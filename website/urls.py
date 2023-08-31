@@ -9,6 +9,5 @@ urlpatterns = [
     path('courses', CoursesView.as_view(), name='courses'),
     path('contacts', ContactsView.as_view(), name='contacts'),
     path('collaboration', Collaboration.as_view(), name='collaboration'),
-    path('singin', SignInView.as_view(), name='signin'),
 
 ]

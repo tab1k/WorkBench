@@ -36,9 +36,3 @@ class CoursesView(View):
     def get(self, request):
         return render(request, self.template_name)
 
-
-class SignInView(View):
-    template_name = 'signin.html'
-
-    def get(self, request):
-        return render(request, self.template_name)

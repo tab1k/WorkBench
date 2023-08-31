@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,6 +39,17 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "website.apps.WebsiteConfig",
+    "users.apps.UsersConfig",
+    "comments.apps.CommentsConfig",
+    "courses.apps.CoursesConfig",
+    "essays.apps.EssaysConfig",
+    "schedule.apps.ScheduleConfig",
+    "tests.apps.TestsConfig",
+    "curator.apps.CuratorConfig",
+    "student.apps.StudentConfig",
+    "administrator.apps.AdministratorConfig",
+    'django_extensions',
+    'embed_video',
 ]
 
 MIDDLEWARE = [
@@ -118,6 +130,14 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = 'users:dashboard'
+LOGOUT_REDIRECT_URL = 'users:login'
+SITE_URL = 'http://127.0.0.1:8000/'
 
 
 # Default primary key field type
