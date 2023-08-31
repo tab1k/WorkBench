@@ -156,7 +156,7 @@
     <!-- Page loading spinner -->
     <div class="page-loading active">
       <div class="page-loading-inner">
-        <div class="page-spinner"></div><span>Loading...</span>
+        <div class="page-spinner"></div><span>Загрузка...</span>
       </div>
     </div>
 
@@ -187,46 +187,14 @@
                 <li class="nav-item">
                   <a href="{% url 'website:about' %}" class="nav-link">О нас</a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a href="##" class="nav-link dropdown-toggle " data-bs-toggle="dropdown" aria-current="page">Курсы</a>
-                  <div class="dropdown-menu p-0">
-                    <div class="d-lg-flex">
-                      <div class="mega-dropdown-column d-flex justify-content-center align-items-center rounded-3 rounded-end-0 px-0" style="margin: -1px; background-color: #f3f6ff;">
-                        <img style="width: 70%; border-radius: 10%;" src="{% static 'website/img/handprogram.avif' %}" alt="Landings">
-                      </div>
-                      <div class="mega-dropdown-column pt-lg-3 pb-lg-4">
-                        <ul class="list-unstyled mb-0">
-                          <li><a href="#" class="dropdown-item">Программирование</a></li>
-                          <li><a href="#" class="dropdown-item">Программирование</a></li>
-                          <li><a href="#" class="dropdown-item">Программирование</a></li>
-                          <li><a href="#" class="dropdown-item d-flex align-items-center">Программирование</a></li>
-                          <li><a href="#" class="dropdown-item d-flex align-items-center">Программирование</a></li>
-                          <li><a href="#" class="dropdown-item">Программирование</a></li>
-                          <li><a href="#" class="dropdown-item">Программирование</a></li>
-                          <li><a href="#" class="dropdown-item">Программирование<span class="badge bg-success ms-2">New</span></a></li>
-                        </ul>
-                      </div>
-<!--                      <div class="mega-dropdown-column pt-lg-3 pb-lg-4" style="&#45;&#45;si-mega-dropdown-column-width: 16rem;">-->
-<!--                        <ul class="list-unstyled mb-0">-->
-<!--                          <li><a href="landing-financial.html" class="dropdown-item">Financial Consulting</a></li>-->
-<!--                          <li><a href="landing-online-courses.html" class="dropdown-item">Online Courses</a></li>-->
-<!--                          <li><a href="landing-medical.html" class="dropdown-item">Medical</a></li>-->
-<!--                          <li><a href="landing-software-dev-agency-v1.html" class="dropdown-item">Software Dev Agency v.1</a></li>-->
-<!--                          <li><a href="landing-software-dev-agency-v2.html" class="dropdown-item">Software Dev Agency v.2<span class="badge bg-success ms-2">New</span></a></li>-->
-<!--                          <li><a href="landing-software-dev-agency-v3.html" class="dropdown-item">Software Dev Agency v.3<span class="badge bg-success ms-2">New</span></a></li>-->
-<!--                          <li><a href="landing-conference.html" class="dropdown-item">Conference</a></li>-->
-<!--                          <li><a href="landing-digital-agency.html" class="dropdown-item">Digital Agency</a></li>-->
-<!--                          <li><a href="landing-blog.html" class="dropdown-item">Blog Homepage</a></li>-->
-<!--                        </ul>-->
-<!--                      </div>-->
-                    </div>
-                  </div>
+                <li class="nav-item">
+                  <a href="{% url 'website:courses' %}" class="nav-link">Курсы</a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">Контакты</a>
+                  <a href="{% url 'website:contacts' %}" class="nav-link">Контакты</a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">Сотрудничество</a>
+                  <a href="{% url 'website:collaboration'%}" class="nav-link">Сотрудничество</a>
                 </li>
               </ul>
             </div>
@@ -619,8 +587,8 @@
             </div>
             <div class="step-body d-flex align-items-center ps-xl-5">
               <div class="rellax d-none d-lg-block flex-shrink-0 mx-4 mx-xl-5" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="lg">
-                <img src="website/img/landing/online-courses/steps/02-dark.svg" class="d-dark-mode-none" width="306" alt="Illustration">
-                <img src="website/img/landing/online-courses/steps/02-light.svg" class="d-none d-dark-mode-block" width="306" alt="Illustration">
+                <img src="{% static 'website/img/landing/online-courses/steps/02-dark.svg' %}" class="d-dark-mode-none" width="306" alt="Illustration">
+                <img src="{% static 'website/img/landing/online-courses/steps/02-light.svg' %}" class="d-none d-dark-mode-block" width="306" alt="Illustration">
               </div>
               <div class="rellax ps-md-4 ps-xl-5" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="lg">
                 <h3 class="h4">Learn by doing</h3>
@@ -634,8 +602,8 @@
             </div>
             <div class="step-body d-flex align-items-center ps-xl-5">
               <div class="rellax d-none d-lg-block flex-shrink-0 mx-4 mx-xl-5" data-rellax-percentage="0.5" data-rellax-speed="-0.3" data-disable-parallax-down="lg">
-                <img src="website/img/landing/online-courses/steps/03-dark.svg" class="d-dark-mode-none" width="306" alt="Illustration">
-                <img src="website/img/landing/online-courses/steps/03-light.svg" class="d-none d-dark-mode-block" width="306" alt="Illustration">
+                <img src="{% static 'website/img/landing/online-courses/steps/03-dark.svg' %}" class="d-dark-mode-none" width="306" alt="Illustration">
+                <img src="{% static 'website/img/landing/online-courses/steps/03-light.svg' %}" class="d-none d-dark-mode-block" width="306" alt="Illustration">
               </div>
               <div class="rellax ps-md-4 ps-xl-5" data-rellax-percentage="0.5" data-rellax-speed="0.4" data-disable-parallax-down="lg">
                 <h3 class="h4">Get instant expert feedback</h3>
@@ -649,8 +617,8 @@
             </div>
             <div class="step-body d-flex align-items-center ps-xl-5">
               <div class="rellax d-none d-lg-block flex-shrink-0 mx-4 mx-xl-5" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="lg">
-                <img src="website/img/landing/online-courses/steps/04-dark.svg" class="d-dark-mode-none" width="306" alt="Illustration">
-                <img src="website/img/landing/online-courses/steps/04-light.svg" class="d-none d-dark-mode-block" width="306" alt="Illustration">
+                <img src="{% static 'website/img/landing/online-courses/steps/04-dark.svg' %}" class="d-dark-mode-none" width="306" alt="Illustration">
+                <img src="{% static 'website/img/landing/online-courses/steps/04-light.svg' %}" class="d-none d-dark-mode-block" width="306" alt="Illustration">
               </div>
               <div class="rellax ps-md-4 ps-xl-5" data-rellax-percentage="0.5" data-rellax-speed="0.6" data-disable-parallax-down="lg">
                 <h3 class="h4">Put your learning into practice &amp; find your dream job</h3>
@@ -688,7 +656,7 @@
               <div class="card card-hover h-100 mx-2">
                 <div class="card-body">
                   <div class="d-table position-relative p-3 mb-4">
-                    <img src="website/img/landing/online-courses/icons/01.svg" class="position-relative zindex-2" width="32" alt="Icon">
+                    <img src="{% static 'website/img/landing/online-courses/icons/01.svg' %}" class="position-relative zindex-2" width="32" alt="Icon">
                     <span class="bg-primary position-absolute top-0 start-0 w-100 h-100 rounded-circle opacity-8"></span>
                   </div>
                   <h3 class="h5 pb-1 mb-2">25K+ Online Video Courses</h3>
