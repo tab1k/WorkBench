@@ -172,7 +172,7 @@
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
           <a href="/" class="navbar-brand pe-3">
-            <img src="{% static 'website/img/logo.svg' %}" width="47" alt="WorkBench">
+            <img src="{% static 'website/img/logo.png' %}" width="47" alt="WorkBench">
             WorkBench
           </a>
           <div id="navbarNav" class="offcanvas offcanvas-end">
@@ -232,7 +232,7 @@
           <nav class="pt-lg-4" aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
               <li class="breadcrumb-item">
-                <a href="/"><i class="bx bx-home-alt fs-lg me-1"></i>Главная</a>
+                <a href="{% url 'website:home' %}"><i class="bx bx-home-alt fs-lg me-1"></i>Главная</a>
               </li>
               <li class="breadcrumb-item active" aria-current="page">О нас</li>
             </ol>
@@ -240,7 +240,7 @@
 
           <!-- Page title -->
           <div class="mt-4 mb-lg-5 mb-4 py-3">
-            <h1 class="display-4 mb-0">We are Silicon Team</h1>
+            <h1 class="display-4 mb-0">Мы — команда WorkBench</h1>
           </div>
 
           <!-- Gallery -->
@@ -262,8 +262,8 @@
       <!-- Story -->
       <section class="container mb-5 pt-md-1 pt-lg-4 pt-xl-5">
         <div class="mt-4 py-2 pb-sm-3 pb-md-4 pb-lg-5 mx-auto text-center" style="max-width: 46.625rem;">
-          <h2 class="h1 mb-4">In 2017 we changed the game</h2>
-          <p class="mb-4">Ac vel feugiat elementum turpis. Euismod eget aliquam non, aliquam dui augue amet lectus donec adipiscing quis molestie eget urna.</p>
+          <h2 class="h1 mb-4">Мы меняем правила ⚠️</h2>
+          <p class="mb-4">С 2020 года WorkBench - это центр подготовки выдающихся программистов. Наша миссия - развивать и вдохновлять будущих лидеров в мире программирования.</p>
         </div>
 
         <!-- Steps -->
@@ -273,17 +273,8 @@
           <div class="step w-100 mx-auto" style="max-width: 26rem;">
             <div class="step-number"><div class="step-number-inner"></div></div>
             <div class="step-body">
-              <h3 class="mb-3">2018</h3>
-              <p class="mb-0">Nibh in natoque ut blandit est sed massa quam massa. Nisi eu aenean tristique sed tortor tincidunt.</p>
-            </div>
-          </div>
-
-          <!-- Step -->
-          <div class="step w-100 mx-auto" style="max-width: 26rem;">
-            <div class="step-number"><div class="step-number-inner"></div></div>
-            <div class="step-body">
-              <h3 class="mb-3">2019</h3>
-              <p class="mb-0">Orci, lorem rutrum euismod est urna commodo. Dictum fringilla ac sit egestas pharetra tellus in tristique.</p>
+              <h3 class="mb-3">2020</h3>
+              <p class="mb-0">Открытие WorkBench</p>
             </div>
           </div>
 
@@ -292,7 +283,16 @@
             <div class="step-number"><div class="step-number-inner"></div></div>
             <div class="step-body">
               <h3 class="mb-3">2021</h3>
-              <p class="mb-0">Quisque felis in augue dolor. Risus, id pretium vitae a adipiscing adipiscing posuere maecenas.</p>
+              <p class="mb-0">Выпуск первого проффесионального потока</p>
+            </div>
+          </div>
+
+          <!-- Step -->
+          <div class="step w-100 mx-auto" style="max-width: 26rem;">
+            <div class="step-number"><div class="step-number-inner"></div></div>
+            <div class="step-body">
+              <h3 class="mb-3">2022</h3>
+              <p class="mb-0">Открытие филиала</p>
             </div>
           </div>
 
@@ -301,27 +301,12 @@
             <div class="step-number"><div class="step-number-inner"></div></div>
             <div class="step-body">
               <h3 class="mb-3">2023</h3>
-              <p class="mb-0">Nunc, sit tempus, varius est duis. Elementum commodo tincidunt mi quis arcu lorem consequat.</p>
+              <p class="mb-0">Лидеры по выпуску студентов с качественным образованием</p>
             </div>
           </div>
         </div>
       </section>
 
-
-      <!-- Locations -->
-      <section class="container mb-5 pt-md-3 pt-lg-4 pt-xl-5">
-        <div class="pt-2 pt-sm-4 pb-md-3 mb-4 mt-lg-1 mt-xl-3 mx-auto text-center" style="max-width: 47rem;">
-          <h2 class="h1 mb-4">Our offices around the world</h2>
-          <p class="mb-3">Congue gravida vel imperdiet rutrum lectus felis purus blandit ullamcorper. In eleifend in ultrices ultrices aliquam augue praesent.</p>
-          <a href="contacts-v2.html" class="btn btn-primary mb-4">Contact us</a>
-        </div>
-
-        <!-- Map -->
-        <div class="mb-4 pb-2">
-          <img src="{% static 'website/img/about/map-light.png' %}" alt="Map" class="d-dark-mode-none d-block">
-          <img src="{% static 'website/img/about/map-dark.png' %}" alt="Map" class="d-dark-mode-block d-none">
-        </div>
-      </section>
 
 
       <!-- Team -->
@@ -561,22 +546,19 @@
         <div class="container pt-5">
           <div class="row align-items-center gy-5 pt-2 pt-sm-3 pt-md-4">
             <div class="col-lg-5 text-lg-start text-center">
-              <h2 class="h1 mb-4 pb-lg-2">Company built by a global team of innovators</h2>
-              <p class="mb-4 pb-1 pb-sm-2 pb-lg-3">In blandit luctus proin mauris a commodo, dolor diam tempus, aenean magna fusce eu. Id porttitor aliquam eget aliquet sagittis eu aut diam ut phasellus sed convallis iaculis neque ultricies convallis sed enim</p>
-              <a href="contacts-v2.html" class="btn btn-primary">Contact us</a>
+              <h2 class="h1 mb-4 pb-lg-2">Общая аналитика нашего центра 🏫</h2>
+              <p class="mb-4 pb-1 pb-sm-2 pb-lg-3"><b>95% </b> - довольных студентов 👨🏻‍</p>
+              <p class="mb-4 pb-1 pb-sm-2 pb-lg-3"><b>24/7 </b> - поддержка  📞</p>
+              <p class="mb-4 pb-1 pb-sm-2 pb-lg-3"><b>+10% </b> - прирост качества 📊</p>
             </div>
             <div class="col-lg-6 offset-lg-1">
               <div class="row row-cols-sm-2 row-cols-1 g-4 align-items-center">
                 <div class="col">
                   <div class="card border-0">
                     <div class="card-body m-xl-3 m-1 text-center">
-                      <a href="about-v3.html#" class="d-inline-block mb-4 pb-2">
-                        <img src="{% static 'website/img/about/clutch-logo-dark.svg' %}" width="116" alt="Clutch" class="d-dark-mode-none d-block">
-                        <img src="{% static 'website/img/about/clutch-logo-light.svg' %}" width="116" alt="Clutch" class="d-dark-mode-block d-none">
-                      </a>
                       <h5 class="mb-3 fs-lg fw-normal lh-1">
-                        <span class="h1 d-block w-100 mb-0">100%</span>
-                        Positive Feedback
+                        <span class="h1 d-block w-100 mb-0">95%</span>
+                        довольных студентов
                       </h5>
                       <div class="mb-3 text-nowrap">
                         <i class="bx bxs-star text-warning fs-sm"></i>
@@ -597,15 +579,15 @@
                       <img src="{% static 'website/img/about/chat-dark.svg' %}" width="56" alt="Icon" class="d-dark-mode-block d-none mx-auto mb-4">
                       <h5 class="mb-3 fs-lg fw-normal lh-1">
                         <span class="h1 d-block w-100 mb-0">24/7</span>
-                        Customer support
+                        Поддержка
                       </h5>
                     </div>
                   </div>
                   <div class="card border-0 mt-4">
                     <div class="card-body m-xl-3 m-1 bg-repeat-0 bg-position-top-end" style="background-image: url('{% static 'website/img/about/graph.svg'%}');">
                       <h5 class="mb-3 fs-lg fw-normal lh-1 mt-5">
-                        <span class="h1 d-block w-100 mb-0">+12k</span>
-                        new leads for clients
+                        <span class="h1 d-block w-100 mb-0">+10%</span>
+                        прирост качества
                       </h5>
                     </div>
                   </div>
@@ -734,7 +716,7 @@
                         <i class="bx bxs-quote-left"></i>
                       </span>
                       <blockquote class="card-body pb-3 mb-0">
-                        <p class="mb-0">Pulvinar urna condimentum amet tempor, ornare integer. Lorem odio justo malesuada suspendisse viverra aliquet quisque turpis non. Feugiat in odio non nunc ornare consectetur.</p>
+                        <p class="mb-0">"WorkBench - это настоящая находка для всех, кто мечтает стать выдающимся программистом. Обучение было интенсивным и интересным. Спасибо, что помогли мне развить свой потенциал и открыть дверь в мир технологий!"</p>
                       </blockquote>
                       <div class="card-footer border-0 text-nowrap pt-0">
                         <i class="bx bxs-star text-warning"></i>
@@ -747,8 +729,7 @@
                     <figcaption class="d-flex align-items-center pt-4">
                       <img src="{% static 'website/img/avatar/03.jpg' %}" width="48" class="rounded-circle" alt="Annette Black">
                       <div class="ps-3">
-                        <h6 class="fs-sm fw-semibold mb-0">Annette Black</h6>
-                        <span class="fs-xs text-muted">Co-founder of Lorem Company</span>
+                        <h6 class="fs-sm fw-semibold mb-0">Дана Жоламанова</h6>
                       </div>
                     </figcaption>
                   </figure>
@@ -762,7 +743,7 @@
                         <i class="bx bxs-quote-left"></i>
                       </span>
                       <blockquote class="card-body pb-3 mb-0">
-                        <p class="mb-0">Id mollis consectetur congue egestas egestas suspendisse blandit justo. Tellus augue commodo id quis tempus etiam pulvinar at maecenas.</p>
+                        <p class="mb-0">"Я никогда не думал, что смогу научиться программированию, но WorkBench сделало это возможным. Их методика и поддержка - просто невероятные. Теперь я уверенно работаю программистом, и это лучшее, что случилось с моей карьерой!"</p>
                       </blockquote>
                       <div class="card-footer border-0 text-nowrap pt-0">
                         <i class="bx bxs-star text-warning"></i>
@@ -775,8 +756,7 @@
                     <figcaption class="d-flex align-items-center pt-4">
                       <img src="{% static 'website/img/avatar/02.jpg' %}" width="48" class="rounded-circle" alt="Robert Fox">
                       <div class="ps-3">
-                        <h6 class="fs-sm fw-semibold mb-0">Robert Fox</h6>
-                        <span class="fs-xs text-muted">CEO of Ipsum Company</span>
+                        <h6 class="fs-sm fw-semibold mb-0">Кадыр Маратулы</h6>
                       </div>
                     </figcaption>
                   </figure>
@@ -790,7 +770,7 @@
                         <i class="bx bxs-quote-left"></i>
                       </span>
                       <blockquote class="card-body pb-3 mb-0">
-                        <p class="mb-0">Sociis sit risus id. Sit facilisis dolor arcu, fermentum vestibulum arcu ele. Pulvinar at maecenas maecenas pharetra, tincidunt sollicitudin in in. Pellentesque vitae mattis aliquet velit arcu risus...</p>
+                        <p class="mb-0">"WorkBench не просто учит программированию, они вдохновляют на творчество. Я узнал, что программируя, можно создавать настоящие произведения искусства. Они помогли мне найти свой стиль и стать не просто программистом, а творцом."</p>
                       </blockquote>
                       <div class="card-footer border-0 text-nowrap pt-0">
                         <i class="bx bxs-star text-warning"></i>
@@ -803,8 +783,7 @@
                     <figcaption class="d-flex align-items-center pt-4">
                       <img src="{% static 'website/img/avatar/10.jpg' %}" width="48" class="rounded-circle" alt="Jerome Bell">
                       <div class="ps-3">
-                        <h6 class="fs-sm fw-semibold mb-0">Jerome Bell</h6>
-                        <span class="fs-xs text-muted">Founder of the Agency </span>
+                        <h6 class="fs-sm fw-semibold mb-0">Бекарыс Отебак</h6>
                       </div>
                     </figcaption>
                   </figure>
@@ -818,7 +797,7 @@
                         <i class="bx bxs-quote-left"></i>
                       </span>
                       <blockquote class="card-body pb-3 mb-0">
-                        <p class="mb-0">Pulvinar urna condimentum amet tempor, ornare integer. Lorem odio justo malesuada suspendisse viverra aliquet quisque turpis non. Feugiat in odio non nunc ornare consectetur.</p>
+                        <p class="mb-0">"Мой сын присоединился к WorkBench, и результаты поразили меня. Он не только освоил навыки программирования, но и развил логическое мышление и умение решать сложные задачи. Я впечатлен, каким профессиональным ростом обладает наш подросток благодаря этой программе."</p>
                       </blockquote>
                       <div class="card-footer border-0 text-nowrap pt-0">
                         <i class="bx bxs-star text-warning"></i>
@@ -831,8 +810,7 @@
                     <figcaption class="d-flex align-items-center pt-4">
                       <img src="{% static 'website/img/avatar/03.jpg' %}" width="48" class="rounded-circle" alt="Annette Black">
                       <div class="ps-3">
-                        <h6 class="fs-sm fw-semibold mb-0">Annette Black</h6>
-                        <span class="fs-xs text-muted">Co-founder of Lorem Company</span>
+                        <h6 class="fs-sm fw-semibold mb-0">Ерканат Шарипов</h6>
                       </div>
                     </figcaption>
                   </figure>
@@ -846,7 +824,7 @@
                         <i class="bx bxs-quote-left"></i>
                       </span>
                       <blockquote class="card-body pb-3 mb-0">
-                        <p class="mb-0">Id mollis consectetur congue egestas egestas suspendisse blandit justo. Tellus augue commodo id quis tempus etiam pulvinar at maecenas.</p>
+                        <p class="mb-0">"WorkBench - это уникальная возможность для молодых людей. Мой ребенок научился программированию в этой школе и теперь уже занимается собственными проектами. Я вижу, как его уверенность и творческий потенциал растут с каждым уроком. Большое спасибо команде WorkBench за их работу!"</p>
                       </blockquote>
                       <div class="card-footer border-0 text-nowrap pt-0">
                         <i class="bx bxs-star text-warning"></i>
@@ -859,8 +837,7 @@
                     <figcaption class="d-flex align-items-center pt-4">
                       <img src="{% static 'website/img/avatar/02.jpg' %}" width="48" class="rounded-circle" alt="Robert Fox">
                       <div class="ps-3">
-                        <h6 class="fs-sm fw-semibold mb-0">Robert Fox</h6>
-                        <span class="fs-xs text-muted">CEO of Ipsum Company</span>
+                        <h6 class="fs-sm fw-semibold mb-0">Руслан Кульмаганбетов</h6>
                       </div>
                     </figcaption>
                   </figure>
@@ -874,7 +851,7 @@
                         <i class="bx bxs-quote-left"></i>
                       </span>
                       <blockquote class="card-body pb-3 mb-0">
-                        <p class="mb-0">Sociis sit risus id. Sit facilisis dolor arcu, fermentum vestibulum arcu ele. Pulvinar at maecenas maecenas pharetra, tincidunt sollicitudin in in. Pellentesque vitae mattis aliquet velit arcu risus...</p>
+                        <p class="mb-0">"WorkBench сделал мой школьный опыт намного интереснее. Я не только узнал программирование, но и нашел новых друзей с общими интересами. Это было невероятно вдохновляющим и веселым опытом. Я с нетерпением жду каждого урока!"</p>
                       </blockquote>
                       <div class="card-footer border-0 text-nowrap pt-0">
                         <i class="bx bxs-star text-warning"></i>
@@ -887,8 +864,7 @@
                     <figcaption class="d-flex align-items-center pt-4">
                       <img src="{% static 'website/img/avatar/10.jpg' %}" width="48" class="rounded-circle" alt="Jerome Bell">
                       <div class="ps-3">
-                        <h6 class="fs-sm fw-semibold mb-0">Jerome Bell</h6>
-                        <span class="fs-xs text-muted">Founder of the Agency </span>
+                        <h6 class="fs-sm fw-semibold mb-0">Юрий Данилков</h6>
                       </div>
                     </figcaption>
                   </figure>
@@ -905,9 +881,9 @@
         <div class="position-relative bg-dark rounded-3 overflow-hidden px-3 py-5">
           <span class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(255, 255, 255, .05)"></span>
           <div class="position-relative zindex-5 text-center my-xl-3 py-1 py-md-4 py-lg-5">
-            <p class="lead text-light opacity-70 mb-3">Ready to get started?</p>
-            <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Launch Your Project with Us</h2>
-            <a href="about-v3.html#" class="btn btn-primary btn-lg">Work with us</a>
+            <p class="lead text-light opacity-70 mb-3">Готов поменять свою жизнь в лучшую сторону?</p>
+            <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Тогда присоединяйся к нам!</h2>
+            <a href="about-v3.html#" class="btn btn-primary btn-lg">Стать программистом!</a>
           </div>
         </div>
       </section>
@@ -915,47 +891,54 @@
 
 
     <!-- Footer -->
-    <footer class="footer py-5">
-      <div class="container text-center pt-2 pt-sm-3">
-        <div class="navbar-brand d-inline-block text-dark p-0 me-0 mb-4 pb-md-2">
-          <img src="{% static 'website/img/logo.svg' %}" width="47" alt="Silicon">
-          Silicon
+    <footer class="footer pt-5 pb-4 pb-lg-5">
+      <div class="container pt-lg-4">
+        <div class="row pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
+              <img src="{% static 'website/img/logo.png' %}" width="47px" alt="WorkBench">
+              WorkBench
+            </div>
+            <p class="fs-sm pb-lg-3 mb-4">"У нас — место, где ваше образование становится вашим будущим. Добро пожаловать в мир обучения и развития, где знания — это ключ к успеху. Присоединяйтесь к нам сегодня и начните свой учебный путь к бесконечным возможностям!"</p>
+          </div>
+          <div class="col-xl-6 col-lg-7 col-md-5 offset-xl-2 offset-md-1 pt-4 pt-md-1 pt-lg-0">
+            <div id="footer-links" class="row">
+              <div class="col-lg-4">
+                <div id="useful-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                  <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Главная</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">О нас</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Курсы</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Контакты</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Сотрудничество</a></li>
+                  </ul>
+                  <ul class="nav flex-column mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Условия использования</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Политика конфиденциальности</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-3">
+                <div id="social-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                  <ul class="nav flex-column mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">WhatsApp</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Facebook</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">LinkedIn</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Instagram</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-5 pt-2 pt-lg-0">
+                <h6 class="mb-2">Связаться с нами</h6>
+                <a href="mailto:email@example.com" class="fw-medium">email@example.com</a>
+              </div>
+            </div>
+          </div>
         </div>
-        <ul class="nav align-items-center justify-content-center mb-4 pb-1 pb-md-3">
-          <li class="nav-item mx-lg-1 px-md-2">
-            <a href="about-v3.html#" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item mx-lg-1 px-md-2">
-            <a href="about-v3.html#" class="nav-link">Features</a>
-          </li>
-          <li class="nav-item mx-lg-1 px-md-2">
-            <a href="about-v3.html#" class="nav-link">Overview</a>
-          </li>
-          <li class="nav-item mx-lg-1 px-md-2">
-            <a href="about-v3.html#" class="nav-link">Blog</a>
-          </li>
-          <li class="nav-item mx-lg-1 px-md-2">
-            <a href="about-v3.html#" class="nav-link">Contact</a>
-          </li>
-          <li class="nav-item mx-lg-1 px-md-2">
-            <a href="about-v3.html#" class="nav-link">Account</a>
-          </li>
-        </ul>
-        <div class="d-inline-block mt-n3 ms-n3 pb-2 pb-md-3 mb-4 mb-lg-5">
-          <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-facebook mt-3 ms-3">
-            <i class="bx bxl-facebook-square"></i>
-          </a>
-          <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-twitter mt-3 ms-3">
-            <i class="bx bxl-twitter"></i>
-          </a>
-          <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-instagram mt-3 ms-3">
-            <i class="bx bxl-instagram"></i>
-          </a>
-          <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-youtube mt-3 ms-3">
-            <i class="bx bxl-youtube"></i>
-          </a>
-        </div>
-        <p class="mb-0 mx-auto fs-sm text-muted" style="max-width: 53.5rem">&copy; All rights reserved. Made by <a class="nav-link d-inline-block p-0" href="https://createx.studio/" target="_blank" rel="noopener">Createx Studio</a>. Pulvinar urna condimentum amet tempor, ornare integer. Lorem odio justo malesuada suspendisse viverra aliquet quisque turpis non. Feugiat in odio non nunc ornare consectetur.</p>
+        <p class="nav d-block fs-xs text-center text-md-start pb-2 pb-lg-0 mb-0">
+          &copy; Все права защищены.
+          <a class="nav-link d-inline-block p-0" href="https://createx.studio/" target="_blank" rel="noopener">WorkBench</a>
+        </p>
       </div>
     </footer>
 

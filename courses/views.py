@@ -34,6 +34,7 @@ from users.models import User
 
 
 
+
 # Представление для отображения типов курсов
 
 class CoursesByType(LoginRequiredMixin, View):
@@ -50,9 +51,9 @@ class CoursesByType(LoginRequiredMixin, View):
         if request.user.groups.filter(name='Студенты').exists():
             template_name = 'users/student/courses_by_type.html'
         elif request.user.groups.filter(name='Кураторы').exists():
-            template_name = 'users/curator/courses_by_type.html'
+            template_name = 'curator/starter-kit/course_type.html'
         elif request.user.groups.filter(name='Администраторы').exists():
-            template_name = 'users/admin/courses_by_type.html'
+            template_name = 'admin/starter-kit/course_type.html'
         else:
             # Если пользователь не принадлежит ни к одной из групп или не аутентифицирован, перенаправляем его на страницу входа
             return redirect('users:login')
@@ -65,13 +66,13 @@ class Courses(View):
 
     def get(self, request):
         if request.user.groups.filter(name='Администраторы').exists():
-            template_name = 'users/admin/coursesAfterSignUpAdmin.html'
+            template_name = 'admin/starter-kit/courses.html'
             courses = Course.objects.all()
         elif request.user.groups.filter(name='Кураторы').exists():
-            template_name = 'users/curator/coursesAfterSignUpCurator.html'
+            template_name = 'curator/starter-kit/courses.html'
             courses = Course.objects.all()
         else:
-            template_name = 'users/student/coursesAfterSignUp.html'
+            template_name = 'student/starter-kit/courses.html'
             courses = Course.objects.filter(students=request.user)
 
         # Get all comments (both student and curator comments) for the current user
@@ -99,15 +100,15 @@ class Modules(View):
 
         if request.user.groups.filter(name='Администраторы').exists():
             module = Module.objects.filter(course__pk=pk)
-            return render(request, 'users/admin/module.html', {'modules': module})
+            return render(request, 'admin/starter-kit/modules.html', {'modules': module})
 
         elif request.user.groups.filter(name='Кураторы').exists():
             module = Module.objects.filter(course__pk=pk, course__curators=request.user)
-            return render(request, 'users/curator/moduleAdmin.html', {'modules': module})
+            return render(request, 'curator/starter-kit/modules.html', {'modules': module})
 
         else:
             module = Module.objects.filter(course__pk=pk, course__students=request.user)
-            return render(request, 'users/student/module.html', {'modules': module})
+            return render(request, 'student/starter-kit/modules.html', {'modules': module})
 
 
 # Представление для отображения
@@ -126,19 +127,19 @@ class LessonsByModule(View):
         lessons = module.lesson_set.all()  # Получаем все уроки модуля
 
         if request.user.role == 'student':
-            return render(request, 'users/student/lessonsStudent.html', {'module': module, 'lessons': lessons})
+            return render(request, 'student/starter-kit/lessons_list.html', {'module': module, 'lessons': lessons})
         elif request.user.role == 'curator':
-            return render(request, 'users/curator/lessonsCurator.html', {'module': module, 'lessons': lessons})
+            return render(request, 'curator/starter-kit/lessons_list.html', {'module': module, 'lessons': lessons})
         elif request.user.role == 'admin':
-            return render(request, 'users/admin/lessonsAdmin.html', {'module': module, 'lessons': lessons})
+            return render(request, 'admin/starter-kit/lessons_list.html', {'module': module, 'lessons': lessons})
         else:
             return render(request, 'users/404.html')
 
 
 class LessonView(View):
-    student_template = 'users/student/video.html'
-    curator_template = 'users/curator/videoAdmin.html'
-    admin_template = 'users/admin/videoAdmin.html'
+    student_template = 'student/starter-kit/lessons.html'
+    curator_template = 'curator/starter-kit/lessons.html'
+    admin_template = 'admin/starter-kit/lessons.html'
 
 
     def get_next_lesson(self, current_lesson):
@@ -221,8 +222,8 @@ class LessonView(View):
 
 
 class AnswersView(View):
-    template_curator = 'users/curator/answers.html'
-    template_admin = 'users/admin/answers.html'
+    template_curator = 'curator/starter-kit/answers.html'
+    template_admin = 'admin/starter-kit/answers.html'
     template_error = 'users/404.html'
 
     def get(self, request):
@@ -303,10 +304,9 @@ class AnswersView(View):
 
 
 
-
 class StudentProgressView(View):
     template_name_curator = 'users/curator/student_progress.html'
-    template_name_admin = 'users/admin/student_progress.html'
+    template_name_admin = 'admin/starter-kit/student_progress.html'
 
     def get(self, request, student_id):
         if request.user.role not in ['curator', 'admin']:
@@ -377,8 +377,8 @@ class StudentProgressView(View):
 
 
 class PassedStudentsView(View):
-    template_name = 'users/admin/passed_students.html'
-    template_name_curator = 'users/curator/passed_students.html'
+    template_name = 'admin/starter-kit/passed_students.html'
+    template_name_curator = 'curator/starter-kit/passed_students.html'
 
 
     def get(self, request):

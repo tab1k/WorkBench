@@ -32,7 +32,7 @@ def curator_view(request):
         # Получите список уведомлений
         notifications = Notification.objects.all().order_by('-timestamp')  # Замените на необходимый способ получения уведомлений
 
-        return render(request, 'users/curator/mainAfterSignUpСurator.html',
+        return render(request, 'curator/starter-kit/index.html',
                       {'courses': courses, 'courses_type': courses_type, 'curator': curator, 'contacts': contacts,
                        'contact_count': contact_count, 'notifications': notifications})
     else:
@@ -40,7 +40,7 @@ def curator_view(request):
 
 
 class StudentsCheckAdmin(View):
-    template_name = 'users/curator/student.html'
+    template_name = 'curator/starter-kit/students.html'
 
     def get(self, request):
         stream_id = request.GET.get('stream')
@@ -102,7 +102,7 @@ class StreamListView(ListView):
 
 class ContactListView(ListView):
     model = Contact
-    template_name = 'users/curator/applications.html'
+    template_name = 'curator/starter-kit/applications.html'
     context_object_name = 'contacts'
     paginate_by = 10
 
@@ -128,7 +128,7 @@ from django.utils import timezone
 
 class NotificationListView(ListView):
     model = Notification
-    template_name = 'users/curator/view_notifications.html'
+    template_name = 'curator/starter-kit/notifications.html'
     context_object_name = 'notifications'
     ordering = ['-timestamp']
 
@@ -178,7 +178,7 @@ class SearchView(View):
 class NotificationCreateView(CreateView):
     model = Notification
     form_class = NotificationForm
-    template_name = 'users/curator/create_notification.html'
+    template_name = 'curator/starter-kit/create_notification.html'
     success_url = reverse_lazy('users:admin:create_notification')  # Используем 'admin:create_notification' из app_name
 
     def form_valid(self, form):

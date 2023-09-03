@@ -19,7 +19,7 @@ def dashboard_view(request):
     curator_comments = Comment.objects.filter(lesson__module__course__in=courses, is_student_comment=False,
                                               user=student)
     if request.user.role == 'student':
-        return render(request, 'users/student/mainAfterSignupStudent.html', {
+        return render(request, 'student/starter-kit/index.html', {
             'courses': courses,
             'course_type': course_type,
             'student': student,

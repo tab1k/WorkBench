@@ -22,13 +22,13 @@ class Profile(View):
 
         if authenticated_user.role == 'student':
             courses = Course.objects.filter(students=authenticated_user)
-            return render(request, 'users/student/profileSettings.html', {'context': context, 'courses': courses})
+            return render(request, 'student/starter-kit/user_profile.html', {'context': context, 'courses': courses})
         elif authenticated_user.role == 'curator':
             courses = Course.objects.filter(curators=authenticated_user)
-            return render(request, 'users/curator/profileCurator.html', {'context': context, 'courses': courses})
+            return render(request, 'curator/starter-kit/profile.html', {'context': context, 'courses': courses})
         elif authenticated_user.role == 'admin':
             courses = Course.objects.all()
-            return render(request, 'users/admin/profileAdmin.html', {'context': context, 'courses': courses})
+            return render(request, 'admin/starter-kit/profile.html', {'context': context, 'courses': courses})
         else:
             return render(request, 'users/404.html')
 
@@ -38,7 +38,7 @@ class Profile(View):
 
 class ProfileView(View):
     template_name_curator = 'users/curator/profileSettingsAdmin.html'
-    template_name_admin = 'users/admin/profileSettingsAdmin.html'
+    template_name_admin = 'admin/starter-kit/user_profile.html'
 
     def get(self, request, pk):
         # Check if the user is allowed to access this view based on their role

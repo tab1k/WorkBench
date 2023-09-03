@@ -5,9 +5,9 @@ from schedule.models import Schedule
 from itertools import groupby
 
 class StudentScheduleView(View):
-    template_name_student = 'users/student/timeTable.html'
-    template_name_curator = 'users/curator/timeTableAdmin.html'
-    template_name_admin = 'users/admin/timeTableAdmin.html'
+    template_name_student = 'student/starter-kit/schedule.html'
+    template_name_curator = 'curator/starter-kit/schedule.html'
+    template_name_admin = 'admin/starter-kit/schedule.html'
 
     def get(self, request):
         # Получить текущего пользователя

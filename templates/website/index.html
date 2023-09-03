@@ -6,9 +6,9 @@
     <title>Главная</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Silicon - Multipurpose Technology Bootstrap Template">
-    <meta name="keywords" content="bootstrap, business, creative agency, mobile app showcase, saas, fintech, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
-    <meta name="author" content="Createx Studio">
+    <meta name="description" content="WorkBench Company">
+    <meta name="keywords" content="WorkBench, workbench, business, it agency, it, saas, itcourse, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="WorkBench">
 
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -171,7 +171,7 @@
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
           <a href="index.html" class="navbar-brand pe-3">
-            <img src="{% static 'website/img/logo.svg' %}" width="47" alt="WorkBench">
+            <img src="{% static 'website/img/logo.png' %}" width="47" alt="WorkBench">
             WorkBench
           </a>
           <div id="navbarNav" class="offcanvas offcanvas-end">
@@ -233,27 +233,8 @@
             <div class="col-lg-5 d-flex flex-column pt-lg-4 pt-xl-5">
               <h5 class="my-2">Добро пожаловать!</h5>
               <h1 class="display-3 mb-4">Изучай <span class="text-primary">IT Online</span> БЕЗ ЛИМИТА</h1>
-              <p class="fs-lg mb-5">Наслаждайтесь нашим большим выбором ИТ-курсов. Выбирайте из более чем 25 тысяч онлайн-видеокурсов и станьте ИТ-экспертом прямо сейчас!</p>
+              <p class="fs-lg mb-5">Погрузись в мир IT прямо сейчас, вместе с WorkBench!</p>
 
-              <!-- Desktop form -->
-              <form class="d-none d-sm-flex mb-5">
-                <div class="input-group d-block d-sm-flex input-group-lg me-3">
-                  <input type="text" class="form-control w-50" placeholder="Искать курсы...">
-                  <select class="form-select w-50">
-                    <option value="" selected disabled>Категории</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="Mobile Development">Mobile Development</option>
-                    <option value="Programming">DataScience</option>
-                    <option value="Game Development">Game Development</option>
-                    <option value="Software Testing">Тестирование ПО</option>
-                    <option value="Software Engineering">Программная инженерия</option>
-                    <option value="Network & Security">Сетевая &amp; безопасность</option>
-                  </select>
-                </div>
-                <button type="submit" class="btn btn-icon btn-primary btn-lg">
-                  <i class="bx bx-search"></i>
-                </button>
-              </form>
 
               <!-- Mobile form -->
               <form class="d-sm-none mb-5">
@@ -324,31 +305,25 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs flex-nowrap overflow-auto flex-md-column pb-2 pb-md-0 mb-3 mb-md-5" role="tablist">
               <li class="nav-item">
-                <a href="landing-online-courses.html#" class="nav-link d-inline-block text-nowrap active" role="tab" aria-selected="true">Web Development</a>
+                <a href="#" class="nav-link d-inline-block text-nowrap active" role="tab" aria-selected="true">Веб-Разработка</a>
               </li>
               <li class="nav-item">
-                <a href="landing-online-courses.html#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Data Science</a>
+                <a href="{% url 'website:full-stack' %}#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Fullstack Веб-Разработчик </a>
               </li>
               <li class="nav-item">
-                <a href="landing-online-courses.html#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Mobile Development</a>
+                <a href="{% url 'website:html-css' %}#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">HTML, CSS, JavaScript </a>
               </li>
               <li class="nav-item">
-                <a href="landing-online-courses.html#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Programming</a>
+                <a href="{% url 'website:python' %}#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Python</a>
               </li>
               <li class="nav-item">
-                <a href="landing-online-courses.html#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Game Development</a>
+                <a href="{% url 'website:python-django' %}#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Python &amp; Django</a>
               </li>
               <li class="nav-item">
-                <a href="landing-online-courses.html#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Software Testing</a>
-              </li>
-              <li class="nav-item">
-                <a href="landing-online-courses.html#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Software Engineering</a>
-              </li>
-              <li class="nav-item">
-                <a href="landing-online-courses.html#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Network &amp; Security</a>
+                <a href="{% url 'website:computer-literacy' %}#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Компьютерная грамотность</a>
               </li>
             </ul>
-            <a href="portfolio-courses.html" class="btn btn-outline-primary btn-lg d-none d-md-inline-flex">
+            <a href="{% url 'website:courses' %}" class="btn btn-outline-primary btn-lg d-none d-md-inline-flex">
               Посмотреть все курсы
               <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
             </a>
@@ -401,28 +376,25 @@
                 <div class="swiper-slide h-auto pb-3">
                   <article class="card h-100 border-0 shadow-sm mx-2">
                     <div class="position-relative">
-                      <a href="portfolio-single-course.html" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
+                      <a href="{% url 'website:full-stack' %}" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
                       <span class="badge bg-success position-absolute top-0 start-0 zindex-2 mt-3 ms-3">Популярное</span>
-                      <a href="landing-online-courses.html#" class="btn btn-icon btn-light bg-white border-white btn-sm rounded-circle position-absolute top-0 end-0 zindex-2 me-3 mt-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Save to Favorites">
-                        <i class="bx bx-bookmark"></i>
-                      </a>
                       <img src="{% static 'website/img/portfolio/courses/01.jpg' %}" class="card-img-top" alt="Image">
                     </div>
                     <div class="card-body pb-3">
                       <h3 class="h5 mb-2">
-                        <a href="portfolio-single-course.html">Fullstack Web Developer Course from Scratch</a>
+                        <a href="{% url 'website:full-stack' %}">Fullstack Веб-Разработчик</a>
                       </h3>
-                      <p class="fs-sm mb-2">By Albert Flores</p>
-                      <p class="fs-lg fw-semibold text-primary mb-0">$12.50</p>
+                      <p class="fs-sm mb-2">WorkBench</p>
+                      <p class="fs-lg fw-semibold text-primary mb-0">от 20.990 тг.</p>
                     </div>
                     <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
                       <div class="d-flex align-items-center me-4">
                         <i class="bx bx-time fs-xl me-1"></i>
-                        220 hours
+                        40+ часов
                       </div>
                       <div class="d-flex align-items-center">
                         <i class="bx bx-like fs-xl me-1"></i>
-                        94% (4.2K)
+                        94%
                       </div>
                     </div>
                   </article>
@@ -432,27 +404,24 @@
                 <div class="swiper-slide h-auto pb-3">
                   <article class="card h-100 border-0 shadow-sm mx-2">
                     <div class="position-relative">
-                      <a href="portfolio-single-course.html" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                      <a href="landing-online-courses.html#" class="btn btn-icon btn-light bg-white border-white btn-sm rounded-circle position-absolute top-0 end-0 zindex-2 me-3 mt-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Save to Favorites">
-                        <i class="bx bx-bookmark"></i>
-                      </a>
+                      <a href="{% url 'website:html-css' %}" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
                       <img src="{% static 'website/img/portfolio/courses/02.jpg' %}" class="card-img-top" alt="Image">
                     </div>
                     <div class="card-body pb-3">
                       <h3 class="h5 mb-2">
-                        <a href="portfolio-single-course.html">HTML, CSS, JavaScript Web Developer</a>
+                        <a href="{% url 'website:html-css' %}">HTML, CSS, JavaScript Веб-Разработчик</a>
                       </h3>
-                      <p class="fs-sm mb-2">By Jenny Wilson &amp; Marvin McKinney</p>
-                      <p class="fs-lg fw-semibold text-primary mb-0">$15.99</p>
+                      <p class="fs-sm mb-2">WorkBench</p>
+                      <p class="fs-lg fw-semibold text-primary mb-0">от 18.990 тенге</p>
                     </div>
                     <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
                       <div class="d-flex align-items-center me-4">
                         <i class="bx bx-time fs-xl me-1"></i>
-                        160 hours
+                        20+ часов
                       </div>
                       <div class="d-flex align-items-center">
                         <i class="bx bx-like fs-xl me-1"></i>
-                        92% (3.1K)
+                        92%
                       </div>
                     </div>
                   </article>
@@ -462,28 +431,25 @@
                 <div class="swiper-slide h-auto pb-3">
                   <article class="card h-100 border-0 shadow-sm mx-2">
                     <div class="position-relative">
-                      <a href="portfolio-single-course.html" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                      <span class="badge bg-danger position-absolute top-0 start-0 zindex-2 mt-3 ms-3">Sale!</span>
-                      <a href="landing-online-courses.html#" class="btn btn-icon btn-light bg-white border-white btn-sm rounded-circle position-absolute top-0 end-0 zindex-2 me-3 mt-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Save to Favorites">
-                        <i class="bx bx-bookmark"></i>
-                      </a>
+                      <a href="{% url 'website:python' %}" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
+                      <span class="badge bg-danger position-absolute top-0 start-0 zindex-2 mt-3 ms-3">Продаваемый!</span>
                       <img src="{% static 'website/img/portfolio/courses/03.jpg' %}" class="card-img-top" alt="Image">
                     </div>
                     <div class="card-body pb-3">
                       <h3 class="h5 mb-2">
-                        <a href="portfolio-single-course.html">HTML, CSS, JavaScript Web Developer</a>
+                        <a href="{% url 'website:python' %}">Python</a>
                       </h3>
-                      <p class="fs-sm mb-2">By Robert Fox</p>
-                      <p class="text-muted mb-0"><span class="fs-lg fw-semibold text-danger me-2">$9.99</span><del>$44.99</del></p>
+                      <p class="fs-sm mb-2">WorkBench</p>
+                      <p class="text-muted mb-0"><span class="fs-lg fw-semibold text-danger me-2">от 15.990 тг.</span><del> от 25.990 тенге</del></p>
                     </div>
                     <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
                       <div class="d-flex align-items-center me-4">
                         <i class="bx bx-time fs-xl me-1"></i>
-                        210 hours
+                        10+ часов
                       </div>
                       <div class="d-flex align-items-center">
                         <i class="bx bx-like fs-xl me-1"></i>
-                        98% (2.7K)
+                        98%
                       </div>
                     </div>
                   </article>
@@ -493,27 +459,24 @@
                 <div class="swiper-slide h-auto pb-3">
                   <article class="card h-100 border-0 shadow-sm mx-2">
                     <div class="position-relative">
-                      <a href="portfolio-single-course.html" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                      <a href="landing-online-courses.html#" class="btn btn-icon btn-light bg-white border-white btn-sm rounded-circle position-absolute top-0 end-0 zindex-2 me-3 mt-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Save to Favorites">
-                        <i class="bx bx-bookmark"></i>
-                      </a>
+                      <a href="{% url 'website:python-django' %}" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
                       <img src="{% static 'website/img/portfolio/courses/05.jpg' %}" class="card-img-top" alt="Image">
                     </div>
                     <div class="card-body pb-3">
                       <h3 class="h5 mb-2">
-                        <a href="portfolio-single-course.html">Data Science &amp; Machine Learning with Python</a>
+                        <a href="{% url 'website:python-django' %}">Python &amp; Django</a>
                       </h3>
-                      <p class="fs-sm mb-2">By Esther Howard</p>
-                      <p class="fs-lg fw-semibold text-primary mb-0">$13.99</p>
+                      <p class="fs-sm mb-2">WorkBench</p>
+                      <p class="fs-lg fw-semibold text-primary mb-0">от 19.990 тенге</p>
                     </div>
                     <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
                       <div class="d-flex align-items-center me-4">
                         <i class="bx bx-time fs-xl me-1"></i>
-                        170 hours
+                        25+ часов
                       </div>
                       <div class="d-flex align-items-center">
                         <i class="bx bx-like fs-xl me-1"></i>
-                        96% (3.8K)
+                        96%
                       </div>
                     </div>
                   </article>
@@ -523,27 +486,24 @@
                 <div class="swiper-slide h-auto pb-3">
                   <article class="card h-100 border-0 shadow-sm mx-2">
                     <div class="position-relative">
-                      <a href="portfolio-single-course.html" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                      <a href="landing-online-courses.html#" class="btn btn-icon btn-light bg-white border-white btn-sm rounded-circle position-absolute top-0 end-0 zindex-2 me-3 mt-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Save to Favorites">
-                        <i class="bx bx-bookmark"></i>
-                      </a>
+                      <a href="{% url 'website:computer-literacy' %}" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
                       <img src="{% static 'website/img/portfolio/courses/08.jpg' %}" class="card-img-top" alt="Image">
                     </div>
                     <div class="card-body pb-3">
                       <h3 class="h5 mb-2">
-                        <a href="portfolio-single-course.html">The Ultimate Guide to Unity Game Development</a>
+                        <a href="{% url 'website:computer-literacy' %}">Компьютерная грамотность</a>
                       </h3>
-                      <p class="fs-sm mb-2">By Albert Flores</p>
-                      <p class="fs-lg fw-semibold text-primary mb-0">$29.99</p>
+                      <p class="fs-sm mb-2">WorkBench</p>
+                      <p class="fs-lg fw-semibold text-primary mb-0">от 8.990 тг</p>
                     </div>
                     <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
                       <div class="d-flex align-items-center me-4">
                         <i class="bx bx-time fs-xl me-1"></i>
-                        250 hours
+                        10+ часов
                       </div>
                       <div class="d-flex align-items-center">
                         <i class="bx bx-like fs-xl me-1"></i>
-                        95% (5.4K)
+                        95%
                       </div>
                     </div>
                   </article>
@@ -554,7 +514,7 @@
               <div class="swiper-pagination position-relative pt-2 pt-sm-3 mt-4"></div>
             </div>
             <a href="portfolio-courses.html" class="btn btn-outline-primary btn-lg w-100 d-md-none mt-3">
-              See all courses
+              Посмотреть все курсы
               <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
             </a>
           </div>
@@ -564,7 +524,7 @@
 
       <!-- How it works (Steps) -->
       <section class="container pt-4 pt-lg-0 pb-4 pb-lg-5">
-        <h2 class="h1 text-center pb-3 pb-md-0 mb-md-5">How Does It Work?</h2>
+        <h2 class="h1 text-center pb-3 pb-md-0 mb-md-5">С чего начать?</h2>
         <div class="steps">
           <div class="step pt-0 pt-md-3 pb-5">
             <div class="step-number">
@@ -576,8 +536,8 @@
                 <img src="{% static 'website/img/landing/online-courses/steps/01-light.svg' %}" class="d-none d-dark-mode-block" width="306" alt="Illustration">
               </div>
               <div class="rellax ps-md-4 ps-xl-5" data-rellax-percentage="0.5" data-rellax-speed="0.4" data-disable-parallax-down="lg">
-                <h3 class="h4">Find what fascinates you &amp; choose your course</h3>
-                <p class="mb-0">Nulla faucibus mauris pellentesque blandit faucibus non. Sit ut et at suspendisse gravida hendrerit scelerisque tempus placerat.</p>
+                <h3 class="h4">Найдите что вас увлекает и выберите свой курс 🤔</h3>
+                <p class="mb-0">Мы предлагаем широкий спектр онлайн-курсов, охватывающих все от фундаментальных принципов до самых передовых технологий.</p>
               </div>
             </div>
           </div>
@@ -591,8 +551,8 @@
                 <img src="{% static 'website/img/landing/online-courses/steps/02-light.svg' %}" class="d-none d-dark-mode-block" width="306" alt="Illustration">
               </div>
               <div class="rellax ps-md-4 ps-xl-5" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="lg">
-                <h3 class="h4">Learn by doing</h3>
-                <p class="mb-0">Tristique sed pharetra feugiat tempor sagittis. Ultricies eu bibendum adipiscing lacinia. Quisque praesent aliquam tempus phasellus ut integer ac nunc dapibus.</p>
+                <h3 class="h4">Освойте качественные знания - применяя их на практике вместе с ментором 👨🏻‍🏫</h3>
+                <p class="mb-0"> - в мире информационных технологий, обучение на практике с ментором является неотъемлемой частью успешного профессионального роста. Поэтому,  мы призываем всех наших студентов внимательно следить за этим аспектом обучения на наших онлайн IT-курсах.</p>
               </div>
             </div>
           </div>
@@ -606,8 +566,8 @@
                 <img src="{% static 'website/img/landing/online-courses/steps/03-light.svg' %}" class="d-none d-dark-mode-block" width="306" alt="Illustration">
               </div>
               <div class="rellax ps-md-4 ps-xl-5" data-rellax-percentage="0.5" data-rellax-speed="0.4" data-disable-parallax-down="lg">
-                <h3 class="h4">Get instant expert feedback</h3>
-                <p class="mb-0">Duis euismod enim, facilisis risus tellus pharetra lectus diam neque. Nec ultrices mi faucibus est. Magna ullamcorper potenti elementum ultricies auctor nec volutpat augue.</p>
+                <h3 class="h4">Применяйте полученные знания на найденных заказах 🪄</h3>
+                <p class="mb-0">- знания, которые вы получаете в наших онлайн IT-курсах, откроют перед вами двери к невероятным возможностям в этой динамичной и востребованной индустрии.</p>
               </div>
             </div>
           </div>
@@ -621,8 +581,8 @@
                 <img src="{% static 'website/img/landing/online-courses/steps/04-light.svg' %}" class="d-none d-dark-mode-block" width="306" alt="Illustration">
               </div>
               <div class="rellax ps-md-4 ps-xl-5" data-rellax-percentage="0.5" data-rellax-speed="0.6" data-disable-parallax-down="lg">
-                <h3 class="h4">Put your learning into practice &amp; find your dream job</h3>
-                <p class="mb-0">Sed fermentum ut nibh duis. Dolor pretium arcu, tincidunt ultrices tristique arcu cursus massa gravida tortor nulla, mollis id pretium.</p>
+                <h3 class="h4">Получайте мгновенную обратную связи от экспертов-менторов которые помогут вам с вашим первым заказом 🤝</h3>
+                <p class="mb-0"> Помощь эксперта - это мощный инструмент, для реализации себя в этой нише.</p>
               </div>
             </div>
           </div>
@@ -632,7 +592,7 @@
 
       <!-- What you get (Icon boxes) -->
       <section class="container pt-1 pt-xl-3 pb-5">
-        <h2 class="h1 text-center pb-3 pb-md-0 mb-md-5">What You Get</h2>
+        <h2 class="h1 text-center pb-3 pb-md-0 mb-md-5">Что вы получите?</h2>
         <div class="swiper swiper-nav-onhover mt-n3 mx-n2" data-swiper-options='{
           "slidesPerView": 1,
           "spaceBetween": 8,
@@ -659,8 +619,8 @@
                     <img src="{% static 'website/img/landing/online-courses/icons/01.svg' %}" class="position-relative zindex-2" width="32" alt="Icon">
                     <span class="bg-primary position-absolute top-0 start-0 w-100 h-100 rounded-circle opacity-8"></span>
                   </div>
-                  <h3 class="h5 pb-1 mb-2">25K+ Online Video Courses</h3>
-                  <p class="mb-0">Leo condimentum dignissim venenatis sit dignissim vel. Adipiscing tristique dictum vitae elementum neque.</p>
+                  <h3 class="h5 pb-1 mb-2">Сертификат 📋</h3>
+                  <p class="mb-0">Получите сертифика, который будет подтверждать ваши навыки.</p>
                 </div>
               </div>
             </div>
@@ -673,8 +633,8 @@
                     <img src="{% static 'website/img/landing/online-courses/icons/02.svg' %}" class="position-relative zindex-2" width="32" alt="Icon">
                     <span class="bg-primary position-absolute top-0 start-0 w-100 h-100 rounded-circle opacity-8"></span>
                   </div>
-                  <h3 class="h5 pb-1 mb-2">Mentor-Based Learning</h3>
-                  <p class="mb-0">Ac dapibus lacus, malesuada ridiculus donec condimentum nunc vestibulum. Mi feugiat tellus faucibus fermentum mattis ultrices.</p>
+                  <h3 class="h5 pb-1 mb-2">Обучение под руководством ментора 👨🏻‍🏫</h3>
+                  <p class="mb-0">Наши студенты будут иметь возможность получить индивидуальное руководство и поддержку от опытного эксперта в ходе учебного процесса.</p>
                 </div>
               </div>
             </div>
@@ -687,8 +647,8 @@
                     <img src="{% static 'website/img/landing/online-courses/icons/03.svg' %}" class="position-relative zindex-2" width="32" alt="Icon">
                     <span class="bg-primary position-absolute top-0 start-0 w-100 h-100 rounded-circle opacity-8"></span>
                   </div>
-                  <h3 class="h5 pb-1 mb-2">Lifetime Access</h3>
-                  <p class="mb-0">Donec interdum risus convallis tristique quis elit. Sapien turpis enim, viverra cursus facilisis dignissim condimentum.</p>
+                  <h3 class="h5 pb-1 mb-2">1 год БЕЗЛИМИТА в обучении ♾</h3>
+                  <p class="mb-0">1 год неограниченного обучения ♾ и профессионального роста 👨🏻‍🎓.</p>
                 </div>
               </div>
             </div>
@@ -707,7 +667,7 @@
             <div class="card h-100 border-0 overflow-hidden px-md-4">
               <span class="bg-gradient-primary position-absolute top-0 start-0 w-100 h-100 opacity-10 d-none d-md-block"></span>
               <div class="card-body d-flex flex-column align-items-center justify-content-center position-relative zindex-2 p-0 pb-2 p-lg-4">
-                <h2 class="h1 text-center text-md-start p-lg-4">What Our Students Say About Online Courses</h2>
+                <h2 class="h1 text-center text-md-start p-lg-4">Что говорят наши студенты?</h2>
               </div>
             </div>
           </div>
@@ -746,13 +706,13 @@
                   <div class="swiper-slide h-auto">
                     <figure class="card h-100 position-relative border-0 bg-transparent">
                       <blockquote class="card-body p-0 mb-0">
-                        <p class="fs-lg mb-0">Vestibulum nunc lectus auctor quis. Natoque lectus tortor lacus, eu. Nunc feugiat nisl maecenas nulla hac morbi. Vitae, donec facilisis sed nunc netus. Venenatis posuere faucibus enim est. Vel dignissim morbi blandit morbi tellus. Arcu ullamcorper quis enim.</p>
+                        <p class="fs-lg mb-0">Благодаря онлайн-курсам, я смог изменить свою жизнь. Сначала я не имел опыта в IT, но курсы с реальными кейсами дали мне шанс преодолеть это. Я разработал приложение, которое сейчас успешно работает, и получил сертификат. Это был невероятный год обучения.🚀</p>
                       </blockquote>
                       <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
                         <img src="{% static 'website/img/avatar/13.jpg' %}" width="60" class="rounded-circle" alt="Ralph Edwards">
                         <div class="ps-3">
-                          <h6 class="fw-semibold lh-base mb-0">Ralph Edwards</h6>
-                          <span class="fs-sm text-muted">Head of Marketing at Lorem Ltd. </span>
+                          <h6 class="fw-semibold lh-base mb-0">Тамерлан Кажымукан</h6>
+                          <span class="fs-sm text-muted">Студент 2021 г. </span>
                         </div>
                       </figcaption>
                     </figure>
@@ -762,13 +722,13 @@
                   <div class="swiper-slide h-auto">
                     <figure class="card h-100 position-relative border-0 bg-transparent">
                       <blockquote class="card-body p-0 mb-0">
-                        <p class="fs-lg mb-0">Mi semper risus ultricies orci pulvinar in at enim orci. Quis facilisis nunc pellentesque in ullamcorper sit. Lorem blandit arcu sapien, senectus libero, amet dapibus cursus quam. Eget pellentesque eu purus volutpat adipiscing malesuada. Purus nisi, tortor vel lacus.</p>
+                        <p class="fs-lg mb-0">Находясь в декрете, я решила не останавливаться и продолжить учиться. Онлайн-курсы с реальными кейсами позволили мне гибко управлять временем и развивать профессиональные навыки. Мой сертификат стал подтверждением моей способности совмещать работу и материнство. 👩‍👦‍👦</p>
                       </blockquote>
                       <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
                         <img src="{% static 'website/img/avatar/14.jpg' %}" width="60" class="rounded-circle" alt="Annette Black">
                         <div class="ps-3">
-                          <h6 class="fw-semibold lh-base mb-0">Annette Black</h6>
-                          <span class="fs-sm text-muted">Strategic Advisor at Company LLC</span>
+                          <h6 class="fw-semibold lh-base mb-0">Светлана Генадьевна</h6>
+                          <span class="fs-sm text-muted">Студент 2022 г.</span>
                         </div>
                       </figcaption>
                     </figure>
@@ -778,13 +738,13 @@
                   <div class="swiper-slide h-auto">
                     <figure class="card h-100 position-relative border-0 bg-transparent">
                       <blockquote class="card-body p-0 mb-0">
-                        <p class="fs-lg mb-0">Ac at sed sit senectus massa. Massa ante amet ultrices magna porta tempor. Aliquet diam in et magna ultricies mi at. Lectus enim, vel enim egestas nam pellentesque et leo. Elit mi faucibus laoreet aliquam pellentesque sed aliquet integer massa. Orci leo tortor ornare.</p>
+                        <p class="fs-lg mb-0">Когда я пошел в колледж, я не знал, что ожидать. Учеба была сложной, но курсы с реальными кейсами сделали ее интереснее. Благодаря этим курсам я узнал, как применять знания на практике. Теперь у меня есть диплом, сертификат и уверенность в своих силах. Обучение стало веселым приключением!</p>
                       </blockquote>
                       <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
                         <img src="{% static 'website/img/avatar/11.jpg' %}" width="60" class="rounded-circle" alt="Darrell Steward">
                         <div class="ps-3">
-                          <h6 class="fw-semibold lh-base mb-0">Darrell Steward</h6>
-                          <span class="fs-sm text-muted">Project Manager at Ipsum Ltd.</span>
+                          <h6 class="fw-semibold lh-base mb-0">Асан Омизрак</h6>
+                          <span class="fs-sm text-muted">Студент 2020 г.</span>
                         </div>
                       </figcaption>
                     </figure>
@@ -802,7 +762,7 @@
 
       <!-- Brands (Carousel) -->
       <section class="container mt-2 mb-lg-2 mb-xl-4 pt-3 pt-lg-5 pb-5">
-        <h2 class="text-center pb-md-2">Trusted by Leading Universities &amp; Companies</h2>
+        <h2 class="text-center pb-md-2">Нам доверяют ведущие университеты и компании</h2>
         <div class="swiper mx-n2" data-swiper-options='{
           "slidesPerView": 2,
           "pagination": {
@@ -892,18 +852,18 @@
 
           <div class="row justify-content-center position-relative zindex-2 py-lg-4">
             <div class="col-xl-8 col-lg-9 col-md-10 py-2">
-              <h2 class="h1 text-light text-center mt-n2 mt-lg-0 mb-4 mb-lg-5">Frequently Asked Questions</h2>
+              <h2 class="h1 text-light text-center mt-n2 mt-lg-0 mb-4 mb-lg-5">Часто задаваемые вопросы ❔</h2>
               <div class="accordion" id="faq">
 
                 <!-- Item -->
                 <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
                   <h3 class="accordion-header">
-                    <button class="accordion-button shadow-none rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#q-1" aria-expanded="true" aria-controls="q-1">What if I don't have any professional background?</button>
+                    <button class="accordion-button shadow-none rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#q-1" aria-expanded="true" aria-controls="q-1">Какие преимущества онлайн-обучения в этой области?</button>
                   </h3>
                   <div class="accordion-collapse collapse show" id="q-1" data-bs-parent="#faq">
                     <div class="accordion-body fs-sm pt-0">
-                      <p>Nunc duis id aenean gravida tincidunt eu, tempor ullamcorper. Viverra aliquam arcu, viverra et, cursus. Aliquet pretium cursus adipiscing gravida et consequat lobortis arcu velit. Nibh pharetra fermentum duis accumsan lectus non. Massa cursus molestie lorem scelerisque pellentesque. Nisi, enim, arcu purus gravida adipiscing euismod montes, duis egestas. Vehicula eu etiam quam tristique tincidunt suspendisse ut consequat.</p>
-                      <p>Ornare senectus fusce dignissim ut. Integer consequat in eu tortor, faucibus et lacinia posuere. Turpis sit viverra lorem suspendisse lacus aliquam auctor vulputate. Quis egestas aliquam nunc purus lacus, elit leo elit facilisi. Dignissim amet adipiscing massa integer.</p>
+                      <p>Преимущества включают гибкость в выборе учебного времени, доступность для всех уровней студентов, практическое обучение и возможность обучения в собственном темпе.</p>
+                      <p>Работа с личным ментором. Выполнение курсового проекта.</p>
                     </div>
                   </div>
                 </div>
@@ -911,12 +871,11 @@
                 <!-- Item -->
                 <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
                   <h3 class="accordion-header">
-                    <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-2" aria-expanded="false" aria-controls="q-2">How is this different from other courses on the market?</button>
+                    <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-2" aria-expanded="false" aria-controls="q-2">Сколько времени занимает прохождение курса?</button>
                   </h3>
                   <div class="accordion-collapse collapse" id="q-2" data-bs-parent="#faq">
                     <div class="accordion-body fs-sm pt-0">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in facilisis nibh. Vestibulum ac porttitor sapien. Curabitur laoreet malesuada gravida. Phasellus vehicula vestibulum consequat. Curabitur feugiat eget sem vitae laoreet. Fusce porttitor finibus tellus, quis condimentum nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus vehicula malesuada magna at viverra. Fusce non est eget libero convallis fringilla suspendisse.</p>
-                      <p>Nunc dolor velit, interdum finibus bibendum vel, mattis a magna. Mauris mollis sapien ac mi aliquet varius. Proin nec est nibh. Dignissim amet adipiscing massa integer.</p>
+                      <p>Время зависит от конкретного курса и вашей предыдущей подготовки. Обычно, для освоения основных навыков веб-разработки и Python/Django потребуется несколько месяцев.</p>
                     </div>
                   </div>
                 </div>
@@ -924,11 +883,11 @@
                 <!-- Item -->
                 <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
                   <h3 class="accordion-header">
-                    <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-3" aria-expanded="false" aria-controls="q-3">How much time does it take to do my homework per week? What if I don't like it?</button>
+                    <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-3" aria-expanded="false" aria-controls="q-3">Могу ли я получить сертификат после прохождения курса?</button>
                   </h3>
                   <div class="accordion-collapse collapse" id="q-3" data-bs-parent="#faq">
                     <div class="accordion-body fs-sm pt-0">
-                      <p>Suspendisse viverra volutpat eros. Curabitur in scelerisque lacus, quis fringilla sem. Nunc rutrum vel magna et ullamcorper. Sed consectetur augue vitae ligula consectetur, eu dapibus justo molestie. Phasellus sit amet metus magna. Sed tincidunt tempus felis vitae commodo. Etiam lobortis justo in elit pretium, sit amet aliquet tellus euismod. Curabitur in purus sed turpis aliquet pretium. Nunc ut magna tempus, iaculis sem id, vulputate ipsum. Etiam fermentum malesuada quam, in tempus purus pulvinar at. Vestibulum auctor congue pharetra. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Nunc dolor velit, interdum finibus bibendum vel, mattis a magna. Mauris mollis sapien ac mi aliquet varius. Proin nec est nibh. In hac habitasse platea dictumst. Nullam porta risus vitae lectus pellentesque interdum. Proin ac leo fermentum, volutpat odio ut, lacinia erat. Suspendisse potenti. Praesent vitae faucibus lectus. Sed tincidunt at ex id maximus. Morbi tristique ullamcorper velit, non cursus libero eleifend quis. Aliquam aliquam odio dui.</p>
+                      <p>Да, по окончании курса вы можете получить сертификат, подтверждающий ваши знания и навыки в области вашего курса.</p>
                     </div>
                   </div>
                 </div>
@@ -936,12 +895,11 @@
                 <!-- Item -->
                 <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
                   <h3 class="accordion-header">
-                    <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-4" aria-expanded="false" aria-controls="q-4">Is there any kind of certificate of completion?</button>
+                    <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-4" aria-expanded="false" aria-controls="q-4">Могу ли я обучаться параллельно с учебой в учебном заведении или работой?</button>
                   </h3>
                   <div class="accordion-collapse collapse" id="q-4" data-bs-parent="#faq">
                     <div class="accordion-body fs-sm pt-0">
-                      <p>Nunc duis id aenean gravida tincidunt eu, tempor ullamcorper. Viverra aliquam arcu, viverra et, cursus. Aliquet pretium cursus adipiscing gravida et consequat lobortis arcu velit. Nibh pharetra fermentum duis accumsan lectus non. Massa cursus molestie lorem scelerisque pellentesque. Nisi, enim, arcu purus gravida adipiscing euismod montes, duis egestas. Vehicula eu etiam quam tristique tincidunt suspendisse ut consequat.</p>
-                      <p>Ornare senectus fusce dignissim ut. Integer consequat in eu tortor, faucibus et lacinia posuere. Turpis sit viverra lorem suspendisse lacus aliquam auctor vulputate. Quis egestas aliquam nunc purus lacus, elit leo elit facilisi. Dignissim amet adipiscing massa integer.</p>
+                      <p>Да, многие студенты сочетают онлайн-обучение с учебой или работой, так как курсы предоставляют гибкое расписание.</p>
                     </div>
                   </div>
                 </div>
@@ -949,12 +907,12 @@
                 <!-- Item -->
                 <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
                   <h3 class="accordion-header">
-                    <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-5" aria-expanded="false" aria-controls="q-5">YouTube is full of free tutorials, videos and courses. Why should I take any courses here?</button>
+                    <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-5" aria-expanded="false" aria-controls="q-5">Какие навыки и знания я получу на этих курсах?</button>
                   </h3>
                   <div class="accordion-collapse collapse" id="q-5" data-bs-parent="#faq">
                     <div class="accordion-body fs-sm pt-0">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in facilisis nibh. Vestibulum ac porttitor sapien. Curabitur laoreet malesuada gravida. Phasellus vehicula vestibulum consequat. Curabitur feugiat eget sem vitae laoreet. Fusce porttitor finibus tellus, quis condimentum nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus vehicula malesuada magna at viverra. Fusce non est eget libero convallis fringilla suspendisse.</p>
-                      <p>Nunc dolor velit, interdum finibus bibendum vel, mattis a magna. Mauris mollis sapien ac mi aliquet varius. Proin nec est nibh. Dignissim amet adipiscing massa integer.</p>
+                      <p>Вы освоите программирование на Python, создание веб-приложений с использованием Django, веб-технологии (HTML, CSS, JavaScript, Bootstrap) и разработку REST API.</p>
+                      <p>И станете полноценным разработчиком (программистом).</p>
                     </div>
                   </div>
                 </div>
@@ -962,11 +920,12 @@
                 <!-- Item -->
                 <div class="accordion-item border-0 rounded-3 shadow-sm">
                   <h3 class="accordion-header">
-                    <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-6" aria-expanded="false" aria-controls="q-6">What happens if I forget or lose my password?</button>
+                    <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-6" aria-expanded="false" aria-controls="q-6">Какой опыт требуется для прохождения курса?</button>
                   </h3>
                   <div class="accordion-collapse collapse" id="q-6" data-bs-parent="#faq">
                     <div class="accordion-body fs-sm pt-0">
-                      <p>Suspendisse viverra volutpat eros. Curabitur in scelerisque lacus, quis fringilla sem. Nunc rutrum vel magna et ullamcorper. Sed consectetur augue vitae ligula consectetur, eu dapibus justo molestie. Phasellus sit amet metus magna. Sed tincidunt tempus felis vitae commodo. Etiam lobortis justo in elit pretium, sit amet aliquet tellus euismod. Curabitur in purus sed turpis aliquet pretium. Nunc ut magna tempus, iaculis sem id, vulputate ipsum. Etiam fermentum malesuada quam, in tempus purus pulvinar at. Vestibulum auctor congue pharetra. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Nunc dolor velit, interdum finibus bibendum vel, mattis a magna. Mauris mollis sapien ac mi aliquet varius. Proin nec est nibh. In hac habitasse platea dictumst. Nullam porta risus vitae lectus pellentesque interdum. Proin ac leo fermentum, volutpat odio ut, lacinia erat. Suspendisse potenti. Praesent vitae faucibus lectus. Sed tincidunt at ex id maximus. Morbi tristique ullamcorper velit, non cursus libero eleifend quis. Aliquam aliquam odio dui.</p>
+                      <p>Большинство курсов подходят как для новичков, так и для тех, кто уже имеет некоторый опыт в программировании и веб-разработке.</p>
+                      <p>Напишите нам, и мы подберем для вас курс!</p>
                     </div>
                   </div>
                 </div>
@@ -1022,55 +981,40 @@
         <div class="row pb-5">
           <div class="col-lg-4 col-md-6">
             <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
-              <img src="{% static 'website/img/logo.svg' %}" width="47" alt="WorkBench">
-              Silicon
+              <img src="{% static 'website/img/logo.png' %}" width="47px" alt="WorkBench">
+              WorkBench
             </div>
-            <p class="fs-sm pb-lg-3 mb-4">Proin ipsum pharetra, senectus eget scelerisque varius pretium platea velit. Lacus, eget eu vitae nullam proin turpis etiam mi sit. Non feugiat feugiat egestas nulla nec. Arcu tempus, eget elementum dolor ullamcorper sodales ultrices eros.</p>
-            <form class="needs-validation" novalidate>
-              <label for="subscr-email" class="form-label">Subscribe to our newsletter</label>
-              <div class="input-group">
-                <input type="email" id="subscr-email" class="form-control rounded-start ps-5" placeholder="Your email" required>
-                <i class="bx bx-envelope fs-lg text-muted position-absolute top-50 start-0 translate-middle-y ms-3 zindex-5"></i>
-                <div class="invalid-tooltip position-absolute top-100 start-0">Please provide a valid email address.</div>
-                <button type="submit" class="btn btn-primary">Subscribe</button>
-              </div>
-            </form>
+            <p class="fs-sm pb-lg-3 mb-4">"У нас — место, где ваше образование становится вашим будущим. Добро пожаловать в мир обучения и развития, где знания — это ключ к успеху. Присоединяйтесь к нам сегодня и начните свой учебный путь к бесконечным возможностям!"</p>
           </div>
           <div class="col-xl-6 col-lg-7 col-md-5 offset-xl-2 offset-md-1 pt-4 pt-md-1 pt-lg-0">
             <div id="footer-links" class="row">
               <div class="col-lg-4">
-                <h6 class="mb-2">
-                  <a href="landing-online-courses.html#useful-links" class="d-block text-dark dropdown-toggle d-lg-none py-2" data-bs-toggle="collapse">Useful Links</a>
-                </h6>
                 <div id="useful-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
                   <ul class="nav flex-column pb-lg-1 mb-lg-3">
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Home</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">About</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Courses</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Careers</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Blog</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Главная</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">О нас</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Курсы</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Контакты</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Сотрудничество</a></li>
                   </ul>
                   <ul class="nav flex-column mb-2 mb-lg-0">
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Terms &amp; Conditions</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Privacy Policy</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Условия использования</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Политика конфиденциальности</a></li>
                   </ul>
                 </div>
               </div>
               <div class="col-xl-4 col-lg-3">
-                <h6 class="mb-2">
-                  <a href="landing-online-courses.html#social-links" class="d-block text-dark dropdown-toggle d-lg-none py-2" data-bs-toggle="collapse">Socials</a>
-                </h6>
                 <div id="social-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
                   <ul class="nav flex-column mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">WhatsApp</a></li>
                     <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Facebook</a></li>
                     <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">LinkedIn</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Twitter</a></li>
                     <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Instagram</a></li>
                   </ul>
                 </div>
               </div>
               <div class="col-xl-4 col-lg-5 pt-2 pt-lg-0">
-                <h6 class="mb-2">Contact Us</h6>
+                <h6 class="mb-2">Связаться с нами</h6>
                 <a href="mailto:email@example.com" class="fw-medium">email@example.com</a>
               </div>
             </div>

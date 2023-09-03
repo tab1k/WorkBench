@@ -36,3 +36,37 @@ class CoursesView(View):
     def get(self, request):
         return render(request, self.template_name)
 
+
+class FullStackView(View):
+
+    def get(self, request):
+        return render(request, 'website/full_stack.html')
+
+
+
+
+class HtmlCssView(View):
+
+    def get(self, request):
+        return render(request, 'website/html_css.html')
+
+
+
+
+class PythonView(View):
+
+    def get(self, request):
+        return render(request, 'website/python.html')
+
+
+
+class PythonDjangoView(View):
+
+    def get(self, request):
+        return render(request, 'website/python_django.html')
+
+
+class ComputerLiteracyView(View):
+
+    def get(self, request):
+        return render(request, 'website/computer_literacy.html')

@@ -16,3 +16,4 @@ class Contact(models.Model):
     class Meta:
         verbose_name = 'Новая заявка'
         verbose_name_plural = 'Новые заявки'
+

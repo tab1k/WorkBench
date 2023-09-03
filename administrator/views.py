@@ -51,7 +51,7 @@ def admin_view(request):
 
 
 class StudentsCheckAdmin(View):
-    template_name = 'users/admin/student.html'
+    template_name = 'admin/starter-kit/students.html'
     items_per_page = 10  # Количество студентов на странице
 
     def get(self, request):
@@ -80,7 +80,7 @@ class StudentsCheckAdmin(View):
 
 
 class CuratorCheckAdmin(View):
-    template_name = 'users/admin/curators.html'
+    template_name = 'admin/starter-kit/curators.html'
 
     def get(self, request):
         curators = User.objects.filter(role='curator')
@@ -211,7 +211,7 @@ class SearchCuratorsView(View):
 
 class ContactListView(ListView):
     model = Contact
-    template_name = 'users/admin/applications.html'
+    template_name = 'admin/starter-kit/applications.html'
     context_object_name = 'contacts'
     paginate_by = 10
 
@@ -237,7 +237,7 @@ from django.utils import timezone
 
 class NotificationListView(ListView):
     model = Notification
-    template_name = 'users/admin/view_notifications.html'
+    template_name = 'admin/starter-kit/notifications.html'
     context_object_name = 'notifications'
     ordering = ['-timestamp']
 
@@ -274,7 +274,7 @@ class NotificationListView(ListView):
 class NotificationCreateView(CreateView):
     model = Notification
     form_class = NotificationForm
-    template_name = 'users/admin/create_notification.html'
+    template_name = 'admin/starter-kit/create_notification.html'
     success_url = reverse_lazy('users:admin:create_notification')  # Используем 'admin:create_notification' из app_name
 
     def form_valid(self, form):
