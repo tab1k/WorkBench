@@ -14,12 +14,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicon and Touch Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/favicon/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'website/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'website/favicon/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'website/favicon/site.webmanifest' %}">
-    <link rel="mask-icon" href="{% static 'website/favicon/safari-pinned-tab.svg' %}" color="#6366f1">
-    <link rel="shortcut icon" href="{% static 'website/favicon/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/img/logo.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'website/img/logo.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'website/img/logo.png' %}">
+    <link rel="manifest" href="{% static 'website/img/logo.png' %}">
+    <link rel="mask-icon" href="{% static 'website/img/logo.png' %}" color="#6366f1">
+    <link rel="shortcut icon" href="{% static 'website/img/logo.png' %}"> <!-- Изменен путь к новому фавикону -->
     <meta name="msapplication-TileColor" content="#080032">
     <meta name="msapplication-config" content="{% static 'website/favicon/browserconfig.xml' %}">
     <meta name="theme-color" content="#ffffff">
@@ -170,8 +170,8 @@
       <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page -->
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
-          <a href="index.html" class="navbar-brand pe-3">
-            <img src="{% static 'website/img/logo.png' %}" width="47" alt="WorkBench">
+          <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
+            <img src="{% static 'website/img/logo.svg' %}" width="47" alt="WorkBench">
             WorkBench
           </a>
           <div id="navbarNav" class="offcanvas offcanvas-end">
@@ -200,7 +200,7 @@
             </div>
             <div class="offcanvas-header border-top">
               <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
-                <i class="bx bx-cart fs-4 lh-1 me-1"></i>
+                <i class="bx bx-log-in fs-5"></i>
                 &nbsp;Войти
               </a>
             </div>
@@ -237,22 +237,22 @@
 
 
               <!-- Mobile form -->
-              <form class="d-sm-none mb-5">
-                <input type="text" class="form-control form-control-lg mb-2" placeholder="Search courses...">
-                <select class="form-select form-select-lg mb-2">
-                  <option value="" selected disabled>Категории</option>
-                  <option value="Web Development">Web Development</option>
-                  <option value="Mobile Development">Mobile Development</option>
-                  <option value="Programming">DataScience</option>
-                  <option value="Game Development">Game Development</option>
-                  <option value="Software Testing">Тестирование ПО</option>
-                  <option value="Software Engineering">Программная инженерия</option>
-                  <option value="Network & Security">Сетевая &amp; безопасность</option>
-                </select>
-                <button type="submit" class="btn btn-icon btn-primary btn-lg w-100 d-sm-none">
-                  <i class="bx bx-search"></i>
-                </button>
-              </form>
+<!--              <form class="d-sm-none mb-5">-->
+<!--                <input type="text" class="form-control form-control-lg mb-2" placeholder="Search courses...">-->
+<!--                <select class="form-select form-select-lg mb-2">-->
+<!--                  <option value="" selected disabled>Категории</option>-->
+<!--                  <option value="Web Development">Web Development</option>-->
+<!--                  <option value="Mobile Development">Mobile Development</option>-->
+<!--                  <option value="Programming">DataScience</option>-->
+<!--                  <option value="Game Development">Game Development</option>-->
+<!--                  <option value="Software Testing">Тестирование ПО</option>-->
+<!--                  <option value="Software Engineering">Программная инженерия</option>-->
+<!--                  <option value="Network & Security">Сетевая &amp; безопасность</option>-->
+<!--                </select>-->
+<!--                <button type="submit" class="btn btn-icon btn-primary btn-lg w-100 d-sm-none">-->
+<!--                  <i class="bx bx-search"></i>-->
+<!--                </button>-->
+<!--              </form>-->
               <div class="d-flex align-items-center mt-auto mb-3 mb-lg-0 pb-4 pb-lg-0 pb-xl-5">
                 <div class="d-flex me-3">
                   <div class="d-flex align-items-center justify-content-center bg-light rounded-circle" style="width: 52px; height: 52px;">
@@ -513,7 +513,7 @@
               <!-- Pagination (bullets) -->
               <div class="swiper-pagination position-relative pt-2 pt-sm-3 mt-4"></div>
             </div>
-            <a href="portfolio-courses.html" class="btn btn-outline-primary btn-lg w-100 d-md-none mt-3">
+            <a href="{% url 'website:courses' %}" class="btn btn-outline-primary btn-lg w-100 d-md-none mt-3">
               Посмотреть все курсы
               <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
             </a>
@@ -666,7 +666,7 @@
           <div class="col-md-5">
             <div class="card h-100 border-0 overflow-hidden px-md-4">
               <span class="bg-gradient-primary position-absolute top-0 start-0 w-100 h-100 opacity-10 d-none d-md-block"></span>
-              <div class="card-body d-flex flex-column align-items-center justify-content-center position-relative zindex-2 p-0 pb-2 p-lg-4">
+              <div class="card-body d-flex flex-column align-items-center justify-content-center position-relative zindex-2 p-0 pb-2 p-lg-4" style="margin-top: 20px;">
                 <h2 class="h1 text-center text-md-start p-lg-4">Что говорят наши студенты?</h2>
               </div>
             </div>
@@ -762,7 +762,7 @@
 
       <!-- Brands (Carousel) -->
       <section class="container mt-2 mb-lg-2 mb-xl-4 pt-3 pt-lg-5 pb-5">
-        <h2 class="text-center pb-md-2">Нам доверяют ведущие университеты и компании</h2>
+        <h2 class="text-center pb-md-2">Нам доверяют ведущие компании Казахстана</h2>
         <div class="swiper mx-n2" data-swiper-options='{
           "slidesPerView": 2,
           "pagination": {
@@ -792,43 +792,43 @@
 
             <!-- Item -->
             <div class="swiper-slide py-3">
-              <a href="landing-online-courses.html#" class="card card-body card-hover px-2 mx-2">
-                <img src="{% static 'website/img/brands/01.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/kaspi.png' %}" class="d-block mx-auto my-2" width="100" alt="Brand">
               </a>
             </div>
 
             <!-- Item -->
             <div class="swiper-slide py-3">
-              <a href="landing-online-courses.html#" class="card card-body card-hover px-2 mx-2">
-                <img src="{% static 'website/img/brands/02.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/halyk.png' %}" class="d-block mx-auto my-2" width="100" alt="Brand">
               </a>
             </div>
 
             <!-- Item -->
             <div class="swiper-slide py-3">
-              <a href="landing-online-courses.html#" class="card card-body card-hover px-2 mx-2">
-                <img src="{% static 'website/img/brands/03.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/forte.png' %}" class="d-block mx-auto my-2" width="130" alt="Brand">
               </a>
             </div>
 
             <!-- Item -->
             <div class="swiper-slide py-3">
-              <a href="landing-online-courses.html#" class="card card-body card-hover px-2 mx-2">
-                <img src="{% static 'website/img/brands/04.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/kolesa.png' %}" class="d-block mx-auto my-2" width="130" alt="Brand">
               </a>
             </div>
 
             <!-- Item -->
             <div class="swiper-slide py-3">
-              <a href="landing-online-courses.html#" class="card card-body card-hover px-2 mx-2">
-                <img src="{% static 'website/img/brands/05.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/kcell.png' %}" class="d-block mx-auto my-2" width="90" alt="Brand">
               </a>
             </div>
 
             <!-- Item -->
             <div class="swiper-slide py-3">
-              <a href="landing-online-courses.html#" class="card card-body card-hover px-2 mx-2">
-                <img src="{% static 'website/img/brands/06.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/beeline.png' %}" class="d-block mx-auto my-2" width="100" alt="Brand">
               </a>
             </div>
           </div>
@@ -991,49 +991,46 @@
               <div class="col-lg-4">
                 <div id="useful-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
                   <ul class="nav flex-column pb-lg-1 mb-lg-3">
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Главная</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">О нас</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Курсы</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Контакты</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Сотрудничество</a></li>
+                    <li class="nav-item"><a href="{% url 'website:home'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Главная</a></li>
+                    <li class="nav-item"><a href="{% url 'website:about'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">О нас</a></li>
+                    <li class="nav-item"><a href="{% url 'website:courses'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Курсы</a></li>
+                    <li class="nav-item"><a href="{% url 'website:contacts'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Контакты</a></li>
+                    <li class="nav-item"><a href="{% url 'website:collaboration'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Сотрудничество</a></li>
                   </ul>
                   <ul class="nav flex-column mb-2 mb-lg-0">
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Условия использования</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Политика конфиденциальности</a></li>
+                    <li class="nav-item"><a href="{% url 'website:terms'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Условия использования</a></li>
+                    <li class="nav-item"><a href="{% url 'website:privacy'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Политика конфиденциальности</a></li>
                   </ul>
                 </div>
               </div>
               <div class="col-xl-4 col-lg-3">
                 <div id="social-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
                   <ul class="nav flex-column mb-2 mb-lg-0">
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">WhatsApp</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Facebook</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">LinkedIn</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Instagram</a></li>
+                    <a href="https://wa.me/87077772817" class="nav-link d-inline-block px-0 pt-1 pb-2">WhatsApp</a>
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Instagram</a></li>
                   </ul>
                 </div>
               </div>
               <div class="col-xl-4 col-lg-5 pt-2 pt-lg-0">
                 <h6 class="mb-2">Связаться с нами</h6>
-                <a href="mailto:email@example.com" class="fw-medium">email@example.com</a>
+                <a href="mailto:workbenchkz@gmail.com" class="fw-medium">workbenchkz@gmail.com</a>
               </div>
             </div>
           </div>
         </div>
         <p class="nav d-block fs-xs text-center text-md-start pb-2 pb-lg-0 mb-0">
           &copy; Все права защищены.
-          <a class="nav-link d-inline-block p-0" href="https://createx.studio/" target="_blank" rel="noopener">WorkBench</a>
+          <a class="nav-link d-inline-block p-0" href="{% url 'website:home' %}" target="_blank" rel="noopener">WorkBench</a>
         </p>
       </div>
     </footer>
 
 
     <!-- Back to top button -->
-    <a href="landing-online-courses.html#top" class="btn-scroll-top" data-scroll>
-      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+    <a href="{% url 'website:home' %}#" class="btn-scroll-top" data-scroll>
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Наверх</span>
       <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
     </a>
-
 
     <!-- Vendor Scripts -->
     <script src="{% static 'website/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>

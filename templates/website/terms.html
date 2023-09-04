@@ -1,10 +1,481 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Условия пользования</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="WorkBench Company">
+    <meta name="keywords" content="WorkBench, workbench, business, it agency, it, saas, itcourse, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="WorkBench">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/img/logo.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'website/img/logo.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'website/img/logo.png' %}">
+    <link rel="manifest" href="{% static 'website/img/logo.png' %}">
+    <link rel="mask-icon" href="{% static 'website/img/logo.png' %}" color="#6366f1">
+    <link rel="shortcut icon" href="{% static 'website/img/logo.png' %}"> <!-- Изменен путь к новому фавикону -->
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="{% static 'website/favicon/browserconfig.xml' %}">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="{% static 'website/vendor/boxicons/css/boxicons.min.css' %}"/>
+    <link rel="stylesheet" media="screen" href="{% static 'website/vendor/swiper/swiper-bundle.min.css' %}"/>
+    <link rel="stylesheet" media="screen" href="{% static 'website/vendor/lightgallery/css/lightgallery-bundle.min.css' %}"/>
+
+    <!-- Main Theme Styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="{% static 'website/css/theme.min.css' %}">
+
+    <!-- Page loading styles -->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      .dark-mode .page-loading {
+        background-color: #0b0f19;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #9397ad;
+      }
+      .dark-mode .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #b4b7c9;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      .dark-mode .page-spinner {
+        border-color: rgba(255,255,255,.4);
+        border-right-color: transparent;
+      }
+      @-webkit-keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <!-- Theme mode -->
+    <script>
+      let mode = window.localStorage.getItem('mode'),
+          root = document.getElementsByTagName('html')[0];
+      if (mode !== null && mode === 'dark') {
+        root.classList.add('dark-mode');
+      } else {
+        root.classList.remove('dark-mode');
+      }
+    </script>
+
+    <!-- Page loading scripts -->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1000);
+        };
+      })();
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
+  </head>
+
+
+  <!-- Body -->
+  <body>
+
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WKV3GT5" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+    </noscript>
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+
+
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+
+      <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
+        <div class="container px-3">
+          <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
+            <img src="{% static 'website/img/logo.svg' %}" width="47" alt="WorkBench">
+            WorkBench
+          </a>
+          <div id="navbarNav" class="offcanvas offcanvas-end">
+            <div class="offcanvas-header border-bottom">
+              <h5 class="offcanvas-title">Меню</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a href="/" class="nav-link">Главная</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'website:about' %}" class="nav-link">О нас</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'website:courses' %}" class="nav-link">Курсы</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'website:contacts' %}" class="nav-link">Контакты</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'website:collaboration'%}" class="nav-link">Сотрудничество</a>
+                </li>
+              </ul>
+            </div>
+            <div class="offcanvas-header border-top">
+              <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Войти
+              </a>
+            </div>
+          </div>
+          <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
+            <input type="checkbox" class="form-check-input" id="theme-mode">
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Светлый</label>
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Темный</label>
+          </div>
+          <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a href="{% url 'users:login' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+            <i class="bx bx-log-in fs-5"></i>
+            &nbsp;Войти
+          </a>
+        </div>
+      </header>
+
+
+      <!-- Video + Title split section -->
+      <section class="container-fluid position-relative px-0 pt-5 mt-3 mt-lg-4">
+        <div class="row g-0">
+          <div class="col-xl-7 col-lg-6 pe-lg-5">
+            <div class="d-flex h-100 pe-xl-4">
+              <video class="w-100" autoplay muted loop style="object-fit: cover;">
+                <source src="{% static 'website/img/landing/conference/hero-video.mp4' %}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="col-xl-5 col-lg-6 position-relative py-5">
+            <img src="{% static 'website/img/landing/conference/hero-bg.png' %}" class="position-absolute top-50 translate-middle-y ms-lg-n4" width="866" alt="Background shapes">
+            <div class="position-relative zindex-5 text-center text-lg-start px-3 px-lg-0 py-xl-4 py-xxl-5 mt-lg-3 mx-auto mx-lg-0" style="max-width: 530px;">
+              <h2 class="h3 text-primary">Условия пользования</h2>
+              <h1 class="display-1 pb-lg-3 mb-3">WorkBench</h1>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+      <!-- Testimonials slider -->
+      <section class="bg-secondary py-5">
+        <div class="container py-2 py-md-4 py-lg-5">
+          <h2 class="h1 text-center pb-3 pb-lg-0 mb-4 mb-lg-5">Условия использования WorkBench</h2>
+          <div class="position-relative px-sm-5 mx-auto" style="max-width: 976px;">
+
+            <!-- Prev button -->
+            <button type="button" id="prev" class="btn btn-prev btn-icon btn-sm position-absolute top-50 translate-middle-y start-0 d-none d-sm-inline-flex mt-n4">
+              <i class="bx bx-chevron-left"></i>
+            </button>
+
+            <!-- Next button -->
+            <button type="button" id="next" class="btn btn-next btn-icon btn-sm position-absolute top-50 translate-middle-y end-0 d-none d-sm-inline-flex mt-n4">
+              <i class="bx bx-chevron-right"></i>
+            </button>
+
+            <!-- Slider -->
+            <div class="swiper swiper-nav-onhover pt-1 mx-md-2" data-swiper-options='{
+              "spaceBetween": 12,
+              "loop": true,
+              "pagination": {
+                "el": ".swiper-pagination",
+                "clickable": true
+              },
+              "navigation": {
+                "prevEl": "#prev",
+                "nextEl": "#next"
+              }
+            }'>
+              <div class="swiper-wrapper pt-4 pb-3">
+
+                <!-- Item -->
+                <div class="swiper-slide h-auto px-2">
+                  <figure class="card h-100 position-relative border-0 shadow-sm py-3 p-0 p-xxl-4 my-0">
+                    <span class="btn btn-icon btn-primary btn-lg shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4 ms-xxl-5">
+                      <i class="bx bxs-quote-left"></i>
+                    </span>
+                    <blockquote class="card-body mt-2 mb-2">
+                      <h1>1. Регистрация и учетная запись:</h1>
+                      <p class="fs-lg mb-0">1.1. WorkBench проводит регистрацию пользователей самостоятельно. При регистрации вы обязуетесь предоставить точную и полную информацию и обязуетесь обновлять эту информацию в случае изменений.</p>
+                      <br>
+                      <p class="fs-lg mb-0">1.2. Вы несете ответственность за безопасность своей учетной записи и пароля. Не делитесь вашей учетной записью и паролем с другими лицами.</p>
+                    </blockquote>
+                  </figure>
+                </div>
+
+                <!-- Item -->
+                <div class="swiper-slide h-auto px-2">
+                  <figure class="card h-100 position-relative border-0 shadow-sm py-3 p-0 p-xxl-4 my-0">
+                    <span class="btn btn-icon btn-primary btn-lg shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4 ms-xxl-5">
+                      <i class="bx bxs-quote-left"></i>
+                    </span>
+                    <blockquote class="card-body mt-2 mb-2">
+                      <h1>2. Правила использования:</h1>
+                      <p class="fs-lg mb-0">2.1. WorkBench предоставляет инструменты для обучения, работы и развития навыков. Пожалуйста, используйте платформу с уважением к другим пользователям и в соответствии с законами и правилами.</p>
+                      <br>
+                      <p class="fs-lg mb-0">2.2. Запрещается размещать или передавать материалы, которые нарушают авторские права, содержат ненормативную лексику, расистский или дискриминирующий контент.</p>
+                    </blockquote>
+                  </figure>
+                </div>
+
+                <!-- Item -->
+                <div class="swiper-slide h-auto px-2">
+                  <figure class="card h-100 position-relative border-0 shadow-sm py-3 p-0 p-xxl-4 my-0">
+                    <span class="btn btn-icon btn-primary btn-lg shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4 ms-xxl-5">
+                      <i class="bx bxs-quote-left"></i>
+                    </span>
+                    <blockquote class="card-body mt-2 mb-2">
+                      <h1>3. Конфиденциальность:</h1>
+                      <p class="fs-lg mb-0">3.1. WorkBench собирает и хранит личную информацию в соответствии с нашей политикой конфиденциальности. Мы уважаем вашу частную жизнь и стремимся обеспечить безопасность ваших данных.</p>
+                    </blockquote>
+                  </figure>
+                </div>
+
+                <div class="swiper-slide h-auto px-2">
+                  <figure class="card h-100 position-relative border-0 shadow-sm py-3 p-0 p-xxl-4 my-0">
+                    <span class="btn btn-icon btn-primary btn-lg shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4 ms-xxl-5">
+                      <i class="bx bxs-quote-left"></i>
+                    </span>
+                    <blockquote class="card-body mt-2 mb-2">
+                      <h1>4. Ответственность:</h1>
+                      <p class="fs-lg mb-0">4.1. Вы несете ответственность за свое использование WorkBench и принимаете все риски, связанные с его использованием.</p>
+                      <br>
+                      <p class="fs-lg mb-0">4.2. WorkBench не несет ответственность за убытки или ущерб, возникшие в результате использования нашей платформы.</p>
+                    </blockquote>
+                  </figure>
+                </div>
+
+              </div>
+
+              <!-- Pagination -->
+              <div class="swiper-pagination position-relative pt-2 pt-sm-3 mt-4"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Location -->
+      <section class="container bg-gradient-primary py-5" style="margin-bottom: 50px;">
+        <div class="row mt-lg-3 pt-1 pt-md-4 pt-lg-5 justify-content-center align-items-center text-center"> <!-- Добавляем text-center для центрирования по горизонтали -->
+          <div class="col-xl-3 col-md-4 text-center text-md-start">
+            <h3 class="h4">Условия использования</h3>
+            <h2 class="h1 mb-4">Скачать можно тут </h2>
+            <div class="d-none d-md-block text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="118" height="118" fill="none"><g clip-path="url(#A)"><path d="M116.912 76.527c-4.963-3.081-9.413-6.675-13.52-10.782-1.37-1.369-3.766-.343-3.766 1.54 0 1.54-.171 3.081-.171 4.621-14.89 2.739-29.78 3.936-45.013 4.108-12.836.342-30.123 1.712-41.761-4.45-8.9-4.792-10.269-15.917-6.504-24.475 1.54-3.594 4.279-6.504 7.702-8.557 3.936-2.396 7.873-1.027 11.981-2.054.513-.171.685-.856.342-1.369-6.333-6.675-17.457 1.027-21.565 6.504-5.819 7.702-6.161 18.998-1.027 27.042 7.531 11.981 25.501 11.125 37.653 11.467 19.169.685 39.365.171 58.192-4.108 0 1.712.171 3.252.685 4.963 0 .342.171.513.342.685-1.369 1.198-.171 4.279 2.225 3.765 4.963-1.027 9.927-2.568 14.548-4.792 1.198-1.026.856-3.251-.343-4.107zm-13.178-4.45c2.396 2.054 4.792 4.108 7.531 5.99-2.396 1.027-4.964 1.712-7.531 2.396v-.685c-.514-2.567-.342-5.135 0-7.702z" fill="currentColor"/></g><defs><clipPath id="A"><path fill="#fff" d="M0 0h118v118H0z"/></clipPath></defs></svg>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-8">
+            <a href="#"><img src="{% static 'website/img/tl.webp' %}" style="height: 300px;" class="rounded-3" alt="Venue"></a>
+          </div>
+        </div>
+      </section>
+
+<!--      <section class="bg-gradient-primary py-5">-->
+<!--        <div class="container py-2 py-md-4 py-lg-5">-->
+<!--          <div class="row py-xl-3">-->
+<!--            <div class="col-xl-4 col-lg-5 offset-xl-1 order-lg-2 mb-4">-->
+<!--              <h2 class="h1 text-light text-center text-sm-start pb-4 mb-0 mb-lg-3">Become a Part of the Digital Evolution!</h2>-->
+<!--              <div class="d-flex align-items-center">-->
+<!--                <div class="bg-white rounded-circle text-primary flex-shrink-0 p-3">-->
+<!--                  <svg style="margin: 2px;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                    <path d="M18.0225 2.91133C17.2397 2.91133 16.5038 3.21602 15.9507 3.76914C15.3132 4.40664 14.9616 5.25508 14.9616 6.15977V8.98633C14.9616 12.516 13.0772 15.6098 10.26 17.3207H14.2585C18.0225 17.3207 21.0882 14.2598 21.0882 10.491V5.97227C21.0882 4.28945 19.71 2.91133 18.0225 2.91133ZM18.7772 5.97695C18.3882 5.97695 18.0741 5.66289 18.0741 5.27383C18.0741 4.88477 18.3882 4.5707 18.7772 4.5707C19.1663 4.5707 19.4804 4.88477 19.4804 5.27383C19.4804 5.66289 19.1663 5.97695 18.7772 5.97695ZM23.7929 1.71133C23.5163 1.43477 23.071 1.43477 22.7991 1.71133L21.4257 3.08477C20.6054 2.11914 19.3819 1.50977 18.0225 1.50977C16.8647 1.50977 15.7772 1.95977 14.9569 2.78008L0.20535 17.527C0.00378752 17.7285 -0.05715 18.0285 0.0506625 18.291C0.158475 18.5535 0.416288 18.727 0.702225 18.727H5.22097H9.4491L11.8069 21.0848H11.2444C10.8553 21.0848 10.5413 21.3988 10.5413 21.7879C10.5413 22.177 10.8553 22.491 11.2444 22.491H15.7632C16.1522 22.491 16.4663 22.177 16.4663 21.7879C16.4663 21.3988 16.1522 21.0848 15.7632 21.0848H13.7944L11.4366 18.727H14.2585C18.8007 18.727 22.4944 15.0332 22.4944 10.491V5.97227C22.4944 5.39102 22.3819 4.8332 22.1757 4.31758L23.7929 2.70039C24.0694 2.4332 24.0694 1.98789 23.7929 1.71133ZM2.3991 17.3207L13.5554 6.16445V8.98633C13.5554 13.5801 9.81472 17.3207 5.22097 17.3207H2.3991ZM21.0882 10.4957C21.0882 14.2598 18.0272 17.3254 14.2585 17.3254H10.26C13.0772 15.6145 14.9616 12.516 14.9616 8.98633V6.15977C14.9616 5.25508 15.3132 4.40664 15.9507 3.76914C16.5038 3.21602 17.2397 2.91133 18.0225 2.91133C19.71 2.91133 21.0882 4.28477 21.0882 5.97695V10.4957Z" fill="currentColor"/>-->
+<!--                  </svg>-->
+<!--                </div>-->
+<!--                <p class="fs-xl text-light ps-3 mb-0">Hurry up! Early birds extended until September 1, 2021.</p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-xl-6 col-lg-7 order-lg-1">-->
+
+<!--              &lt;!&ndash; Ticket card &ndash;&gt;-->
+<!--              <div class="ignore-dark-mode position-relative">-->
+<!--                <div class="position-relative overflow-hidden rounded-3 zindex-5 py-5 px-4 p-sm-5">-->
+<!--                  <span class="position-absolute top-0 start-0 w-100 h-100 bg-repeat-0 bg-position-center-start zindex-2" style="background-image: url('{% static 'website/img/landing/conference/price-card-left-bg.png' %}');"></span>-->
+<!--                  <span class="position-absolute top-0 end-0 w-100 h-100 bg-repeat-0 bg-position-center-end zindex-2" style="background-image: url('{% static 'website/img/landing/conference/price-card-right-bg.png' %}');"></span>-->
+<!--                  <div class="px-md-4 position-relative zindex-5">-->
+<!--                    <div class="d-sm-flex align-items-start justify-content-between">-->
+<!--                      <div class="text-center text-sm-start me-sm-4">-->
+<!--                        <div class="lead text-primary fw-semibold text-uppercase mb-2">Oct 14+15</div>-->
+<!--                        <h3 class="h1">NY Digital Conference</h3>-->
+<!--                      </div>-->
+<!--                      <div class="d-table bg-white rounded-3 p-4 flex-shrink-0 mx-auto mx-sm-0">-->
+<!--                        <img src="assets/img/landing/conference/qr.png" width="102" alt="QR Code">-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="d-flex flex-column flex-sm-row align-items-center pt-4 mt-2">-->
+<!--                      <a href="landing-conference.html#" class="btn btn-primary shadow-primary btn-lg mb-3 mb-sm-0 me-sm-3">Buy access pass</a>-->
+<!--                      <div class="d-flex align-items-center">-->
+<!--                        <span class="fs-lg me-2">for only</span>-->
+<!--                        <span class="h4 text-body mb-0">$100</span>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <span class="position-absolute bg-dark opacity-35 bottom-0 mb-n2 d-dark-mode-none" style="left: 1.5rem; width: calc(100% - 3rem); height: 5rem; filter: blur(.75rem);"></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </section>-->
+    </main>
+
+
+    <footer class="footer pt-5 pb-4 pb-lg-5">
+      <div class="container pt-lg-4">
+        <div class="row pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
+              <img src="{% static 'website/img/logo.png' %}" width="47px" alt="WorkBench">
+              WorkBench
+            </div>
+            <p class="fs-sm pb-lg-3 mb-4">"У нас — место, где ваше образование становится вашим будущим. Добро пожаловать в мир обучения и развития, где знания — это ключ к успеху. Присоединяйтесь к нам сегодня и начните свой учебный путь к бесконечным возможностям!"</p>
+          </div>
+          <div class="col-xl-6 col-lg-7 col-md-5 offset-xl-2 offset-md-1 pt-4 pt-md-1 pt-lg-0">
+            <div id="footer-links" class="row">
+              <div class="col-lg-4">
+                <div id="useful-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                  <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                    <li class="nav-item"><a href="{% url 'website:home'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Главная</a></li>
+                    <li class="nav-item"><a href="{% url 'website:about'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">О нас</a></li>
+                    <li class="nav-item"><a href="{% url 'website:courses'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Курсы</a></li>
+                    <li class="nav-item"><a href="{% url 'website:contacts'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Контакты</a></li>
+                    <li class="nav-item"><a href="{% url 'website:collaboration'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Сотрудничество</a></li>
+                  </ul>
+                  <ul class="nav flex-column mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Условия использования</a></li>
+                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Политика конфиденциальности</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-3">
+                <div id="social-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                  <ul class="nav flex-column mb-2 mb-lg-0">
+                    <a href="https://wa.me/87077772817" class="nav-link d-inline-block px-0 pt-1 pb-2">WhatsApp</a>
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Facebook</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">LinkedIn</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Instagram</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-5 pt-2 pt-lg-0">
+                <h6 class="mb-2">Связаться с нами</h6>
+                <a href="mailto:workbenchkz@gmail.com" class="fw-medium">workbenchkz@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="nav d-block fs-xs text-center text-md-start pb-2 pb-lg-0 mb-0">
+          &copy; Все права защищены.
+          <a class="nav-link d-inline-block p-0" href="{% url 'website:home' %}" target="_blank" rel="noopener">WorkBench</a>
+        </p>
+      </div>
+    </footer>
+
+
+    <!-- Back to top button -->
+    <a href="{% url 'website:terms' %}#" class="btn-scroll-top" data-scroll>
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Наверх</span>
+      <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
+    </a>
+
+
+    <!-- Vendor Scripts -->
+    <script src="{% static 'website/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'website/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js' %}"></script>
+    <script src="{% static 'website/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'website/vendor/lightgallery/lightgallery.min.js' %}"></script>
+    <script src="{% static 'website/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js' %}"></script>
+    <script src="{% static 'website/vendor/lightgallery/plugins/zoom/lg-zoom.min.js' %}"></script>
+    <script src="{% static 'website/vendor/lightgallery/plugins/video/lg-video.min.js' %}"></script>
+
+    <!-- Main Theme Script -->
+    <script src="{% static 'website/js/theme.min.js' %}"></script>
+  </body>
 </html>

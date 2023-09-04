@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Silicon | Blog Single Post</title>
+    <title>Сотрудничество</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="Silicon - Multipurpose Technology Bootstrap Template">
@@ -14,14 +14,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicon and Touch Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="website/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="website/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="website/favicon/favicon-16x16.png">
-    <link rel="manifest" href="website/favicon/site.webmanifest">
-    <link rel="mask-icon" href="website/favicon/safari-pinned-tab.svg" color="#6366f1">
-    <link rel="shortcut icon" href="website/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/img/logo.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'website/img/logo.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'website/img/logo.png' %}">
+    <link rel="manifest" href="{% static 'website/img/logo.png' %}">
+    <link rel="mask-icon" href="{% static 'website/img/logo.png' %}" color="#6366f1">
+    <link rel="shortcut icon" href="{% static 'website/img/logo.png' %}"> <!-- Изменен путь к новому фавикону -->
     <meta name="msapplication-TileColor" content="#080032">
-    <meta name="msapplication-config" content="website/favicon/browserconfig.xml">
+    <meta name="msapplication-config" content="{% static 'website/favicon/browserconfig.xml' %}">
     <meta name="theme-color" content="#ffffff">
 
     <!-- Vendor Styles -->
@@ -171,7 +171,7 @@
       <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page -->
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
-          <a href="index.html" class="navbar-brand pe-3">
+          <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
             <img src="{% static 'website/img/logo.svg' %}" width="47" alt="WorkBench">
             WorkBench
           </a>
@@ -201,7 +201,7 @@
             </div>
             <div class="offcanvas-header border-top">
               <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
-                <i class="bx bx-cart fs-4 lh-1 me-1"></i>
+                <i class="bx bx-log-in fs-5"></i>
                 &nbsp;Войти
               </a>
             </div>
@@ -239,15 +239,15 @@
         <div class="d-flex flex-md-row flex-column align-items-md-center justify-content-md-between mb-3">
           <div class="d-flex flex-sm-row flex-column pt-2">
               <div>
-                <a href="blog-single.html#" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Зачем сотрудничать с нами</a>
-                <a href="blog-single.html#" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Наши партнеры</a>
-                <a href="blog-single.html#" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Возможности для бизнеса</a>
-                <a href="blog-single.html#" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Возможности для образования</a>
-                <a href="blog-single.html#" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Свяжитесь с нами</a>
-                <a href="blog-single.html#" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Отзывы партнеров</a>
-                <a href="blog-single.html#" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Преимущества сотрудничества с нами</a>
-                <a href="blog-single.html#" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Наша команда</a>
-                <a href="blog-single.html#" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Примеры успешных сотрудничеств</a>
+                <a href="" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Зачем сотрудничать с нами</a>
+                <a href="" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Наши партнеры</a>
+                <a href="" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Возможности для бизнеса</a>
+                <a href="" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Возможности для образования</a>
+                <a href="" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Свяжитесь с нами</a>
+                <a href="" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Отзывы партнеров</a>
+                <a href="" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Преимущества сотрудничества с нами</a>
+                <a href="" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Наша команда</a>
+                <a href="" class="btn btn-sm btn-outline-secondary me-2 mb-2">#Примеры успешных сотрудничеств</a>
               </div>
           </div>
         </div>
@@ -277,8 +277,16 @@
               </a>
             </div>
             <h2 class="h4">Возможности для образования</h2>
-            <p class="mb-4 pb-2">Tempor donec aliquam est, a. Sit arcu tellus pharetra, bibendum hendrerit arcu, sed. Scelerisque dui enim libero sit ac sed lacus lectus. Quam in iaculis scelerisque feugiat nibh mi. Maecenas posuere lobortis praesent iaculis sagittis. Egestas vel at praesent ipsum pretium faucibus adipiscing gravida feugiat. Lacus, rhoncus velit at non nunc, quam urna, phasellus facilisis. Cursus elit posuere amet tortor at. Mi tristique congue vulputate eget in pellentesque tincidunt. In viverra est id nibh. Nunc tellus ultrices magna turpis. Viverra est morbi posuere dapibus nisi habitasse. Id tristique cursus vel metus.</p>
-            <p class="mb-4 pb-2">Pellentesque laoreet neque ut dictumst fames scelerisque. In malesuada orci dapibus risus tellus, amet, ultrices sagittis a. Turpis vel tincidunt tristique maecenas cursus tortor, suscipit ut. Ullamcorper at faucibus dolor tortor suspendisse suscipit senectus convallis aliquam. At orci amet facilisi nunc mi vitae iaculis diam a. Mauris venenatis sed purus cursus torte.</p>
+            <p>WorkBench предоставляет широкий спектр возможностей для образования, позволяя вам расширить свои знания и навыки. Независимо от вашей области интересов, у нас есть что-то для каждого:</p>
+
+            <ul>
+                <li>Обширная библиотека обучающих материалов: Мы предлагаем доступ к обширной библиотеке курсов, учебных материалов и ресурсов, позволяя вам изучать темы, которые вас интересуют.</li>
+                <li>Интерактивные уроки: Наши интерактивные уроки и практические задания помогут вам углубить свои знания и применить их на практике.</li>
+                <li>Сеть образовательных сообществ: Присоединяйтесь к нашим образовательным сообществам, общайтесь с единомышленниками и обменивайтесь опытом.</li>
+                <li>Поддержка экспертов: Наши опытные инструкторы и эксперты всегда готовы помочь вам на вашем образовательном пути.</li>
+            </ul>
+
+            <p>Независимо от вашей цели - освоить новые навыки, углубить знания в своей области или начать с нуля, WorkBench предоставляет вам ресурсы и инструменты, необходимые для успешного образования. Начните сегодня и раскройте свой образовательный потенциал на WorkBench.</p>
 
             <h2 class="h4">Возможности для бизнеса</h2>
             <p class="mb-4 pb-2">"Для бизнеса мы предлагаем корпоративные обучающие программы, консультации и индивидуальные образовательные решения. Сотрудничество с WorkBench помогает компаниям развивать навыки своей команды и достигать бизнес-целей."</p>
@@ -302,14 +310,14 @@
               <li class="mb-1">Поддержке и консультациям</li>
             </ul>
 
-            <h2 class="h4">Примеры успешных сотрудничеств:</h2>
-            <p>Некоторые из примеров успешных сотрудничеств с WorkBench включают:</p>
-            <ul class="mb-4 pb-2 ps-4">
-              <li class="mb-1">Kaspi Bank</li>
-              <li class="mb-1">Kaspi Bank</li>
-              <li class="mb-1">Kaspi Bank</li>
-              <li class="mb-1">Kaspi Bank</li>
-            </ul>
+<!--            <h2 class="h4">Примеры успешных сотрудничеств:</h2>-->
+<!--            <p>Некоторые из примеров успешных сотрудничеств с WorkBench включают:</p>-->
+<!--            <ul class="mb-4 pb-2 ps-4">-->
+<!--              <li class="mb-1">Kaspi Bank</li>-->
+<!--              <li class="mb-1">Kaspi Bank</li>-->
+<!--              <li class="mb-1">Kaspi Bank</li>-->
+<!--              <li class="mb-1">Kaspi Bank</li>-->
+<!--            </ul>-->
             <p class="mb-4 pb-2">Сотрудничество с WorkBench открывает перед вашей компанией мир новых возможностей и успеха. Мы предоставляем образовательные и консультационные решения, созданные с учетом ваших потребностей. Наши корпоративные обучающие программы, гибкие решения и индивидуальные консультации помогут улучшить производительность вашей команды и достичь более высоких результатов. Когда вы сотрудничаете с нами, вы вступаете в партнерство с лидером в области повышения качества образования, что открывает перед вами дорогу к инновациям и успеху. Давайте сделаем ваш бизнес лучше вместе - присоединяйтесь к WorkBench и достигайте новых высот!</p>
             <hr class="mb-4">
           </div>
@@ -372,46 +380,44 @@
               <div class="col-lg-4">
                 <div id="useful-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
                   <ul class="nav flex-column pb-lg-1 mb-lg-3">
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Главная</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">О нас</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Курсы</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Контакты</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Сотрудничество</a></li>
+                    <li class="nav-item"><a href="{% url 'website:home'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Главная</a></li>
+                    <li class="nav-item"><a href="{% url 'website:about'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">О нас</a></li>
+                    <li class="nav-item"><a href="{% url 'website:courses'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Курсы</a></li>
+                    <li class="nav-item"><a href="{% url 'website:contacts'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Контакты</a></li>
+                    <li class="nav-item"><a href="{% url 'website:collaboration'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Сотрудничество</a></li>
                   </ul>
                   <ul class="nav flex-column mb-2 mb-lg-0">
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Условия использования</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Политика конфиденциальности</a></li>
+                    <li class="nav-item"><a href="{% url 'website:terms'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Условия использования</a></li>
+                    <li class="nav-item"><a href="{% url 'website:privacy'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Политика конфиденциальности</a></li>
                   </ul>
                 </div>
               </div>
               <div class="col-xl-4 col-lg-3">
                 <div id="social-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
                   <ul class="nav flex-column mb-2 mb-lg-0">
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">WhatsApp</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Facebook</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">LinkedIn</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Instagram</a></li>
+                    <a href="https://wa.me/87077772817" class="nav-link d-inline-block px-0 pt-1 pb-2">WhatsApp</a>
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Instagram</a></li>
                   </ul>
                 </div>
               </div>
               <div class="col-xl-4 col-lg-5 pt-2 pt-lg-0">
                 <h6 class="mb-2">Связаться с нами</h6>
-                <a href="mailto:email@example.com" class="fw-medium">email@example.com</a>
+                <a href="mailto:workbenchkz@gmail.com" class="fw-medium">workbenchkz@gmail.com</a>
               </div>
             </div>
           </div>
         </div>
         <p class="nav d-block fs-xs text-center text-md-start pb-2 pb-lg-0 mb-0">
           &copy; Все права защищены.
-          <a class="nav-link d-inline-block p-0" href="https://createx.studio/" target="_blank" rel="noopener">WorkBench</a>
+          <a class="nav-link d-inline-block p-0" href="{% url 'website:home' %}" target="_blank" rel="noopener">WorkBench</a>
         </p>
       </div>
     </footer>
 
 
     <!-- Back to top button -->
-    <a href="blog-single.html#top" class="btn-scroll-top" data-scroll>
-      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+    <a href="{% url 'website:collaboration' %}#" class="btn-scroll-top" data-scroll>
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Наверх</span>
       <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
     </a>
 

@@ -14,15 +14,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicon and Touch Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/favicon/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'website/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'website/favicon/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'website/favicon/site.webmanifest' %}">
-    <link rel="mask-icon" href="{% static 'website/favicon/safari-pinned-tab.svg' %}" color="#6366f1">
-    <link rel="shortcut icon" href="{% static 'website/favicon/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/img/logo.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'website/img/logo.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'website/img/logo.png' %}">
+    <link rel="manifest" href="{% static 'website/img/logo.png' %}">
+    <link rel="mask-icon" href="{% static 'website/img/logo.png' %}" color="#6366f1">
+    <link rel="shortcut icon" href="{% static 'website/img/logo.png' %}"> <!-- Изменен путь к новому фавикону -->
     <meta name="msapplication-TileColor" content="#080032">
     <meta name="msapplication-config" content="{% static 'website/favicon/browserconfig.xml' %}">
     <meta name="theme-color" content="#ffffff">
+
 
     <!-- Vendor Styles -->
     <link rel="stylesheet" media="screen" href="{% static 'website/vendor/boxicons/css/boxicons.min.css' %}"/>
@@ -171,8 +172,8 @@
       <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page -->
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
-          <a href="/" class="navbar-brand pe-3">
-            <img src="{% static 'website/img/logo.png' %}" width="47" alt="WorkBench">
+          <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
+            <img src="{% static 'website/img/logo.svg' %}" width="47" alt="WorkBench">
             WorkBench
           </a>
           <div id="navbarNav" class="offcanvas offcanvas-end">
@@ -191,7 +192,7 @@
                 <li class="nav-item">
                   <a href="{% url 'website:courses' %}" class="nav-link">Курсы</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item ">
                   <a href="{% url 'website:contacts' %}" class="nav-link">Контакты</a>
                 </li>
                 <li class="nav-item">
@@ -201,7 +202,7 @@
             </div>
             <div class="offcanvas-header border-top">
               <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
-                <i class="bx bx-cart fs-4 lh-1 me-1"></i>
+                <i class="bx bx-log-in fs-5"></i>
                 &nbsp;Войти
               </a>
             </div>
@@ -312,11 +313,7 @@
       <!-- Team -->
       <section class="container mb-5 py-lg-3 py-xl-4 py-xxl-5">
         <div class="d-md-flex align-items-center justify-content-between text-md-start text-center pt-1 pt-sm-3 pt-md-4 mb-5">
-          <h2 class="h1 mb-md-0">Our talented team</h2>
-          <a href="about-v3.html#" class="btn btn-primary">
-            Join our team
-            <i class="bx bx-right-arrow-alt lead ms-1"></i>
-          </a>
+          <h2 class="h1 mb-md-0">Наши профессионалы</h2>
         </div>
 
         <!-- Team grid -->
@@ -327,20 +324,6 @@
             <div class="card card-hover border-0 bg-transparent">
               <div class="position-relative">
                 <img src="{% static 'website/img/team/24.jpg' %}" class="rounded-3" alt="Ralph Edwards">
-                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
-                  <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
-                  <div class="position-relative d-flex zindex-2">
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-facebook btn-sm bg-white me-2">
-                      <i class="bx bxl-facebook"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2">
-                      <i class="bx bxl-linkedin"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white">
-                      <i class="bx bxl-twitter"></i>
-                    </a>
-                  </div>
-                </div>
               </div>
               <div class="card-body text-center p-3">
                 <h3 class="fs-lg fw-semibold pt-1 mb-2">Ralph Edwards</h3>
@@ -354,20 +337,6 @@
             <div class="card card-hover border-0 bg-transparent">
               <div class="position-relative">
                 <img src="{% static 'website/img/team/26.jpg' %}" class="rounded-3" alt="Albert Flores">
-                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
-                  <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
-                  <div class="position-relative d-flex zindex-2">
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-facebook btn-sm bg-white me-2">
-                      <i class="bx bxl-facebook"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2">
-                      <i class="bx bxl-linkedin"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white">
-                      <i class="bx bxl-twitter"></i>
-                    </a>
-                  </div>
-                </div>
               </div>
               <div class="card-body text-center p-3">
                 <h3 class="fs-lg fw-semibold pt-1 mb-2">Albert Flores</h3>
@@ -381,20 +350,6 @@
             <div class="card card-hover border-0 bg-transparent">
               <div class="position-relative">
                 <img src="{% static 'website/img/team/26.jpg' %}" class="rounded-3" alt="Jenny Wilson">
-                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
-                  <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
-                  <div class="position-relative d-flex zindex-2">
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-facebook btn-sm bg-white me-2">
-                      <i class="bx bxl-facebook"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2">
-                      <i class="bx bxl-linkedin"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white">
-                      <i class="bx bxl-twitter"></i>
-                    </a>
-                  </div>
-                </div>
               </div>
               <div class="card-body text-center p-3">
                 <h3 class="fs-lg fw-semibold pt-1 mb-2">Jenny Wilson</h3>
@@ -408,20 +363,6 @@
             <div class="card card-hover border-0 bg-transparent">
               <div class="position-relative">
                 <img src="{% static 'website/img/team/27.jpg' %}" class="rounded-3" alt="Marvin McKinney">
-                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
-                  <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
-                  <div class="position-relative d-flex zindex-2">
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-facebook btn-sm bg-white me-2">
-                      <i class="bx bxl-facebook"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2">
-                      <i class="bx bxl-linkedin"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white">
-                      <i class="bx bxl-twitter"></i>
-                    </a>
-                  </div>
-                </div>
               </div>
               <div class="card-body text-center p-3">
                 <h3 class="fs-lg fw-semibold pt-1 mb-2">Marvin McKinney</h3>
@@ -435,20 +376,6 @@
             <div class="card card-hover border-0 bg-transparent">
               <div class="position-relative">
                 <img src="{% static 'website/img/team/28.jpg' %}" class="rounded-3" alt="Esther Howard">
-                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
-                  <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
-                  <div class="position-relative d-flex zindex-2">
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-facebook btn-sm bg-white me-2">
-                      <i class="bx bxl-facebook"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2">
-                      <i class="bx bxl-linkedin"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white">
-                      <i class="bx bxl-twitter"></i>
-                    </a>
-                  </div>
-                </div>
               </div>
               <div class="card-body text-center p-3">
                 <h3 class="fs-lg fw-semibold pt-1 mb-2">Esther Howard</h3>
@@ -462,20 +389,6 @@
             <div class="card card-hover border-0 bg-transparent">
               <div class="position-relative">
                 <img src="{% static 'website/img/team/29.jpg' %}" class="rounded-3" alt="Cameron Williamson">
-                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
-                  <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
-                  <div class="position-relative d-flex zindex-2">
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-facebook btn-sm bg-white me-2">
-                      <i class="bx bxl-facebook"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2">
-                      <i class="bx bxl-linkedin"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white">
-                      <i class="bx bxl-twitter"></i>
-                    </a>
-                  </div>
-                </div>
               </div>
               <div class="card-body text-center p-3">
                 <h3 class="fs-lg fw-semibold pt-1 mb-2">Cameron Williamson</h3>
@@ -489,20 +402,6 @@
             <div class="card card-hover border-0 bg-transparent">
               <div class="position-relative">
                 <img src="{% static 'website/img/team/30.jpg' %}" class="rounded-3" alt="Jerome Bell">
-                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
-                  <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
-                  <div class="position-relative d-flex zindex-2">
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-facebook btn-sm bg-white me-2">
-                      <i class="bx bxl-facebook"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2">
-                      <i class="bx bxl-linkedin"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white">
-                      <i class="bx bxl-twitter"></i>
-                    </a>
-                  </div>
-                </div>
               </div>
               <div class="card-body text-center p-3">
                 <h3 class="fs-lg fw-semibold pt-1 mb-2">Jerome Bell</h3>
@@ -516,20 +415,6 @@
             <div class="card card-hover border-0 bg-transparent">
               <div class="position-relative">
                 <img src="{% static 'website/img/team/31.jpg' %}" class="rounded-3" alt="Darrell Steward">
-                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
-                  <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
-                  <div class="position-relative d-flex zindex-2">
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-facebook btn-sm bg-white me-2">
-                      <i class="bx bxl-facebook"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2">
-                      <i class="bx bxl-linkedin"></i>
-                    </a>
-                    <a href="about-v3.html#" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white">
-                      <i class="bx bxl-twitter"></i>
-                    </a>
-                  </div>
-                </div>
               </div>
               <div class="card-body text-center p-3">
                 <h3 class="fs-lg fw-semibold pt-1 mb-2">Darrell Steward</h3>
@@ -597,89 +482,91 @@
           </div>
 
           <!-- Brands (carousel) -->
-          <div class="swiper mx-n2 mt-lg-5 mt-sm-2 mt-md-4 pt-4" data-swiper-options='{
-            "slidesPerView": 2,
-            "loop": true,
-            "autoplay": {
-              "delay": 6000,
-              "disableOnInteraction": false
+          <section class="container mt-2 mb-lg-2 mb-xl-4 pt-3 pt-lg-5 pb-5">
+        <h2 class="text-center pb-md-2">Нам доверяют ведущие компании Казахстана</h2>
+        <div class="swiper mx-n2" data-swiper-options='{
+          "slidesPerView": 2,
+          "pagination": {
+            "el": ".swiper-pagination",
+            "clickable": true
+          },
+          "breakpoints": {
+            "500": {
+              "slidesPerView": 3,
+              "spaceBetween": 8
             },
-            "breakpoints": {
-              "500": {
-                "slidesPerView": 3,
-                "spaceBetween": 8
-              },
-              "650": {
-                "slidesPerView": 4,
-                "spaceBetween": 8
-              },
-              "900": {
-                "slidesPerView": 5,
-                "spaceBetween": 8
-              },
-              "1100": {
-                "slidesPerView": 6,
-                "spaceBetween": 8
-              }
+            "650": {
+              "slidesPerView": 4,
+              "spaceBetween": 8
+            },
+            "900": {
+              "slidesPerView": 5,
+              "spaceBetween": 8
+            },
+            "1100": {
+              "slidesPerView": 6,
+              "spaceBetween": 8
             }
-          }'>
-            <div class="swiper-wrapper">
+          }
+        }'>
+          <div class="swiper-wrapper">
 
-              <!-- Item -->
-              <div class="swiper-slide py-3">
-                <a href="about-v3.html#" class="card card-body bg-none border-0 px-2 mx-2">
-                  <img src="{% static 'website/img/brands/01.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
-                </a>
-              </div>
-
-              <!-- Item -->
-              <div class="swiper-slide py-3">
-                <a href="about-v3.html#" class="card card-body bg-none border-0 px-2 mx-2">
-                  <img src="{% static 'website/img/brands/02.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
-                </a>
-              </div>
-
-              <!-- Item -->
-              <div class="swiper-slide py-3">
-                <a href="about-v3.html#" class="card card-body bg-none border-0 px-2 mx-2">
-                  <img src="{% static 'website/img/brands/03.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
-                </a>
-              </div>
-
-              <!-- Item -->
-              <div class="swiper-slide py-3">
-                <a href="about-v3.html#" class="card card-body bg-none border-0 px-2 mx-2">
-                  <img src="{% static 'website/img/brands/04.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
-                </a>
-              </div>
-
-              <!-- Item -->
-              <div class="swiper-slide py-3">
-                <a href="about-v3.html#" class="card card-body bg-none border-0 px-2 mx-2">
-                  <img src="{% static 'website/img/brands/05.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
-                </a>
-              </div>
-
-              <!-- Item -->
-              <div class="swiper-slide py-3">
-                <a href="about-v3.html#" class="card card-body bg-none border-0 px-2 mx-2">
-                  <img src="{% static 'website/img/brands/06.svg' %}" class="d-block mx-auto my-2" width="154" alt="Brand">
-                </a>
-              </div>
+            <!-- Item -->
+            <div class="swiper-slide py-3">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/kaspi.png' %}" class="d-block mx-auto my-2" width="100" alt="Brand">
+              </a>
             </div>
 
-            <!-- Pagination (bullets) -->
-            <div class="swiper-pagination position-relative pt-2 mt-4"></div>
+            <!-- Item -->
+            <div class="swiper-slide py-3">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/halyk.png' %}" class="d-block mx-auto my-2" width="100" alt="Brand">
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="swiper-slide py-3">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/forte.png' %}" class="d-block mx-auto my-2" width="130" alt="Brand">
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="swiper-slide py-3">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/kolesa.png' %}" class="d-block mx-auto my-2" width="130" alt="Brand">
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="swiper-slide py-3">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/kcell.png' %}" class="d-block mx-auto my-2" width="90" alt="Brand">
+              </a>
+            </div>
+
+            <!-- Item -->
+            <div class="swiper-slide py-3">
+              <a href="" class="card card-body card-hover px-2 mx-2">
+                <img src="{% static 'website/img/brands/beeline.png' %}" class="d-block mx-auto my-2" width="100" alt="Brand">
+              </a>
+            </div>
           </div>
+
+          <!-- Pagination (bullets) -->
+          <div class="swiper-pagination position-relative pt-2 mt-4"></div>
+        </div>
+      </section>
         </div>
       </section>
 
 
       <!-- Testimonials -->
-      <section class="container mb-5 pb-3 py-lg-4 py-xl-5">
+      <section class="container mb-5 pb-3 py-lg-4 py-xl-5" style="margin-top: 100px;">
         <div class="row gy-4 gy-md-5 pt-3 py-md-4">
           <div class="col-xl-2 col-lg-3 text-lg-start text-center">
-            <h2 class="mb-4 mb-xl-5 pb-2 pb-md-3 pb-lg-4">What Our Clients Say About Us:</h2>
+            <h2 class="mb-4 mb-xl-5 pb-2 pb-md-3 pb-lg-4">Что говорят студенты о нас:</h2>
             <button type="button" id="prev" class="btn btn-prev btn-icon btn-sm me-2">
               <i class="bx bx-chevron-left"></i>
             </button>
@@ -883,7 +770,7 @@
           <div class="position-relative zindex-5 text-center my-xl-3 py-1 py-md-4 py-lg-5">
             <p class="lead text-light opacity-70 mb-3">Готов поменять свою жизнь в лучшую сторону?</p>
             <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Тогда присоединяйся к нам!</h2>
-            <a href="about-v3.html#" class="btn btn-primary btn-lg">Стать программистом!</a>
+            <a href="{% url 'website:contacts' %}#" class="btn btn-primary btn-lg">Стать программистом!</a>
           </div>
         </div>
       </section>
@@ -906,46 +793,44 @@
               <div class="col-lg-4">
                 <div id="useful-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
                   <ul class="nav flex-column pb-lg-1 mb-lg-3">
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Главная</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">О нас</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Курсы</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Контакты</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Сотрудничество</a></li>
+                    <li class="nav-item"><a href="{% url 'website:home'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Главная</a></li>
+                    <li class="nav-item"><a href="{% url 'website:about'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">О нас</a></li>
+                    <li class="nav-item"><a href="{% url 'website:courses'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Курсы</a></li>
+                    <li class="nav-item"><a href="{% url 'website:contacts'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Контакты</a></li>
+                    <li class="nav-item"><a href="{% url 'website:collaboration'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Сотрудничество</a></li>
                   </ul>
                   <ul class="nav flex-column mb-2 mb-lg-0">
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Условия использования</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Политика конфиденциальности</a></li>
+                    <li class="nav-item"><a href="{% url 'website:terms'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Условия использования</a></li>
+                    <li class="nav-item"><a href="{% url 'website:privacy'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Политика конфиденциальности</a></li>
                   </ul>
                 </div>
               </div>
               <div class="col-xl-4 col-lg-3">
                 <div id="social-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
                   <ul class="nav flex-column mb-2 mb-lg-0">
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">WhatsApp</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Facebook</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">LinkedIn</a></li>
-                    <li class="nav-item"><a href="landing-online-courses.html#" class="nav-link d-inline-block px-0 pt-1 pb-2">Instagram</a></li>
+                    <a href="https://wa.me/87077772817" class="nav-link d-inline-block px-0 pt-1 pb-2">WhatsApp</a>
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Instagram</a></li>
                   </ul>
                 </div>
               </div>
               <div class="col-xl-4 col-lg-5 pt-2 pt-lg-0">
                 <h6 class="mb-2">Связаться с нами</h6>
-                <a href="mailto:email@example.com" class="fw-medium">email@example.com</a>
+                <a href="mailto:workbenchkz@gmail.com" class="fw-medium">workbenchkz@gmail.com</a>
               </div>
             </div>
           </div>
         </div>
         <p class="nav d-block fs-xs text-center text-md-start pb-2 pb-lg-0 mb-0">
           &copy; Все права защищены.
-          <a class="nav-link d-inline-block p-0" href="https://createx.studio/" target="_blank" rel="noopener">WorkBench</a>
+          <a class="nav-link d-inline-block p-0" href="{% url 'website:home' %}" target="_blank" rel="noopener">WorkBench</a>
         </p>
       </div>
     </footer>
 
 
     <!-- Back to top button -->
-    <a href="about-v3.html#top" class="btn-scroll-top" data-scroll>
-      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+    <a href="{% url 'website:about' %}#" class="btn-scroll-top" data-scroll>
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Наверх</span>
       <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
     </a>
 

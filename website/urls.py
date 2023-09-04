@@ -14,4 +14,6 @@ urlpatterns = [
     path('python', PythonView.as_view(), name='python'),
     path('python-django', PythonDjangoView.as_view(), name='python-django'),
     path('computer-literacy', ComputerLiteracyView.as_view(), name='computer-literacy'),
+    path('terms', TermsView.as_view(), name='terms'),
+    path('privacy', PrivacyView.as_view(), name='privacy'),
 ]

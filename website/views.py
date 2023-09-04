@@ -70,3 +70,16 @@ class ComputerLiteracyView(View):
 
     def get(self, request):
         return render(request, 'website/computer_literacy.html')
+
+
+
+class TermsView(View):
+
+    def get(self, request):
+        return render(request, 'website/terms.html')
+
+
+class PrivacyView(View):
+
+    def get(self,request):
+        return render(request, 'website/privacy.html')
