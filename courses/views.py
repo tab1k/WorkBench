@@ -12,7 +12,6 @@ from django.views import View
 from users.models import User
 from courses.models import Lesson
 from tests.models import TestResult
-from essays.models import EssaySubmission
 import matplotlib.pyplot as plt
 from django.db.models import Count
 from reportlab.pdfgen import canvas
@@ -305,7 +304,7 @@ class AnswersView(View):
 
 
 class StudentProgressView(View):
-    template_name_curator = 'users/curator/student_progress.html'
+    template_name_curator = 'curator/starter-kit/student_progress.html'
     template_name_admin = 'admin/starter-kit/student_progress.html'
 
     def get(self, request, student_id):
@@ -317,10 +316,8 @@ class StudentProgressView(View):
 
         progress = []
         total_test_scores = 0
-        total_essays_submitted = 0
         lessons_titles = []
         test_scores = []
-        essays_submitted = []
         total_test_lessons = 0
         total_lessons = 0
 
@@ -330,25 +327,17 @@ class StudentProgressView(View):
                 lessons = module.lesson_set.all()
                 for lesson in lessons:
                     test_result = TestResult.objects.filter(student=student, lesson=lesson).first()
-                    essay_submission = EssaySubmission.objects.filter(student=student, lesson=lesson).first()
 
                     if test_result:
                         total_test_scores += test_result.score
                         test_scores.append(test_result.score)
                         total_test_lessons += 1
 
-                    if essay_submission:
-                        total_essays_submitted += 1
-                        essays_submitted.append(1)
-                    else:
-                        essays_submitted.append(0)  # Добавляем значение 0 для урока без сданного эссе
-
                     progress.append({
                         'course': course,
                         'module': module,
                         'lesson': lesson,
-                        'test_result': test_result,
-                        'essay_submission': essay_submission,
+                        'test_result.html': test_result,
                     })
 
                     lessons_titles.append(lesson.title)
@@ -361,16 +350,15 @@ class StudentProgressView(View):
             'student': student,
             'progress': progress,
             'average_test_score': average_test_score,
-            'total_essays_submitted': total_essays_submitted,
             'lessons_titles': lessons_titles,
             'test_scores': test_scores,
-            'essays_submitted': essays_submitted,
         }
 
         if request.user.role == 'curator':
             return render(request, self.template_name_curator, context)
         elif request.user.role == 'admin':
             return render(request, self.template_name_admin, context)
+
 
 # Ваш файл views.py
 
@@ -380,11 +368,9 @@ class PassedStudentsView(View):
     template_name = 'admin/starter-kit/passed_students.html'
     template_name_curator = 'curator/starter-kit/passed_students.html'
 
-
     def get(self, request):
         if request.user.role not in ['curator', 'admin']:
             return HttpResponseForbidden("У вас нет доступа к этой странице.")
-
 
         search_query = request.GET.get('q', '')
 
@@ -394,23 +380,22 @@ class PassedStudentsView(View):
         for student in students:
             courses = Course.objects.filter(students=student)
 
-            # Check if the student passed all lessons with tests and essays in each course
+            # Check if the student passed all lessons with tests in each course
             for course in courses:
                 modules = course.modules.all()
                 lessons_passed = 0
 
-                # Check if the student passed all lessons with tests and essays in each module
+                # Check if the student passed all lessons with tests in each module
                 for module in modules:
-                    lessons_with_tests_and_essays = Lesson.objects.filter(module=module)
+                    lessons_with_tests = Lesson.objects.filter(module=module)
 
-                    total_lessons_in_module = lessons_with_tests_and_essays.count()
+                    total_lessons_in_module = lessons_with_tests.count()
 
                     # Check if the student passed all lessons in the module
                     passed_all_lessons_in_module = (
-                        lessons_with_tests_and_essays
+                        lessons_with_tests
                         .annotate(test_passed=Count('testresult', filter=Q(testresult__student=student, testresult__score__gte=50)))
-                        .annotate(essay_passed=Count('essaysubmission', filter=Q(essaysubmission__student=student)))
-                        .filter(test_passed__gte=1, essay_passed__gte=1)
+                        .filter(test_passed__gte=1)
                         .count() == total_lessons_in_module
                     )
 
@@ -465,8 +450,7 @@ from reportlab.lib.pagesizes import A4,landscape
 from reportlab.pdfgen import canvas
 from PIL import Image
 from datetime import date
-import calendar
-import locale
+
 
 
 class CertificateView(View):

@@ -11,7 +11,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{% static 'admin/assets/images/favicon.png' %}" type="image/x-icon">
     <link rel="shortcut icon" href="{% static 'admin/assets/images/favicon.png' %}" type="image/x-icon">
-    {% block css %}<title>Заявки</title>{% endblock %}
+    {% block css %}<title>Главная</title>{% endblock %}
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
@@ -44,12 +44,7 @@
     <!-- tap on tap ends-->
     <!-- page-wrapper Start-->
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
-
       <div class="page-body-wrapper">
-
-
-
-
 
         <!-- PAGE BODY-->
 
@@ -59,63 +54,65 @@
               <div class="page-title">
                 <div class="row">
                   <div class="col-6">
-                    <h3>Уведомления</h3>
-                  </div>
-                  <div class="col-6">
                     <ol class="breadcrumb">
-                      <i data-feather="home"></i>
-  <!--                    <li class="breadcrumb-item"><a href="index.html">                                       <i data-feather="home"></i></a></li>-->
-  <!--                    <li class="breadcrumb-item"></li>-->
-  <!--                    <li class="breadcrumb-item active">Default      </li>-->
+                      <li class="breadcrumb-item"><a href="{% url 'users:admin:administrator' %}"><i data-feather="home"></i></a></li>
+                      <li class="breadcrumb-item">Курсы</li>
+                      <li class="breadcrumb-item active">Модули</li>
+                      <li class="breadcrumb-item active">Уроки</li>
+                      <li class="breadcrumb-item active">{{ lesson.title }}</li>
+                      <li class="breadcrumb-item active">Тест</li>
+                      <li class="breadcrumb-item active">Результаты теста</li>
                     </ol>
                   </div>
                 </div>
               </div>
             </div>
-          <!-- Container-fluid starts-->
+
             <div class="container-fluid">
-              <div class="card shadow">
-                  <div class="container mt-5">
-                        <form class="mb-4" method="get" action="{% url 'users:admin:view_notifications' %}">
-                            <div class="form-group">
-                                <label for="course_id">Курс:</label>
-                                <select class="form-control" id="course_id" name="course_id">
-                                    <option value="">Все курсы</option>
-                                    {% for course in courses %}
-                                    <option value="{{ course.id }}">{{ course.title }}</option>
-                                    {% endfor %}
-                                </select>
+              <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">{{ lesson.title }}</div>
+                                <div class="card-body">
+                                    <h6>Ваша оценка: {{ total_score }}/{{ total_possible_score }}</h6>
+                                    {% if is_passing_grade %}
+                                        <div class="alert alert-success" role="alert">
+                                            Поздравляем! Вы успешно справились с тестом.
+                                        </div>
+                                        <div>
+                                            {% if essay_allowed %}
+                                                <a href="{% url 'users:student:courses:essays:essay_submission' lesson_id=lesson.id %}" class="btn btn-primary mt-3" style="background-color: #0c3ee1">Сдать эссе</a>
+                                            {% else %}
+                                                <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary mt-3">На главную</a>
+                                            {% endif %}
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-danger" role="alert">
+                                            Вы не прошли тест. Попробуйте пройти его заново.
+                                        </div>
+                                        <div>
+                                            <a href="{% url 'users:student:courses:tests:take_test' lesson_id=lesson.id %}" class="btn btn-primary mt-3" style="background-color: #0c3ee1">Пройти тест заново</a>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="start_date">Дата начала:</label>
-                                <input type="date" class="form-control" id="start_date" name="start_date">
-                            </div>
-                            <div class="form-group">
-                                <label for="end_date">Дата окончания:</label>
-                                <input type="date" class="form-control" id="end_date" name="end_date">
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="margin-top: 15px;">Применить фильтры</button>
-                        </form>
-                        <ul class="list-group" style="margin-bottom: 10px; height: 700px; overflow-y: scroll;">
-                          {% for notification in notifications %}
-                            <li class="list-group-item">
-                                Дата: {{ notification.timestamp }}<br>
-                                Курс: {{ notification.course }}<br><br>
-                                {{ notification }}
-                            </li>
-                          {% endfor %}
-                        </ul>
+                        </div>
                     </div>
-              </div>
+                    <div class="row mt-4">
+                        <div class="col-md-8 offset-md-2">
+                            <canvas id="chartContainer"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-            </div>
-          </div>
+
           <!-- Container-fluid Ends-->
-        </div>
+          </div>
         {% endblock %}
 
         <!-- PAGE BODY END -->
+
 
       </div>
     </div>
@@ -155,7 +152,8 @@
     <!-- Theme js-->
     <script src="{% static 'admin/assets/js/script.js' %}"></script>
     <script src="{% static 'admin/assets/js/theme-customizer/customizer.js' %}"></script>
-    <!-- login js-->
-    <!-- Plugin used-->
+
+
+
   </body>
 </html>

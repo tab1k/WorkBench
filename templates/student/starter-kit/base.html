@@ -65,12 +65,12 @@
                 <div class="mode"><i class="fa fa-moon-o"></i></div>
               </li>
               <li class="onhover-dropdown">
-                <div class="notification-box"><i data-feather="bell"> </i><span class="badge rounded-pill badge-secondary">4                               </span></div>
+                <div class="notification-box"><i data-feather="bell"> </i><span class="badge rounded-pill badge-secondary">{{ notifications.count }}</span></div>
                 <ul class="notification-dropdown onhover-show-div">
                   <li><i data-feather="bell"></i>
                     <h6 class="f-18 mb-0">Уведомления</h6>
                   </li>
-                  {% for notification in notifications %}
+                  {% for notification in notifications|slice:3 %}
                   <li>
                     <p><i class="fa fa-circle-o me-3 font-primary"> </i>{{ notification.message }}<span class="pull-right">{{ notification.timestamp }}</span></p>
                   </li>
@@ -79,28 +79,30 @@
 
                 </ul>
               </li>
-              <li class="onhover-dropdown"><i data-feather="message-square"></i>
-                <ul class="chat-dropdown onhover-show-div">
-                  <li><i data-feather="message-square"></i>
-                    <h6 class="f-18 mb-0">Заявки</h6>
+
+              <li class="onhover-dropdown">
+                <div class="notification-box"><i data-feather="message-square"> </i><span class="badge rounded-pill badge-secondary">{{ curator_comments.count }}</span></div>
+                <ul class="notification-dropdown onhover-show-div">
+                  <li><i data-feather="bell"></i>
+                    <h6 class="f-18 mb-0">Новые сообщения</h6>
                   </li>
-                  {% for contact in contacts %}
+                  {% for comment in curator_comments|dictsortreversed:"timestamp"|slice:"0:3" %}
                   <li>
-                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/user/1.jpg' %}" alt="">
+                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/profile.png' %}" alt="">
                       <div class="status-circle online"></div>
-                      <div class="media-body"><span>{{ contact.name }}</span>
-                        <p>{{ contact.message }}</p>
+                      <div class="media-body"><span>{{ comment.curator.get_full_name }}</span>
+                        <p>{{ comment.curator_response }}</p>
+                        <p>Урок - {{ comment.lesson }}</p>
                       </div>
-                      <p class="f-12 font-success">{{ contact.timestamp|timesince }}</p>
+                      <p class="f-12 font-success">{{ comment.timestamp }}</p>
                     </div>
                   </li>
                   {% endfor %}
-                  <li class="text-center"> <a class="btn btn-primary" href="{% url 'users:curator:admin_applications' %}">Показать все заявки</a></li>
                 </ul>
               </li>
               <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
               <li class="profile-nav onhover-dropdown p-0 me-0">
-                <div class="media profile-media"><img class="b-r-10" style="width: 30px;" src="{% if student.image and student.image.url %}{{ student.image.url }}{% else %}{% static 'admin/assets/images/profile.jpg' %}{% endif %}" alt="">
+                <div class="media profile-media"><img class="b-r-10" style="width: 40px;" src="{% if student.image and student.image.url %}{{ student.image.url }}{% else %}{% static 'admin/assets/images/profile.png' %}{% endif %}" alt="">
                   <div class="media-body"><span>{{ user.first_name}} {{ user.last_name }}</span>
                     <p class="mb-0 font-roboto">Студент <i class="middle fa fa-angle-down"></i></p>
                   </div>

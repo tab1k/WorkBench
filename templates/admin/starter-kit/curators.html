@@ -144,7 +144,7 @@
                                                 {% if curator.image %}
                                                     <img class="rounded-circle me-2" width="30" height="30" src="{{ curator.image.url }}">
                                                 {% else %}
-                                                    <img class="rounded-circle me-2" width="30" height="30" src="{% if curator.image and curator.image.url %}{{ curator.image.url }}{% else %}{% static 'admin/assets/images/profile.jpg' %}{% endif %}">
+                                                    <img class="rounded-circle me-2" width="40" height="30" src="{% if curator.image and curator.image.url %}{{ curator.image.url }}{% else %}{% static 'admin/assets/images/profile.png' %}{% endif %}">
                                                 {% endif %}
                                                 {{ curator.first_name }} {{ curator.last_name }}
                                             </td>

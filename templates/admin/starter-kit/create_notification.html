@@ -84,161 +84,52 @@
 
         {% block content %}
           <div class="page-body">
-          <div class="container-fluid">
-            <div class="page-title">
-              <div class="row">
-                <div class="col-6">
-                  <h3>Главная</h3>
-                </div>
-                <div class="col-6">
-                  <ol class="breadcrumb">
-                    <i data-feather="home"></i>
-<!--                    <li class="breadcrumb-item"><a href="index.html">                                       <i data-feather="home"></i></a></li>-->
-<!--                    <li class="breadcrumb-item"></li>-->
-<!--                    <li class="breadcrumb-item active">Default      </li>-->
-                  </ol>
+            <div class="container-fluid">
+              <div class="page-title">
+                <div class="row">
+                  <div class="col-6">
+                    <h3>Новое уведомление</h3>
+                  </div>
+                  <div class="col-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'users:admin:administrator' %}">                                       <i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item active">Новое уведомление</li>
+                    </ol>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           <!-- Container-fluid starts-->
-          <div class="container-fluid">
-            <div class="d-sm-flex justify-content-between align-items-center mb-4">
-              <div class="col-6">
-                <h3>Типы курсов</h3>
-              </div>
-            </div>
-            <div class="row">
-              {% for ct in courses_type|slice:3 %}
-              <div class="col-md-4 course-card">
-                <a href="{% url 'users:admin:courses:courses_by_type' ct.pk %}">
-                  <div class="card shadow border-start-primary mb-4">
-                    <img src="{{ ct.photo.url }}" alt="" style="max-width: 100%; max-height: 300px; border-radius: 20px 20px 0px 0px;">
-                    <div class="card-body">
-                      <div class="text-dark fw-bold h5 mb-0" style="text-align: center;">{{ ct.title|truncatechars:40 }}</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              {% endfor %}
-            </div>
-            <div class="d-sm-flex justify-content-between align-items-center mb-4">
-              <div class="col-6">
-                <h3>Курсы</h3>
-              </div>
-            </div>
-            <div class="row">
-              {% for c in courses|slice:3 %}
-              <div class="col-md-4 course-card">
-                <a href="{% url 'users:admin:courses:modules' c.pk %}">
-                  <div class="card shadow border-start-primary mb-4">
-                    {% if c.image %}
-                        <img src="{{ c.image.url }}" alt="" style="max-width: 100%; max-height: 300px; border-radius: 20px 20px 0px 0px;">
-                    {% else %}
-                        <img src="{% static 'media/course_images/programming.jpg' %}" alt="" style="max-width: 100%; max-height: 300px; border-radius: 20px 20px 0px 0px;">
-                    {% endif %}
-
-                    <div class="card-body">
-                      <div class="text-uppercase text-primary fw-bold text-xs mb-1 ">{{ c.title|truncatechars:40 }}</div>
-                      <div class="text-dark fw-bold h5 mb-0">{{ c.duration }} часов</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              {% endfor %}
-            </div>
-            <div class="row second-chart-list third-news-update">
-              <!-- НОВЫЕ УВЕДОМЛЕНИЯ -->
-              <div class="col-xl-3 xl-50 chart_data_right box-col-12">
-                {% for notification in notifications|slice:3 %}
-                <a href="{% url 'users:admin:view_notifications' %}">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="media align-items-center">
-                        <div class="media-body right-chart-content">
-                          <h4>{{ notification.course }}<span class="new-box">{{ notification.timestamp }}</span></h4><span>{{ notification.message }}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                {% endfor %}
-              </div>
-              <div class="col-xl-4 xl-50 news box-col-6">
-
-                <!--  УВЕДОМЛЕНИЯ -->
-                  <div class="card">
-                      <div class="card-header">
-                          <div class="header-top">
-                              <h5 class="m-0">Уведомления</h5>
-                          </div>
-                      </div>
-                      <div class="card-body p-0" style="height: 300px; overflow-y: auto;">
-                          {% if notifications %}
-                              {% for notification in notifications %}
-                              <div class="news-update">
-                                  <h6>{{ notification.message }}</h6><span>{{ notification.course }}</span>
-                                  <p>{{ notification.timestamp }}</p>
-                              </div>
-                              {% endfor %}
-                          {% else %}
-                              <div class="no-notifications text-center py-5">
-                                  <h3 class="mb-3">Нет уведомлений</h3>
-                                      <img src="{% static 'website/img/tl.webp' %}" style="height: 150px;" alt="Нет заявок">
-                              </div>
-                          {% endif %}
-                      </div>
-                      <div class="card-footer">
-                          <div class="bottom-btn"><a href="{% url 'users:admin:view_notifications' %}">Все уведомления</a></div>
-                      </div>
-                  </div>
-              </div>
-
-              <!--  ЗАЯВКИ -->
-              <div class="col-xl-4 xl-50 appointment-sec box-col-6">
-                  <div class="row">
-                      <div class="card">
-                          <div class="card-header">
-                              <div class="header-top">
-                                  <h5 class="m-0">Заявки</h5>
-                              </div>
-                          </div>
-                          <div class="card-body p-0" style="height: 300px; overflow-y: auto;">
-                              {% if contacts %}
-                                  {% for contact in contacts %}
-                                  <div class="news-update">
-                                      <h6>{{ contact.name }}</h6><span>{{ contact.message }}</span>
-                                      <p>{{ contact.timestamp|timesince }}</p>
-                                  </div>
-                                  {% endfor %}
-                              {% else %}
-                                  <div class="no-contacts text-center py-5">
-                                      <h3 class="mb-3">Нет заявок</h3>
-                                      <img src="{% static 'website/img/tl.webp' %}" style="height: 150px;" alt="Нет заявок">
-                                  </div>
-                              {% endif %}
-                          </div>
-                          <div class="card-footer">
-                              <div class="bottom-btn"><a href="{% url 'users:admin:admin_applications' %}">Все заявки</a></div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-
-              <div class="col-xl-4 col-lg-12 xl-50 calendar-sec box-col-6">
-                <div class="card gradient-primary o-hidden">
-                  <div class="card-body">
-                    <div class="default-datepicker">
-                      <div class="datepicker-here" data-language="en"></div>
-                    </div><span class="default-dots-stay overview-dots full-width-dots"><span class="dots-group"><span class="dots dots1"></span><span class="dots dots2 dot-small"></span><span class="dots dots3 dot-small"></span><span class="dots dots4 dot-medium"></span><span class="dots dots5 dot-small"></span><span class="dots dots6 dot-small"></span><span class="dots dots7 dot-small-semi"></span><span class="dots dots8 dot-small-semi"></span><span class="dots dots9 dot-small">                </span></span></span>
-                  </div>
+            <div class="container-fluid">
+                <div class="container mt-5">
+                  <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary mt-3">Создать уведомление</button>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
+          <!-- Container-fluid Ends-->
         </div>
         {% endblock %}
+
+        <!-- PAGE BODY END -->
+
+
+
+
+        <!-- FOOOTER -->
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12 footer-copyright text-center">
+                <p class="mb-0">Copyright 2023 © WorkBench </p>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
     <!-- latest jquery-->

@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "comments.apps.CommentsConfig",
     "courses.apps.CoursesConfig",
-    "essays.apps.EssaysConfig",
     "schedule.apps.ScheduleConfig",
     "tests.apps.TestsConfig",
     "curator.apps.CuratorConfig",

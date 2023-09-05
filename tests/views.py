@@ -2,15 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib import messages
 from courses.models import Lesson
-from essays.models import EssaySubmission
 from users.models import User
 from .models import Test, TestChoice, TestResult
 
 
 class TakeTestView(View):
-    template_name = 'users/student/test.html'
-    template_name_curator = 'users/admin/testAdmin.html'
-    template_name_admin = 'users/admin/testAdmin.html'
+    template_name = 'users/student/taketest.html'
+    template_name_curator = 'curator/starter-kit/taketest.html'
+    template_name_admin = 'admin/starter-kit/taketest.html'
 
     def get(self, request, lesson_id):
         lesson = get_object_or_404(Lesson, pk=lesson_id)
@@ -49,16 +48,16 @@ class TakeTestView(View):
         test_result.score = total_score
         test_result.save()
 
-        return redirect('users:student:courses:tests:test_result', lesson_id=lesson_id)
+        return redirect('users:student:courses:tests:test_result.html', lesson_id=lesson_id)
 
 
 
 
 
 class TestResultView(View):
-    template_name = 'users/student/test_result.html'
-    template_name_curator = 'users/curator/test_result_curator.html'
-    template_name_admin = 'users/admin/test_result_admin.html'
+    template_name = 'users/student/test_result.html.html'
+    template_name_curator = 'curator/starter-kit/test_result.html.html'
+    template_name_admin = 'admin/starter-kit/test_result.html.html'
 
     def get(self, request, lesson_id):
         current_user = request.user
@@ -82,11 +81,7 @@ class TestResultView(View):
         # Получаем список вопросов теста
         test_questions = Test.objects.filter(lesson=lesson)
 
-        # Check if essay is allowed (assuming you have the logic for it)
-        essay_allowed = True  # Replace this with your actual logic
-
         difference_score = total_possible_score - total_correct_answers
-
 
         context = {
             'lesson': lesson,
@@ -95,7 +90,6 @@ class TestResultView(View):
             'total_questions': total_questions,
             'total_possible_score': total_possible_score,
             'is_passing_grade': is_passing_grade,
-            'essay_allowed': essay_allowed,
             'test_questions': test_questions,
             'difference_score': difference_score,
         }
@@ -106,6 +100,7 @@ class TestResultView(View):
             return render(request, self.template_name_admin, context)
         else:
             return render(request, self.template_name, context)
+
 
 
 

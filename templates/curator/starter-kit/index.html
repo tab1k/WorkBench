@@ -44,42 +44,8 @@
     <!-- tap on tap ends-->
     <!-- page-wrapper Start-->
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
+
       <div class="page-body-wrapper">
-        <!-- Page Sidebar Start-->
-        <div class="sidebar-wrapper">
-          <div>
-            <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="{% static 'admin/assets/images/logo/logo.png' %}" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt=""></a>
-              <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-              <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
-            </div>
-            <div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid" src="{% static 'admin/assets/images/logo/logo-icon.png' %}" alt=""></a></div>
-            <nav class="sidebar-main">
-              <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
-              <div id="sidebar-menu">
-                <ul class="sidebar-links" id="simple-bar">
-                  <li class="back-btn"><a href="index.html"><img class="img-fluid" src="{% static 'admin/assets/images/logo/logo-icon.png' %}" alt=""></a>
-                    <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
-                  </li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:administrator' %}"><i data-feather="home"> </i><span>Главная</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:courses:courses' %}"><i data-feather="heart"> </i><span>Курсы</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:students_admin_check' %}"><i data-feather="list"> </i><span>Студенты</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:curators_admin_check' %}"><i data-feather="check-square"> </i><span>Кураторы</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:schedule:student_schedule' %}"><i data-feather="calendar"> </i><span>Расписание</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:courses:answers_view' %}"><i data-feather="zap"> </i><span>Лента ответов</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:profile:profile' %}"><i data-feather="settings"> </i><span>Настройки</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'curator:index' %}"><i data-feather="search"> </i><span>Админ панель</span></a></li>
-                </ul>
-              </div>
-              <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
-            </nav>
-          </div>
-        </div>
-
-
-
-
-
-        <!-- PAGE BODY-->
 
         {% block content %}
           <div class="page-body">
@@ -103,12 +69,14 @@
           <!-- Container-fluid starts-->
           <div class="container-fluid">
             <div class="d-sm-flex justify-content-between align-items-center mb-4">
-              <h3 class="text-dark mb-0">Типы курсов</h3><a class="btn-sm d-none d-sm-inline-block" href="#" ></a>
+              <div class="col-6">
+                <h3>Типы курсов</h3>
+              </div>
             </div>
             <div class="row">
               {% for ct in courses_type|slice:3 %}
               <div class="col-md-4 course-card">
-                <a href="{% url 'users:curator:courses:courses_by_type' ct.pk %}">
+                <a href="{% url 'users:admin:courses:courses_by_type' ct.pk %}">
                   <div class="card shadow border-start-primary mb-4">
                     <img src="{{ ct.photo.url }}" alt="" style="max-width: 100%; max-height: 300px; border-radius: 20px 20px 0px 0px;">
                     <div class="card-body">
@@ -120,7 +88,9 @@
               {% endfor %}
             </div>
             <div class="d-sm-flex justify-content-between align-items-center mb-4">
-              <h3 class="text-dark mb-0">Курсы</h3><a class="btn-sm d-none d-sm-inline-block" href="#" ></a>
+              <div class="col-6">
+                <h3>Курсы</h3>
+              </div>
             </div>
             <div class="row">
               {% for c in courses|slice:3 %}
@@ -134,7 +104,7 @@
                     {% endif %}
 
                     <div class="card-body">
-                      <div class="text-uppercase text-primary fw-bold text-xs mb-1">{{ c.title|truncatechars:40 }}</div>
+                      <div class="text-uppercase text-primary fw-bold text-xs mb-1 ">{{ c.title|truncatechars:40 }}</div>
                       <div class="text-dark fw-bold h5 mb-0">{{ c.duration }} часов</div>
                     </div>
                   </div>
@@ -143,134 +113,84 @@
               {% endfor %}
             </div>
             <div class="row second-chart-list third-news-update">
+              <!-- НОВЫЕ УВЕДОМЛЕНИЯ -->
               <div class="col-xl-3 xl-50 chart_data_right box-col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="media align-items-center">
-                      <div class="media-body right-chart-content">
-                        <h4>$95,900<span class="new-box">Hot</span></h4><span>Purchase Order Value</span>
-                      </div>
-                      <div class="knob-block text-center">
-                        <input class="knob1" data-width="10" data-height="70" data-thickness=".3" data-angleoffset="0" data-linecap="round" data-fgcolor="#7366ff" data-bgcolor="#eef5fb" value="60">
+                {% for notification in notifications|slice:3 %}
+                <a href="{% url 'users:curator:view_notifications' %}">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="media align-items-center">
+                        <div class="media-body right-chart-content">
+                          <h4>{{ notification.course }}<span class="new-box">{{ notification.timestamp }}</span></h4><span>{{ notification.message }}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </a>
+                {% endfor %}
               </div>
               <div class="col-xl-4 xl-50 news box-col-6">
-                <div class="card">
-                  <div class="card-header">
-                    <div class="header-top">
-                      <h5 class="m-0">News & Update</h5>
-                      <div class="card-header-right-icon">
-                        <select class="button btn btn-primary">
-                          <option>Today</option>
-                          <option>Tomorrow</option>
-                          <option>Yesterday</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-body p-0">
-                    <div class="news-update">
-                      <h6>36% off For pixel lights Couslations Types.</h6><span>Lorem Ipsum is simply dummy...</span>
-                    </div>
-                    <div class="news-update">
-                      <h6>We are produce new product this</h6><span> Lorem Ipsum is simply text of the printing... </span>
-                    </div>
-                    <div class="news-update">
-                      <h6>50% off For COVID Couslations Types.</h6><span>Lorem Ipsum is simply dummy...</span>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                    <div class="bottom-btn"><a href="#">More...</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-4 xl-50 appointment-sec box-col-6">
-                <div class="row">
+
+                <!--  УВЕДОМЛЕНИЯ -->
                   <div class="card">
-                  <div class="card-header">
-                    <div class="header-top">
-                      <h5 class="m-0">News & Update</h5>
-                      <div class="card-header-right-icon">
-                        <select class="button btn btn-primary">
-                          <option>Today</option>
-                          <option>Tomorrow</option>
-                          <option>Yesterday</option>
-                        </select>
+                      <div class="card-header">
+                          <div class="header-top">
+                              <h5 class="m-0">Уведомления</h5>
+                          </div>
                       </div>
-                    </div>
+                      <div class="card-body p-0" style="height: 300px; overflow-y: auto;">
+                          {% if notifications %}
+                              {% for notification in notifications %}
+                              <div class="news-update">
+                                  <h6>{{ notification.message }}</h6><span>{{ notification.course }}</span>
+                                  <p>{{ notification.timestamp }}</p>
+                              </div>
+                              {% endfor %}
+                          {% else %}
+                              <div class="no-notifications text-center py-5">
+                                  <h3 class="mb-3">Нет уведомлений</h3>
+                                      <img src="{% static 'website/img/tl.webp' %}" style="height: 150px;" alt="Нет заявок">
+                              </div>
+                          {% endif %}
+                      </div>
+                      <div class="card-footer">
+                          <div class="bottom-btn"><a href="{% url 'users:curator:view_notifications' %}">Все уведомления</a></div>
+                      </div>
                   </div>
-                  <div class="card-body p-0">
-                    <div class="news-update">
-                      <h6>36% off For pixel lights Couslations Types.</h6><span>Lorem Ipsum is simply dummy...</span>
-                    </div>
-                    <div class="news-update">
-                      <h6>We are produce new product this</h6><span> Lorem Ipsum is simply text of the printing... </span>
-                    </div>
-                    <div class="news-update">
-                      <h6>50% off For COVID Couslations Types.</h6><span>Lorem Ipsum is simply dummy...</span>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                    <div class="bottom-btn"><a href="#">More...</a></div>
-                  </div>
-                </div>
-                </div>
               </div>
-              <div class="col-xl-4 xl-100 chat-sec box-col-6">
-                <div class="card chat-default">
-                  <div class="card-header card-no-border">
-                    <div class="media media-dashboard">
-                      <div class="media-body">
-                        <h5 class="mb-0">Live Chat</h5>
+
+              <!--  ЗАЯВКИ -->
+              <div class="col-xl-4 xl-50 appointment-sec box-col-6">
+                  <div class="row">
+                      <div class="card">
+                          <div class="card-header">
+                              <div class="header-top">
+                                  <h5 class="m-0">Заявки</h5>
+                              </div>
+                          </div>
+                          <div class="card-body p-0" style="height: 300px; overflow-y: auto;">
+                              {% if contacts %}
+                                  {% for contact in contacts %}
+                                  <div class="news-update">
+                                      <h6>{{ contact.name }}</h6><span>{{ contact.message }}</span>
+                                      <p>{{ contact.timestamp|timesince }}</p>
+                                  </div>
+                                  {% endfor %}
+                              {% else %}
+                                  <div class="no-contacts text-center py-5">
+                                      <h3 class="mb-3">Нет заявок</h3>
+                                      <img src="{% static 'website/img/tl.webp' %}" style="height: 150px;" alt="Нет заявок">
+                                  </div>
+                              {% endif %}
+                          </div>
+                          <div class="card-footer">
+                              <div class="bottom-btn"><a href="{% url 'users:curator:admin_applications' %}">Все заявки</a></div>
+                          </div>
                       </div>
-                      <div class="icon-box"><i class="fa fa-ellipsis-h"></i></div>
-                    </div>
                   </div>
-                  <div class="card-body chat-box">
-                    <div class="chat">
-                      <div class="media left-side-chat">
-                        <div class="media-body d-flex">
-                          <div class="img-profile"> <img class="img-fluid" src="../assets/images/user.jpg" alt="Profile"></div>
-                          <div class="main-chat">
-                            <div class="message-main"><span class="mb-0">Hi deo, Please send me link.</span></div>
-                            <div class="sub-message message-main"><span class="mb-0">Right Now</span></div>
-                          </div>
-                        </div>
-                        <p class="f-w-400">7:28 PM</p>
-                      </div>
-                      <div class="media right-side-chat">
-                        <p class="f-w-400">7:28 PM</p>
-                        <div class="media-body text-end">
-                          <div class="message-main pull-right"><span class="mb-0 text-start">How can do for you</span>
-                            <div class="clearfix"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="media left-side-chat">
-                        <div class="media-body d-flex">
-                          <div class="img-profile"> <img class="img-fluid" src="../assets/images/user.jpg" alt="Profile"></div>
-                          <div class="main-chat">
-                            <div class="sub-message message-main mt-0"><span>It's argenty</span></div>
-                          </div>
-                        </div>
-                        <p class="f-w-400">7:28 PM</p>
-                      </div>
-                      <div class="media right-side-chat">
-                        <div class="media-body text-end">
-                          <div class="message-main pull-right"><span class="loader-span mb-0 text-start" id="wave"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div>
-                        </div>
-                      </div>
-                      <div class="input-group">
-                        <input class="form-control" id="mail" type="text" placeholder="Type Your Message..." name="text">
-                        <div class="send-msg"><i data-feather="send"></i></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
+
+
               <div class="col-xl-4 col-lg-12 xl-50 calendar-sec box-col-6">
                 <div class="card gradient-primary o-hidden">
                   <div class="card-body">
@@ -282,25 +202,8 @@
               </div>
             </div>
           </div>
-          <!-- Container-fluid Ends-->
         </div>
         {% endblock %}
-
-        <!-- PAGE BODY END -->
-
-
-
-
-        <!-- FOOOTER -->
-        <footer class="footer">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12 footer-copyright text-center">
-                <p class="mb-0">Copyright 2023 © WorkBench </p>
-              </div>
-            </div>
-          </div>
-        </footer>
       </div>
     </div>
     <!-- latest jquery-->

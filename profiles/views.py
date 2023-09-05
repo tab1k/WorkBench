@@ -37,7 +37,7 @@ class Profile(View):
 
 
 class ProfileView(View):
-    template_name_curator = 'users/curator/profileSettingsAdmin.html'
+    template_name_curator = 'curator/starter-kit/user_profile.html'
     template_name_admin = 'admin/starter-kit/user_profile.html'
 
     def get(self, request, pk):

@@ -17,7 +17,6 @@ urlpatterns = [
     path('generate-certificate/<int:student_id>/', CertificateView.as_view(), name='generate_certificate'),
 
     path('tests', include('tests.urls')),
-    path('essays', include('essays.urls')),
 
 ]
 

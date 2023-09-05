@@ -46,41 +46,6 @@
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
 
       <div class="page-body-wrapper">
-        <!-- Page Sidebar Start-->
-        <div class="sidebar-wrapper">
-          <div>
-            <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="{% static 'admin/assets/images/logo/logo.png' %}" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt=""></a>
-              <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-              <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
-            </div>
-            <div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid" src="{% static 'admin/assets/images/logo/logo-icon.png' %}" alt=""></a></div>
-            <nav class="sidebar-main">
-              <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
-              <div id="sidebar-menu">
-                <ul class="sidebar-links" id="simple-bar">
-                  <li class="back-btn"><a href="index.html"><img class="img-fluid" src="{% static 'admin/assets/images/logo/logo-icon.png' %}" alt=""></a>
-                    <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
-                  </li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:administrator' %}"><i data-feather="home"> </i><span>Главная</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:courses:courses' %}"><i data-feather="heart"> </i><span>Курсы</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:students_admin_check' %}"><i data-feather="list"> </i><span>Студенты</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:curators_admin_check' %}"><i data-feather="check-square"> </i><span>Кураторы</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:schedule:student_schedule' %}"><i data-feather="calendar"> </i><span>Расписание</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:courses:answers_view' %}"><i data-feather="zap"> </i><span>Лента ответов</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:profile:profile' %}"><i data-feather="settings"> </i><span>Настройки</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'admin:index' %}"><i data-feather="search"> </i><span>Админ панель</span></a></li>
-                </ul>
-              </div>
-              <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
-            </nav>
-          </div>
-        </div>
-
-
-
-
-
-        <!-- PAGE BODY-->
 
         {% block content %}
           <div class="page-body">
@@ -160,12 +125,12 @@
                                       <tbody>
                                           {% for student in students %}
                                           <tr>
-                                              <td><img class="rounded-circle me-2" width="30" height="30" src="{% if student.image and student.image.url %}{{ student.image.url }}{% else %}{% static 'admin/assets/images/profile.jpg' %}{% endif %}">{{ student.first_name }} {{ student.last_name }}</td>
+                                              <td><img class="rounded-circle me-2" width="40" height="30" src="{% if student.image and student.image.url %}{{ student.image.url }}{% else %}{% static 'admin/assets/images/profile.png' %}{% endif %}">{{ student.first_name }} {{ student.last_name }}</td>
                                               <td>{{ student.courses.name }}</td>
                                               <td>{{ student.id }}</td>
-                                              <td><a style="text-decoration: none;" href="{% url 'users:administrator:stream_list' %}">{{ student.stream }}</a></td>
-                                              <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal1" style="height: 37px;text-align: center;background: #22549E;"><a style="color: white; text-decoration: none;" href="{% url 'users:admin:profile:profile_view' pk=student.pk %}">Кабинет</a></button></td>
-                                              <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal1" style="height: 37px;text-align: center;background: #22549E;"><a style="color: white; text-decoration: none;"  href="{% url 'users:admin:courses:student_progress' student_id=student.id %}">Успеваемость</a></button></td>
+                                              <td><a style="text-decoration: none;" href="{% url 'users:curator:stream_list' %}">{{ student.stream }}</a></td>
+                                              <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal1" style="height: 37px;text-align: center;background: #22549E;"><a style="color: white; text-decoration: none;" href="{% url 'users:curator:profile:profile_view' pk=student.pk %}">Кабинет</a></button></td>
+                                              <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal1" style="height: 37px;text-align: center;background: #22549E;"><a style="color: white; text-decoration: none;"  href="{% url 'users:curator:courses:student_progress' student_id=student.id %}">Успеваемость</a></button></td>
                                           </tr>
                                           {% endfor %}
                                       </tbody>
