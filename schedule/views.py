@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from django.views import View
 from courses.models import Course
-from schedule.models import Schedule
-from itertools import groupby
+from django.shortcuts import render, redirect
+from django.views import View
+from .models import Schedule
+from .forms import ScheduleForm
+
+
 
 class StudentScheduleView(View):
     template_name_student = 'student/starter-kit/schedule.html'
@@ -65,6 +67,37 @@ class StudentScheduleView(View):
             'user_role': user_role,
         }
         return render(request, template_name, context)
+
+
+
+from django.views import View
+from django.shortcuts import render, redirect
+from .models import Schedule
+from .forms import ScheduleForm
+from courses.models import Course  # Здесь нужно импортировать модель Course
+
+class AddScheduleView(View):
+    template_name = 'admin/starter-kit/add_schedule.html'
+
+    def get(self, request):
+        form = ScheduleForm()
+        courses = Course.objects.all()  # Получаем список всех курсов
+        return render(request, self.template_name, {'form': form, 'courses': courses})
+
+    def post(self, request):
+        form = ScheduleForm(request.POST)
+        if form.is_valid():
+            schedule = form.save(commit=False)  # Создаем объект расписания без сохранения в базу данных
+            schedule.course = form.cleaned_data['course']  # Устанавливаем курс из формы
+            schedule.save()  # Теперь сохраняем объект расписания
+
+            # Дополнительная обработка, если нужно
+
+            return render(request, self.template_name, {'form': form, 'course_added': True})
+        else:
+            courses = Course.objects.all()
+            return render(request, self.template_name, {'form': form, 'courses': courses})
+
 
 
 

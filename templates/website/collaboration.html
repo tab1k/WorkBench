@@ -172,7 +172,7 @@
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
           <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
-            <img src="{% static 'website/img/logo.svg' %}" width="47" alt="WorkBench">
+            <img src="{% static 'website/img/logo.png' %}" width="47" alt="WorkBench">
             WorkBench
           </a>
           <div id="navbarNav" class="offcanvas offcanvas-end">
@@ -199,12 +199,37 @@
                 </li>
               </ul>
             </div>
-            <div class="offcanvas-header border-top">
-              <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
-                <i class="bx bx-log-in fs-5"></i>
-                &nbsp;Войти
-              </a>
-            </div>
+            {% if user.is_authenticated %}
+              {% if user.role == "student" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:student:student' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет студента
+                  </a>
+                </div>
+              {% elif user.role == "curator" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:curator:curator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет ментора
+                  </a>
+                </div>
+              {% elif user.role == "admin" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет администратора
+                  </a>
+                </div>
+              {% endif %}
+            {% else %}
+              <div class="offcanvas-header border-top">
+                <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                  <i class="bx bx-log-in fs-5"></i>
+                  &nbsp;Войти
+                </a>
+              </div>
+            {% endif %}
           </div>
           <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
             <input type="checkbox" class="form-check-input" id="theme-mode">
@@ -214,10 +239,29 @@
           <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a href="{% url 'users:login' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
-            <i class="bx bx-log-in fs-5"></i>
-            &nbsp;Войти
-          </a>
+          {% if user.is_authenticated %}
+            {% if user.role == "student" %}
+              <a href="{% url 'users:student:student' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет студента
+              </a>
+            {% elif user.role == "curator" %}
+              <a href="{% url 'users:curator:curator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет ментора
+              </a>
+            {% elif user.role == "admin" %}
+              <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет администратора
+              </a>
+            {% endif %}
+          {% else %}
+            <a href="{% url 'users:login' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+              <i class="bx bx-log-in fs-5"></i>
+              &nbsp;Войти
+            </a>
+          {% endif %}
         </div>
       </header>
 
@@ -272,8 +316,8 @@
 
             <!-- Video -->
             <div class="gallery mb-4 pb-2" data-video="true">
-              <a href="https://www.youtube.com/watch?v=LDb-G8y88Sc" class="gallery-item video-item is-hovered rounded-3" data-sub-html='<h6 class="fs-sm text-light">Video inside blog post</h6>'>
-                <img src="{% static 'website/img/blog/single/video-cover.jpg' %}" alt="Video preview">
+              <a href="https://www.youtube.com/watch?v=4EB1rVEugvk" class="gallery-item video-item is-hovered rounded-3" data-sub-html='<h6 class="fs-sm text-light">Интервью от нашего ученика!)</h6>'>
+                <img src="{% static 'website/img/blog/single/video.jpg' %}" alt="Video preview">
               </a>
             </div>
             <h2 class="h4">Возможности для образования</h2>
@@ -336,19 +380,20 @@
             <div class="card p-md-5 p-4 border-0 bg-secondary">
               <div class="card-body w-100 mx-auto px-0" style="max-width: 746px;">
                 <h2 class="mb-4 pb-3">Узнать больше 🤔</h2>
-                <form class="row gy-4 needs-validation" novalidate>
+                <form class="row gy-4 needs-validation" method="post" novalidate>
+                  {% csrf_token %}
                   <div class="col-sm-6 col-12">
                     <label for="c-name" class="form-label fs-base">Имя</label>
-                    <input id="c-name" type="text" class="form-control form-control-lg" required>
+                    <input id="c-name" name="name" type="text" class="form-control form-control-lg" required>
                     <span class="invalid-tooltip">Пожалуйста, введите ваше имя.</span>
                   </div>
                   <div class="col-sm-6 col-12">
-                    <label for="c-email" class="form-label fs-base">Номер телефона</label>
-                    <input id="c-email" type="email" class="form-control form-control-lg" required>
+                    <label for="phone" class="form-label fs-base">Номер телефона</label>
+                    <input id="phone" name="phone" class="form-control form-control-lg" required>
                     <span class="invalid-tooltip">Пожалуйста, введите ваш номер телефона.</span>
                   </div>
                   <div class="col-12">
-                    <label for="c-comment" class="form-label fs-base">Сообщение</label>
+                    <label for="c-comment" name="message" class="form-label fs-base">Сообщение</label>
                     <textarea id="c-comment" class="form-control form-control-lg" rows="3" placeholder="Введите ваше сообщение.." required></textarea>
                     <span class="invalid-tooltip">Пожалуйста, введите ваше сообщение.</span>
                   </div>

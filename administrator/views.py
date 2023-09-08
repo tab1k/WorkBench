@@ -99,7 +99,7 @@ class CuratorCheckAdmin(View):
 
 
 class AddStudent(View):
-    template_name = 'users/admin/addstudent.html'
+    template_name = 'admin/starter-kit/addstudent.html'
 
     def get(self, request):
         form = StudentForm()
@@ -129,7 +129,7 @@ class AddStudent(View):
 
 
 class AddCurator(View):
-    template_name = 'users/admin/addCoach.html'
+    template_name = 'admin/starter-kit/addcoach.html'
 
     def get(self, request):
         form = CuratorForm()
@@ -154,7 +154,7 @@ class AddCurator(View):
             curator_group = Group.objects.get(name='Кураторы')
             curator.groups.add(curator_group)
 
-            return render(request, 'users/admin/curators.html', {'curator': curator})
+            return render(request, 'admin/starter-kit/curators.html', {'curator': curator})
         return render(request, self.template_name, {'form': form})
 
 
@@ -165,10 +165,10 @@ class SearchStudentsView(View):
 
         # Если поле role у пользователя равно "admin", используем шаблон для администратора
         if user.role == 'admin':
-            return ['users/admin/student.html']
+            return ['admin/starter-kit/students.html']
         # Иначе используем шаблон для куратора
         else:
-            return ['users/curator/student.html']
+            return ['curator/starter-kit/students.html']
 
     def get(self, request):
         query = request.GET.get('q')
@@ -188,7 +188,7 @@ class SearchStudentsView(View):
 
 
 class SearchCuratorsView(View):
-    template_name = 'users/admin/curators.html'
+    template_name = 'admin/starter-kit/curators.html'
 
     def get(self, request):
         query = request.GET.get('q')

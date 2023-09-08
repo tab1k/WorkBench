@@ -72,7 +72,7 @@
                   </li>
                   {% for notification in notifications|slice:3 %}
                   <li>
-                    <p><i class="fa fa-circle-o me-3 font-primary"> </i>{{ notification.message }}<span class="pull-right">{{ notification.timestamp }}</span></p>
+                    <p style="padding: 15px;"><i class="fa fa-circle-o me-3 font-primary"> </i>{{ notification.message|truncatechars:15 }}<span class="pull-right">{{ notification.timestamp }}</span></p>
                   </li>
                   {% endfor %}
                   <li><a class="btn btn-primary w-100" href="{% url 'users:admin:view_notifications' %}">Все уведомления</a></li>
@@ -87,7 +87,7 @@
                   </li>
                   {% for contact in contacts|slice:3 %}
                   <li>
-                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/user/1.jpg' %}" alt="">
+                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/profile.png' %}" alt="">
                       <div class="status-circle online"></div>
                       <div class="media-body"><span>{{ contact.name }}</span>
                         <p>{{ contact.message }}</p>
@@ -163,15 +163,15 @@
 
         {% endblock%}
         <!-- footer start-->
-        <footer class="footer">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12 footer-copyright text-center">
-                <p class="mb-0">Copyright 2023 © WorkBench</p>
-              </div>
-            </div>
-          </div>
-        </footer>
+<!--        <footer class="footer">-->
+<!--          <div class="container-fluid">-->
+<!--            <div class="row">-->
+<!--              <div class="col-md-12 footer-copyright text-center">-->
+<!--                <p class="mb-0">Copyright 2023 © WorkBench</p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </footer>-->
       </div>
     </div>
     <!-- latest jquery-->

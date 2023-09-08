@@ -95,7 +95,7 @@
               <!-- НОВЫЕ УВЕДОМЛЕНИЯ -->
               <div class="col-xl-3 xl-50 chart_data_right box-col-12">
                 {% for notification in notifications|slice:3 %}
-                <a href="{% url 'users:curator:view_notifications' %}">
+                <a href="{% url 'users:student:student_notifications' %}">
                   <div class="card">
                     <div class="card-body">
                       <div class="media align-items-center">
@@ -133,7 +133,7 @@
                           {% endif %}
                       </div>
                       <div class="card-footer">
-                          <div class="bottom-btn"><a href="{% url 'users:curator:view_notifications' %}">Все уведомления</a></div>
+                          <div class="bottom-btn"><a href="{% url 'users:student:student_notifications' %}">Все уведомления</a></div>
                       </div>
                   </div>
               </div>

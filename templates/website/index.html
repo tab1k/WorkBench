@@ -171,7 +171,7 @@
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
           <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
-            <img src="{% static 'website/img/logo.svg' %}" width="47" alt="WorkBench">
+            <img src="{% static 'website/img/logo.png' %}" width="47" alt="WorkBench">
             WorkBench
           </a>
           <div id="navbarNav" class="offcanvas offcanvas-end">
@@ -182,7 +182,7 @@
             <div class="offcanvas-body">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item active">
-                  <a href="/" class="nav-link">Главная</a>
+                  <a href="{% url 'website:home' %}" class="nav-link">Главная</a>
                 </li>
                 <li class="nav-item">
                   <a href="{% url 'website:about' %}" class="nav-link">О нас</a>
@@ -198,12 +198,37 @@
                 </li>
               </ul>
             </div>
-            <div class="offcanvas-header border-top">
-              <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
-                <i class="bx bx-log-in fs-5"></i>
-                &nbsp;Войти
-              </a>
-            </div>
+            {% if user.is_authenticated %}
+              {% if user.role == "student" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:student:student' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет студента
+                  </a>
+                </div>
+              {% elif user.role == "curator" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:curator:curator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет ментора
+                  </a>
+                </div>
+              {% elif user.role == "admin" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет администратора
+                  </a>
+                </div>
+              {% endif %}
+            {% else %}
+              <div class="offcanvas-header border-top">
+                <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                  <i class="bx bx-log-in fs-5"></i>
+                  &nbsp;Войти
+                </a>
+              </div>
+            {% endif %}
           </div>
           <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
             <input type="checkbox" class="form-check-input" id="theme-mode">
@@ -213,10 +238,29 @@
           <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a href="{% url 'users:login' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
-            <i class="bx bx-log-in fs-5"></i>
-            &nbsp;Войти
-          </a>
+          {% if user.is_authenticated %}
+            {% if user.role == "student" %}
+              <a href="{% url 'users:student:student' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет студента
+              </a>
+            {% elif user.role == "curator" %}
+              <a href="{% url 'users:curator:curator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет ментора
+              </a>
+            {% elif user.role == "admin" %}
+              <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет администратора
+              </a>
+            {% endif %}
+          {% else %}
+            <a href="{% url 'users:login' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+              <i class="bx bx-log-in fs-5"></i>
+              &nbsp;Войти
+            </a>
+          {% endif %}
         </div>
       </header>
 
@@ -254,18 +298,7 @@
 <!--                </button>-->
 <!--              </form>-->
               <div class="d-flex align-items-center mt-auto mb-3 mb-lg-0 pb-4 pb-lg-0 pb-xl-5">
-                <div class="d-flex me-3">
-                  <div class="d-flex align-items-center justify-content-center bg-light rounded-circle" style="width: 52px; height: 52px;">
-                    <img src="{% static 'website/img/avatar/08.jpg' %}" class="rounded-circle" width="48" alt="Avatar">
-                  </div>
-                  <div class="d-flex align-items-center justify-content-center bg-light rounded-circle ms-n3" style="width: 52px; height: 52px;">
-                    <img src="{% static 'website/img/avatar/15.jpg' %}" class="rounded-circle" width="48" alt="Avatar">
-                  </div>
-                  <div class="d-flex align-items-center justify-content-center bg-light rounded-circle ms-n3" style="width: 52px; height: 52px;">
-                    <img src="{% static 'website/img/avatar/16.jpg' %}" class="rounded-circle" width="48" alt="Avatar">
-                  </div>
-                </div>
-                <span class="fs-sm"><span class="text-primary fw-semibold">10K+</span> студентов уже с нами!</span>
+                <span class="fs-sm"><span class="text-primary fw-semibold">1K+</span> студентов уже с нами!</span>
               </div>
             </div>
             <div class="col-lg-7">
@@ -305,7 +338,7 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs flex-nowrap overflow-auto flex-md-column pb-2 pb-md-0 mb-3 mb-md-5" role="tablist">
               <li class="nav-item">
-                <a href="#" class="nav-link d-inline-block text-nowrap active" role="tab" aria-selected="true">Веб-Разработка</a>
+                <a href="{% url 'website:courses' %}" class="nav-link d-inline-block text-nowrap active" role="tab" aria-selected="true">Веб-Разработка</a>
               </li>
               <li class="nav-item">
                 <a href="{% url 'website:full-stack' %}#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Fullstack Веб-Разработчик </a>
@@ -709,7 +742,7 @@
                         <p class="fs-lg mb-0">Благодаря онлайн-курсам, я смог изменить свою жизнь. Сначала я не имел опыта в IT, но курсы с реальными кейсами дали мне шанс преодолеть это. Я разработал приложение, которое сейчас успешно работает, и получил сертификат. Это был невероятный год обучения.🚀</p>
                       </blockquote>
                       <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
-                        <img src="{% static 'website/img/avatar/13.jpg' %}" width="60" class="rounded-circle" alt="Ralph Edwards">
+                        <img src="{% static 'website/img/users.avif' %}" width="60" class="rounded-circle" alt="Ralph Edwards">
                         <div class="ps-3">
                           <h6 class="fw-semibold lh-base mb-0">Тамерлан Кажымукан</h6>
                           <span class="fs-sm text-muted">Студент 2021 г. </span>
@@ -725,7 +758,7 @@
                         <p class="fs-lg mb-0">Находясь в декрете, я решила не останавливаться и продолжить учиться. Онлайн-курсы с реальными кейсами позволили мне гибко управлять временем и развивать профессиональные навыки. Мой сертификат стал подтверждением моей способности совмещать работу и материнство. 👩‍👦‍👦</p>
                       </blockquote>
                       <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
-                        <img src="{% static 'website/img/avatar/14.jpg' %}" width="60" class="rounded-circle" alt="Annette Black">
+                        <img src="{% static 'website/img/users.avif' %}" width="60" class="rounded-circle" alt="Annette Black">
                         <div class="ps-3">
                           <h6 class="fw-semibold lh-base mb-0">Светлана Генадьевна</h6>
                           <span class="fs-sm text-muted">Студент 2022 г.</span>
@@ -741,7 +774,7 @@
                         <p class="fs-lg mb-0">Когда я пошел в колледж, я не знал, что ожидать. Учеба была сложной, но курсы с реальными кейсами сделали ее интереснее. Благодаря этим курсам я узнал, как применять знания на практике. Теперь у меня есть диплом, сертификат и уверенность в своих силах. Обучение стало веселым приключением!</p>
                       </blockquote>
                       <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
-                        <img src="{% static 'website/img/avatar/11.jpg' %}" width="60" class="rounded-circle" alt="Darrell Steward">
+                        <img src="{% static 'website/img/users.avif' %}" width="60" class="rounded-circle" alt="Darrell Steward">
                         <div class="ps-3">
                           <h6 class="fw-semibold lh-base mb-0">Асан Омизрак</h6>
                           <span class="fs-sm text-muted">Студент 2020 г.</span>
@@ -942,29 +975,36 @@
           <h2 class="h1 text-center pb-2 mb-4 mb-lg-5">Готовы начать свою карьеру?<br>Начните учиться сегодня!</h2>
           <div class="row pb-3">
             <div class="col-xl-7 col-md-6">
-              <div class="d-flex flex-column w-100 h-100 rounded-3 bg-position-center bg-repeat-0 bg-size-cover" style="background-image: url('{% static 'website/img/landing/online-courses/signup-img.jpg' %}');"></div>
+              <div class="d-flex flex-column w-100 h-100 rounded-3 bg-position-center bg-repeat-0 bg-size-cover" style="background-image: url('{% static 'website/img/landing/online-courses/contacts.jpg' %}');"></div>
             </div>
             <div class="col-xl-5 col-md-6">
               <div class="card border-0 p-lg-4">
                 <div class="card-body">
                   <h3 class="pb-3 pb-lg-4">Именно тебе <span class="text-danger">20% скидка</span> только сегодня!</h3>
-                  <form class="needs-validation mb-4 pb-2 pb-lg-0 mb-lg-5" novalidate>
-                    <div class="position-relative mb-4">
-                      <label class="form-label fs-base">Имя</label>
-                      <input type="text" class="form-control form-control-lg" required>
-                      <div class="invalid-tooltip position-absolute top-100 start-0">Please provide a valid email address.</div>
-                    </div>
-                    <div class="mb-4 pt-1 pb-2">
-                      <label class="form-label fs-base">Номер телефона</label>
-                      <div class="password-toggle">
-                        <input type="tel" class="form-control form-control-lg" required>
-                        <label class="password-toggle-btn" aria-label="Show/hide password">
-                          <input class="password-toggle-check" type="checkbox">
-                        </label>
-                        <div class="invalid-tooltip position-absolute top-100 start-0">Please provide a valid email address.</div>
+                  <form class="needs-validation mb-4 pb-2 pb-lg-0 mb-lg-5" method="post">
+                      {% csrf_token %}
+                      <div class="position-relative mb-4">
+                          <label class="form-label fs-base" for="name">Имя</label>
+                          <input type="text" class="form-control form-control-lg" id="name" name="name" required>
+                          <div class="invalid-tooltip position-absolute top-100 start-0">Пожалуйста, введите ваше имя!</div>
                       </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg shadow-primary">Начать карьеру!</button>
+                      <div class="mb-4 pt-1">
+                          <label class="form-label fs-base" for="phone">Номер телефона</label>
+                          <div class="password-toggle">
+                              <input type="tel" class="form-control form-control-lg" id="phone" name="phone" required>
+                              <label class="password-toggle-btn" aria-label="Show/hide password">
+                                  <input class="password-toggle-check" type="checkbox">
+                              </label>
+                              <div class="invalid-tooltip position-absolute top-100 start-0">Пожалуйста, введите ваш номер телефона!</div>
+                          </div>
+                      </div>
+                      <div class="col-12 pb-2">
+                          <label for="message" class="form-label fs-base">Сообщение</label>
+                          <textarea class="form-control form-control-lg" id="message" name="message" rows="3" required></textarea>
+                          <div class="invalid-feedback">Пожалуйста, введите предмет, который вы выбрали!</div>
+                      </div>
+
+                      <button type="submit" style="margin-top: 10px;" type="submit" class="btn btn-primary btn-lg shadow-primary">Начать карьеру!</button>
                   </form>
                 </div>
               </div>
@@ -1031,8 +1071,6 @@
       <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Наверх</span>
       <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
     </a>
-
-    <!-- Vendor Scripts -->
     <script src="{% static 'website/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'website/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js' %}"></script>
     <script src="{% static 'website/vendor/parallax-js/dist/parallax.min.js' %}"></script>

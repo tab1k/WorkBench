@@ -7,7 +7,7 @@ from .models import Test, TestChoice, TestResult
 
 
 class TakeTestView(View):
-    template_name = 'users/student/taketest.html'
+    template_name = 'student/starter-kit/taketest.html'
     template_name_curator = 'curator/starter-kit/taketest.html'
     template_name_admin = 'admin/starter-kit/taketest.html'
 
@@ -55,7 +55,7 @@ class TakeTestView(View):
 
 
 class TestResultView(View):
-    template_name = 'users/student/test_result.html.html'
+    template_name = 'student/starter-kit/test_result.html'
     template_name_curator = 'curator/starter-kit/test_result.html.html'
     template_name_admin = 'admin/starter-kit/test_result.html.html'
 

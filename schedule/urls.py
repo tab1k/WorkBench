@@ -5,4 +5,5 @@ app_name = 'schedule'
 
 urlpatterns = [
     path('student-schedule/', StudentScheduleView.as_view(), name='student_schedule'),
+    path('add_schedule/', AddScheduleView.as_view(), name='add_schedule'),
 ]

@@ -33,7 +33,6 @@
   </head>
   <body onload="startTime()">
     <!-- tap on top starts-->
-    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
     <!-- tap on tap ends-->
     <!-- page-wrapper Start-->
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
@@ -44,7 +43,7 @@
             <div class="form-group w-100">
               <div class="Typeahead Typeahead--twitterUsers">
                 <div class="u-posRelative">
-                  <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Search Cuba .." name="q" title="" autofocus>
+                  <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Искать.." name="q" title="" autofocus>
                   <div class="spinner-border Typeahead-spinner" role="status"><span class="sr-only">Загрузка...</span></div><i class="close-search" data-feather="x"></i>
                 </div>
                 <div class="Typeahead-menu"></div>
@@ -56,14 +55,19 @@
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
           </div>
           <div class="left-header col horizontal-wrapper ps-0">
+            <ul class="horizontal-menu">
+              <li class="mega-menu outside">
+                <a class="nav-link" href="{% url 'users:student:profile:profile' %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                  </svg>
+                  <span>Профиль</span>
+                </a>
+              </li>
+            </ul>
           </div>
           <div class="nav-right col-8 pull-right right-header p-0">
             <ul class="nav-menus">
-              <li>
-                <span class="header-search"><i data-feather="search"></i></span></li>
-              <li>
-                <div class="mode"><i class="fa fa-moon-o"></i></div>
-              </li>
               <li class="onhover-dropdown">
                 <div class="notification-box"><i data-feather="bell"> </i><span class="badge rounded-pill badge-secondary">{{ notifications.count }}</span></div>
                 <ul class="notification-dropdown onhover-show-div">
@@ -71,11 +75,11 @@
                     <h6 class="f-18 mb-0">Уведомления</h6>
                   </li>
                   {% for notification in notifications|slice:3 %}
-                  <li>
-                    <p><i class="fa fa-circle-o me-3 font-primary"> </i>{{ notification.message }}<span class="pull-right">{{ notification.timestamp }}</span></p>
+                  <li style="padding: 18px;">
+                    <p><i class="fa fa-circle-o me-3 font-primary"> </i>{{ notification.message|truncatechars:15 }}<span class="pull-right">{{ notification.timestamp }}</span></p>
                   </li>
                   {% endfor %}
-                  <li><a class="btn btn-primary" href="#">Все уведомления</a></li>
+                  <li><a class="btn btn-primary" href="{% url 'users:student:student_notifications' %}">Все уведомления</a></li>
 
                 </ul>
               </li>
@@ -87,14 +91,16 @@
                     <h6 class="f-18 mb-0">Новые сообщения</h6>
                   </li>
                   {% for comment in curator_comments|dictsortreversed:"timestamp"|slice:"0:3" %}
-                  <li>
-                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/profile.png' %}" alt="">
+                  <li class="notification-item">
+                    <div class="media">
+                      <img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/profile.png' %}" alt="Профиль">
                       <div class="status-circle online"></div>
-                      <div class="media-body"><span>{{ comment.curator.get_full_name }}</span>
-                        <p>{{ comment.curator_response }}</p>
-                        <p>Урок - {{ comment.lesson }}</p>
+                      <div class="media-body">
+                        <span class="notification-title">{{ comment.curator.get_full_name }}</span>
+                        <p class="notification-text">{{ comment.curator_response }}</p>
+                        <p class="notification-text">Урок - {{ comment.lesson }}</p>
+                        <p class="f-12 font-success notification-timestamp">{{ comment.timestamp }}</p>
                       </div>
-                      <p class="f-12 font-success">{{ comment.timestamp }}</p>
                     </div>
                   </li>
                   {% endfor %}
@@ -109,21 +115,11 @@
                 </div>
                 <ul class="profile-dropdown onhover-show-div">
                   <li><a href="{% url 'users:student:profile:profile' %}"><i data-feather="settings"></i><span>Настройки</span></a></li>
-                  <li><a href="#"><i data-feather="mail"></i><span>Почта</span></a></li>
                   <li><a href="{% url 'users:student:logout' %}"><i data-feather="log-in"> </i><span>Выйти</span></a></li>
                 </ul>
               </li>
             </ul>
           </div>
-          <script class="result-template" type="text/x-handlebars-template">
-            <div class="ProfileCard u-cf">
-            <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
-            <div class="ProfileCard-details">
-            <div class="ProfileCard-realName">{{name}}</div>
-            </div>
-            </div>
-          </script>
-          <script class="empty-template" type="text/x-handlebars-template"><div class="EmptyMessage">Ничего не найдено.</div></script>
         </div>
       </div>
       <!-- Page Body Start-->

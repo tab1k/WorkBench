@@ -170,7 +170,7 @@
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
           <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
-            <img src="{% static 'website/img/logo.svg' %}" width="47" alt="WorkBench">
+            <img src="{% static 'website/img/logo.png' %}" width="47" alt="WorkBench">
             WorkBench
           </a>
           <div id="navbarNav" class="offcanvas offcanvas-end">
@@ -180,7 +180,7 @@
             </div>
             <div class="offcanvas-body">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+                <li class="nav-item active">
                   <a href="/" class="nav-link">Главная</a>
                 </li>
                 <li class="nav-item">
@@ -197,12 +197,37 @@
                 </li>
               </ul>
             </div>
-            <div class="offcanvas-header border-top">
-              <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
-                <i class="bx bx-log-in fs-5"></i>
-                &nbsp;Войти
-              </a>
-            </div>
+            {% if user.is_authenticated %}
+              {% if user.role == "student" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:student:student' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет студента
+                  </a>
+                </div>
+              {% elif user.role == "curator" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:curator:curator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет ментора
+                  </a>
+                </div>
+              {% elif user.role == "admin" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет администратора
+                  </a>
+                </div>
+              {% endif %}
+            {% else %}
+              <div class="offcanvas-header border-top">
+                <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                  <i class="bx bx-log-in fs-5"></i>
+                  &nbsp;Войти
+                </a>
+              </div>
+            {% endif %}
           </div>
           <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
             <input type="checkbox" class="form-check-input" id="theme-mode">
@@ -212,10 +237,29 @@
           <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a href="{% url 'users:login' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
-            <i class="bx bx-log-in fs-5"></i>
-            &nbsp;Войти
-          </a>
+          {% if user.is_authenticated %}
+            {% if user.role == "student" %}
+              <a href="{% url 'users:student:student' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет студента
+              </a>
+            {% elif user.role == "curator" %}
+              <a href="{% url 'users:curator:curator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет ментора
+              </a>
+            {% elif user.role == "admin" %}
+              <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет администратора
+              </a>
+            {% endif %}
+          {% else %}
+            <a href="{% url 'users:login' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+              <i class="bx bx-log-in fs-5"></i>
+              &nbsp;Войти
+            </a>
+          {% endif %}
         </div>
       </header>
 

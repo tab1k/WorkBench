@@ -311,6 +311,8 @@ class StudentProgressView(View):
         if request.user.role not in ['curator', 'admin']:
             return HttpResponseForbidden("У вас нет доступа к этой странице.")
 
+
+
         student = User.objects.get(pk=student_id)
         courses = student.courses.all()
 
@@ -320,6 +322,7 @@ class StudentProgressView(View):
         test_scores = []
         total_test_lessons = 0
         total_lessons = 0
+
 
         for course in courses:
             modules = course.modules.all()
@@ -337,7 +340,7 @@ class StudentProgressView(View):
                         'course': course,
                         'module': module,
                         'lesson': lesson,
-                        'test_result.html': test_result,
+                        'test_result': test_result,
                     })
 
                     lessons_titles.append(lesson.title)
@@ -345,6 +348,9 @@ class StudentProgressView(View):
 
         lesson_count_with_tests = total_test_lessons
         average_test_score = total_test_scores / lesson_count_with_tests if lesson_count_with_tests > 0 else 0
+
+        print("lessons_titles:", lessons_titles)
+        print("test_scores:", test_scores)
 
         context = {
             'student': student,

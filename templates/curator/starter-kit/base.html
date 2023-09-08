@@ -72,7 +72,7 @@
                   </li>
                   {% for notification in notifications|slice:3 %}
                   <li>
-                    <p><i class="fa fa-circle-o me-3 font-primary"> </i>{{ notification.message }}<span class="pull-right">{{ notification.timestamp }}</span></p>
+                    <p style="padding: 15px;><i class="fa fa-circle-o me-3 font-primary"> </i>{{ notification.message|truncatechars:15 }}<span class="pull-right">{{ notification.timestamp }}</span></p>
                   </li>
                   {% endfor %}
                   <li><a class="btn btn-primary" href="{% url 'users:curator:view_notifications' %}">Все уведомления</a></li>
@@ -86,7 +86,7 @@
                   </li>
                   {% for contact in contacts|slice:3 %}
                   <li>
-                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/user/1.jpg' %}" alt="">
+                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/profile.png' %}" alt="">
                       <div class="status-circle online"></div>
                       <div class="media-body"><span>{{ contact.name }}</span>
                         <p>{{ contact.message }}</p>

@@ -37,14 +37,17 @@
     <link id="color" rel="stylesheet" href="{% static 'admin/assets/css/color-1.css' %}" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/responsive.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   </head>
   <body onload="startTime()">
     <!-- tap on top starts-->
     <div class="tap-top"><i data-feather="chevrons-up"></i></div>
-
+    <!-- tap on tap ends-->
+    <!-- page-wrapper Start-->
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
-
       <div class="page-body-wrapper">
+
 
         {% block content %}
           <div class="page-body">
@@ -127,7 +130,7 @@
                                                             <td>{{ item.module.title }}</td>
                                                             <td>{{ item.lesson.title }}</td>
                                                             <td>{{ item.test_result.score }}</td>
-                                                            <td>{% if item.is_completed %}Да{% else %}Нет{% endif %}</td>
+                                                            <td>{% if item.test_result.score > 50 %}Да{% else %}Нет{% endif %}</td>
                                                         </tr>
                                                         {% endfor %}
                                                     </tbody>
@@ -142,8 +145,8 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-lg-7 col-xl-8 w-100">
-                                                    <div class="card shadow mb-4 ">
-                                                        <div class="card-header d-flex justify-content-between align-items-center ">
+                                                    <div class="card shadow mb-4">
+                                                        <div class="card-header d-flex justify-content-between align-items-center">
                                                             <h6 class="text-primary fw-bold m-3">Средний балл за тесты: {{ average_test_score }}</h6>
                                                         </div>
                                                         <div class="card-body">
@@ -154,6 +157,41 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                            <script>
+
+                                                var ctx = document.getElementById('testScoresChart').getContext('2d');
+
+                                                var lessonsTitles = {{ lessons_titles|safe }};
+                                                var testScores = {{ test_scores|safe }};
+
+                                                var data = {
+                                                    labels: lessonsTitles,
+                                                    datasets: [{
+                                                        label: 'Баллы за тесты',
+                                                        data: testScores,
+                                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                                        borderWidth: 1
+                                                    }]
+                                                };
+
+                                                var options = {
+                                                    scales: {
+                                                        y: {
+                                                            beginAtZero: true,
+                                                            max: 100 // Установите максимальное значение по оси Y (если нужно)
+                                                        }
+                                                    }
+                                                };
+
+                                                var myChart = new Chart(ctx, {
+                                                    type: 'bar',
+                                                    data: data,
+                                                    options: options
+                                                });
+                                            </script>
+
                                         </div>
                                     </div>
                                 </div>

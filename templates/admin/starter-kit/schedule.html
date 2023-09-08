@@ -146,7 +146,7 @@
                         </div>
                         {% if user_role == 'admin' %}
                         <div class="text-center mt-4">
-                            <a href="#" class="btn btn-primary">Добавить расписание</a>
+                            <a href="{% url 'users:admin:schedule:add_schedule' %}" class="btn btn-primary">Добавить расписание</a>
                         </div>
                         {% endif %}
                     </div>

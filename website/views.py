@@ -1,11 +1,31 @@
+import telebot
 from django.shortcuts import render
 from django.views import View
+
+from website.models import Contact
+from workbench import settings
 
 
 class WebSiteView(View):
     template_name = 'website/index.html'
 
     def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        name = request.POST.get('name')
+        phone_number = request.POST.get('phone_number')
+        message = request.POST.get('message')
+
+        # Сохранение данных в базе данных
+        contact = Contact(name=name, phone_number=phone_number, message=message)
+        contact.save()
+
+        bot = telebot.TeleBot(settings.TELEGRAM_BOT_TOKEN)
+        chat_id = settings.TELEGRAM_CHAT_ID
+        message_text = f"❕Новая заявка❕\n\n⚜️Имя:{name}.\n\n⚜️Телефон: {phone_number}\n\n⚜️Сообщение: {message}"
+        bot.send_message(chat_id, message_text)
+
         return render(request, self.template_name)
 
 
@@ -22,11 +42,43 @@ class ContactsView(View):
     def get(self, request):
         return render(request, self.template_name)
 
+    def post(self, request):
+        name = request.POST.get('name')
+        phone_number = request.POST.get('phone_number')
+        message = request.POST.get('message')
+
+        # Сохранение данных в базе данных
+        contact = Contact(name=name, phone_number=phone_number, message=message)
+        contact.save()
+
+        bot = telebot.TeleBot(settings.TELEGRAM_BOT_TOKEN)
+        chat_id = settings.TELEGRAM_CHAT_ID
+        message_text = f"❕Новая заявка❕\n\n⚜️Имя:{name}.\n\n⚜️Телефон: {phone_number}\n\n⚜️Сообщение: {message}"
+        bot.send_message(chat_id, message_text)
+
+        return render(request, self.template_name)
+
 
 class Collaboration(View):
     template_name = 'website/collaboration.html'
 
     def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        name = request.POST.get('name')
+        phone_number = request.POST.get('phone_number')
+        message = request.POST.get('message')
+
+        # Сохранение данных в базе данных
+        contact = Contact(name=name, phone_number=phone_number, message=message)
+        contact.save()
+
+        bot = telebot.TeleBot(settings.TELEGRAM_BOT_TOKEN)
+        chat_id = settings.TELEGRAM_CHAT_ID
+        message_text = f"❕Новая заявка❕\n\n⚜️Имя:{name}.\n\n⚜️Телефон: {phone_number}\n\n⚜️Сообщение: {message}"
+        bot.send_message(chat_id, message_text)
+
         return render(request, self.template_name)
 
 

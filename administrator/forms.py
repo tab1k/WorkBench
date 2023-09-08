@@ -1,15 +1,16 @@
 from django import forms
 from courses.models import Course, Notification
-from users.models import User
+from users.models import User, Stream
 
 
 class StudentForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input'}))
     courses = forms.ModelMultipleChoiceField(queryset=Course.objects.all())
+    stream = forms.ModelChoiceField(queryset=Stream.objects.all(), required=False)
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'username', 'password', 'courses']
+        fields = ['first_name', 'last_name', 'email', 'username', 'password', 'courses', 'stream']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -19,6 +20,7 @@ class StudentForm(forms.ModelForm):
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['password'].widget.attrs['class'] = 'form-control'
         self.fields['courses'].widget.attrs['class'] = 'form-control'
+        self.fields['stream'].widget.attrs['class'] = 'form-select'  # Стилизуйте виджет выбора потока
 
 
 

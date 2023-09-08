@@ -171,7 +171,7 @@
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
           <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
-            <img src="{% static 'website/img/logo.svg' %}" width="47" alt="WorkBench">
+            <img src="{% static 'website/img/logo.png' %}" width="47" alt="WorkBench">
             WorkBench
           </a>
           <div id="navbarNav" class="offcanvas offcanvas-end">
@@ -181,7 +181,7 @@
             </div>
             <div class="offcanvas-body">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+                <li class="nav-item ">
                   <a href="/" class="nav-link">Главная</a>
                 </li>
                 <li class="nav-item">
@@ -198,12 +198,37 @@
                 </li>
               </ul>
             </div>
-            <div class="offcanvas-header border-top">
-              <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
-                <i class="bx bx-log-in fs-5"></i>
-                &nbsp;Войти
-              </a>
-            </div>
+            {% if user.is_authenticated %}
+              {% if user.role == "student" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:student:student' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет студента
+                  </a>
+                </div>
+              {% elif user.role == "curator" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:curator:curator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет ментора
+                  </a>
+                </div>
+              {% elif user.role == "admin" %}
+                <div class="offcanvas-header border-top">
+                  <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                    <i class="bx bx-log-in fs-5"></i>
+                    &nbsp;Кабинет администратора
+                  </a>
+                </div>
+              {% endif %}
+            {% else %}
+              <div class="offcanvas-header border-top">
+                <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                  <i class="bx bx-log-in fs-5"></i>
+                  &nbsp;Войти
+                </a>
+              </div>
+            {% endif %}
           </div>
           <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
             <input type="checkbox" class="form-check-input" id="theme-mode">
@@ -213,10 +238,29 @@
           <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a href="{% url 'users:login' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
-            <i class="bx bx-log-in fs-5"></i>
-            &nbsp;Войти
-          </a>
+          {% if user.is_authenticated %}
+            {% if user.role == "student" %}
+              <a href="{% url 'users:student:student' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет студента
+              </a>
+            {% elif user.role == "curator" %}
+              <a href="{% url 'users:curator:curator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет ментора
+              </a>
+            {% elif user.role == "admin" %}
+              <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                <i class="bx bx-log-in fs-5"></i>
+                &nbsp;Кабинет администратора
+              </a>
+            {% endif %}
+          {% else %}
+            <a href="{% url 'users:login' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+              <i class="bx bx-log-in fs-5"></i>
+              &nbsp;Войти
+            </a>
+          {% endif %}
         </div>
       </header>
 
@@ -243,7 +287,7 @@
           <!-- Badges -->
           <div class="d-flex pt-3 pb-4 py-sm-4 pt-lg-5">
             <span class="badge bg-success fs-sm me-2">Большая продаваемость</span>
-            <a href="#" class="badge bg-white text-nav fs-sm text-decoration-none"> Веб-Разработка</a>
+            <a href="{% url 'website:courses' %}" class="badge bg-white text-nav fs-sm text-decoration-none"> Веб-Разработка</a>
           </div>
 
           <!-- Title -->
@@ -308,8 +352,8 @@
                         Сертификат об окончании курса, подтверждающий ваши достижения.
                       </li>
                     </ul>
-                    <div class="h2 d-flex align-items-center mb-4">$28.99<del class="text-muted fs-xl fw-normal ms-2">49.99</del></div>
-                    <a href="portfolio-single-course.html#" class="btn btn-primary btn-lg shadow-primary">Join the course</a>
+                    <div class="h2 d-flex align-items-center mb-4">от 20.990 тг.<del class="text-muted fs-xl fw-normal ms-2">от 25.990 тг.</del></div>
+                    <a href="portfolio-single-course.html#" class="btn btn-primary btn-lg shadow-primary">Присоединиться</a>
                   </div>
                 </div>
               </div>
@@ -317,7 +361,7 @@
           </aside>
 
           <!-- Content -->
-          <div class="col-xl-7 col-lg-8 col-md-7 order-md-1 mb-5">
+          <div class="col-xl-7 col-lg-8 col-md-7 order-md-1 mb-5" style="margin-top: 70px;">
             <h2 class="h1 pb-md-2 pb-lg-3">Описание курса</h2>
             <p class="pb-4 mb-3">Наш курс Fullstack Веб-Разработки - это идеальное решение для тех, кто хочет стать экспертом в создании веб-приложений с нуля. Мы предлагаем глубокое и всеобъемлющее обучение, которое охватывает ключевые технологии, такие как Python, Django, Bootstrap, HTML, CSS и JavaScript. Этот курс поможет вам освоить фундаментальные навыки и концепции, необходимые для разработки полноценных веб-приложений. Мы предлагаем практический опыт и множество проектов, чтобы вы могли применить свои знания на практике и построить впечатляющее портфолио. Присоединяйтесь к нам и начните свой путь к карьере в веб-разработке.</p>
             <h3 class="mb-4">Что вы изучите?</h3>
@@ -414,21 +458,28 @@
       <!-- Course author -->
       <section class="container py-lg-4 py-xl-5 mt-3 mb-5">
         <div class="row g-0 bg-dark bg-repeat-0 bg-position-center border rounded-3 overflow-hidden" style="background-image: url('{% static 'website/img/portfolio/courses/author-pattern.svg' %}');">
-          <div class="col-md-5 bg-repeat-0 bg-position-top-center bg-size-cover" style="background-image: url('{% static 'website/img/portfolio/courses/author.jpg' %}'); min-height: 350px;"></div>
+          <div class="col-md-5 bg-repeat-0 bg-position-top-center bg-size-cover" style="background-image: url('{% static 'website/img/portfolio/courses/dulat.jpg' %}'); min-height: 350px;"></div>
           <div class="col-md-7 py-xl-5 px-4">
             <div class="py-5 mx-auto" style="max-width: 530px;">
-              <div class="fs-xl text-light opacity-50 mb-2">Учись у лучших</div>
-              <h2 class="h1 text-light mb-4">Табигат Карбаев</h2>
-              <p class="text-light opacity-70 pb-4">Dolor ipsum amet cursus quisque porta adipiscing. Lorem convallis malesuada sed maecenas. Ac dui at vitae mauris cursus in nullam porta sem. Quis pellentesque elementum ac bibendum. Nunc aliquam in tortor facilisis. Vulputate eget risus, metus phasellus. Pellentesque faucibus amet, eleifend diam quam condimentum convallis ultricies placerat. Duis habitasse placerat amet, odio pellentesque rhoncus, feugiat at. Eget pellentesque tristique felis magna fringilla.</p>
-              <div class="d-flex flex-column flex-sm-row">
-                <a href="portfolio-single-course.html#" class="btn btn-danger me-sm-4 mb-3 mb-sm-0">
-                  <i class="bx bxl-youtube fs-xl me-2"></i>
-                  240k subscribers
-                </a>
-                <a href="portfolio-single-course.html#" class="btn btn-info">
-                  <i class="bx bxl-facebook-square fs-xl me-2"></i>
-                  180k followers
-                </a>
+              <h2>
+                  Дорогие студенты!
+              </h2>
+              <p>
+                  Путь к успеху и самореализации — это нелегкий и часто изогнутый путь. Он требует усилий, терпения и постоянной самомотивации. Но помните, что каждый шаг, каждое усилие и каждое преодоленное препятствие подводят вас ближе к вашей мечте.
+              </p>
+              <p>
+                  Не бойтесь вызовов и не отступайтесь перед трудностями. Каждая трудность — это возможность для вас стать сильнее. Помните, что успех приходит к тем, кто не сдаётся, кто стремится к самосовершенствованию и готов преодолевать все преграды.
+              </p>
+              <p>
+                  Вы — будущее, и ваша учеба в WorkBench — это первый шаг на пути к вашим мечтам. Верьте в себя, цените каждый опыт и никогда не забывайте, что ваши усилия сегодня определяют вашу успешную карьеру завтра.
+              </p>
+              <p>
+                  Удачи вам на вашем пути!
+              </p>
+              <p>
+                  С уважением,<br>
+                  Дулат Медер
+              </p>
               </div>
             </div>
           </div>
@@ -474,7 +525,7 @@
                       <i class="bx bxs-quote-left"></i>
                     </span>
                     <blockquote class="card-body pb-3 mb-0">
-                      <p class="mb-0">Id mollis consectetur congue egestas egestas suspendisse blandit justo. Tellus augue commodo id quis tempus etiam pulvinar at maecenas.</p>
+                      <p class="mb-0">Этот курс помог мне превратить мою страсть к программированию в реальное умение. Менторы здесь исключительно компетентны и всегда готовы помочь.</p>
                     </blockquote>
                     <div class="card-footer border-0 text-nowrap pt-0">
                       <i class="bx bxs-star text-warning"></i>
@@ -485,10 +536,12 @@
                     </div>
                   </div>
                   <figcaption class="d-flex align-items-center ps-4 pt-4">
-                    <img src="assets/img/avatar/03.jpg" width="48" class="rounded-circle" alt="Fannie Summers">
+                    <img src="{% static 'website/img/users.avif' %}" width="48" class="rounded-circle" alt="Fannie Summers">
                     <div class="ps-3">
-                      <h6 class="fs-sm fw-semibold mb-0">Fannie Summers</h6>
-                      <span class="fs-xs text-muted">Designer</span>
+                      <h6 class="fs-sm fw-semibold mb-0">
+                      </h6>
+                      <h6 class="fs-sm fw-semibold mb-0">Руслан Айтимов</h6>
+
                     </div>
                   </figcaption>
                 </figure>
@@ -502,7 +555,7 @@
                       <i class="bx bxs-quote-left"></i>
                     </span>
                     <blockquote class="card-body pb-3 mb-0">
-                      <p class="mb-0">Phasellus luctus nisi id orci condimentum, at cursus nisl vestibulum. Orci varius natoque penatibus et magnis dis parturient montes.</p>
+                      <p class="mb-0">Самое лучшее в этом курсе - это практический опыт. Мы создаем реальные проекты с самого начала и учимся решать реальные задачи.</p>
                     </blockquote>
                     <div class="card-footer border-0 text-nowrap pt-0">
                       <i class="bx bxs-star text-warning"></i>
@@ -513,10 +566,9 @@
                     </div>
                   </div>
                   <figcaption class="d-flex align-items-center ps-4 pt-4">
-                    <img src="assets/img/avatar/02.jpg" width="48" class="rounded-circle" alt="Robert Fox">
+                    <img src="{% static 'website/img/users.avif' %}" width="48" class="rounded-circle" alt="Robert Fox">
                     <div class="ps-3">
-                      <h6 class="fs-sm fw-semibold mb-0">Robert Fox</h6>
-                      <span class="fs-xs text-muted">QA Engineer</span>
+                      <h6 class="fs-sm fw-semibold mb-0">Алишер Садыков</h6>
                     </div>
                   </figcaption>
                 </figure>
@@ -530,7 +582,7 @@
                       <i class="bx bxs-quote-left"></i>
                     </span>
                     <blockquote class="card-body pb-3 mb-0">
-                      <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum odio, bibendum ornare mi at, efficitur urna.</p>
+                      <p class="mb-0">Здесь очень хорошо организованная команда. Я никогда не чувствовала себя потерянной, и всегда была возможность обсудить свои вопросы.</p>
                     </blockquote>
                     <div class="card-footer border-0 text-nowrap pt-0">
                       <i class="bx bxs-star text-warning"></i>
@@ -541,10 +593,9 @@
                     </div>
                   </div>
                   <figcaption class="d-flex align-items-center ps-4 pt-4">
-                    <img src="assets/img/avatar/04.jpg" width="48" class="rounded-circle" alt="Annette Black">
+                    <img src="{% static 'website/img/users.avif' %}" width="48" class="rounded-circle" alt="Annette Black">
                     <div class="ps-3">
-                      <h6 class="fs-sm fw-semibold mb-0">Annette Black</h6>
-                      <span class="fs-xs text-muted">Project Manager</span>
+                      <h6 class="fs-sm fw-semibold mb-0">Марина Филатова</h6>
                     </div>
                   </figcaption>
                 </figure>
@@ -558,7 +609,7 @@
                       <i class="bx bxs-quote-left"></i>
                     </span>
                     <blockquote class="card-body pb-3 mb-0">
-                      <p class="mb-0">Etiam augue ante, imperdiet et nunc sed, bibendum faucibus est. Suspendisse egestas facilisis erat eu eleifend.</p>
+                      <p class="mb-0">Информация на курсе всегда актуальная. Это действительно важно в мире технологий, который постоянно меняется.</p>
                     </blockquote>
                     <div class="card-footer border-0 text-nowrap pt-0">
                       <i class="bx bxs-star text-warning"></i>
@@ -569,10 +620,9 @@
                     </div>
                   </div>
                   <figcaption class="d-flex align-items-center ps-4 pt-4">
-                    <img src="assets/img/avatar/05.jpg" width="48" class="rounded-circle" alt="Jerome Bell">
+                    <img src="{% static 'website/img/users.avif' %}" width="48" class="rounded-circle" alt="Jerome Bell">
                     <div class="ps-3">
-                      <h6 class="fs-sm fw-semibold mb-0">Jerome Bell</h6>
-                      <span class="fs-xs text-muted">Developer</span>
+                      <h6 class="fs-sm fw-semibold mb-0">Альбина Аслановна</h6>
                     </div>
                   </figcaption>
                 </figure>
@@ -586,7 +636,7 @@
                       <i class="bx bxs-quote-left"></i>
                     </span>
                     <blockquote class="card-body pb-3 mb-0">
-                      <p class="mb-0">Pellentesque finibus congue egestas egestas suspendisse blandit justo. Tellus augue commodo id quis tempus etiam pulvinar at maecenas.</p>
+                      <p class="mb-0">Я училась на других курсах, но этот действительно выделяется. Он гораздо более интенсивный и практический.</p>
                     </blockquote>
                     <div class="card-footer border-0 text-nowrap pt-0">
                       <i class="bx bxs-star text-warning"></i>
@@ -597,10 +647,9 @@
                     </div>
                   </div>
                   <figcaption class="d-flex align-items-center ps-4 pt-4">
-                    <img src="assets/img/avatar/01.jpg" width="48" class="rounded-circle" alt="Albert Flores">
+                    <img src="{% static 'website/img/users.avif' %}" width="48" class="rounded-circle" alt="Albert Flores">
                     <div class="ps-3">
-                      <h6 class="fs-sm fw-semibold mb-0">Albert Flores</h6>
-                      <span class="fs-xs text-muted">PR Director</span>
+                      <h6 class="fs-sm fw-semibold mb-0">Георгий Васильев</h6>
                     </div>
                   </figcaption>
                 </figure>
@@ -614,7 +663,7 @@
                       <i class="bx bxs-quote-left"></i>
                     </span>
                     <blockquote class="card-body pb-3 mb-0">
-                      <p class="mb-0">Nulla volutpat consectetur congue egestas egestas uni suspendisse blandit parturient.</p>
+                      <p class="mb-0">Очень рад, что выбрал этот курс. Я уверен, что после его окончания буду готов к карьере в разработке.</p>
                     </blockquote>
                     <div class="card-footer border-0 text-nowrap pt-0">
                       <i class="bx bxs-star text-warning"></i>
@@ -625,10 +674,9 @@
                     </div>
                   </div>
                   <figcaption class="d-flex align-items-center ps-4 pt-4">
-                    <img src="assets/img/avatar/06.jpg" width="48" class="rounded-circle" alt="Jenny Wilson">
+                    <img src="{% static 'website/img/users.avif' %}" width="48" class="rounded-circle" alt="Jenny Wilson">
                     <div class="ps-3">
-                      <h6 class="fs-sm fw-semibold mb-0">Jenny Wilson</h6>
-                      <span class="fs-xs text-muted">Marketing</span>
+                      <h6 class="fs-sm fw-semibold mb-0">Даниял Марсель</h6>
                     </div>
                   </figcaption>
                 </figure>
@@ -642,7 +690,7 @@
                       <i class="bx bxs-quote-left"></i>
                     </span>
                     <blockquote class="card-body pb-3 mb-0">
-                      <p class="mb-0">Vivamus iaculis facilisis pretium. Pellentesque vitae mi odio. Donec imperdiet pellentesque ipsum quis pharetra. Nullam dolor sem.</p>
+                      <p class="mb-0">Приятно видеть, как мой уровень навыков постоянно растет. Этот курс действительно вытягивает лучшее из меня.</p>
                     </blockquote>
                     <div class="card-footer border-0 text-nowrap pt-0">
                       <i class="bx bxs-star text-warning"></i>
@@ -653,10 +701,9 @@
                     </div>
                   </div>
                   <figcaption class="d-flex align-items-center ps-4 pt-4">
-                    <img src="assets/img/avatar/07.jpg" width="48" class="rounded-circle" alt="Cameron Williamson">
+                    <img src="{% static 'website/img/users.avif' %}" width="48" class="rounded-circle" alt="Cameron Williamson">
                     <div class="ps-3">
-                      <h6 class="fs-sm fw-semibold mb-0">Cameron Williamson</h6>
-                      <span class="fs-xs text-muted">Illustrator</span>
+                      <h6 class="fs-sm fw-semibold mb-0">Улболсын Ерболаткызы</h6>
                     </div>
                   </figcaption>
                 </figure>
@@ -676,12 +723,11 @@
           <div class="col-md-5 mb-4 mb-md-0">
             <div class="card bg-dark h-100 p-lg-5">
               <div class="card-body p-lg-2">
-                <h2 class="h1 text-light">Still Have Any Questions?</h2>
-                <p class="fs-xl text-light opacity-70 mb-0">Check out the FAQs.</p>
+                <h2 class="h1 text-light">У вас возникли вопросы по этому курсу?</h2>
               </div>
               <div class="card-footer border-0 w-100 pt-0 p-4 p-lg-2">
-                <div class="h2 d-flex align-items-center text-light mb-4">$28.99<del class="fs-xl fw-normal opacity-70 ms-2">49.99</del></div>
-                <a href="portfolio-single-course.html#" class="btn btn-primary btn-lg shadow-primary">Join the course</a>
+                <div class="h2 d-flex align-items-center text-light mb-4">от 20.990 тг.<del class="fs-xl fw-normal opacity-70 ms-2">25.990 тг.</del></div>
+                <a href="{% url 'website:contacts' %}#" class="btn btn-primary btn-lg shadow-primary">Присоединиться</a>
               </div>
             </div>
           </div>
@@ -691,11 +737,49 @@
               <!-- Item -->
               <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
                 <h3 class="accordion-header">
-                  <button class="accordion-button shadow-none rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#q-1" aria-expanded="true" aria-controls="q-1">YouTube is full of free tutorials, videos and courses. Why should I take courses here?</button>
+                  <button class="accordion-button shadow-none rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#q-1" aria-expanded="true" aria-controls="q-1"><b>Какой план курса "Full-Stack Разработка"?</b></button>
                 </h3>
                 <div class="accordion-collapse collapse show" id="q-1" data-bs-parent="#faq">
                   <div class="accordion-body fs-sm pt-0">
-                    <p>Nunc duis id aenean gravida tincidunt eu, tempor ullamcorper. Viverra aliquam arcu, viverra et, cursus. Aliquet pretium cursus adipiscing gravida et consequat lobortis arcu velit. Nibh pharetra fermentum duis accumsan lectus non. Massa cursus molestie lorem scelerisque pellentesque.</p>
+                    <h4>План курса "FullStack Разработчик"</h4>
+                    <h5>Модуль 1: Введение в веб-разработку и основы программирования</h5>
+                    <ul>
+                        <li>Основы программирования с использованием Python.</li>
+                        <li>Основы структуры HTML и CSS.</li>
+                        <li>Основы JavaScript и взаимодействие с веб-страницами.</li>
+                        <li>Введение в базы данных и язык SQL.</li>
+                    </ul>
+
+                    <h5>Модуль 2: Front-End Разработка</h5>
+                    <ul>
+                        <li>Расширенное изучение HTML и CSS.</li>
+                        <li>JavaScript и библиотеки для создания интерактивных интерфейсов.</li>
+                        <li>Работа с Bootstrap.</li>
+                    </ul>
+
+                    <h5>Модуль 3: Back-End Разработка</h5>
+                    <ul>
+                        <li>Введение в серверную разработку с использованием Python.</li>
+                        <li>Фреймворк Django для создания веб-приложений.</li>
+                        <li>Работа с базами данных в Django.</li>
+                        <li>Создание API для взаимодействия между фронтендом и бэкендом.</li>
+                    </ul>
+
+                    <h5>Модуль 4: Разработка и деплой приложений</h5>
+                    <ul>
+                        <li>Введение в системы контроля версий (например, Git).</li>
+                        <li>Создание и тестирование веб-приложений.</li>
+                        <li>Контейнеризация с Docker.</li>
+                        <li>Деплой приложений с использованием Nginx и других инструментов.</li>
+                    </ul>
+
+                    <h5>Модуль 5: Курсовой проект и заключительные штрихи</h5>
+                    <ul>
+                        <li>Разработка курсовой работы - полноценного веб-приложения от начала до конца.</li>
+                        <li>Оптимизация и улучшение производительности приложения.</li>
+                        <li>Тестирование и отладка.</li>
+                        <li>Завершение и развертывание курсовой работы.</li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -703,11 +787,11 @@
               <!-- Item -->
               <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
                 <h3 class="accordion-header">
-                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-2" aria-expanded="false" aria-controls="q-2">What if I don't have any professional background?</button>
+                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-2" aria-expanded="false" aria-controls="q-2">Как долго длиться этот курс?</button>
                 </h3>
                 <div class="accordion-collapse collapse" id="q-2" data-bs-parent="#faq">
                   <div class="accordion-body fs-sm pt-0">
-                    <p>Nunc duis id aenean gravida tincidunt eu, tempor ullamcorper. Viverra aliquam arcu, viverra et, cursus. Aliquet pretium cursus adipiscing gravida et consequat lobortis arcu velit. Nibh pharetra fermentum duis accumsan lectus non. Massa cursus molestie lorem scelerisque pellentesque.</p>
+                    <p>12 месяцев.</p>
                   </div>
                 </div>
               </div>
@@ -715,11 +799,12 @@
               <!-- Item -->
               <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
                 <h3 class="accordion-header">
-                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-3" aria-expanded="false" aria-controls="q-3">How is this different from other courses on the market?</button>
+                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-3" aria-expanded="false" aria-controls="q-3">Смогу ли я устроиться на работу после этого курса?</button>
                 </h3>
                 <div class="accordion-collapse collapse" id="q-3" data-bs-parent="#faq">
                   <div class="accordion-body fs-sm pt-0">
-                    <p>Nunc duis id aenean gravida tincidunt eu, tempor ullamcorper. Viverra aliquam arcu, viverra et, cursus. Aliquet pretium cursus adipiscing gravida et consequat lobortis arcu velit. Nibh pharetra fermentum duis accumsan lectus non. Massa cursus molestie lorem scelerisque pellentesque.</p>
+                    <p>Конечно!</p>
+                    <p>В случае если курсовая работа вашей команды будет лучшей на вашем потоке, тогда мы сами устроим вашу команду на работу!  </p>
                   </div>
                 </div>
               </div>
@@ -727,11 +812,12 @@
               <!-- Item -->
               <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
                 <h3 class="accordion-header">
-                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-4" aria-expanded="false" aria-controls="q-4">How much time does it take to do my homework per week? What if I don't like it?</button>
+                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-4" aria-expanded="false" aria-controls="q-4">Что за курсовая работа?</button>
                 </h3>
                 <div class="accordion-collapse collapse" id="q-4" data-bs-parent="#faq">
                   <div class="accordion-body fs-sm pt-0">
-                    <p>Nunc duis id aenean gravida tincidunt eu, tempor ullamcorper. Viverra aliquam arcu, viverra et, cursus. Aliquet pretium cursus adipiscing gravida et consequat lobortis arcu velit. Nibh pharetra fermentum duis accumsan lectus non. Massa cursus molestie lorem scelerisque pellentesque.</p>
+                    <p>Курсовая работа - это аттестация под конец курса, во время обучения на определенном модуле менторы разобьют вас на команды.</p>
+                    <p>В конце, вы и ваша команда должны будете защитить свой проект, и получить подтверждение об окончании вашего курса.</p>
                   </div>
                 </div>
               </div>
@@ -739,136 +825,15 @@
               <!-- Item -->
               <div class="accordion-item border-0 rounded-3 shadow-sm">
                 <h3 class="accordion-header">
-                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-5" aria-expanded="false" aria-controls="q-5">Is there any kind of certificate of completion?</button>
+                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q-5" aria-expanded="false" aria-controls="q-5">Смогу ли я закончить курс?</button>
                 </h3>
                 <div class="accordion-collapse collapse" id="q-5" data-bs-parent="#faq">
                   <div class="accordion-body fs-sm pt-0">
-                    <p>Nunc duis id aenean gravida tincidunt eu, tempor ullamcorper. Viverra aliquam arcu, viverra et, cursus. Aliquet pretium cursus adipiscing gravida et consequat lobortis arcu velit. Nibh pharetra fermentum duis accumsan lectus non. Massa cursus molestie lorem scelerisque pellentesque.</p>
+                    <p>На этот вопрос точного ответа нет, но наша команда в обязательном порядке поспособствует тому чтобы вы прошли аттестацию!</p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-
-      <!-- Related courses (Carousel on narrow screens) -->
-      <section class="bg-secondary pt-5 pb-4 pb-lg-5">
-        <div class="container py-2 pt-lg-4 pb-lg-0">
-          <h2 class="h1 text-center pb-4">More courses like this</h2>
-          <div class="swiper mx-n2" data-swiper-options='{
-            "slidesPerView": 1,
-            "spaceBetween": 8,
-            "pagination": {
-              "el": ".swiper-pagination",
-              "clickable": true
-            },
-            "breakpoints": {
-              "560": {
-                "slidesPerView": 2
-              },
-              "1000": {
-                "slidesPerView": 3
-              }
-            }
-          }'>
-            <div class="swiper-wrapper">
-
-              <!-- Item -->
-              <div class="swiper-slide h-auto pb-3">
-                <article class="card h-100 border-0 shadow-sm mx-2">
-                  <div class="position-relative">
-                    <a href="portfolio-single-course.html#" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                    <a href="portfolio-single-course.html#" class="btn btn-icon btn-light bg-white border-white btn-sm rounded-circle position-absolute top-0 end-0 zindex-2 me-3 mt-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Save to Favorites">
-                      <i class="bx bx-bookmark"></i>
-                    </a>
-                    <img src="assets/img/portfolio/courses/02.jpg" class="card-img-top" alt="Image">
-                  </div>
-                  <div class="card-body pb-3">
-                    <h3 class="h5 mb-2">
-                      <a href="portfolio-single-course.html#">HTML, CSS, JavaScript Web Developer</a>
-                    </h3>
-                    <p class="fs-sm mb-2">By Jenny Wilson &amp; Marvin McKinney</p>
-                    <p class="fs-lg fw-semibold text-primary mb-0">$15.99</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
-                    <div class="d-flex align-items-center me-4">
-                      <i class="bx bx-time fs-xl me-1"></i>
-                      160 hours
-                    </div>
-                    <div class="d-flex align-items-center">
-                      <i class="bx bx-like fs-xl me-1"></i>
-                      92% (3.1K)
-                    </div>
-                  </div>
-                </article>
-              </div>
-
-              <!-- Item -->
-              <div class="swiper-slide h-auto pb-3">
-                <article class="card h-100 border-0 shadow-sm mx-2">
-                  <div class="position-relative">
-                    <a href="portfolio-single-course.html#" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                    <span class="badge bg-danger position-absolute top-0 start-0 zindex-2 mt-3 ms-3">Sale!</span>
-                    <a href="portfolio-single-course.html#" class="btn btn-icon btn-light bg-white border-white btn-sm rounded-circle position-absolute top-0 end-0 zindex-2 me-3 mt-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Save to Favorites">
-                      <i class="bx bx-bookmark"></i>
-                    </a>
-                    <img src="assets/img/portfolio/courses/03.jpg" class="card-img-top" alt="Image">
-                  </div>
-                  <div class="card-body pb-3">
-                    <h3 class="h5 mb-2">
-                      <a href="portfolio-single-course.html#">HTML, CSS, JavaScript Web Developer</a>
-                    </h3>
-                    <p class="fs-sm mb-2">By Robert Fox</p>
-                    <p class="text-muted mb-0"><span class="fs-lg fw-semibold text-danger me-2">$9.99</span><del>$44.99</del></p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
-                    <div class="d-flex align-items-center me-4">
-                      <i class="bx bx-time fs-xl me-1"></i>
-                      210 hours
-                    </div>
-                    <div class="d-flex align-items-center">
-                      <i class="bx bx-like fs-xl me-1"></i>
-                      98% (2.7K)
-                    </div>
-                  </div>
-                </article>
-              </div>
-
-              <!-- Item -->
-              <div class="swiper-slide h-auto pb-3">
-                <article class="card h-100 border-0 shadow-sm mx-2">
-                  <div class="position-relative">
-                    <a href="portfolio-single-course.html#" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                    <a href="portfolio-single-course.html#" class="btn btn-icon btn-light bg-white border-white btn-sm rounded-circle position-absolute top-0 end-0 zindex-2 me-3 mt-3" data-bs-toggle="tooltip" data-bs-placement="left" title="Save to Favorites">
-                      <i class="bx bx-bookmark"></i>
-                    </a>
-                    <img src="assets/img/portfolio/courses/09.jpg" class="card-img-top" alt="Image">
-                  </div>
-                  <div class="card-body pb-3">
-                    <h3 class="h5 mb-2">
-                      <a href="portfolio-single-course.html#">Learn JMETER from Scratch on Live Apps-Performance Testing</a>
-                    </h3>
-                    <p class="fs-sm mb-2">By Jenny Wilson</p>
-                    <p class="fs-lg fw-semibold text-primary mb-0">$14.50</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
-                    <div class="d-flex align-items-center me-4">
-                      <i class="bx bx-time fs-xl me-1"></i>
-                      120 hours
-                    </div>
-                    <div class="d-flex align-items-center">
-                      <i class="bx bx-like fs-xl me-1"></i>
-                      92% (3.8K)
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </div>
-
-            <!-- Pagination (bullets) -->
-            <div class="swiper-pagination position-relative pt-2 pt-sm-3 mt-4"></div>
           </div>
         </div>
       </section>

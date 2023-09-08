@@ -13,6 +13,7 @@ urlpatterns = [
     path('notifications/', StudentNotificationListView.as_view(), name='student_notifications'),
     path('messages/', StudentMessagesListView.as_view(), name='student_messages'),
     path('send_response/<int:comment_id>/', SendResponseView.as_view(), name='send_response'),
+    path('student_notifications', StudentNotificationListView.as_view(), name='student_notifications'),
     path('logout/', LogoutView.as_view(), name='logout'),
 
     # Другие пути для пользователей...
