@@ -314,6 +314,74 @@ class SearchView(View):
 
 
 
+
+# ДОБАВЛЕНИЕ КУРСА
+
+from django.shortcuts import render, redirect
+from django.views import View
+from courses.models import *
+from .forms import *
+
+class AddCourseView(View):
+    def get(self, request):
+        # Retrieve all available course types
+        course_types = CourseType.objects.all()
+
+        # Create an empty form instance
+        form = CourseForm()
+
+        return render(request, 'admin/starter-kit/add_course.html', {'course_types': course_types, 'form': form})
+
+    def post(self, request):
+        # Create a form instance with POST data
+        form = CourseForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            # Save the course object to the database
+            course = form.save()
+
+            # Redirect to the course detail page or any other desired URL
+            return render(request, 'admin/starter-kit/index.html', {'form': form, 'success_message': 'Course added successfully'})
+
+        # If the form is not valid, re-render the form with errors
+        return render(request, 'admin/starter-kit/add_course.html', {'form': form})
+
+
+
+from django.views import View
+from .forms import ModuleForm
+
+class AddModuleView(View):
+    def get(self, request):
+        # Retrieve all available course types
+        course_types = CourseType.objects.all()
+
+        # Create an empty form instance
+        form = ModuleForm()
+
+        return render(request, 'admin/starter-kit/add_module.html', {'course_types': course_types, 'form': form})
+
+    def post(self, request):
+        # Create a form instance with POST data
+        form = ModuleForm(request.POST)
+
+        if form.is_valid():
+            # Save the module object to the database
+            module = form.save()
+
+            # Redirect to a success page or any other desired URL
+            return render(request, 'admin/starter-kit/add_module.html', {'form': form, 'success_message': 'Module added successfully'})
+
+        # If the form is not valid, re-render the form with errors
+        return render(request, 'admin/starter-kit/add_module.html', {'form': form})
+
+
+
+
+
+
+
+
 class LogoutView(View):
     def get(self, request):
         logout(request)

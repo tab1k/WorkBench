@@ -25,4 +25,7 @@ urlpatterns = [
     path('create-notification/', NotificationCreateView.as_view(), name='create_notification'),
     path('search/', SearchView.as_view(), name='search'),
 
+    path('add_course/', AddCourseView.as_view(), name='add_course'),
+    path('add_module', AddModuleView.as_view(), name='add_module'),
+
 ]

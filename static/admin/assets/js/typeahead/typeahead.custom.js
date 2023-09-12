@@ -107,12 +107,12 @@
   var nbaTeams = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('team'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: '../assets/js/typeahead/data/nba.json'
+    prefetch: 'static/admin/assets/js/typeahead/data/nba.json'
   });
   var nhlTeams = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('team'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: '../assets/js/typeahead/data/nhl.json'
+    prefetch: 'static/admin/assets/js/typeahead/data/nhl.json'
   });
   $('#multiple-datasets .typeahead').typeahead({
         highlight: true

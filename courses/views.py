@@ -74,14 +74,12 @@ class Courses(View):
             template_name = 'student/starter-kit/courses.html'
             courses = Course.objects.filter(students=request.user)
 
-        # Get all comments (both student and curator comments) for the current user
         all_comments = Comment.objects.filter(Q(user=request.user) | Q(curator=request.user))
 
-        # Separate student and curator comments
         student_comments = all_comments.filter(is_student_comment=True)
         curator_comments = all_comments.filter(is_student_comment=False)
 
-        # Get the current date and time in the Asia/Almaty timezone
+
         current_time = localtime(now())
 
         return render(request, template_name, {

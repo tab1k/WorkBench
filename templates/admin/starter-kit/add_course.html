@@ -1,10 +1,67 @@
+{% extends 'admin/starter-kit/base.html' %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить курс</title>
 </head>
 <body>
-$END$
+    {% block content %}
+    <div class="page-body">
+        <div class="container-fluid">
+            <div class="page-title">
+                <h1 class="mt-2">Добавить курс</h1>
+            </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+
+                    <div class="form-group">
+                        {{ form.title.label_tag }}
+                        {{ form.title }}
+                        {{ form.title.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.description.label_tag }}
+                        {{ form.description }}
+                        {{ form.description.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.duration.label_tag }}
+                        {{ form.duration }}
+                        {{ form.duration.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.course_type.label_tag }}
+                        {{ form.course_type }}
+                        {{ form.course_type.errors }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.curators.label_tag }}
+                        {{ form.curators }}
+                        {{ form.curators.errors }}
+                    </div>
+
+
+                    <div class="form-group">
+                        {{ form.image.label_tag }}
+                        {{ form.image }}
+                        {{ form.image.errors }}
+                    </div>
+
+                    <div class="mt-4 mb-4">
+                        <button class="btn btn-primary btn-sm" type="submit">Добавить</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+    {% endblock %}
 </body>
 </html>
