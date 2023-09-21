@@ -89,14 +89,15 @@
                   {% for comment in curator_comments|dictsortreversed:"timestamp"|slice:"0:3" %}
                   <li class="notification-item">
                     <div class="media">
-                      <img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/profile.png' %}" alt="Профиль">
+                      <img class="img-fluid rounded-circle me-3" src="{% if student.image and student.image.url %}{{ student.image.url }}{% else %}{% static 'admin/assets/images/user.png' %}{% endif %}" alt="Профиль">
                       <div class="status-circle online"></div>
+                      <a href="{% url 'users:student:courses:lesson_view' comment.lesson.id %}">
                       <div class="media-body">
                         <span class="notification-title">{{ comment.curator.get_full_name }}</span>
-                        <p class="notification-text">{{ comment.curator_response }}</p>
-                        <p class="notification-text">Урок - {{ comment.lesson }}</p>
+                        <p class="notification-text">- {{ comment.curator_response }}</p>
                         <p class="f-12 font-success notification-timestamp">{{ comment.timestamp }}</p>
                       </div>
+                      </a>
                     </div>
                   </li>
                   {% endfor %}
@@ -104,7 +105,7 @@
               </li>
               <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
               <li class="profile-nav onhover-dropdown p-0 me-0">
-                <div class="media profile-media"><img class="b-r-10" style="width: 40px;" src="{% if student.image and student.image.url %}{{ student.image.url }}{% else %}{% static 'admin/assets/images/profile.png' %}{% endif %}" alt="">
+                <div class="media profile-media"><img class="b-r-10" style="width: 40px;" src="{% if student.image and student.image.url %}{{ student.image.url }}{% else %}{% static 'admin/assets/images/user.png' %}{% endif %}" alt="">
                   <div class="media-body"><span>{{ user.first_name}} {{ user.last_name }}</span>
                     <p class="mb-0 font-roboto">Студент <i class="middle fa fa-angle-down"></i></p>
                   </div>
@@ -127,7 +128,7 @@
               <div class="back-btn"><i class="fa fa-angle-left"></i></div>
               <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
             </div>
-            <div class="logo-icon-wrapper"><a href="index.html"><img style="height: 30px;" class="img-fluid" src="{% static 'website/img/logo.png' %}" alt=""></a></div>
+            <div class="logo-icon-wrapper"><a href="index.html"><img style="height: 30px;" class="img-fluid" src="{% if student.image and student.image.url %}{{ student.image.url }}{% else %}{% static 'admin/assets/images/user.png' %}{% endif %}" alt=""></a></div>
             <nav class="sidebar-main">
               <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
               <div id="sidebar-menu">

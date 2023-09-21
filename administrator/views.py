@@ -124,7 +124,7 @@ class AddStudent(View):
             student_group = Group.objects.get(name='Студенты')
             student.groups.add(student_group)
 
-            return render(request, 'users/admin/student.html', {'student': student})
+            return render(request, 'admin/starter-kit/students.html', {'student': student})
         return render(request, self.template_name, {'form': form})
 
 

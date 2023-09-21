@@ -1,40 +1,24 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, redirect
-from django.template.loader import render_to_string
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.timezone import localtime, now
-from django.http import JsonResponse, HttpResponseForbidden
+from django.http import JsonResponse
 from comments.forms import CommentForm
 from comments.models import Comment
-from .models import Course, Module, CourseType, Lesson
-from django.views import View
-from users.models import User
+from .models import Course, Module, CourseType
 from courses.models import Lesson
 from tests.models import TestResult
-import matplotlib.pyplot as plt
 from django.db.models import Count
-from reportlab.pdfgen import canvas
-from django.http import HttpResponse
-from io import BytesIO
 from django.http import HttpResponseForbidden
 from django.http import HttpResponse
 from django.views import View
 from django.shortcuts import get_object_or_404
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from io import BytesIO
-from urllib.request import urlopen
 from users.models import User
 
-
-
-
-
-# Представление для отображения типов курсов
 
 class CoursesByType(LoginRequiredMixin, View):
     login_url = 'users:login'

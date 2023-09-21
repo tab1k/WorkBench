@@ -100,7 +100,7 @@
                     <div class="card-body">
                       <div class="media align-items-center">
                         <div class="media-body right-chart-content">
-                          <h4>{{ notification.course }}<span class="new-box">{{ notification.timestamp }}</span></h4><span>{{ notification.message }}</span>
+                          <h4>{{ notification.course }}<span class="new-box">{{ notification.timestamp }}</span></h4><span>{{ notification.message|truncatechars:40 }}</span>
                         </div>
                       </div>
                     </div>
@@ -121,7 +121,7 @@
                           {% if notifications %}
                               {% for notification in notifications %}
                               <div class="news-update">
-                                  <h6>{{ notification.message }}</h6><span>{{ notification.course }}</span>
+                                  <h6>{{ notification.message|truncatechars:40 }}</h6><span>{{ notification.course }}</span>
                                   <p>{{ notification.timestamp }}</p>
                               </div>
                               {% endfor %}

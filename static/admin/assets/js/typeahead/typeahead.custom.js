@@ -72,7 +72,7 @@
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('team'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     identify: function(obj) { return obj.team; },
-    prefetch: '../assets/js/typeahead/data/nfl.json'
+    prefetch: ''
   });
   function nflTeamsWithDefaults(q, sync) {
     if (q === '') {

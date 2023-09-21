@@ -86,7 +86,7 @@
                   </li>
                   {% for contact in contacts|slice:3 %}
                   <li>
-                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/profile.png' %}" alt="">
+                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/user.png' %}" alt="">
                       <div class="status-circle online"></div>
                       <div class="media-body"><span>{{ contact.name }}</span>
                         <p>{{ contact.message }}</p>
@@ -100,7 +100,7 @@
               </li>
               <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
               <li class="profile-nav onhover-dropdown p-0 me-0">
-                <div class="media profile-media"><img class="b-r-10" style="width: 40px;" src="{% if user.image and user.image.url %}{{ user.image.url }}{% else %}{% static 'admin/assets/images/profile.png' %}{% endif %}" alt="">
+                <div class="media profile-media"><img class="b-r-10" style="width: 40px;" src="{% if user.image and user.image.url %}{{ user.image.url }}{% else %}{% static 'admin/assets/images/user.png' %}{% endif %}" alt="">
                   <div class="media-body"><span>{{ user.first_name}} {{ user.last_name }}</span>
                     <p class="mb-0 font-roboto">Куратор <i class="middle fa fa-angle-down"></i></p>
                   </div>

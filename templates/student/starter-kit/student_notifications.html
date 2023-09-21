@@ -37,6 +37,7 @@
     <link id="color" rel="stylesheet" href="{% static 'admin/assets/css/color-1.css' %}" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/responsive.css' %}">
+
   </head>
   <body onload="startTime()">
     <!-- tap on top starts-->
@@ -68,47 +69,65 @@
             </div>
           <!-- Container-fluid starts-->
           <div class="container-fluid">
-              <div class="container mt-5">
-                  {% if notifications %}
-                      <div class="row">
-                          {% for notification in notifications %}
-                              <div class="col-md-4 mb-4">
-                                  <div class="card card-hover" style="transition: transform 0.2s; cursor: pointer;" data-toggle="modal" data-target="#myModal{{ notification.id }}">
-                                      <div class="card-header bg-primary text-white">
-                                          <h5 class="card-title">{{ notification.course }}</h5>
-                                      </div>
-                                      <div class="card-body">
-                                          <p class="card-text">{{ notification.message }}</p>
-                                          <p class="card-text"><small class="text-muted">Дата создания: {{ notification.timestamp }}</small></p>
-                                      </div>
-                                  </div>
-                              </div>
+            <div class="container mt-5">
+                {% if notifications %}
+                <div class="row">
+                    {% for notification in notifications %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card card-hover" style="transition: transform 0.2s; cursor: pointer;" data-toggle="modal" data-target="#myModal{{ notification.id }}">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="card-title">{{ notification.course }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ notification.message|truncatechars:25 }}</p>
+                                <p class="card-text"><small class="text-muted">Дата создания: {{ notification.timestamp }}</small></p>
+                            </div>
+                        </div>
+                    </div>
 
-                              <!-- Модальное окно -->
-                              <div class="modal fade" id="myModal{{ notification.id }}">
-                                  <div class="modal-dialog">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <h4 class="modal-title">{{ notification.course }}</h4>
-                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                          </div>
-                                          <div class="modal-body">
-                                              <p>{{ notification.message }}</p>
-                                              <p><small class="text-muted">Дата создания: {{ notification.timestamp }}</small></p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          {% endfor %}
-                      </div>
-                  {% else %}
-                      <div class="no-notifications text-center py-5">
-                          <h3 class="mb-3">Нет уведомлений</h3>
-                          <img src="{% static 'website/img/tl.webp' %}" style="height: 150px;" alt="Нет заявок">
-                      </div>
-                  {% endif %}
-              </div>
-          </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="no-notifications text-center py-5">
+                    <h3 class="mb-3">Нет уведомлений</h3>
+                    <img src="{% static 'website/img/tl.webp' %}" style="height: 150px;" alt="Нет заявок">
+                </div>
+                {% endif %}
+
+                    {% for notification in notifications %}
+                    <div class="modal fade" id="myModal{{ notification.id }}" style="z-index: 1050;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary text-white">
+                                    <h4 class="modal-title">{{ notification.course }}</h4>
+                                    <button type="button" class="close custom-close-button btn " style="border-radius: 15px; border: 1px solid white; color: white;" data-dismiss="modal" aria-label="Закрыть">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" style="overflow-y: scroll; max-height: 700px;">
+                                    <p>{{ notification.message }}</p>
+                                    <p><small class="text-muted">Дата создания: {{ notification.timestamp }}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- JavaScript для открытия модального окна -->
+                    <script>
+                        // Эта функция будет вызываться при клике на карточку уведомления
+                        function openModal{{ notification.id }}() {
+                            $('#myModal{{ notification.id }}').modal('show'); // Показать модальное окно
+                        }
+                    </script>
+
+                </div>
+
+
+            </div>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        </div>
 
 
           <!-- Container-fluid Ends-->
