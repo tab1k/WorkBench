@@ -82,7 +82,7 @@ class Lesson(models.Model):
 
 class Notification(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    students = models.ManyToManyField(get_user_model(), blank=True, null=True, related_name='notifications')
+    students = models.ManyToManyField(get_user_model(), blank=True, related_name='notifications')
     file = models.FileField(upload_to='notifications/', blank=True, null=True)
     message = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
