@@ -171,7 +171,7 @@
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
           <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
-            <img src="{% static 'website/img/logo.png' %}" width="47" alt="WorkBench">
+            <img src="{% static 'website/img/logo.jpg' %}" width="40" style="border-radius: 50px;" alt="WorkBench">
             WorkBench
           </a>
           <div id="navbarNav" class="offcanvas offcanvas-end">
@@ -268,7 +268,7 @@
       <!-- Hero -->
       <section class="jarallax dark-mode bg-dark pt-2 pt-lg-3 pb-lg-5" data-jarallax data-speed="0.35">
         <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-70"></span>
-        <div class="jarallax-img" style="background-image: url('{% static 'website/img/portfolio/courses/single.jpg' %}');"></div>
+        <div class="jarallax-img" style="background-image: url('{% static 'website/img/portfolio/courses/4.png' %}');"></div>
         <div class="container position-relative zindex-5 pb-5">
 
           <!-- Breadcrumb -->
@@ -292,7 +292,7 @@
 
           <!-- Title -->
           <h1>Fullstack Веб-Разработка</h1>
-          <p class="fs-lg text-light opacity-70">Egestas feugiat lorem eu neque suspendisse ullamcorper scelerisque aliquam mauris.</p>
+
 
           <!-- Stats -->
           <div class="d-sm-flex py-3 py-md-4 py-xl-5">
@@ -448,38 +448,6 @@
                   <h4 class="mb-2">Разработка полноценных веб-приложений</h4>
                   <p class="mb-0">Интеграция всех изученных концепций и технологий. Создание и развертывание полноценного веб-приложения.</p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <!-- Course author -->
-      <section class="container py-lg-4 py-xl-5 mt-3 mb-5">
-        <div class="row g-0 bg-dark bg-repeat-0 bg-position-center border rounded-3 overflow-hidden" style="background-image: url('{% static 'website/img/portfolio/courses/author-pattern.svg' %}');">
-          <div class="col-md-5 bg-repeat-0 bg-position-top-center bg-size-cover" style="background-image: url('{% static 'website/img/portfolio/courses/dulat.jpg' %}'); min-height: 350px;"></div>
-          <div class="col-md-7 py-xl-5 px-4">
-            <div class="py-5 mx-auto" style="max-width: 530px;">
-              <h2>
-                  Дорогие студенты!
-              </h2>
-              <p>
-                  Путь к успеху и самореализации — это нелегкий и часто изогнутый путь. Он требует усилий, терпения и постоянной самомотивации. Но помните, что каждый шаг, каждое усилие и каждое преодоленное препятствие подводят вас ближе к вашей мечте.
-              </p>
-              <p>
-                  Не бойтесь вызовов и не отступайтесь перед трудностями. Каждая трудность — это возможность для вас стать сильнее. Помните, что успех приходит к тем, кто не сдаётся, кто стремится к самосовершенствованию и готов преодолевать все преграды.
-              </p>
-              <p>
-                  Вы — будущее, и ваша учеба в WorkBench — это первый шаг на пути к вашим мечтам. Верьте в себя, цените каждый опыт и никогда не забывайте, что ваши усилия сегодня определяют вашу успешную карьеру завтра.
-              </p>
-              <p>
-                  Удачи вам на вашем пути!
-              </p>
-              <p>
-                  С уважением,<br>
-                  Дулат Медер
-              </p>
               </div>
             </div>
           </div>
@@ -721,13 +689,13 @@
       <section class="container pb-5 mb-md-3 mb-lg-4 mb-xl-5">
         <div class="row pb-3">
           <div class="col-md-5 mb-4 mb-md-0">
-            <div class="card bg-dark h-100 p-lg-5">
+            <div class="card h-100 p-lg-5" style="background-color: #4044ee;">
               <div class="card-body p-lg-2">
                 <h2 class="h1 text-light">У вас возникли вопросы по этому курсу?</h2>
               </div>
               <div class="card-footer border-0 w-100 pt-0 p-4 p-lg-2">
                 <div class="h2 d-flex align-items-center text-light mb-4">от 20.990 тг.<del class="fs-xl fw-normal opacity-70 ms-2">25.990 тг.</del></div>
-                <a href="{% url 'website:contacts' %}#" class="btn btn-primary btn-lg shadow-primary">Присоединиться</a>
+                <a href="{% url 'website:contacts' %}#" class="btn btn-primary btn-lg shadow-primary" style="background-color: white; color: black;">Присоединиться</a>
               </div>
             </div>
           </div>

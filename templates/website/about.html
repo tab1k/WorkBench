@@ -173,7 +173,7 @@
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
           <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
-            <img src="{% static 'website/img/logo.png' %}" width="47" alt="WorkBench">
+            <img src="{% static 'website/img/logo.jpg' %}" width="40" style="border-radius: 50px;" alt="WorkBench">
             WorkBench
           </a>
           <div id="navbarNav" class="offcanvas offcanvas-end">
@@ -291,13 +291,13 @@
           <!-- Gallery -->
           <div class="row g-md-4 g-3">
             <div class="col-md-6">
-              <img src="{% static 'website/img/about/hero/05.jpg' %}" alt="Hero image" class="rounded-3">
+              <img src="{% static 'website/img/about/hero/team.jpg' %}" alt="Hero image" class="rounded-3">
             </div>
             <div class="col-md-3 col-6 d-md-block d-none mt-5 pt-3 pt-xl-4">
-              <img src="{% static 'website/img/about/hero/06.jpg' %}" alt="Hero image" class="rounded-3">
+              <img src="{% static 'website/img/about/hero/beka.jpg' %}" alt="Hero image" class="rounded-3">
             </div>
             <div class="col-md-3 col-6 d-md-block d-none">
-              <img src="{% static 'website/img/about/hero/07.jpg' %}" alt="Hero image" class="rounded-3">
+              <img src="{% static 'website/img/about/hero/alish.jpg' %}" alt="Hero image" class="rounded-3">
             </div>
           </div>
         </div>
@@ -367,11 +367,11 @@
           <div class="col">
             <div class="card card-hover border-0 bg-transparent">
               <div class="position-relative">
-                <img src="{% static 'website/img/team/nurzhan.jpg' %}" class="rounded-3" alt="Нуржан Нурланович">
+                <img src="{% static 'website/img/about/hero/alish.jpg' %}" class="rounded-3" alt="Нуржан Нурланович">
               </div>
               <div class="card-body text-center p-3">
-                <h3 class="fs-lg fw-semibold pt-1 mb-2">Нуржан Нурланович</h3>
-                <p class="fs-sm mb-0">Director</p>
+                <h3 class="fs-lg fw-semibold pt-1 mb-2">Алишер Маратов</h3>
+                <p class="fs-sm mb-0">Designer</p>
               </div>
             </div>
           </div>
@@ -380,23 +380,10 @@
           <div class="col">
             <div class="card card-hover border-0 bg-transparent">
               <div class="position-relative">
-                <img src="{% static 'website/img/team/25.jpg' %}" class="rounded-3" alt="Albert Flores">
+                <img src="{% static 'website/img/about/hero/fattah.jpg' %}" class="rounded-3" alt="Albert Flores">
               </div>
               <div class="card-body text-center p-3">
-                <h3 class="fs-lg fw-semibold pt-1 mb-2">Ескендир Амирович</h3>
-                <p class="fs-sm mb-0">Back-end Coach</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item -->
-          <div class="col">
-            <div class="card card-hover border-0 bg-transparent">
-              <div class="position-relative">
-                <img src="{% static 'website/img/team/maksat.jpg' %}" class="rounded-3" alt="Jenny Wilson">
-              </div>
-              <div class="card-body text-center p-3">
-                <h3 class="fs-lg fw-semibold pt-1 mb-2">Максат Турегельдиев</h3>
+                <h3 class="fs-lg fw-semibold pt-1 mb-2">АбдуФаттах </h3>
                 <p class="fs-sm mb-0">Front-end Coach</p>
               </div>
             </div>
@@ -406,7 +393,20 @@
           <div class="col">
             <div class="card card-hover border-0 bg-transparent">
               <div class="position-relative">
-                <img src="{% static 'website/img/tab1k.png' %}" class="rounded-3" alt="Marvin McKinney">
+                <img src="{% static 'website/img/about/hero/era.jpg' %}" class="rounded-3" alt="Jenny Wilson">
+              </div>
+              <div class="card-body text-center p-3">
+                <h3 class="fs-lg fw-semibold pt-1 mb-2">Ерасыл Ермеков</h3>
+                <p class="fs-sm mb-0">Back-end Coach</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="col">
+            <div class="card card-hover border-0 bg-transparent">
+              <div class="position-relative">
+                <img src="{% static 'website/img/about/hero/tabik.jpg' %}" class="rounded-3" alt="Tabigat Karbayev">
               </div>
               <div class="card-body text-center p-3">
                 <h3 class="fs-lg fw-semibold pt-1 mb-2">Табигат Карбаев</h3>
@@ -754,16 +754,7 @@
 
 
       <!-- CTA -->
-      <section class="container">
-        <div class="position-relative bg-dark rounded-3 overflow-hidden px-3 py-5">
-          <span class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(255, 255, 255, .05)"></span>
-          <div class="position-relative zindex-5 text-center my-xl-3 py-1 py-md-4 py-lg-5">
-            <p class="lead text-light opacity-70 mb-3">Готов поменять свою жизнь в лучшую сторону?</p>
-            <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Тогда присоединяйся к нам!</h2>
-            <a href="{% url 'website:contacts' %}#" class="btn btn-primary btn-lg">Стать программистом!</a>
-          </div>
-        </div>
-      </section>
+
     </main>
 
 

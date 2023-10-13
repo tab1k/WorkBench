@@ -164,7 +164,7 @@
       <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
         <div class="container px-3">
           <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
-            <img src="{% static 'website/img/logo.png' %}" width="47" alt="WorkBench">
+            <img src="{% static 'website/img/logo.jpg' %}" width="40" style="border-radius: 50px;" alt="WorkBench">
             WorkBench
           </a>
           <div id="navbarNav" class="offcanvas offcanvas-end">
@@ -304,7 +304,7 @@
               <div class="position-relative">
                 <a href="{% url 'website:full-stack' %}" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
                 <span class="badge bg-success position-absolute top-0 start-0 zindex-2 mt-3 ms-3">Популярное</span>
-                <img src="{% static 'website/img/portfolio/courses/01.jpg' %}" class="card-img-top" alt="Image">
+                <img src="{% static 'website/img/portfolio/courses/full-stack.png' %}" class="card-img-top" alt="Image">
               </div>
               <div class="card-body pb-3">
                 <h3 class="h5 mb-2">
@@ -331,7 +331,7 @@
             <article class="card h-100 border-0 shadow-sm">
               <div class="position-relative">
                 <a href="{% url 'website:html-css' %}" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                <img src="{% static 'website/img/portfolio/courses/02.jpg' %}" class="card-img-top" alt="Image">
+                <img src="{% static 'website/img/portfolio/courses/html.png' %}" class="card-img-top" alt="Image">
               </div>
               <div class="card-body pb-3">
                 <h3 class="h5 mb-2">
@@ -358,8 +358,8 @@
             <article class="card h-100 border-0 shadow-sm">
               <div class="position-relative">
                 <a href="{% url 'website:python' %}" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                <span class="badge bg-danger position-absolute top-0 start-0 zindex-2 mt-3 ms-3">Продаваемый!</span>
-                <img src="{% static 'website/img/portfolio/courses/03.jpg' %}" class="card-img-top" alt="Image">
+
+                <img src="{% static 'website/img/portfolio/courses/python.png' %}" class="card-img-top" alt="Image">
               </div>
               <div class="card-body pb-3">
                 <h3 class="h5 mb-2">
@@ -386,7 +386,7 @@
             <article class="card h-100 border-0 shadow-sm">
               <div class="position-relative">
                 <a href="{% url 'website:python-django' %}" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                <img src="{% static 'website/img/portfolio/courses/04.jpg' %}" class="card-img-top" alt="Image">
+                <img src="{% static 'website/img/portfolio/courses/django.png' %}" class="card-img-top" alt="Image">
               </div>
               <div class="card-body pb-3">
                 <h3 class="h5 mb-2">
@@ -412,7 +412,8 @@
             <article class="card h-100 border-0 shadow-sm">
               <div class="position-relative">
                 <a href="{% url 'website:computer-literacy' %}" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                <img src="{% static 'website/img/portfolio/courses/06.jpg' %}" class="card-img-top" alt="Image">
+                <span class="badge bg-danger position-absolute top-0 start-0 zindex-2 mt-3 ms-3">Продаваемый!</span>
+                <img src="{% static 'website/img/portfolio/courses/computer_literacy.png' %}" class="card-img-top" alt="Image">
               </div>
               <div class="card-body pb-3">
                 <h3 class="h5 mb-2">
