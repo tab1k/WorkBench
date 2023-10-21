@@ -2,14 +2,23 @@
 {% load static %}
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{% static 'admin/assets/images/favicon.png' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'admin/assets/images/favicon.png' %}" type="image/x-icon">
+    <meta name="description" content="WorkBench Company">
+    <meta name="keywords" content="WorkBench, workbench, business, it agency, it, saas, itcourse, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="WorkBench">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/img/logo.jpg' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'website/img/logo.jpg' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'website/img/logo.jpg' %}">
+    <link rel="manifest" href="{% static 'website/img/logo.jpg' %}">
+    <link rel="mask-icon" href="{% static 'website/img/logo.jpg' %}" color="#6366f1">
+    <link rel="shortcut icon" href="{% static 'website/img/logo.jpg' %}"> <!-- Изменен путь к новому фавикону -->
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="{% static 'website/favicon/browserconfig.xml' %}">
+    <meta name="theme-color" content="#ffffff">
     {% block title %}{% endblock %}
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
@@ -131,7 +140,7 @@
         <!-- Page Sidebar Start-->
         <div class="sidebar-wrapper">
           <div>
-            <div class="logo-wrapper"><a href="{% url 'users:admin:administrator' %}"><img style="height: 30px;" class="img-fluid for-light" src="{% static 'website/img/logo.png' %}" alt=""><img style="height: 30px;" class="img-fluid for-dark" src="{% static 'website/img/logo.png' %}" alt=""></a>
+            <div class="logo-wrapper"><a href="{% url 'users:admin:administrator' %}"><img style="height: 30px; border-radius: 50px;" class="img-fluid for-light" src="{% static 'website/img/logo.jpg' %}" alt=""><img style="height: 30px; border-radius: 50px;" class="img-fluid for-dark" src="{% static 'website/img/logo.jpg' %}" alt=""></a>
               <div class="back-btn"><i class="fa fa-angle-left"></i></div>
               <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
             </div>

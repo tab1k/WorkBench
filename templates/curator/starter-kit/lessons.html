@@ -84,10 +84,10 @@
                       <div class="courses">
                           <div class="video">
                               <div class="theme">
-                                  <p>{{ lesson.title }}</p>
-                                  <p>{{ lesson.description }}</p>
+                                  <h5>{{ lesson.title }}</h5>
+                                  <h6>{{ lesson.description }}</h6>
                                   {% if lesson.learn_documentation %}
-                                      <p>Документация: <a href="{{ lesson.learn_documentation.url }}" target="_blank">{{ lesson.learn_documentation.url|truncatechars:10 }} 📎</a></p>
+                                      <h6>Документация: <a href="{{ lesson.learn_documentation.url }}" target="_blank">{{ lesson.learn_documentation.url|truncatechars:10 }} 📎</a></h6>
                                   {% endif %}
                               </div>
                               <style>

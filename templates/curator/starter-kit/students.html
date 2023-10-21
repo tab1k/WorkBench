@@ -107,7 +107,6 @@
                                       <thead>
                                           <tr>
                                               <th>Имя</th>
-                                              <th>Курс</th>
                                               <th>ID</th>
                                               <th>Поток</th>
                                               <th>Личный кабинет</th>
@@ -118,7 +117,6 @@
                                           {% for student in students %}
                                           <tr>
                                               <td><img class="rounded-circle me-2" width="40" height="30" src="{% if student.image and student.image.url %}{{ student.image.url }}{% else %}{% static 'admin/assets/images/user.png' %}{% endif %}">{{ student.first_name }} {{ student.last_name }}</td>
-                                              <td>{{ student.courses.name }}</td>
                                               <td>{{ student.id }}</td>
                                               <td><a style="text-decoration: none;" href="{% url 'users:curator:stream_list' %}">{{ student.stream }}</a></td>
                                               <td><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal1" style="height: 37px;text-align: center;background: #22549E;"><a style="color: white; text-decoration: none;" href="{% url 'users:curator:profile:profile_view' pk=student.pk %}">Кабинет</a></button></td>
