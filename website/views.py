@@ -105,13 +105,6 @@ class HtmlCssView(View):
 
 
 
-class PythonView(View):
-
-    def get(self, request):
-        return render(request, 'website/python.html')
-
-
-
 class PythonDjangoView(View):
 
     def get(self, request):

@@ -11,7 +11,6 @@ urlpatterns = [
     path('collaboration', Collaboration.as_view(), name='collaboration'),
     path('full-stack', FullStackView.as_view(), name='full-stack'),
     path('html-css', HtmlCssView.as_view(), name='html-css'),
-    path('python', PythonView.as_view(), name='python'),
     path('python-django', PythonDjangoView.as_view(), name='python-django'),
     path('computer-literacy', ComputerLiteracyView.as_view(), name='computer-literacy'),
     path('terms', TermsView.as_view(), name='terms'),

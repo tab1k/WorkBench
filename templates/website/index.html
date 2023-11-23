@@ -347,9 +347,6 @@
                 <a href="{% url 'website:html-css' %}#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">HTML, CSS, JavaScript </a>
               </li>
               <li class="nav-item">
-                <a href="{% url 'website:python' %}#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Python</a>
-              </li>
-              <li class="nav-item">
                 <a href="{% url 'website:python-django' %}#" class="nav-link d-inline-block text-nowrap" role="tab" aria-selected="false">Python &amp; Django</a>
               </li>
               <li class="nav-item">
@@ -418,7 +415,7 @@
                         <a href="{% url 'website:full-stack' %}">Fullstack Веб-Разработчик</a>
                       </h3>
                       <p class="fs-sm mb-2">WorkBench</p>
-                      <p class="fs-lg fw-semibold text-primary mb-0">от 20.990 тг.</p>
+                      <p class="text-muted mb-0"><span class="fs-lg fw-semibold text-danger me-2"> 350.000 тг.</span><del> 500.000 тенге</del></p>
                     </div>
                     <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
                       <div class="d-flex align-items-center me-4">
@@ -445,7 +442,7 @@
                         <a href="{% url 'website:html-css' %}">HTML, CSS, JavaScript Веб-Разработчик</a>
                       </h3>
                       <p class="fs-sm mb-2">WorkBench</p>
-                      <p class="fs-lg fw-semibold text-primary mb-0">от 18.990 тенге</p>
+                      <p class="fs-lg fw-semibold text-primary mb-0"> 250.000 тенге</p>
                     </div>
                     <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
                       <div class="d-flex align-items-center me-4">
@@ -460,32 +457,6 @@
                   </article>
                 </div>
 
-                <!-- Item -->
-                <div class="swiper-slide h-auto pb-3">
-                  <article class="card h-100 border-0 shadow-sm mx-2">
-                    <div class="position-relative">
-                      <a href="{% url 'website:python' %}" class="d-block position-absolute w-100 h-100 top-0 start-0"></a>
-                      <img src="{% static 'website/img/portfolio/courses/python.png' %}" class="card-img-top" alt="Image">
-                    </div>
-                    <div class="card-body pb-3">
-                      <h3 class="h5 mb-2">
-                        <a href="{% url 'website:python' %}">Python</a>
-                      </h3>
-                      <p class="fs-sm mb-2">WorkBench</p>
-                      <p class="text-muted mb-0"><span class="fs-lg fw-semibold text-danger me-2">от 15.990 тг.</span><del> от 25.990 тенге</del></p>
-                    </div>
-                    <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
-                      <div class="d-flex align-items-center me-4">
-                        <i class="bx bx-time fs-xl me-1"></i>
-                        10+ часов
-                      </div>
-                      <div class="d-flex align-items-center">
-                        <i class="bx bx-like fs-xl me-1"></i>
-                        98%
-                      </div>
-                    </div>
-                  </article>
-                </div>
 
                 <!-- Item -->
                 <div class="swiper-slide h-auto pb-3">
@@ -496,10 +467,10 @@
                     </div>
                     <div class="card-body pb-3">
                       <h3 class="h5 mb-2">
-                        <a href="{% url 'website:python-django' %}">Python &amp; Django</a>
+                        <a href="{% url 'website:python-django' %}">Python &amp; Django Веб-Разработчик</a>
                       </h3>
                       <p class="fs-sm mb-2">WorkBench</p>
-                      <p class="fs-lg fw-semibold text-primary mb-0">от 19.990 тенге</p>
+                      <p class="fs-lg fw-semibold text-primary mb-0">250.000 тенге</p>
                     </div>
                     <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
                       <div class="d-flex align-items-center me-4">
@@ -991,7 +962,7 @@
                       <div class="mb-4 pt-1">
                           <label class="form-label fs-base" for="phone">Номер телефона</label>
                           <div class="password-toggle">
-                              <input type="tel" class="form-control form-control-lg" id="phone" name="phone" required>
+                              <input type="tel" class="form-control form-control-lg" id="phone" name="phone_number" required>
                               <label class="password-toggle-btn" aria-label="Show/hide password">
                                   <input class="password-toggle-check" type="checkbox">
                               </label>

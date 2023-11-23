@@ -5,7 +5,7 @@ from django.db import models
 class Contact(models.Model):
     name = models.CharField(max_length=155)
     email = models.EmailField()
-    phone_number = models.PositiveIntegerField(blank=False, null=True)
+    phone_number = models.BigIntegerField(blank=False, null=True)
     message = models.TextField(max_length=500, blank=True, null=True)
     read = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)

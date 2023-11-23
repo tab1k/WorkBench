@@ -161,7 +161,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 
-# JAZZMIN
+# JAZZMIN SETTINGS
 
 
 JAZZMIN_SETTINGS = {
