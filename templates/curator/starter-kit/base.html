@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
-  <head>
+{% load humanize %}
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <title>Главная</title>
     <meta name="description" content="WorkBench Company">
     <meta name="keywords" content="WorkBench, workbench, business, it agency, it, saas, itcourse, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
     <meta name="author" content="WorkBench">
@@ -9,7 +12,12 @@
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Favicon and Touch Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+    <script async="" src="{% static 'student/js/gtm.js' %}"></script>
+    <script src="{% static 'student/js/theme-switcher.js' %}"></script>
+    
+
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/img/logo.jpg' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'website/img/logo.jpg' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'website/img/logo.jpg' %}">
@@ -19,204 +27,313 @@
     <meta name="msapplication-TileColor" content="#080032">
     <meta name="msapplication-config" content="{% static 'website/favicon/browserconfig.xml' %}">
     <meta name="theme-color" content="#ffffff">
-    {% block title %}{% endblock %}
-    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/font-awesome.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/icofont.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/themify.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/flag-icon.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/feather-icon.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/scrollbar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/animate.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/chartist.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/date-picker.css' %}">
-    <!-- Plugins css Ends-->
-    <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/bootstrap.css' %}">
-    <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/style.css' %}">
-    <link id="color" rel="stylesheet" href="{% static 'admin/assets/css/color-1.css' %}" media="screen">
-    <!-- Responsive css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/responsive.css' %}">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="{% static 'student/css/boxicons.min.css' %}">
+    <link rel="stylesheet" media="screen" href="{% static 'student/css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" media="screen" href="{% static 'student/css/theme.min.css' %}">
+
+    <!-- Page loading styles -->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      [data-bs-theme="dark"] .page-loading {
+        background-color: #0b0f19;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #9397ad;
+      }
+      [data-bs-theme="dark"] .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #b4b7c9;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      [data-bs-theme="dark"] .page-spinner {
+        border-color: rgba(255,255,255,.4);
+        border-right-color: transparent;
+      }
+      @-webkit-keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+ 
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
   </head>
-  <body onload="startTime()">
-    <!-- tap on top starts-->
-    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
-    <!-- tap on tap ends-->
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper compact-wrapper" id="pageWrapper">
-      <!-- Page Header Start-->
-      <div class="page-header">
-        <div class="header-wrapper row m-0">
-          <form class="form-inline search-full col" action="#" method="get">
-            <div class="form-group w-100">
-              <div class="Typeahead Typeahead--twitterUsers">
-                <div class="u-posRelative">
-                  <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Искать .." name="q" title="" autofocus>
-                  <div class="spinner-border Typeahead-spinner" role="status"><span class="sr-only">Загрузка...</span></div><i class="close-search" data-feather="x"></i>
-                </div>
-                <div class="Typeahead-menu"></div>
-              </div>
-            </div>
-          </form>
-          <div class="header-logo-wrapper col-auto p-0">
-            <div class="logo-wrapper"><a href="index.html"><img style="height: 30px;" class="img-fluid" src="{% static 'website/img/logo.jpg' %}" alt=""></a></div>
-            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
-          </div>
-          <div class="left-header col horizontal-wrapper ps-0">
-          </div>
-          <div class="nav-right col-8 pull-right right-header p-0">
-            <ul class="nav-menus">
-              <li>
-                <span class="header-search"><i data-feather="search"></i></span></li>
-              <li>
-                <div class="mode"><i class="fa fa-moon-o"></i></div>
-              </li>
-              <li class="onhover-dropdown">
-                <div class="notification-box"><i data-feather="bell"> </i><span class="badge rounded-pill badge-secondary">4                               </span></div>
-                <ul class="notification-dropdown onhover-show-div">
-                  <li><i data-feather="bell"></i>
-                    <h6 class="f-18 mb-0">Уведомления</h6>
-                  </li>
-                  {% for notification in notifications|slice:3 %}
-                  <li>
-                    <p style="padding: 15px;><i class="fa fa-circle-o me-3 font-primary"> </i>{{ notification.message|truncatechars:15 }}<span class="pull-right">{{ notification.timestamp }}</span></p>
-                  </li>
-                  {% endfor %}
-                  <li><a class="btn btn-primary" href="{% url 'users:curator:view_notifications' %}">Все уведомления</a></li>
 
-                </ul>
-              </li>
-              <li class="onhover-dropdown"><i data-feather="message-square"></i>
-                <ul class="chat-dropdown onhover-show-div">
-                  <li><i data-feather="message-square"></i>
-                    <h6 class="f-18 mb-0">Заявки</h6>
-                  </li>
-                  {% for contact in contacts|slice:3 %}
-                  <li>
-                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/user.png' %}" alt="">
-                      <div class="status-circle online"></div>
-                      <div class="media-body"><span>{{ contact.name }}</span>
-                        <p>{{ contact.message }}</p>
-                      </div>
-                      <p class="f-12 font-success">{{ contact.timestamp|timesince }}</p>
-                    </div>
-                  </li>
-                  {% endfor %}
-                  <li class="text-center"> <a class="btn btn-primary" href="{% url 'users:curator:admin_applications' %}">Показать все заявки</a></li>
-                </ul>
-              </li>
-              <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
-              <li class="profile-nav onhover-dropdown p-0 me-0">
-                <div class="media profile-media"><img class="b-r-10" style="width: 40px;" src="{% if user.image and user.image.url %}{{ user.image.url }}{% else %}{% static 'admin/assets/images/user.png' %}{% endif %}" alt="">
-                  <div class="media-body"><span>{{ user.first_name}} {{ user.last_name }}</span>
-                    <p class="mb-0 font-roboto">Куратор <i class="middle fa fa-angle-down"></i></p>
-                  </div>
-                </div>
-                <ul class="profile-dropdown onhover-show-div">
-                  <li><a href="{% url 'users:curator:profile:profile' %}"><i data-feather="settings"></i><span>Настройки</span></a></li>
-                  <li><a href="{% url 'users:curator:view_notifications' %}"><i data-feather="mail"></i><span>Почта</span></a></li>
-                  <li><a href="{% url 'users:curator:courses:passed_students' %}"><i data-feather="list"></i><span>Выпускники</span></a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <script class="result-template" type="text/x-handlebars-template">
-            <div class="ProfileCard u-cf">
-            <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
-            <div class="ProfileCard-details">
-            <div class="ProfileCard-realName">{{name}}</div>
-            </div>
-            </div>
-          </script>
-          <script class="empty-template" type="text/x-handlebars-template"><div class="EmptyMessage">Ничего не найдено.</div></script>
-        </div>
-      </div>
-      <!-- Page Body Start-->
-      <div class="page-body-wrapper">
-        <!-- Page Sidebar Start-->
-        <div class="sidebar-wrapper">
-          <div>
-            <div class="logo-wrapper"><a href="index.html"><img style="height: 30px; border-radius: 50px;" class="img-fluid for-light" src="{% static 'website/img/logo.jpg' %}" alt=""><img style="height: 30px; border-radius: 50px;" class="img-fluid for-dark" src="{% static 'website/img/logo.jpg' %}" alt=""></a>
-              <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-              <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
-            </div>
-            <div class="logo-icon-wrapper"><a href="index.html"><img style="height: 30px;" class="img-fluid" src="{% static 'website/img/logo.jpg' %}" alt=""></a></div>
-            <nav class="sidebar-main">
-              <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
-              <div id="sidebar-menu">
-                <ul class="sidebar-links" id="simple-bar">
-                  <li class="back-btn"><a href="index.html"><img style="height: 30px;" class="img-fluid" src="{% static 'website/img/logo.png' %}" alt=""></a>
-                    <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
-                  </li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:curator' %}"><i data-feather="home"> </i><span>Главная</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:courses:courses' %}"><i data-feather="heart"> </i><span>Курсы</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:students_admin_check' %}"><i data-feather="list"> </i><span>Студенты</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:schedule:student_schedule' %}"><i data-feather="calendar"> </i><span>Расписание</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:courses:answers_view' %}"><i data-feather="zap"> </i><span>Лента ответов</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:profile:profile' %}"><i data-feather="settings"> </i><span>Настройки</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'admin:index' %}"><i data-feather="search"> </i><span>Админ панель</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:curator:logout' %}"><i data-feather="log-in"> </i><span>Выйти</span></a></li>
-                </ul>
-              </div>
-              <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
-            </nav>
-          </div>
-        </div>
-        <!-- Page Sidebar Ends-->
-        {% block content %}
 
-        {% endblock%}
-        <!-- footer start-->
-        <footer class="footer">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12 footer-copyright text-center">
-                <p class="mb-0">Copyright 2023 © WorkBench</p>
-              </div>
-            </div>
-          </div>
-        </footer>
+  <!-- Body -->
+  <body>
+    
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+      <iframe src="//www.googletagmanager.com/ns.html?id=GTM-WKV3GT5" height="0" width="0" style="display: none; visibility: hidden;" title="Google Tag Manager"></iframe>
+    </noscript>
+
+    <!-- Page loading spinner -->
+    <div class="page-loading">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
       </div>
     </div>
-    <!-- latest jquery-->
-    <script src="{% static 'admin/assets/js/jquery-3.5.1.min.js' %}"></script>
-    <!-- Bootstrap js-->
-    <script src="{% static 'admin/assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
-    <!-- feather icon js-->
-    <script src="{% static 'admin/assets/js/icons/feather-icon/feather.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/icons/feather-icon/feather-icon.js' %}"></script>
-    <!-- scrollbar js-->
-    <script src="{% static 'admin/assets/js/scrollbar/simplebar.js' %}"></script>
-    <script src="{% static 'admin/assets/js/scrollbar/custom.js' %}"></script>
-    <!-- Sidebar jquery-->
-    <script src="{% static 'admin/assets/js/config.js' %}"></script>
-    <!-- Plugins JS start-->
-    <script src="{% static 'admin/assets/js/sidebar-menu.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/chartist/chartist.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/chartist/chartist-plugin-tooltip.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/knob/knob.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/knob/knob-chart.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/apex-chart/apex-chart.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/apex-chart/stock-prices.js' %}"></script>
-    <script src="{% static 'admin/assets/js/notify/bootstrap-notify.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/dashboard/default.js' %}"></script>
-    <script src="{% static 'admin/assets/js/notify/index.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.en.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/handlebars.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/typeahead.bundle.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/typeahead.custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead-search/handlebars.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead-search/typeahead-custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/tooltip-init.js' %}"></script>
-    <!-- Plugins JS Ends-->
-    <!-- Theme js-->
-    <script src="{% static 'admin/assets/js/script.js' %}"></script>
-    <script src="{% static 'admin/assets/js/theme-customizer/customizer.js' %}"></script>
-    <!-- login js-->
-    <!-- Plugin used-->
-  </body>
+
+
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+    
+      <header class="header navbar navbar-expand-lg bg-light border-bottom border-light shadow-sm fixed-top">
+        <div class="container px-3">
+          <a href="{% url 'website:home' %}" class="navbar-brand pe-3">
+            <img src="{% static 'website/img/logo.jpg' %}" width="40" style="border-radius: 50px;" alt="WorkBench">
+            WorkBench
+          </a>
+          <div id="navbarNav" class="offcanvas offcanvas-end">
+            <div class="offcanvas-header border-bottom">
+              <h5 class="offcanvas-title">Меню</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                  <a href="{% url 'users:blog:blog' %}" class="nav-link">Блог</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-current="page">Аккаунт</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url 'users:curator:dashboard' %}" class="dropdown-item">Главная</a></li>
+                    <li><a href="{% url 'users:curator:courses:courses' %}" class="dropdown-item">Курсы</a></li>
+                    <li><a href="{% url 'users:curator:schedule:student_schedule' %}" class="dropdown-item">Расписание</a></li>
+                    <li><a href="{% url 'users:curator:students_admin_check' %}" class="dropdown-item">Студенты</a></li>  
+                    <li><a href="{% url 'users:curator:courses:answers_view' %}" class="dropdown-item">Лента ответов</a></li>  
+                    <li><a href="{% url 'admin:index' %}" class="dropdown-item">Админ панель</a></li>  
+                    <li><a href="{% url 'users:curator:profile' %}" class="dropdown-item">Настройки</a></li>
+                    <li><a href="{% url 'users:curator:logout' %}" class="dropdown-item">Выйти</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a href="docs/getting-started.html" class="nav-link">Документы</a>
+                </li>
+              </ul>
+            </div>
+            <div class="offcanvas-header border-top">
+              <a href="{% url 'users:curator:logout' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                <i class="bx bx-log-out fs-4 lh-1 me-1"></i>
+                Выйти
+              </a>
+            </div>       
+          </div>
+          <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
+            
+          </div>
+
+
+          <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+        </div>
+      </header>
+
+
+      <!-- Page content -->
+      <section class="container pt-5">
+        <div class="row">
+
+  
+          <!-- Sidebar (User info + Account menu) -->
+          <aside class="col-lg-3 col-md-4 border-end pb-5 mt-n5">
+            <div class="position-sticky top-0">
+              <div class="text-center pt-5">
+                <div class="d-table position-relative mx-auto mt-2 mt-lg-4 pt-5 mb-3">
+                  {% if user.image %}  
+                  <img src="{{ user.image.url }}" class="d-block rounded-circle" width="120" alt="{{ user.first_name }} {{ user.last_name }}">
+                  {% else %}
+                  <img src="{% static 'student/images/18.jpg' %}" class="d-block rounded-circle" width="120" alt="{{ user.first_name }} {{ user.last_name }}">
+                  {% endif %}
+                </div>
+                <h2 class="h5 mb-1">{{ user.first_name }} {{ user.last_name }}</h2>
+                <p class="mb-3 pb-3">{{ user.email }}</p>
+                <button type="button" class="btn btn-secondary w-100 d-md-none mt-n2 mb-3" data-bs-toggle="collapse" data-bs-target="#account-menu">
+                  <i class="bx bxs-user-detail fs-xl me-2"></i>
+                  Меню
+                  <i class="bx bx-chevron-down fs-lg ms-1"></i>
+                </button>
+                <div id="account-menu" class="list-group list-group-flush collapse d-md-block">
+                {% with request.resolver_match.url_name as current_url_name %}
+                  <a href="{% url 'users:curator:dashboard' %}" class="list-group-item list-group-item-action d-flex align-items-center {% if current_url_name == 'dashboard' %}active{% endif %}">
+                    <i class="bx bx-cog fs-xl opacity-60 me-2"></i>
+                    Главная
+                  </a>
+                  <a href="{% url 'users:curator:courses:courses' %}" class="list-group-item list-group-item-action d-flex align-items-center {% if current_url_name == 'courses' %}active{% endif %}">
+                    <i class="bx bx-chat fs-xl opacity-60 me-2"></i>
+                    Курсы
+                  </a>
+                  <a href="{% url 'users:curator:schedule:student_schedule' %}" class="list-group-item list-group-item-action d-flex align-items-center {% if current_url_name == 'student-schedule' %}active{% endif %}">
+                    <i class="bx bx-time fs-xl opacity-60 me-2"></i>
+                    Расписание
+                  </a>
+                  <a href="{% url 'users:curator:students_admin_check' %}" class="list-group-item list-group-item-action d-flex align-items-center {% if current_url_name == 'student-schedule' %}active{% endif %}">
+                    <i class="bx bx-user fs-xl opacity-60 me-2"></i>
+                    Студенты
+                  </a>  
+                  <a href="{% url 'users:curator:courses:answers_view' %}" class="list-group-item list-group-item-action d-flex align-items-center {% if current_url_name == 'student-schedule' %}active{% endif %}">
+                    <i class="bx bx-message fs-xl opacity-60 me-2"></i>
+                    Лента ответов
+                  </a>
+                  <a href="{% url 'admin:index' %}" class="list-group-item list-group-item-action d-flex align-items-center {% if current_url_name == 'student-schedule' %}active{% endif %}">
+                    <i class="bx bx-rocket fs-xl opacity-60 me-2"></i>
+                    Админ панель
+                  </a>  
+                  <a href="{% url 'users:curator:profile' %}" class="list-group-item list-group-item-action d-flex align-items-center {% if current_url_name == 'profile' %}active{% endif %}">
+                    <i class="bx bx-lock-alt fs-xl opacity-60 me-2"></i>
+                    Настройки
+                  </a>
+                  <a href="{% url 'users:curator:logout' %}" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <i class="bx bx-log-out fs-xl opacity-60 me-2"></i>
+                    Выйти
+                  </a>
+                {% endwith %}
+                </div>
+              </div>
+            </div>
+          </aside>
+        
+          {% block content %}
+              
+          {% endblock %}
+            
+        </div>
+      </section>
+    </main>
+    
+    <footer class="footer bg-dark border-top border-light pt-5 pb-4 pb-lg-5" data-bs-theme="dark">
+      <div class="container pt-lg-4">
+        <div class="row pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
+              <img style="border-radius: 50px;" src="{% static 'website/img/logo.jpg' %}" width="47px" alt="WorkBench">
+              WorkBench
+            </div>
+            <p class="fs-sm pb-lg-3 mb-4">"У нас — место, где ваше образование становится вашим будущим. Добро пожаловать в мир обучения и развития, где знания — это ключ к успеху. Присоединяйтесь к нам сегодня и начните свой учебный путь к бесконечным возможностям!"</p>
+          </div>
+          <div class="col-xl-6 col-lg-7 col-md-5 offset-xl-2 offset-md-1 pt-4 pt-md-1 pt-lg-0">
+            <div id="footer-links" class="row">
+              <div class="col-lg-4">
+                <div id="useful-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                  <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                    <li class="nav-item"><a href="{% url 'website:home'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Главная</a></li>
+                    <li class="nav-item"><a href="{% url 'website:about'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">О нас</a></li>
+                    <li class="nav-item"><a href="{% url 'website:courses'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Курсы</a></li>
+                    <li class="nav-item"><a href="{% url 'website:contacts'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Контакты</a></li>
+                    <li class="nav-item"><a href="{% url 'website:collaboration'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Сотрудничество</a></li>
+                  </ul>
+                  <ul class="nav flex-column mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="{% url 'website:terms'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Условия использования</a></li>
+                    <li class="nav-item"><a href="{% url 'website:privacy'%}#" class="nav-link d-inline-block px-0 pt-1 pb-2">Политика конфиденциальности</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-3">
+                <div id="social-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                  <ul class="nav flex-column mb-2 mb-lg-0">
+                    <a href="https://wa.me/87077772817" class="nav-link d-inline-block px-0 pt-1 pb-2">WhatsApp</a>
+                    <li class="nav-item"><a href="https://www.instagram.com/workbench.kz/" class="nav-link d-inline-block px-0 pt-1 pb-2">Instagram</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-5 pt-2 pt-lg-0">
+                <h6 class="mb-2">Связаться с нами</h6>
+                <a href="mailto:workbenchkz@gmail.com" class="fw-medium">workbenchkz@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="nav d-block fs-xs text-center text-md-start pb-2 pb-lg-0 mb-0">
+          &copy; Все права защищены.
+          <a class="nav-link d-inline-block p-0" href="{% url 'website:home' %}" target="_blank" rel="noopener">WorkBench</a>
+        </p>
+      </div>
+    </footer>
+    
+    
+
+
+    <!-- Back to top button -->
+    <a href="#top" class="btn-scroll-top" data-scroll="">
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+      <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
+    </a>
+
+
+    <!-- Vendor Scripts -->
+    <script src="{% static 'student/js/cleave.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
+    <script src="{% static 'student/js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'student/js/theme.min.js' %}"></script>
+  
+</body>
 </html>

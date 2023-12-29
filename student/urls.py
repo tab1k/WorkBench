@@ -6,7 +6,6 @@ app_name = 'student'
 
 urlpatterns = [
     path('courses/', include('courses.urls')),
-    path('blog/', include('blog.urls')),
     path('schedule/', include('schedule.urls')),
     path('dashboard/', StudentDashboardView.as_view(), name='dashboard'),
     path('profile/', StudentProfileView.as_view(), name='profile'),

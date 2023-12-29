@@ -3,6 +3,8 @@ from datetime import datetime
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from blog.models import Post
+
 
 class User(AbstractUser):
 
@@ -37,6 +39,9 @@ class User(AbstractUser):
     city = models.CharField(choices=CITY_CHOICES, max_length=20, default='tse')
     address = models.CharField(blank=True, null=True, default='', max_length=255)
     stream = models.ForeignKey('Stream', on_delete=models.SET_NULL, null=True, blank=True)
+
+    def get_course_name(self):
+        return self.student.courses.name
 
     def __str__(self):
         return self.username

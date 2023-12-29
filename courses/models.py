@@ -56,6 +56,9 @@ class Module(models.Model):
     order = models.PositiveIntegerField()  # Порядковый номер модуля
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='modules')  # Связь с моделью "Course"
 
+    def get_course_name(self):
+        return self.course.title
+
     def __str__(self):
         return self.title
 

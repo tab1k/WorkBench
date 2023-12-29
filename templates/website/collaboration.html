@@ -202,7 +202,7 @@
             {% if user.is_authenticated %}
               {% if user.role == "student" %}
                 <div class="offcanvas-header border-top">
-                  <a href="{% url 'users:student:student' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                  <a href="{% url 'users:student:dashboard' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
                     <i class="bx bx-log-in fs-5"></i>
                     &nbsp;Кабинет студента
                   </a>
@@ -241,7 +241,7 @@
           </button>
           {% if user.is_authenticated %}
             {% if user.role == "student" %}
-              <a href="{% url 'users:student:student' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+              <a href="{% url 'users:student:dashboard' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
                 <i class="bx bx-log-in fs-5"></i>
                 &nbsp;Кабинет студента
               </a>

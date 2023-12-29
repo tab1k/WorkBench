@@ -13,7 +13,7 @@ class UserLoginView(LoginView):
         user = self.request.user
         if user.is_staff:
             if user.role == 'curator':
-                return redirect('users:curator:curator')
+                return redirect('users:curator:dashboard')
             elif user.role == 'admin':
                 return redirect('users:admin:administrator')
         else:

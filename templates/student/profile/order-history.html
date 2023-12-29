@@ -96,11 +96,11 @@
                 </div>
               </div>
             </div>
-            {% endfor %}      
+                 
             <script>
               function showOrderDetails() {
                 // Сгенерируйте содержимое чека для скачивания
-                var receiptContent = 'Содержимое вашего чека';
+                var receiptContent = 'Чек № {{order.student_id}}. Дата создания аккаунта: {{order.created_date}}. ФИО: {{order.student.first_name}} {{order.student.last_name}}. Статус: Оплачен. Метод оплаты: {{order.get_cash_method_name}}. Сумма к оплате: {{order.cash_count}}.';
             
                 // Обновите ссылку для скачивания
                 var downloadLink = document.getElementById('downloadLink');
@@ -111,7 +111,7 @@
                 myModal.show();
               }
             </script>
-
+            {% endfor %}     
             {% endblock %}
         </div>
       </section>

@@ -1,42 +1,60 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, TemplateView, UpdateView, DetailView
 from administrator.forms import NotificationForm
+from blog.models import Post
 from courses.models import Course, CourseType, Notification
+from curator.forms import CuratorCustomProfileForm
 from website.models import Contact
 from users.models import User, Stream
 from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
+from courses.models import Lesson
 
 
-@login_required(login_url='users:login')
-def curator_view(request):
-    curator = request.user
-    if request.user.role == 'curator':
+class CuratorDashboardView(LoginRequiredMixin, TemplateView):
+    template_name = 'curator/starter-kit/index.html'
 
-        # Получите список курсов, связанных с текущим куратором
-        courses = Course.objects.filter(curators=curator)
-        courses_type = CourseType.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        student = self.request.user
+        context['posts'] = Post.objects.filter().order_by('-date')[:3]
+        context['notifications'] = Notification.objects.all().order_by('-timestamp')
+        context['contacts'] = Contact.objects.all().order_by('-timestamp')
+        #courses = Course.objects.filter(curators=curator)
+        # courses_type = CourseType.objects.all()
+        # context['notifications'] = Notification.objects.filter(course__in=context['course']).order_by('-timestamp')
+        # context['curator_comments'] = Comment.objects.filter(lesson__module__course__in=context['course'],
+        #                                                      is_student_comment=False, user=student)
+        return context
 
-        # Получите список заявок
-        contacts = Contact.objects.all().order_by('-timestamp')  # Замените на необходимый способ получения заявок
 
-        # Отметьте все заявки как прочитанные
-        Contact.objects.all().update(read=True)
+class CuratorProfileView(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = 'curator/profile/user_profile.html'
+    context_object_name = 'user'
+    success_url = reverse_lazy('users:curator:dashboard')
+    form_class = CuratorCustomProfileForm
 
-        # Получите количество заявок
-        contact_count = Contact.objects.count()
+    def get_object(self, queryset=None):
+        return self.request.user
 
-        # Получите список уведомлений
-        notifications = Notification.objects.all().order_by('-timestamp')  # Замените на необходимый способ получения уведомлений
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        # Сохранение изображения профиля
+        if 'image' in form.cleaned_data:
+            self.object.image = form.cleaned_data['image']
+            self.object.save()
+        return response
 
-        return render(request, 'curator/starter-kit/index.html',
-                      {'courses': courses, 'courses_type': courses_type, 'curator': curator, 'contacts': contacts,
-                       'contact_count': contact_count, 'notifications': notifications})
-    else:
-        return redirect('users:login')
+    def form_invalid(self, form):
+        print("Form is invalid!")
+        print(form.errors)
+        return super().form_invalid(form)
 
 
 class StudentsCheckAdmin(View):
@@ -58,8 +76,17 @@ class StudentsCheckAdmin(View):
             'selected_stream': selected_stream
         })
 
-from django.shortcuts import render, get_object_or_404, redirect
-from courses.models import Lesson
+
+class StudentProfileDetailView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'curator/starter-kit/student_profile.html'
+    context_object_name = 'student'
+
+
+
+
+
+
 
 def show_previous_lesson(request, lesson_id):
     current_lesson = get_object_or_404(Lesson, pk=lesson_id)

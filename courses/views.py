@@ -85,7 +85,10 @@ class Modules(View):
 
         elif request.user.groups.filter(name='Кураторы').exists():
             module = Module.objects.filter(course__pk=pk, course__curators=request.user)
-            return render(request, 'curator/starter-kit/modules.html', {'modules': module})
+            return render(request, 'curator/starter-kit/modules.html', {
+                'modules': module,
+
+            })
 
         else:
             module = Module.objects.filter(course__pk=pk, course__students=request.user)

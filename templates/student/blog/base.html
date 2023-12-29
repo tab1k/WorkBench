@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Блог</title>
-    
+
     <meta name="description" content="WorkBench Company">
     <meta name="keywords" content="WorkBench, workbench, business, it agency, it, saas, itcourse, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
     <meta name="author" content="WorkBench">
@@ -133,13 +133,13 @@
 
   <!-- Body -->
   <body>
-    
+
     <!-- Google Tag Manager (noscript)-->
     <noscript>
       <iframe src="//www.googletagmanager.com/ns.html?id=GTM-WKV3GT5" height="0" width="0" style="display: none; visibility: hidden;" title="Google Tag Manager"></iframe>
     </noscript>
-    
-    
+
+
     <main class="page-wrapper">
 
 
@@ -157,7 +157,15 @@
             <div class="offcanvas-body">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                  <a href="{% url 'users:student:dashboard' %}" class="nav-link">Кабинет</a>
+                  {% if user.is_authenticated %}
+                    {% if user.role == "student" %}
+                      <a href="{% url 'users:student:dashboard' %}" class="nav-link">Кабинет</a>
+                    {% elif user.role == 'curator' %}
+                      <a href="{% url 'users:curator:dashboard' %}" class="nav-link">Кабинет</a>
+                    {% elif user.role == 'admin' %}
+                      <a href="#" class="nav-link">Кабинет</a>
+                    {% endif %}
+                  {% endif %}
                 </li>
                 <li class="nav-item dropdown">
                   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-current="page">Аккаунт</a>
@@ -175,27 +183,27 @@
               </ul>
             </div>
             <div class="offcanvas-header border-top">
-              <a href="https://themes.getbootstrap.com/product/silicon-business-technology-template-ui-kit/" class="btn btn-primary w-100" target="_blank" rel="noopener">
-                <i class="bx bx-cart fs-4 lh-1 me-1"></i>
-                �&nbsp;Buy now
+              <a href="{% url 'users:student:logout' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                <i class="bx bx-log-out fs-4 lh-1 me-1"></i>
+                Выйти
               </a>
-            </div>      
+            </div> 
           </div>
           <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
-            
+
           </div>
 
 
           <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          
+
         </div>
       </header>
 
 
       {% block content %}
-          
+
       {% endblock %}
     </main>
 
@@ -257,7 +265,7 @@
       <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
     </a>
 
-    
+
     <!-- Main Theme Script -->
     <script src="{% static 'student/js/theme.min.js'  %}"></script>
     <script src="{% static 'student/js/jarallax.min.js' %}"></script>
@@ -267,6 +275,6 @@
     <script src="{% static 'student/js/lg-video.min.js' %}"></script>
     <script src="{% static 'student/js/swiper-bundle.min.js' %}"></script>
     <script src="{% static 'student/js/theme.min.js' %}"></script>
-  
+
 </body>
 </html>

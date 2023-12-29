@@ -77,9 +77,6 @@ class StudentOrderHistoryView(LoginRequiredMixin, ListView):
         return StudentOrderHistory.objects.filter(student=self.request.user)
 
 
-
-
-
 class StudentNotificationListView(ListView):
     model = Notification
     template_name = 'users/student/student_notifications.html'

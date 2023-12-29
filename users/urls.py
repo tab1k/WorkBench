@@ -10,6 +10,7 @@ urlpatterns = [
     path('administrator/', include('administrator.urls', namespace='administrator')),
     path('student/', include('student.urls', namespace='student')),
     path('curator/', include('curator.urls', namespace='curator')),
+    path('blog/', include('blog.urls')),
     path('back-to-home/', back_to_home, name='back_to_home'),
     path('open-website/', open_website, name='open_website'),
 ]
