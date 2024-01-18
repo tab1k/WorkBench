@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse
+
 from users.models import User
 from embed_video.fields import EmbedVideoField
 
@@ -26,6 +28,7 @@ class Course(models.Model):
     description = models.TextField()  # Описание курса
     duration = models.PositiveIntegerField()  # Продолжительность курса
     image = models.ImageField(upload_to='course_images', null=True, blank=True)
+    start_date = models.DateField(blank=True, null=True, auto_created=True)
     course_type = models.ForeignKey(CourseType, on_delete=models.CASCADE, related_name='courses') # Связь с моделью "Course Type"
     curators = models.ManyToManyField(get_user_model())   # Связь с моделью "Curator"
     students = models.ManyToManyField(User, related_name='courses', blank=True)
@@ -68,11 +71,16 @@ class Lesson(models.Model):
     start_datetime = models.DateTimeField(blank=True, null=True)
     video = EmbedVideoField(blank=True, null=True) # Видео
     learn_documentation = models.FileField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    order = models.PositiveIntegerField(default=0)
     module = models.ForeignKey(Module, on_delete=models.CASCADE)
 
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('users:student:courses:lesson_view', args=[str(self.id)])
 
     class Meta:
         verbose_name = 'Урок'

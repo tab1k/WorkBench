@@ -6,7 +6,7 @@ from django.conf import settings
 app_name = 'users'
 
 urlpatterns = [
-    path('login/', login_view, name='login'),
+    path('login/', UserLoginView.as_view(), name='login'),
     path('administrator/', include('administrator.urls', namespace='administrator')),
     path('student/', include('student.urls', namespace='student')),
     path('curator/', include('curator.urls', namespace='curator')),

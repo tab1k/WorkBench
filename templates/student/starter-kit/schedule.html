@@ -53,124 +53,41 @@
         <!-- PAGE BODY-->
 
         {% block content %}
-          <div class="page-body">
-            <div class="container-fluid">
-                <div class="page-title">
-                    <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <h3>Расписание</h3>
-                        </div>
-                        <div class="col-md-6">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{% url 'users:student:student' %}">                                       <i data-feather="home"></i></a></li>
-                                <li class="breadcrumb-item active">Расписание</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Container-fluid starts-->
-            <div class="container-fluid">
-                <div class="card shadow">
-                    <div class="card-header py-3">
-                        <p class="text-primary m-0 fw-bold" style="color: #22549E;">Информация о курсах</p>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            {% for group in grouped_schedules %}
-                            <div class="col-md-6">
-                                <div class="schedule-block">
-                                    <h5 class="course-title">{{ group.course.title }}</h5>
-                                    <table class="table table-bordered schedule-table">
-                                        <thead>
-                                            <tr>
-                                                <th>День недели</th>
-                                                <th>Время</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for schedule in group.schedules %}
+        <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+            <div class="ps-md-3 ps-lg-0 mt-md-2 py-md-4">
+                <h1 class="h2 pt-xl-1 pb-3">Расписание</h1>
+                <div class="row">
+                    {% for group in grouped_schedules %}
+                        <div class="col-md-12"> <!-- Изменил размер колонки -->
+                            <div class="schedule-block border rounded-3 mb-4 mb-lg-5 p-3">
+                                <h5 class="course-title">{{ group.course.title }}</h5>
+                                <table class="table table-bordered schedule-table">
+                                    <thead>
+                                        <tr>
+                                            <th>День недели</th>
+                                            <th>Время</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for schedule in group.schedules %}
                                             <tr>
                                                 <td>{{ schedule.get_weekdays_display }}</td>
                                                 <td>{{ schedule.start_time|time:"H:i" }} - {{ schedule.end_time|time:"H:i" }}</td>
                                             </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        {% if user_role == 'admin' %}
-                        <div class="text-center mt-4">
-                            <a href="#" class="btn btn-primary">Добавить расписание</a>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-xl-4 col-lg-12 xl-50 calendar-sec box-col-6">
-                        <div class="card gradient-primary o-hidden">
-                            <div class="card-body">
-                                <div class="default-datepicker">
-                                    <div class="datepicker-here" data-language="en"></div>
-                                </div>
-                                <span class="default-dots-stay overview-dots full-width-dots">
-                                    <span class="dots-group">
-                                        <span class="dots dots1"></span>
-                                        <span class="dots dots2 dot-small"></span>
-                                        <span class="dots dots3 dot-small"></span>
-                                        <span class="dots dots4 dot-medium"></span>
-                                        <span class="dots dots5 dot-small"></span>
-                                        <span class="dots dots6 dot-small"></span>
-                                        <span class="dots dots7 dot-small-semi"></span>
-                                        <span class="dots dots8 dot-small-semi"></span>
-                                        <span class="dots dots9 dot-small"></span>
-                                    </span>
-                                </span>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
+    {% endblock %}
 
-        {% endblock %}
+
       </div>
     </div>
-    <!-- latest jquery-->
-    <script src="{% static 'admin/assets/js/jquery-3.5.1.min.js' %}"></script>
-    <!-- Bootstrap js-->
-    <script src="{% static 'admin/assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
-    <!-- feather icon js-->
-    <script src="{% static 'admin/assets/js/icons/feather-icon/feather.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/icons/feather-icon/feather-icon.js' %}"></script>
-    <!-- scrollbar js-->
-    <script src="{% static 'admin/assets/js/scrollbar/simplebar.js' %}"></script>
-    <script src="{% static 'admin/assets/js/scrollbar/custom.js' %}"></script>
-    <!-- Sidebar jquery-->
-    <script src="{% static 'admin/assets/js/config.js' %}"></script>
-    <!-- Plugins JS start-->
-    <script src="{% static 'admin/assets/js/sidebar-menu.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/chartist/chartist.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/chartist/chartist-plugin-tooltip.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/knob/knob.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/knob/knob-chart.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/apex-chart/apex-chart.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/apex-chart/stock-prices.js' %}"></script>
-    <script src="{% static 'admin/assets/js/notify/bootstrap-notify.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/dashboard/default.js' %}"></script>
-    <script src="{% static 'admin/assets/js/notify/index.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.en.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/handlebars.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/typeahead.bundle.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/typeahead.custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead-search/handlebars.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead-search/typeahead-custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/tooltip-init.js' %}"></script>
-    <script src="{% static 'admin/assets/js/script.js' %}"></script>
-    <script src="{% static 'admin/assets/js/theme-customizer/customizer.js' %}"></script>
+    
   </body>
 </html>

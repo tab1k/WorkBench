@@ -25,7 +25,9 @@ SECRET_KEY = "django-insecure-^g3y09%yta_zrwfe1#kpl7hjw88$t0zyvh%xxdca6^s8h$wy5v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['185.100.67.30', 'workbench.kz', '0.0.0.0', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['185.100.67.30', 'workbench.kz', '0.0.0.0', 'localhost', '127.0.0.1', '192.168.139.80']
+
+
 
 TELEGRAM_BOT_TOKEN = '6343861611:AAECcTOCT4tkG2RqOQvsgmYHkCW7UhRnrIM'
 TELEGRAM_CHAT_ID = '-1001863583934'
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
     "administrator.apps.AdministratorConfig",
     'django_extensions',
     'embed_video',
+    "blog.apps.BlogConfig",
 ]
 
 MIDDLEWARE = [
@@ -61,6 +64,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
 ]
 
 ROOT_URLCONF = "workbench.urls"
@@ -87,24 +91,24 @@ WSGI_APPLICATION = "workbench.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 #
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": 'workbench_db',
-        "USER": 'admin',
-        "PASSWORD": 'admin',
-        "HOST": 'db',
-        "PORT": '5432',
-    }
-}
-
-
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": 'workbench_db',
+#         "USER": 'admin',
+#         "PASSWORD": 'admin',
+#         "HOST": 'db',
+#         "PORT": '5432',
 #     }
 # }
+
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 # Password validation
@@ -155,7 +159,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'users:dashboard'
+
 LOGOUT_REDIRECT_URL = 'users:login'
 SITE_URL = 'http://127.0.0.1:8000/'
 

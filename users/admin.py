@@ -30,6 +30,7 @@ class StreamAdmin(admin.ModelAdmin):
 
 admin.site.register(Stream, StreamAdmin)
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(StudentOrderHistory)
 
 
 

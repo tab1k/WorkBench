@@ -22,7 +22,7 @@ class Profile(View):
 
         if authenticated_user.role == 'student':
             courses = Course.objects.filter(students=authenticated_user)
-            return render(request, 'student/starter-kit/user_profile.html', {'context': context, 'courses': courses})
+            return render(request, 'student/profile/user_profile.html', {'context': context, 'courses': courses})
         elif authenticated_user.role == 'curator':
             courses = Course.objects.filter(curators=authenticated_user)
             return render(request, 'curator/starter-kit/profile.html', {'context': context, 'courses': courses})

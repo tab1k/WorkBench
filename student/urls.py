@@ -1,22 +1,25 @@
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.urls import path, include
 from student.views import *
 
 app_name = 'student'
 
 urlpatterns = [
-    path('', dashboard_view, name='student'),
-    path('previous/<int:lesson_id>/', show_previous_lesson, name='previous_lesson'),
-    path('next/<int:lesson_id>/', show_next_lesson, name='next_lesson'),
     path('courses/', include('courses.urls')),
-    path('profile/', include('profiles.urls', namespace='profile')),
+    path('blog/', include('blog.urls')),
     path('schedule/', include('schedule.urls')),
+    path('dashboard/', StudentDashboardView.as_view(), name='dashboard'),
+    path('profile/', StudentProfileView.as_view(), name='profile'),
+    path('security/', CustomPasswordChangeView.as_view(), name='security'),
+    path('order-history/', StudentOrderHistoryView.as_view(), name='order-history'),
     path('notifications/', StudentNotificationListView.as_view(), name='student_notifications'),
     path('messages/', StudentMessagesListView.as_view(), name='student_messages'),
     path('send_response/<int:comment_id>/', SendResponseView.as_view(), name='send_response'),
     path('student_notifications', StudentNotificationListView.as_view(), name='student_notifications'),
+    path('lesson/<int:pk>/previous/', PreviousLessonRedirectView.as_view(), name='previous_lesson_redirect'),
+    path('lesson/<int:pk>/next/', NextLessonRedirectView.as_view(), name='next_lesson_redirect'),
     path('logout/', LogoutView.as_view(), name='logout'),
 
-    # Другие пути для пользователей...
 ]
 
 

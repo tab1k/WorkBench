@@ -1,0 +1,123 @@
+{% extends 'student/profile/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <title>Silicon | Account - Payment Details</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Silicon - Multipurpose Technology Bootstrap Template">
+    <meta name="keywords" content="bootstrap, business, creative agency, mobile app showcase, saas, fintech, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="Createx Studio">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Theme switcher (color modes) -->
+    <script async="" src="js/gtm.js"></script><script src="js/theme-switcher.js"></script>
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#6366f1">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="css/boxicons.min.css">
+
+    <!-- Main Theme Styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="css/theme.min.css">
+
+  <!-- Body -->
+  <body>
+
+    <main class="page-wrapper">
+
+      <section class="container pt-5">
+        <div class="row">
+        
+
+            {% block content %}
+          <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+            <div class="ps-md-3 ps-lg-0 mt-md-2 pt-md-4 pb-md-2">
+              <h1 class="h2 pt-xl-1 mb-3 pb-2 pb-lg-3">Чек</h1>
+              <h2 class="h5 text-primary mb-4">Эти чеки генерируется компанией - WorkBench.</h2>
+              {% for order in orders %}  
+              <div class="card d-sm-flex flex-sm-row align-items-sm-center justify-content-between border-0 shadow-sm p-3 p-md-4 mb-4">
+                <div class="d-flex align-items-center pe-sm-3">
+                  <img style="border-radius: 10px;" src="{% static 'website/img/logo.jpg' %}" width="84" alt="WorkBench">
+                  <div class="ps-3 ps-sm-4">
+                    <h6 class="mb-2">{{ order.student.first_name }} {{ order.student.last_name }} <span class="badge bg-success ms-1">Оплачен</span></h6>
+                    <div class="fs-sm">Дата создания - {{ order.created_date }}</div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end pt-3 pt-sm-0">
+                  <button type="button" class="btn btn-outline-secondary px-3 px-xl-4 me-3" onclick="showOrderDetails('{{ order.student.first_name }}', '{{ order.student.last_name }}', '{{ order.created_date }}')">
+                      <i class="bx bx-show fs-xl me-lg-1 me-xl-2"></i>
+                      <span class="d-none d-lg-inline">Посмотреть</span>
+                    </button>
+                </div>
+              </div>
+              {% endfor %}  
+            </div>
+          </div>
+            {% for order in orders %}  
+            <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Чек № {{ order.student_id }}.</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" style="color: black;">
+                    <p>Дата создания аккаунта: {{ order.created_date }}</p>
+                    <b>ФИО: {{ order.student.first_name }} {{ order.student.last_name }}</b>
+                    <p id="orderDetails"></p>
+                    <p>Статус: <span class="badge bg-success ms-1">Оплачен</span></p>  
+                    <p>Метод оплаты: {{ order.get_cash_method_name }}</p>
+                     {% if order.bank %}
+                    <p>Банк: {{ order.get_bank_name }}</p>
+                      {% endif %}
+                    <div class="modal-footer">
+                        <p >Сумма к оплате: {{ order.cash_count }} тг.</p>
+                    </div>
+                    
+                  </div>
+                  <div class="modal-footer">
+                    <a id="downloadLink" class="btn btn-primary" download="receipt.txt" href="#">Скачать чек</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}      
+            <script>
+              function showOrderDetails() {
+                // Сгенерируйте содержимое чека для скачивания
+                var receiptContent = 'Содержимое вашего чека';
+            
+                // Обновите ссылку для скачивания
+                var downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(receiptContent);
+            
+                // Показать модальное окно
+                var myModal = new bootstrap.Modal(document.getElementById('orderModal'));
+                myModal.show();
+              }
+            </script>
+
+            {% endblock %}
+        </div>
+      </section>
+    </main>
+
+
+  
+</body>
+</html>

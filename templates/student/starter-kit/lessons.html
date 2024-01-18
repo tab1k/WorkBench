@@ -1,313 +1,405 @@
 {% extends 'student/starter-kit/base.html' %}
+<!DOCTYPE html>
 {% load static %}
 {% load embed_video_tags %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{% static 'admin/assets/images/favicon.png' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'admin/assets/images/favicon.png' %}" type="image/x-icon">
-    {% block css %}<title>Главная</title>{% endblock %}
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/font-awesome.css' %}">
-    <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/icofont.css' %}">
-    <!-- Themify icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/themify.css' %}">
-    <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/flag-icon.css' %}">
-    <!-- Feather icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/feather-icon.css' %}">
-    <!-- Plugins css start-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/scrollbar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/animate.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/chartist.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/date-picker.css' %}">
-    <!-- Plugins css Ends-->
-    <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/bootstrap.css' %}">
-    <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/style.css' %}">
-    <link id="color" rel="stylesheet" href="{% static 'admin/assets/css/color-1.css' %}" media="screen">
-    <!-- Responsive css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/responsive.css' %}">
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <title>Silicon | Account - Messages</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Silicon - Multipurpose Technology Bootstrap Template">
+    <meta name="keywords" content="bootstrap, business, creative agency, mobile app showcase, saas, fintech, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="Createx Studio">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Theme switcher (color modes) -->
+    <script async="" src="js/gtm.js"></script><script src="{% static 'student/js/theme-switcher.js' %}"></script>
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#6366f1">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="{% static 'student/css/boxicons.min.css' %}">
+    <link rel="stylesheet" media="screen" href="{% static 'student/css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" media="screen" href="{% static 'student/css/theme.min.css' %}">
+
+    
+
   </head>
-  <body onload="startTime()">
-    <!-- tap on top starts-->
-    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
-    <!-- tap on tap ends-->
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper compact-wrapper" id="pageWrapper">
 
-      <div class="page-body-wrapper">
 
-        {% block content %}
-          <div class="page-body">
-            <div class="container-fluid">
-              <div class="page-title">
-                <div class="row">
-                  <div class="col-6">
-                    <h3><a href="{% url 'users:admin:courses:courses' %}"><b>{{ lesson.title }}</b></a></h3>
-                  </div>
-                  <div class="col-6">
+  <!-- Body -->
+  <body>
+    <main class="page-wrapper">
+      <section class="container pt-5">
+        <div class="row">
+
+            {% block content %}
+                
+          <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+            <div class="ps-md-3 ps-lg-0 mt-md-2 pt-md-4 pb-md-2">
+              <h1 class="h2 pt-xl-1 mb-3 pb-2 pb-lg-3">{{ lesson.title }}</h1>
+              <div class="col-12 mb-4 mt-4">
                     <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="{% url 'users:student:student' %}"><i data-feather="home"></i></a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'users:student:dashboard' %}"><i data-feather="home"></i></a></li>
                       <li class="breadcrumb-item">Курсы</li>
                       <li class="breadcrumb-item active">Модули</li>
                       <li class="breadcrumb-item active">Уроки</li>
                       <li class="breadcrumb-item active">{{ lesson.title }}</li>
                     </ol>
+              </div>
+              <div class="buttons d-flex justify-content-around mb-5 mt-5">
+                  {% if previous_lesson %}
+                      <a href="{% url 'users:student:previous_lesson_redirect' pk=lesson.id %}" class="btn btn-primary">Предыдущий урок</a>
+                  {% else %}
+                      <button class="btn btn-secondary" disabled>Предыдущий</button>
+                  {% endif %}
+                  {% if next_lesson %}
+                      <a href="{% url 'users:student:next_lesson_redirect' pk=lesson.id %}" class="btn btn-primary">Следующий урок</a>
+                  {% else %}
+                      <button class="btn btn-secondary" disabled>Следующий урок</button>
+                  {% endif %}
+              </div>  
+                
+              <div class="buttons d-flex justify-content-around mb-5 mt-5">
+                  {% video lesson.video width="800" height="450" %}
+              </div>
+            
+              <div class="card d-sm-flex flex-sm-row align-items-sm-center justify-content-between border-0 shadow-sm p-3 p-md-4 mb-4">
+                <div class="d-flex align-items-center pe-sm-3">
+                  <img src="{% static 'student/images/lesson.webp' %}" width="84" alt="Visa">
+                  <div class="ps-3 ps-sm-4">
+                    <h6 class="mb-2">{{ lesson.title }}</h6>
+                    {% if lesson.description %}
+                        <div class="fs-sm">Об уроке: {{ lesson.description }} </div>
+                    {% endif %}
+                    {% if lesson.learn_documentation %}  
+                        <div class="fs-sm">Документация: <a href="{{ lesson.learn_documentation.url }}" target="_blank">{{ lesson.learn_documentation.url|truncatechars:10 }} 📎</div>
+                    {% endif %}  
+                  </div>
+                    
+                </div>
+                
+                <div class="d-flex justify-content-end pt-3 pt-sm-0">
+                    {% if lesson.test_set.exists %}
+                  <a href="{% url 'users:student:courses:tests:take_test' lesson_id=lesson.id %}" type="button" class="btn btn-outline-secondary px-3 px-xl-4 me-3">
+                    <i class="bx bx-edit fs-xl me-lg-1 me-xl-2"></i>
+                    <span class="d-none d-lg-inline">Тест</span>
+                  </a>
+                    {% endif %}
+                </div>
+              </div>
+
+                
+            </div>
+              
+            <div class="ps-md-3 mt-md-2 pt-md-4 pb-md-2">
+              <div class="row g-0 border rounded-3 shadow-sm position-relative overflow-hidden">
+
+                <!-- Contacts list -->
+                <div class="col-lg-4">
+                  <div id="contactsList" class="offcanvas-lg offcanvas-start position-absolute position-lg-relative h-100 bg-secondary shadow-none border-end" data-bs-scroll="true" data-bs-backdrop="false" style="max-height: 712px;">
+                    <div class="card-header w-100 border-0 p-4">
+                      <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0">Messages</h1>
+                        <button type="button" class="btn btn-link nav-link bg-faded-primary-hover d-lg-none py-2 ps-2 pe-3 me-n3" data-bs-dismiss="offcanvas" data-bs-target="#contactsList">
+                          <i class="bx bx-x fs-xl me-1"></i>
+                          Close
+                        </button>
+                      </div>
+                      <div class="position-relative">
+                        <input type="text" class="form-control pe-5" placeholder="Search">
+                        <i class="bx bx-search fs-xl text-nav position-absolute top-50 end-0 translate-middle-y me-3"></i>
+                      </div>
+                    </div>
+                    <div class="card-body swiper scrollbar-hover overflow-hidden w-100 p-0" data-swiper-options="{
+                      " direction":="" "vertical",="" "slidesperview":="" "auto",="" "freemode":="" true,="" "scrollbar":="" {="" "el":="" ".swiper-scrollbar"="" },="" "mousewheel":="" true="" }"="">
+                      <div class="swiper-wrapper">
+                        <div class="swiper-slide h-auto">
+
+                          <!-- Contact -->
+                          <a href="#" class="d-flex align-items-start border-bottom text-decoration-none bg-faded-primary-hover py-3 px-4">
+                            <img src="images/19.jpg" class="rounded-circle" width="40" alt="Devon Lane">
+                            <div class="w-100 ps-2 ms-1">
+                              <div class="d-flex align-items-center justify-content-between mb-1">
+                                <h6 class="mb-0 me-2">Devon Lane</h6>
+                                <span class="fs-xs text-muted">18:02</span>
+                              </div>
+                              <p class="fs-sm text-body mb-0">Dolor, quam habitant...</p>
+                            </div>
+                          </a>
+
+                          <!-- Contact (active) -->
+                          <a href="#" class="position-relative d-flex align-items-start border-bottom text-decoration-none bg-light pe-none py-3 px-4">
+                            <div class="position-absolute top-0 start-0 bg-primary w-2 h-100"></div>
+                            <img src="images/20.jpg" class="rounded-circle" width="40" alt="Albert Flores">
+                            <div class="w-100 ps-2 ms-1">
+                              <div class="d-flex align-items-center justify-content-between mb-1">
+                                <h6 class="mb-0 me-2">Albert Flores</h6>
+                                <span class="fs-xs text-muted">17:33</span>
+                              </div>
+                              <p class="fs-sm text-body mb-0">You are welcome 😊</p>
+                            </div>
+                          </a>
+
+                          <!-- Contact -->
+                          <a href="#" class="d-flex align-items-start border-bottom text-decoration-none bg-faded-primary-hover py-3 px-4">
+                            <img src="images/21.jpg" class="rounded-circle" width="40" alt="Bessie Cooper">
+                            <div class="w-100 ps-2 ms-1">
+                              <div class="d-flex align-items-center justify-content-between mb-1">
+                                <h6 class="mb-0 me-2">Bessie Cooper</h6>
+                                <span class="fs-xs text-muted">12:04</span>
+                              </div>
+                              <p class="fs-sm text-body mb-0">Typing...</p>
+                            </div>
+                          </a>
+
+                          <!-- Contact -->
+                          <a href="#" class="d-flex align-items-start border-bottom text-decoration-none bg-faded-primary-hover py-3 px-4">
+                            <img src="images/22.jpg" class="rounded-circle" width="40" alt="Ronald Richards">
+                            <div class="w-100 ps-2 ms-1">
+                              <div class="d-flex align-items-center justify-content-between mb-1">
+                                <h6 class="mb-0 me-2">Ronald Richards</h6>
+                                <span class="fs-xs text-muted">08:00</span>
+                              </div>
+                              <p class="fs-sm text-body mb-0">Ok 👌</p>
+                            </div>
+                          </a>
+
+                          <!-- Contact -->
+                          <a href="#" class="d-flex align-items-start border-bottom text-decoration-none bg-faded-primary-hover py-3 px-4">
+                            <img src="images/23.jpg" class="rounded-circle" width="40" alt="Robert Fox">
+                            <div class="w-100 ps-2 ms-1">
+                              <div class="d-flex align-items-center justify-content-between mb-1">
+                                <h6 class="mb-0 me-2">Robert Fox</h6>
+                                <span class="fs-xs text-muted">14 Nov</span>
+                              </div>
+                              <p class="fs-sm text-body mb-0">Praesent ut mi.</p>
+                            </div>
+                          </a>
+
+                          <!-- Contact -->
+                          <a href="#" class="d-flex align-items-start border-bottom text-decoration-none bg-faded-primary-hover py-3 px-4">
+                            <img src="images/24.jpg" class="rounded-circle" width="40" alt="Jerome Bell">
+                            <div class="w-100 ps-2 ms-1">
+                              <div class="d-flex align-items-center justify-content-between mb-1">
+                                <h6 class="mb-0 me-2">Jerome Bell</h6>
+                                <span class="fs-xs text-muted">8 Oct</span>
+                              </div>
+                              <p class="fs-sm text-body mb-0">In pretium a eget nunc...</p>
+                            </div>
+                          </a>
+
+                          <!-- Contact -->
+                          <a href="#" class="d-flex align-items-start border-bottom text-decoration-none bg-faded-primary-hover py-3 px-4">
+                            <img src="images/25.jpg" class="rounded-circle" width="40" alt="Kathryn Murphy">
+                            <div class="w-100 ps-2 ms-1">
+                              <div class="d-flex align-items-center justify-content-between mb-1">
+                                <h6 class="mb-0 me-2">Kathryn Murphy</h6>
+                                <span class="fs-xs text-muted">16 Sep</span>
+                              </div>
+                              <p class="fs-sm text-body mb-0">Tempor amet?</p>
+                            </div>
+                          </a>
+
+                          <!-- Contact -->
+                          <a href="#" class="d-flex align-items-start border-bottom text-decoration-none bg-faded-primary-hover py-3 px-4">
+                            <img src="images/26.jpg" class="rounded-circle" width="40" alt="Dianne Russell">
+                            <div class="w-100 ps-2 ms-1">
+                              <div class="d-flex align-items-center justify-content-between mb-1">
+                                <h6 class="mb-0 me-2">Dianne Russell</h6>
+                                <span class="fs-xs text-muted">27 Aug</span>
+                              </div>
+                              <p class="fs-sm text-body mb-0">Vehicula accumsan leo.</p>
+                            </div>
+                          </a>
+
+                          <!-- Contact -->
+                          <a href="#" class="d-flex align-items-start border-bottom text-decoration-none bg-faded-primary-hover py-3 px-4">
+                            <img src="images/27.jpg" class="rounded-circle" width="40" alt="Cody Fisher">
+                            <div class="w-100 ps-2 ms-1">
+                              <div class="d-flex align-items-center justify-content-between mb-1">
+                                <h6 class="mb-0 me-2">Cody Fisher</h6>
+                                <span class="fs-xs text-muted">18 Aug</span>
+                              </div>
+                              <p class="fs-sm text-body mb-0">Erat cum amet viverra...</p>
+                            </div>
+                          </a>
+
+                          <!-- Contact -->
+                          <a href="#" class="d-flex align-items-start text-decoration-none bg-faded-primary-hover py-3 px-4">
+                            <img src="images/28.jpg" class="rounded-circle" width="40" alt="Darlene Robertson">
+                            <div class="w-100 ps-2 ms-1">
+                              <div class="d-flex align-items-center justify-content-between mb-1">
+                                <h6 class="mb-0 me-2">Darlene Robertson</h6>
+                                <span class="fs-xs text-muted">13 Jul</span>
+                              </div>
+                              <p class="fs-sm text-body mb-0">Orci convallis eget sit...</p>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="swiper-scrollbar end-0"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Chat window -->
+                <div class="col-lg-8" style="max-height: 712px;">
+                  <div class="card h-100 border-0 bg-transparent pb-3">
+
+                    <!-- Header -->
+                    <div class="navbar card-header d-flex align-items-center justify-content-between w-100 p-sm-4 p-3">
+                      <div class="d-flex align-items-center pe-3">
+                        <button type="button" class="navbar-toggler d-lg-none me-3" data-bs-toggle="offcanvas" data-bs-target="#contactsList" aria-controls="contactsList" aria-label="Toggle contacts list">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <img src="images/20.jpg" class="rounded-circle" width="40" alt="Albert Flores">
+                        <h6 class="mb-0 px-1 mx-2">Albert Flores</h6>
+                        <div class="bg-success rounded-circle" style="width: 8px; height: 8px;"></div>
+                      </div>
+                      <div class="d-flex">
+                        <div class="dropdown me-sm-2">
+                          <button type="button" class="btn btn-outline-primary px-2 px-sm-3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bx bx-dots-horizontal-rounded fs-xl mx-1 mx-sm-0 me-xl-2"></i>
+                            <span class="d-none d-xl-inline">More</span>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-end my-1">
+                            <a href="#" class="dropdown-item">View profile</a>
+                            <a href="#" class="dropdown-item">Disable notifications</a>
+                            <a href="#" class="dropdown-item">Edit contact</a>
+                            <a href="#" class="dropdown-item">Delete contact</a>
+                            <a href="#" class="dropdown-item">Delete chat</a>
+                            <a href="#" class="dropdown-item">Clear history</a>
+                            <a href="#" class="dropdown-item">Block user</a>
+                          </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-danger d-none d-sm-inline-flex px-2 px-sm-3 ms-1">
+                          <i class="bx bx-trash-alt fs-xl me-xl-2"></i>
+                          <span class="d-none d-xl-inline">Clear chat</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Messages -->
+                    <div class="card-body swiper scrollbar-hover overflow-hidden w-100 pb-0" data-swiper-options="{
+                      " direction":="" "vertical",="" "slidesperview":="" "auto",="" "freemode":="" true,="" "scrollbar":="" {="" "el":="" ".swiper-scrollbar"="" },="" "mousewheel":="" true="" }"="">
+                      <div class="swiper-wrapper">
+                        <div class="swiper-slide h-auto">
+                          <div class="fs-sm text-muted text-center mb-3">November 27, 2023</div>
+
+                          <!-- User message -->
+                          <div class="d-flex align-items-start mb-3">
+                            <img src="{% static 'student/images/20.jpg' %}" class="rounded-circle" width="40" alt="Albert Flores">
+                            <div class="ps-2 ms-1" style="max-width: 348px;">
+                              <div class="bg-secondary p-3 mb-1" style="border-top-right-radius: .5rem; border-bottom-right-radius: .5rem; border-bottom-left-radius: .5rem;">Tellus, ipsum, commodo, dui ac. Ultrices mi arcu orci aliquam et.</div>
+                              <div class="fs-sm text-muted">09:04 am</div>
+                            </div>
+                          </div>
+
+                          <!-- Own message -->
+                          <div class="d-flex align-items-start justify-content-end mb-3">
+                            <div class="pe-2 me-1" style="max-width: 348px;">
+                              <div class="bg-primary text-light p-3 mb-1" style="border-top-left-radius: .5rem; border-bottom-right-radius: .5rem; border-bottom-left-radius: .5rem;">Orci convallis eget sit ultricies rutrum.</div>
+                              <div class="d-flex justify-content-end align-items-center fs-sm text-muted">
+                                10:36 am
+                                <i class="bx bx-check-double fs-xl text-primary ms-2"></i>
+                              </div>
+                            </div>
+                            <img src="images/29.jpg" class="rounded-circle" width="40" alt="Albert Flores">
+                          </div>
+
+                          <!-- User message -->
+                          <div class="d-flex align-items-start mb-3">
+                            <img src="{% static 'student/images/20.jpg' %}" class="rounded-circle" width="40" alt="Albert Flores">
+                            <div class="ps-2 ms-1" style="max-width: 348px;">
+                              <div class="bg-secondary p-3 mb-1" style="border-top-right-radius: .5rem; border-bottom-right-radius: .5rem; border-bottom-left-radius: .5rem;">Blandit tempus, erat cum amet viverra pharetra, morbi. Vivamus pretium tristique amet, nulla aenean sed blandit?</div>
+                              <div class="fs-sm text-muted">14:48 pm</div>
+                            </div>
+                          </div>
+
+                          <!-- Own message -->
+                          <div class="d-flex align-items-start justify-content-end mb-3">
+                            <div class="pe-2 me-1" style="max-width: 348px;">
+                              <div class="bg-primary text-light p-3 mb-1" style="border-top-left-radius: .5rem; border-bottom-right-radius: .5rem; border-bottom-left-radius: .5rem;">Vel enim lacus, ac, fermentum, id. Aliquet faucibus pellentesque egestas.</div>
+                              <div class="bg-primary text-light p-3 mb-1" style="border-top-left-radius: .5rem; border-bottom-right-radius: .5rem; border-bottom-left-radius: .5rem;">Thank you!</div>
+                              <div class="d-flex justify-content-end align-items-center fs-sm text-muted">
+                                16:29 pm
+                                <i class="bx bx-check fs-xl text-primary ms-2"></i>
+                              </div>
+                            </div>
+                            <img src="images/29.jpg" class="rounded-circle" width="40" alt="Albert Flores">
+                          </div>
+
+                          <div class="fs-sm text-muted text-center mb-3">November 28, 2023</div>
+
+                          <!-- User message -->
+                          <div class="d-flex align-items-start mb-3">
+                            <img src="{% static 'student/images/20.jpg' %}" class="rounded-circle" width="40" alt="Albert Flores">
+                            <div class="ps-2 ms-1" style="max-width: 348px;">
+                              <div class="bg-secondary p-3 mb-1" style="border-top-right-radius: .5rem; border-bottom-right-radius: .5rem; border-bottom-left-radius: .5rem;">You are welcome 😊</div>
+                              <div class="fs-sm text-muted">17:33 pm</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="swiper-scrollbar end-0"></div>
+                    </div>
+
+                    <!-- Footer (Send message form) -->
+                    <div class="card-footer d-sm-flex w-100 border-0 pt-3 pb-3 px-4">
+                      <div class="position-relative w-100 me-2 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-lg" style="padding-right: 85px;">
+                        <div class="position-absolute top-50 end-0 translate-middle-y d-flex zindex-3 me-2">
+                          <button type="button" class="btn btn-icon btn-sm btn-link nav-link bg-faded-primary-hover me-1" aria-label="Attachment">
+                            <i class="bx bx-paperclip fs-4"></i>
+                          </button>
+                          <button type="button" class="btn btn-icon btn-sm btn-link nav-link bg-faded-primary-hover" aria-label="Emoji">
+                            <i class="bx bx-smile fs-4"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-primary btn-icon btn-lg d-none d-sm-inline-flex ms-1" aria-label="Send">
+                        <i class="bx bx-send"></i>
+                      </button>
+                      <button type="button" class="btn btn-primary btn-lg w-100 d-sm-none">
+                        <i class="bx bx-send fs-xl me-2"></i>
+                        Send
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="container-fluid">
-              <div class="container mt-5">
-                <div class="row">
-                  <div class="col-md-8 offset-md-2">
-                      <div class="buttons d-flex justify-content-around mb-3">
-                          {% if previous_lesson %}
-                              <a href="#" class="btn btn-primary">Предыдущий</a>
-                          {% else %}
-                              <button class="btn btn-secondary" disabled>Предыдущий</button>
-                          {% endif %}
-                          {% if next_lesson %}
-                              <a href="#" class="btn btn-primary">Следующий урок</a>
-                          {% else %}
-                              <button class="btn btn-secondary" disabled>Следующий урок</button>
-                          {% endif %}
-                      </div>
-                      <div class="courses">
-                          <div class="video">
-                              <div class="theme">
-                                  <h5>{{ lesson.title }}</h5>
-                                  <h6>{{ lesson.description }}</h6>
-                                  {% if lesson.learn_documentation %}
-                                      <h6>Документация: <a href="{{ lesson.learn_documentation.url }}" target="_blank">{{ lesson.learn_documentation.url|truncatechars:10 }} 📎</a></h6>
-                                  {% endif %}
-                              </div>
-                              <style>
-                                  .video-wrapper {
-                                      position: relative;
-                                      padding-bottom: 56.25%;
-                                      height: 0;
-                                  }
-
-                                  .video-wrapper iframe {
-                                      position: absolute;
-                                      top: 0;
-                                      left: 0;
-                                      width: 100%;
-                                      height: 100%;
-                                      border-radius: 10px;
-                                  }
-
-                                  .buttonNext {
-                                      position: relative;
-                                      z-index: 1;
-                                      margin-top: 15px;
-                                  }
-                              </style>
-                              <div class="video_course">
-                                  <div class="video-wrapper">
-                                      {% video lesson.video width="800" height="450" %}
-                                  </div>
-                                  <div class="buttonNext" style="margin-bottom: 20px;">
-                                      {% if lesson.test_set.exists %}
-                                          <a href="{% url 'users:student:courses:tests:take_test' lesson_id=lesson.id %}" class="btn btn-primary">Пройти тест</a>
-                                      {% endif %}
-                                  </div>
-                              </div>
-                              <div class="col-xl-4 xl-100 chat-sec box-col-6 w-100">
-                                <div class="card chat-default" style="margin-bottom: 70px;">
-                                  <div class="card-header card-no-border">
-                                    <div class="media media-dashboard">
-                                      <div class="media-body">
-                                        <h5 class="mb-0">Чат</h5>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="card-body chat-box">
-                                    <div class="chat">
-                                        {% for comment in curator_comments %}
-                                      <div class="media right-side-chat">
-                                        <p class="f-w-400">{{ comment.timestamp }}</p>
-                                        <div class="media-body text-end">
-                                          <div class="message-main pull-right"><span class="mb-0 text-start">{{ comment.text }}</span>
-                                            <div class="clearfix"></div>
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                      <div class="media left-side-chat">
-                                        <div class="media-body d-flex">
-                                          <div class="img-profile"> <img class="img-fluid" src="{% static 'admin/assets/images/user.png' %}" alt="Profile"></div>
-                                          <div class="main-chat">
-                                            <div class="message-main"><span class="mb-0">{{ comment.curator_response }}</span></div>
-                                          </div>
-                                        </div>
-                                        <p class="f-w-400">{{ comment.timestamp }}</p>
-                                      </div>
-                                        {%endfor%}
-                                        <div class="media right-side-chat">
-                                        <div class="media-body text-end">
-                                          <div class="message-main pull-right"><span class="loader-span mb-0 text-start" id="wave"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="container " style="margin-bottom: 70px;">
-                                        <div class="row" >
-                                            <div class="col-md-8 offset-md-2 ">
-                                                <div class="chat">
-                                                    <div class="comments">
-                                                        {% for comment in comments %}
-                                                            <div class="comment {% if comment.is_student_comment %}student-comment{% else %}instructor-comment{% endif %}">
-                                                                <div class="media">
-                                                                    <img src="{% static 'admin/assets/images/user.jpg' %}" class="mr-3 rounded-circle" alt="User Image" style="width: 40px;">
-                                                                    <div class="media-body">
-                                                                        <h5 class="mt-0"><strong>{{ comment.user }}</strong> {% if comment.is_student_comment %}(Student){% else %}(Instructor){% endif %}</h5>
-                                                                        <p>{{ comment.text }}</p>
-                                                                        {% if not comment.is_student_comment and comment.curator_response %}
-                                                                            <div class="curator-response bg-light p-2 mt-2">
-                                                                                <p><strong>Instructor:</strong> {{ comment.curator_response }}</p>
-                                                                            </div>
-                                                                        {% endif %}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        {% endfor %}
-                                                    </div>
-                                                    <div class="reply mt-4">
-                                                        <form id="commentForm" class="d-flex">
-                                                            {% csrf_token %}
-                                                            <textarea name="text" class="form-control reply-input" placeholder="Напишите свой вопрос..." rows="1"></textarea>
-                                                            <button type="submit" class="btn btn-primary ml-3">
-                                                                Отправить
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                              </div>
-                            <script>
-                                document.getElementById('commentForm').addEventListener('submit', function(event) {
-                                    event.preventDefault(); // Отменяем отправку формы по умолчанию
-
-                                    const form = event.target;
-                                    const formData = new FormData(form);
-
-                                    fetch(window.location.href, { // Используйте текущий URL страницы или другой URL, если нужно
-                                        method: 'POST',
-                                        body: formData,
-                                        headers: {
-                                            'X-CSRFToken': formData.get('csrfmiddlewaretoken') // Передаем CSRF-токен в заголовках
-                                        }
-                                    })
-                                    .then(response => response.json()) // Ожидаем JSON-ответ
-                                    .then(data => {
-                                        if (data.success) {
-                                            form.reset(); // Очищаем форму после успешной отправки
-                                            // Обновляем список комментариев на странице без перезагрузки
-                                            const commentsDiv = document.querySelector('.comments');
-                                            commentsDiv.innerHTML = ''; // Очищаем список комментариев
-                                            for (const comment of data.comments) {
-                                                const commentDiv = document.createElement('div');
-                                                commentDiv.className = 'comment';
-                                                commentDiv.innerHTML = `
-                                                    <div class="ava">
-                                                        <h5>Ваше сообщение находится на рассмотрении инструкторов ❗ </h5>
-                                                        <h6>После проверки вашего сообщения инструктором, в этом чате появятся ответ на ваш вопрос 😁</h6>
-                                                    </div>
-                                                    <div class="comment-text">
-                                                        <h5><strong>${comment.user}</strong>: ${comment.text}</h5>
-                                                    </div>`;
-                                                commentsDiv.appendChild(commentDiv);
-                                            }
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error('Error:', error);
-                                    });
-                                });
-                            </script>
-
-<!--                              <div class="chat">-->
-<!--                                  <div class="comment">-->
-<!--                                      <div class="comment-text">-->
-<!--                                          <p>Напишите свой вопрос и вам обязательно ответ наш Инструктор 😉</p>-->
-<!--                                      </div>-->
-<!--                                  </div>-->
-<!--                                  <div class="reply">-->
-<!--                                      <form action="" style="display: flex;">-->
-<!--                                          <input type="text" class="form-control reply-input" placeholder="Комментарии">-->
-<!--                                          <button class="btn btn-primary send" style="background-color: white; border: none;">-->
-<!--                                              <img src="{% static 'student/img/send.svg' %}" alt="">-->
-<!--                                          </button>-->
-<!--                                      </form>-->
-<!--                                  </div>-->
-<!--                              </div>-->
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              </div>
-            </div>
-          <!-- Container-fluid Ends-->
           </div>
-        {% endblock %}
-      </div>
-    </div>
+                
+          {% endblock %}
+      
+        </div>
+      </section>
+    </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'admin/assets/js/jquery-3.5.1.min.js' %}"></script>
-    <!-- Bootstrap js-->
-    <script src="{% static 'admin/assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
-    <!-- feather icon js-->
-    <script src="{% static 'admin/assets/js/icons/feather-icon/feather.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/icons/feather-icon/feather-icon.js' %}"></script>
-    <!-- scrollbar js-->
-    <script src="{% static 'admin/assets/js/scrollbar/simplebar.js' %}"></script>
-    <script src="{% static 'admin/assets/js/scrollbar/custom.js' %}"></script>
-    <!-- Sidebar jquery-->
-    <script src="{% static 'admin/assets/js/config.js' %}"></script>
-    <!-- Plugins JS start-->
-    <script src="{% static 'admin/assets/js/sidebar-menu.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/chartist/chartist.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/chartist/chartist-plugin-tooltip.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/knob/knob.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/knob/knob-chart.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/apex-chart/apex-chart.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/apex-chart/stock-prices.js' %}"></script>
-    <script src="{% static 'admin/assets/js/notify/bootstrap-notify.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/dashboard/default.js' %}"></script>
-    <script src="{% static 'admin/assets/js/notify/index.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.en.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/handlebars.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/typeahead.bundle.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/typeahead.custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead-search/handlebars.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead-search/typeahead-custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/tooltip-init.js' %}"></script>
-    <!-- Plugins JS Ends-->
-    <!-- Theme js-->
-    <script src="{% static 'admin/assets/js/script.js' %}"></script>
-    <script src="{% static 'admin/assets/js/theme-customizer/customizer.js' %}"></script>
-    <!-- login js-->
-    <!-- Plugin used-->
-  </body>
-</html>
+
+    <!-- Back to top button -->
+    <a href="#top" class="btn-scroll-top" data-scroll="">
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+      <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
+    </a>
+
+
+
+    <script src="{% static 'student/js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'student/js/theme.min.js' %}"></script>
+  
+</body></html>

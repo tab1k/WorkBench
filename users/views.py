@@ -1,35 +1,28 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.views import View
-from django.core.mail import send_mail
-from users.forms import LoginForm
-from users.models import User
+from django.contrib.auth.views import LoginView
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from django.urls import reverse_lazy
 
 
-def login_view(request):
-    error = None
+class UserLoginView(LoginView):
+    template_name = 'signin.html'
+    success_url = reverse_lazy('users:student:dashboard')
 
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                if user.is_staff:
-                    if user.role == 'curator':
-                        return redirect('users:curator:curator')
-                    elif user.role == 'admin':
-                        return redirect('users:admin:administrator')
-                else:
-                    return redirect('users:student:student')
-            else:
-                error = 'Не правильные данные!'
-    else:
-        form = LoginForm()
+    def form_valid(self, form):
+        super().form_valid(form)
+        user = self.request.user
+        if user.is_staff:
+            if user.role == 'curator':
+                return redirect('users:curator:curator')
+            elif user.role == 'admin':
+                return redirect('users:admin:administrator')
+        else:
+            return redirect(self.success_url)
 
-    return render(request, 'signin.html', {'form': form, 'error': error})
+    def form_invalid(self, form):
+        return render(self.request, self.template_name, {'form': form, 'error': 'Не правильные данные!'})
+
+
 
 
 # BACK_TO_HOME
