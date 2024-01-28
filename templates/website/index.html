@@ -208,14 +208,14 @@
                 </div>
               {% elif user.role == "curator" %}
                 <div class="offcanvas-header border-top">
-                  <a href="{% url 'users:curator:curator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                  <a href="{% url 'users:curator:dashboard' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
                     <i class="bx bx-log-in fs-5"></i>
                     &nbsp;Кабинет ментора
                   </a>
                 </div>
               {% elif user.role == "admin" %}
                 <div class="offcanvas-header border-top">
-                  <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                  <a href="{% url 'users:admin:dashboard' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
                     <i class="bx bx-log-in fs-5"></i>
                     &nbsp;Кабинет администратора
                   </a>
@@ -245,12 +245,12 @@
                 &nbsp;Кабинет студента
               </a>
             {% elif user.role == "curator" %}
-              <a href="{% url 'users:curator:curator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+              <a href="{% url 'users:curator:dashboard' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
                 <i class="bx bx-log-in fs-5"></i>
                 &nbsp;Кабинет ментора
               </a>
             {% elif user.role == "admin" %}
-              <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+              <a href="{% url 'users:admin:dashboard' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
                 <i class="bx bx-log-in fs-5"></i>
                 &nbsp;Кабинет администратора
               </a>

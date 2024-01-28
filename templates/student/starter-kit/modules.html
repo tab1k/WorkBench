@@ -22,15 +22,15 @@
               <div class="card border-0 shadow-sm overflow-hidden mb-4">
                 <div class="row g-0">
                     
-                  <a href="#/" class="col-sm-4 bg-repeat-0 bg-position-center bg-size-cover" style="background-image: url(/media/course_images/collection01.jpg); min-height: 13rem;" aria-label="Cover image"></a>
+                  <a href="#/" class="col-sm-4 bg-repeat-0 bg-position-center bg-size-cover" style="background-image: url({{ course.image.url }}); min-height: 13rem;" aria-label="Cover image"></a>
                     
                   <div class="col-sm-8">
                     <div class="card-body">
-                      <div class="fs-sm text-muted mb-1">16 января 2024 г.</div>
+                      <div class="fs-sm text-muted mb-1">{{ course.start_date }}</div>
                       <h2 class="h4 pb-1 mb-2">
-                        <a href="#">Начало программирования</a>
+                        <a href="#">{{ course.title }}</a>
                       </h2>
-                      <p class="mb-4 mb-lg-5">Программирование</p>
+                      <p class="mb-4 mb-lg-5">{{ course.course_type }}</p>
                       
                     </div>
                   </div>
@@ -47,16 +47,7 @@
                     <div class="fs-sm">Кол-во уроков: {{ module.lesson_set.count }}</div>
                   </div>
                 </div>
-                <div class="d-flex justify-content-end pt-3 pt-sm-0">
-                  <button type="button" class="btn btn-outline-secondary px-3 px-xl-4 me-3">
-                    <i class="bx bx-edit fs-xl me-lg-1 me-xl-2"></i>
-                    <span class="d-none d-lg-inline">Edit</span>
-                  </button>
-                  <button type="button" class="btn btn-outline-danger px-3 px-xl-4">
-                    <i class="bx bx-trash-alt fs-xl me-lg-1 me-xl-2"></i>
-                    <span class="d-none d-lg-inline">Delete</span>
-                  </button>
-                </div>
+              
               </div>
               {% endfor %}  
 

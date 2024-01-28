@@ -15,7 +15,7 @@
               <div class="col-md-8 offset-lg-1 pb-5 mb-lg-2 pt-md-5 mt-n3 mt-md-0">
             <div class="ps-md-3 ps-lg-0 mt-md-2 pt-md-4 pb-md-2">
               <div class="d-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
-                <h1 class="h2 mb-0">Список студентов</h1>
+                <h1 class="h2 mb-0">Cтуденты</h1>
               </div>
             
               <div class="row align-items-center mb-5">
@@ -29,6 +29,14 @@
                                         {% for stream in streams %}
                                             <option value="{{ stream.id }}" {% if selected_stream == stream %}selected{% endif %}>{{ stream.number }} поток</option>
                                         {% endfor %}
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label d-block">
+                                    <select class="form-select form-select-sm" onchange="window.location.href = this.options[this.selectedIndex].value">
+                                        <option value="">Действия</option>
+                                        <option value="{% url 'users:curator:courses:passed_students' %}">Выпускники</option>  
                                     </select>
                                 </label>
                             </div>
@@ -62,11 +70,11 @@
                                 </h3>
                                 <p class="fs-sm mb-2">Поток: {{ student.stream }}</p>
                             </div>
-                            <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
-                                <div class="d-flex align-items-center me-4">
-                                    <i class="bx bx-time fs-xl me-1"></i>
-                                    {{ student.date_joined }}
-                                </div>
+                            <div class="card-footer d-flex align-items-center justify-content-center fs-sm text-muted py-4">
+                                <a href="{% url 'users:curator:courses:student_progress' student_id=student.id %}" class="btn btn-outline-secondary px-3 px-lg-4 me-3">
+                                    <i class="bx bxl-graphql fs-xl me-xl-2"></i>
+                                    <span class="d-none d-xl-inline">Успеваемость</span>
+                                </a>
                             </div>
                         </article>
                     </div>
@@ -119,7 +127,5 @@
         </div>
       </section>
     </main>
-
-
-
-</body></html>
+</body>
+</html>

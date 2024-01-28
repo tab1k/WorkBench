@@ -56,8 +56,8 @@ class TakeTestView(View):
 
 class TestResultView(View):
     template_name = 'student/starter-kit/test_result.html'
-    template_name_curator = 'curator/starter-kit/test_result.html.html'
-    template_name_admin = 'admin/starter-kit/test_result.html.html'
+    template_name_curator = 'curator/starter-kit/test_result.html'
+    template_name_admin = 'admin/starter-kit/test_result.html'
 
     def get(self, request, lesson_id):
         current_user = request.user

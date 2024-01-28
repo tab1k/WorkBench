@@ -1,63 +1,67 @@
 {% extends 'admin/starter-kit/base.html' %}
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добавить модуль</title>
-    <!-- Include Bootstrap CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-</head>
-<body>
-    {% block content %}
+  <head>
+  </head>
+  <body onload="startTime()">
+    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
 
-        <div class="page-body">
-            <div class="container-fluid">
-                <div class="page-title">
-                    <h1 class="mt-2">Добавить модуль</h1>
-                </div>
-
-
-
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        {{ form.as_p }}
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+      <div class="page-body-wrapper">
+        {% block content %}
+            <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+                <div class="ps-md-3 ps-lg-0 mt-md-2 py-md-4">
+                    <div class="page-title">
+                        <h1 class="mt-2">Добавить модуль</h1>
                     </div>
+                    <div class="row">
 
-                    <button type="submit" class="btn btn-primary">Добавить</button>
-                </form>
 
-                {% if success_message %}
-                <div class="alert alert-success mt-3">
-                    {{ success_message }}
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{ form.as_p }}
+                        </div>
+                        
+                        <div class="text-center mt-4 mb-4">
+                            <button type="submit" class="btn btn-outline-primary px-3 px-lg-4 me-3">
+                                <i class="bx bx-edit fs-xl me-xl-2"></i>
+                                <span class="d-none d-xl-inline">Добавить модуль</span>
+                            </button>
+                        </div>
+                        
+                    </form>
+    
+                    {% if success_message %}
+                    <div class="alert alert-success mt-3">
+                        {{ success_message }}
+                    </div>
+                    {% endif %}
+    
+                    {% if form.errors %}
+                    <div class="alert alert-danger mt-3">
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                            <li><strong>{{ field }}:</strong>
+                                <ul>
+                                    {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    </div>
                 </div>
-                {% endif %}
-
-                {% if form.errors %}
-                <div class="alert alert-danger mt-3">
-                    <ul>
-                        {% for field, errors in form.errors.items %}
-                        <li><strong>{{ field }}:</strong>
-                            <ul>
-                                {% for error in errors %}
-                                <li>{{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}
             </div>
-        </div>
-
-
-    {% endblock %}
-
-    <!-- Include Bootstrap JS -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-</body>
+        {% endblock %}
+      </div>
+    </div>
+  </body>
 </html>
+
+
+

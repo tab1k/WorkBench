@@ -1,346 +1,238 @@
 {% extends 'admin/starter-kit/base.html' %}
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{% static 'admin/assets/images/favicon.png' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'admin/assets/images/favicon.png' %}" type="image/x-icon">
-    {% block css %}<title>Главная</title>{% endblock %}
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/font-awesome.css' %}">
-    <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/icofont.css' %}">
-    <!-- Themify icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/themify.css' %}">
-    <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/flag-icon.css' %}">
-    <!-- Feather icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/feather-icon.css' %}">
-    <!-- Plugins css start-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/scrollbar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/animate.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/chartist.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/date-picker.css' %}">
-    <!-- Plugins css Ends-->
-    <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/bootstrap.css' %}">
-    <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/style.css' %}">
-    <link id="color" rel="stylesheet" href="{% static 'admin/assets/css/color-1.css' %}" media="screen">
-    <!-- Responsive css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/responsive.css' %}">
+{% load static %}
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <title>Silicon | Account - Details</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Silicon - Multipurpose Technology Bootstrap Template">
+    <meta name="keywords" content="bootstrap, business, creative agency, mobile app showcase, saas, fintech, finance, online courses, software, medical, conference landing, services, e-commerce, shopping cart, multipurpose, shop, ui kit, marketing, seo, landing, blog, portfolio, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="Createx Studio">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+    <script async="" src="{% static 'student/js/gtm.js' %}"></script>
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'student/images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'student/images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'student/images/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'student/assets/favicon/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'student/images/safari-pinned-tab.svg' %}" color="#6366f1">
+    <link rel="shortcut icon" href="{% static 'student/favicon.ico' %}">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="{% static 'student/css/boxicons.min.css' %}">
+    
+
+    <!-- Page loading styles -->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      [data-bs-theme="dark"] .page-loading {
+        background-color: #0b0f19;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #9397ad;
+      }
+      [data-bs-theme="dark"] .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #b4b7c9;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      [data-bs-theme="dark"] .page-spinner {
+        border-color: rgba(255,255,255,.4);
+        border-right-color: transparent;
+      }
+      @-webkit-keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+ 
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WKV3GT5');
+    </script>
   </head>
-  <body onload="startTime()">
-    <!-- tap on top starts-->
-    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
-    <!-- tap on tap ends-->
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper compact-wrapper" id="pageWrapper">
-      <!-- Page Header Start-->
-      <div class="page-header">
-        <div class="header-wrapper row m-0">
-          <form class="form-inline search-full col" action="#" method="get">
-            <div class="form-group w-100">
-              <div class="Typeahead Typeahead--twitterUsers">
-                <div class="u-posRelative">
-                  <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Search Cuba .." name="q" title="" autofocus>
-                  <div class="spinner-border Typeahead-spinner" role="status"><span class="sr-only">Загрузка...</span></div><i class="close-search" data-feather="x"></i>
-                </div>
-                <div class="Typeahead-menu"></div>
-              </div>
-            </div>
-          </form>
-          <div class="header-logo-wrapper col-auto p-0">
-            <div class="logo-wrapper"><a href="index.html"><img class="img-fluid" src="{% static 'admin/assets/images/logo/logo.png' %}" alt=""></a></div>
-            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
-          </div>
-          <div class="left-header col horizontal-wrapper ps-0">
-          </div>
-          <div class="nav-right col-8 pull-right right-header p-0">
-            <ul class="nav-menus">
-              <li>                         <span class="header-search"><i data-feather="search"></i></span></li>
-              <li>
-                <div class="mode"><i class="fa fa-moon-o"></i></div>
-              </li>
-              <li class="onhover-dropdown">
-                <div class="notification-box"><i data-feather="bell"> </i><span class="badge rounded-pill badge-secondary">4                                </span></div>
-                <ul class="notification-dropdown onhover-show-div">
-                  <li><i data-feather="bell"></i>
-                    <h6 class="f-18 mb-0">Уведомления</h6>
-                  </li>
-                  <li>
-                    <p><i class="fa fa-circle-o me-3 font-primary"> </i>Delivery processing <span class="pull-right">10 min.</span></p>
-                  </li>
-                  <li>
-                    <p><i class="fa fa-circle-o me-3 font-success"></i>Order Complete<span class="pull-right">1 hr</span></p>
-                  </li>
-                  <li>
-                    <p><i class="fa fa-circle-o me-3 font-info"></i>Tickets Generated<span class="pull-right">3 hr</span></p>
-                  </li>
-                  <li>
-                    <p><i class="fa fa-circle-o me-3 font-danger"></i>Delivery Complete<span class="pull-right">6 hr</span></p>
-                  </li>
-                  <li><a class="btn btn-primary" href="#">Check all notification</a></li>
-                </ul>
-              </li>
-              <li class="onhover-dropdown"><i data-feather="message-square"></i>
-                <ul class="chat-dropdown onhover-show-div">
-                  <li><i data-feather="message-square"></i>
-                    <h6 class="f-18 mb-0">Сообщения</h6>
-                  </li>
-                  <li>
-                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/user/1.jpg' %}" alt="">
-                      <div class="status-circle online"></div>
-                      <div class="media-body"><span>Erica Hughes</span>
-                        <p>Lorem Ipsum is simply dummy...</p>
-                      </div>
-                      <p class="f-12 font-success">58 mins ago</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/user/2.jpg' %}" alt="">
-                      <div class="status-circle online"></div>
-                      <div class="media-body"><span>Kori Thomas</span>
-                        <p>Lorem Ipsum is simply dummy...</p>
-                      </div>
-                      <p class="f-12 font-success">1 hr ago</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="media"><img class="img-fluid rounded-circle me-3" src="{% static 'admin/assets/images/user/4.jpg' %}" alt="">
-                      <div class="status-circle offline"></div>
-                      <div class="media-body"><span>Ain Chavez</span>
-                        <p>Lorem Ipsum is simply dummy...</p>
-                      </div>
-                      <p class="f-12 font-danger">32 mins ago</p>
-                    </div>
-                  </li>
-                  <li class="text-center"> <a class="btn btn-primary" href="#">View All     </a></li>
-                </ul>
-              </li>
-              <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
-              <li class="profile-nav onhover-dropdown p-0 me-0">
-                <div class="media profile-media"><img class="b-r-10" src="{% static 'admin/assets/images/dashboard/profile.png' %}" alt="">
-                  <div class="media-body"><span>Emay Walter</span>
-                    <p class="mb-0 font-roboto">Администратор <i class="middle fa fa-angle-down"></i></p>
-                  </div>
-                </div>
-                <ul class="profile-dropdown onhover-show-div">
-                  <li><a href="#"><i data-feather="user"></i><span>Настройки</span></a></li>
-                  <li><a href="#"><i data-feather="mail"></i><span>Почта</span></a></li>
-                  <li><a href="#"><i data-feather="file-text"></i><span>Студенты</span></a></li>
-                  <li><a href="#"><i data-feather="settings"></i><span>Кураторы</span></a></li>
-                  <li><a href="#"><i data-feather="log-in"> </i><span>Выйти</span></a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <script class="result-template" type="text/x-handlebars-template">
-            <div class="ProfileCard u-cf">
-            <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
-            <div class="ProfileCard-details">
-            <div class="ProfileCard-realName">{{name}}</div>
-            </div>
-            </div>
-          </script>
-          <script class="empty-template" type="text/x-handlebars-template"><div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>
-        </div>
-      </div>
-      <!-- Page Body Start-->
-      <div class="page-body-wrapper">
-        <!-- Page Sidebar Start-->
-        <div class="sidebar-wrapper">
-          <div>
-            <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="{% static 'admin/assets/images/logo/logo.png' %}" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt=""></a>
-              <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-              <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
-            </div>
-            <div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid" src="{% static 'admin/assets/images/logo/logo-icon.png' %}" alt=""></a></div>
-            <nav class="sidebar-main">
-              <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
-              <div id="sidebar-menu">
-                <ul class="sidebar-links" id="simple-bar">
-                  <li class="back-btn"><a href="index.html"><img class="img-fluid" src="{% static 'admin/assets/images/logo/logo-icon.png' %}" alt=""></a>
-                    <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
-                  </li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:administrator' %}"><i data-feather="home"> </i><span>Главная</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:courses:courses' %}"><i data-feather="heart"> </i><span>Курсы</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:students_admin_check' %}"><i data-feather="list"> </i><span>Студенты</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:curators_admin_check' %}"><i data-feather="check-square"> </i><span>Кураторы</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:schedule:student_schedule' %}"><i data-feather="calendar"> </i><span>Расписание</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:courses:answers_view' %}"><i data-feather="zap"> </i><span>Лента ответов</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'users:admin:profile:profile' %}"><i data-feather="settings"> </i><span>Настройки</span></a></li>
-                  <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="{% url 'admin:index' %}"><i data-feather="search"> </i><span>Админ панель</span></a></li>
-                </ul>
-              </div>
-              <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
-            </nav>
-          </div>
-        </div>
 
 
+  <!-- Body -->
+  <body>
+    
+    <!-- Google Tag Manager (noscript)-->
+    <noscript>
+      <iframe src="//www.googletagmanager.com/ns.html?id=GTM-WKV3GT5" height="0" width="0" style="display: none; visibility: hidden;" title="Google Tag Manager"></iframe>
+    </noscript>
 
-
-
-        <!-- PAGE BODY-->
-
-        {% block content %}
-          <div class="page-body">
-            <div class="container-fluid">
-              <div class="page-title">
-                <div class="row">
-                  <div class="col-6">
-                    <h3>Профиль</h3>
-                  </div>
-                  <div class="col-6">
-                    <ol class="breadcrumb">
-                      <i data-feather="home"></i>
-  <!--                    <li class="breadcrumb-item"><a href="index.html">                                       <i data-feather="home"></i></a></li>-->
-  <!--                    <li class="breadcrumb-item"></li>-->
-  <!--                    <li class="breadcrumb-item active">Default      </li>-->
-                    </ol>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <!-- Container-fluid starts-->
-            <div class="container-fluid">
-              <div class="card shadow">
-                <div class="row mb-3">
-                        <div class="col-lg-4">
-                            <div class="card mb-3">
-                                <div class="card-body text-center shadow">
-                                    {% if student.image %}
-                                        <img class="rounded-circle mb-3 mt-4" src="{{ student.image.url }}" width="160" height="160">
-                                    {% else %}
-                                        <img class="rounded-circle mb-3 mt-4" src="{% static 'admin/assets/images/profile.png' %}" width="160" height="160">
-                                    {% endif %}
-                                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Изменить</button></div>
-                                </div>
-                            </div>
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="text-primary fw-bold m-0">Курсы</h6>
-                                </div>
-                                <div class="card-body" style="overflow-y: scroll;">
-                                    <div class="aviation-courses">
-                                        <div class="aviation-courses-img" style="display: flex;">
-                                        </div>
-                                        <div class="aviation-courses-text">
-                                            <ul>
-                                                {% for course in courses %}
-                                                <li><strong><b>Курс: {{ course.title|truncatechars:20 }}</b></strong></li>
-                                                <li><p>Длительность: {{ course.duration }} часов</p></li>
-                                                {% empty %}
-                                                <li>Студент не участвует в курсах</li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card shadow mb-3">
-                                        <div class="card-header py-3">
-                                            <p class="text-primary m-0 fw-bold">Пользовательские настройки</p>
-                                        </div>
-                                        <div class="card-body">
-                                            <form>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="username"><strong>Username</strong></label><input class="form-control" type="text" id="username" placeholder="{{ student.username }}" name="username"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="email"><strong>Почта</strong></label><input class="form-control" type="email" id="email" placeholder="{{ student.email }}" name="email"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Имя</strong></label><input class="form-control" type="text" id="first_name" placeholder="{{ student.first_name }}" name="first_name"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Фамилия</strong></label><input class="form-control" type="text" id="last_name" placeholder="{{ student.last_name }}" name="last_name"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Изменить</button></div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="card shadow">
-                                        <div class="card-header py-3">
-                                            <p class="text-primary m-0 fw-bold">Личные данные</p>
-                                        </div>
-                                        <div class="card-body">
-                                            <form>
-                                                <div class="mb-3"><label class="form-label" for="address"><strong>Последний вход</strong></label><input class="form-control" type="text" id="address" placeholder="{{ student.last_login }}" name="address"></div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-            </div>
-          </div>
-          <!-- Container-fluid Ends-->
-        </div>
-        {% endblock %}
-
-        <!-- PAGE BODY END -->
-
+    <!-- Page loading spinner -->
+    <div class="page-loading">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
       </div>
     </div>
-    <!-- latest jquery-->
-    <script src="{% static 'admin/assets/js/jquery-3.5.1.min.js' %}"></script>
-    <!-- Bootstrap js-->
-    <script src="{% static 'admin/assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
-    <!-- feather icon js-->
-    <script src="{% static 'admin/assets/js/icons/feather-icon/feather.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/icons/feather-icon/feather-icon.js' %}"></script>
-    <!-- scrollbar js-->
-    <script src="{% static 'admin/assets/js/scrollbar/simplebar.js' %}"></script>
-    <script src="{% static 'admin/assets/js/scrollbar/custom.js' %}"></script>
-    <!-- Sidebar jquery-->
-    <script src="{% static 'admin/assets/js/config.js' %}"></script>
-    <!-- Plugins JS start-->
-    <script src="{% static 'admin/assets/js/sidebar-menu.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/chartist/chartist.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/chartist/chartist-plugin-tooltip.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/knob/knob.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/knob/knob-chart.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/apex-chart/apex-chart.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/apex-chart/stock-prices.js' %}"></script>
-    <script src="{% static 'admin/assets/js/notify/bootstrap-notify.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/dashboard/default.js' %}"></script>
-    <script src="{% static 'admin/assets/js/notify/index.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.en.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/handlebars.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/typeahead.bundle.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/typeahead.custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead-search/handlebars.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead-search/typeahead-custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/tooltip-init.js' %}"></script>
-    <!-- Plugins JS Ends-->
-    <!-- Theme js-->
-    <script src="{% static 'admin/assets/js/script.js' %}"></script>
-    <script src="{% static 'admin/assets/js/theme-customizer/customizer.js' %}"></script>
-    <!-- login js-->
-    <!-- Plugin used-->
-  </body>
+
+
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+
+
+      <!-- Page content -->
+      <section class="container pt-5">
+        <div class="row">
+
+            {% block content %}
+          <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+            <div class="ps-md-3 ps-lg-0 mt-md-2 py-md-4">
+              <h1 class="h2 pt-xl-1 pb-3">Личная информация</h1>
+
+              <!-- Basic info -->
+              <h2 class="h5 text-primary mb-4">Базовая информация</h2>
+              <form class="needs-validation border-bottom pb-2 pb-lg-4" method="post" enctype="multipart/form-data" novalidate="">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                  <div class="col-sm-6 mb-4">
+                        <label for="{{ form.image.id_for_label }}" class="form-label fs-base">Фото </label>
+                        {{ form.image }}
+                        <div class="invalid-feedback">Пожалуйста, выберите изображение для загрузки!</div>
+                    </div>
+                <div class="row pb-2">
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.first_name.id_for_label }}" class="form-label fs-base">Имя</label>
+                        {{ form.first_name }}
+                        <div class="invalid-feedback">Пожалуйста введите свое имя!</div>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.last_name.id_for_label }}" class="form-label fs-base">Фамилия</label>
+                        {{ form.last_name }}
+                        <div class="invalid-feedback">Пожалуйста введите свою фамилию!</div>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.email.id_for_label }}" class="form-label fs-base">Почта</label>
+                        {{ form.email }}
+                        <div class="invalid-feedback">Пожалуйста, представьте действующий адрес электронной почты!</div>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.phone.id_for_label }}" class="form-label fs-base">Телефон <small class="text-muted"></small></label>
+                        {{ form.phone }}
+                    </div>
+                    <div class="col-12 mb-4">
+                        <label for="{{ form.bio.id_for_label }}" class="form-label fs-base">Биография <small class="text-muted"></small></label>
+                        {{ form.bio }}
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.country.id_for_label }}" class="form-label fs-base">Страна</label>
+                        {{ form.country }}
+                        <div class="invalid-feedback">Пожалуйста выберите свою страну!</div>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.city.id_for_label }}" class="form-label fs-base">Город</label>
+                        {{ form.city }}
+                        <div class="invalid-feedback">Пожалуйста выберите свой город!</div>
+                    </div>
+                    <div class="col-12 mb-4">
+                        <label for="{{ form.address.id_for_label }}" class="form-label fs-base">Адрес</label>
+                        {{ form.address }}
+                        <div class="invalid-feedback">Пожалуйста введите свой адрес!</div>
+                    </div>
+                </div>
+                <div class="d-flex mb-3">
+                    <button type="reset" class="btn btn-secondary me-3">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+
+
+              <!-- Delete account -->
+              <h2 class="h5 text-primary pt-1 pt-lg-3 mt-4">Удалить аккаунт</h2>
+              <p>Когда вы удалите свою учетную запись, ваш общедоступный профиль будет немедленно деактивирован.</p>
+              <div class="form-check mb-4">
+                <input type="checkbox" id="delete-account" class="form-check-input">
+                <label for="delete-account" class="form-check-label fs-base">Да, я хочу удалить свою учетную запись.</label>
+              </div>
+              <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Удалить аккаунт можно только по согласию куратора." aria-label="Change picture">Удалить</button>
+            </div>
+          </div>
+            {% endblock %}
+        </div>
+      </section>
+    </main>
+
+    <!-- Vendor Scripts -->
+    <script src="{% static 'student/js/cleave.min.js' %}"></script>
+
+    <!-- Main Theme Script -->
+    <script src="{% static 'student/js/theme.min.js' %}"></script>
+  
+</body>
 </html>

@@ -76,23 +76,24 @@ class Courses(View):
 
 # Представление для отображения Модулей
 class Modules(View):
+    template_admin = 'admin/starter-kit/modules.html'
+    template_curator = 'curator/starter-kit/modules.html'
+    template_student = 'student/starter-kit/modules.html'
 
     def get(self, request, pk):
+        course = get_object_or_404(Course, pk=pk)
 
         if request.user.groups.filter(name='Администраторы').exists():
-            module = Module.objects.filter(course__pk=pk)
-            return render(request, 'admin/starter-kit/modules.html', {'modules': module})
+            module = Module.objects.filter(course=course)
+            return render(request, self.template_admin, {'modules': module, 'course': course})
 
         elif request.user.groups.filter(name='Кураторы').exists():
-            module = Module.objects.filter(course__pk=pk, course__curators=request.user)
-            return render(request, 'curator/starter-kit/modules.html', {
-                'modules': module,
-
-            })
+            module = Module.objects.filter(course=course, course__curators=request.user)
+            return render(request, self.template_curator, {'modules': module, 'course': course})
 
         else:
-            module = Module.objects.filter(course__pk=pk, course__students=request.user)
-            return render(request, 'student/starter-kit/modules.html', {'modules': module})
+            module = Module.objects.filter(course=course, course__students=request.user)
+            return render(request, self.template_student, {'modules': module, 'course': course})
 
 
 # Представление для отображения
@@ -105,26 +106,39 @@ class CourseDetailView(View):
 
 # Представление для отображения уроков в модуле
 class LessonsByModule(View):
+    template_student = 'student/starter-kit/lessons_list.html'
+    template_curator = 'curator/starter-kit/lessons_list.html'
+    template_admin = 'admin/starter-kit/lessons_list.html'
 
     def get(self, request, module_id):
         module = get_object_or_404(Module, id=module_id)
         lessons = module.lesson_set.all()  # Получаем все уроки модуля
+        student = request.user
 
-        if request.user.role == 'student':
-            return render(request, 'student/starter-kit/lessons_list.html', {'module': module, 'lessons': lessons})
-        elif request.user.role == 'curator':
-            return render(request, 'curator/starter-kit/lessons_list.html', {'module': module, 'lessons': lessons})
-        elif request.user.role == 'admin':
-            return render(request, 'admin/starter-kit/lessons_list.html', {'module': module, 'lessons': lessons})
-        else:
-            return render(request, 'users/404.html')
+        test_results = {}
+        if student.is_authenticated and student.role == 'student':
+            # Если пользователь — студент, получаем результаты тестов для каждого урока
+            for lesson in lessons:
+                test_result = TestResult.objects.filter(student=student, lesson=lesson).first()
+                test_results[lesson.id] = test_result
+
+        context = {'module': module, 'lessons': lessons, 'test_results': test_results}
+
+        if student.is_authenticated:
+            if student.role == 'student':
+                return render(request, self.template_student, context)
+            elif student.role == 'curator':
+                return render(request, self.template_curator, context)
+            elif student.role == 'admin':
+                return render(request, self.template_admin, context)
+
+        return render(request, 'users/404.html')
 
 
 class LessonView(View):
     student_template = 'student/starter-kit/lessons.html'
     curator_template = 'curator/starter-kit/lessons.html'
     admin_template = 'admin/starter-kit/lessons.html'
-
 
     def get_next_lesson(self, current_lesson):
         module = current_lesson.module
@@ -165,14 +179,41 @@ class LessonView(View):
                            'course_type': course_type,
                            'student': student,
                            'curator_comments': curator_comments,
-                           'lesson_id': lesson_id  # Передаем идентификатор урока в контекст
+                           'lesson_id': lesson_id,
                            })
+
         elif request.user.role == 'curator':
+            next_lesson = self.get_next_lesson(lesson)
+            previous_lesson = self.get_previous_lesson(lesson)
+            curator_comments = Comment.objects.filter(lesson=lesson, is_student_comment=False, user=student)
             return render(request, self.curator_template,
-                          {'lesson': lesson, 'lessons': lessons, 'comment_form': comment_form})
+                          {'lesson': lesson,
+                           'lessons': lessons,
+                           'next_lesson': next_lesson,
+                           'previous_lesson': previous_lesson,
+                           'courses': courses,
+                           'course_type': course_type,
+                           'student': student,
+                           'comment_form': comment_form,
+                           'curator_comments': curator_comments,
+                           'lesson_id': lesson_id,
+                           })
+
         elif request.user.role == 'admin':
+            next_lesson = self.get_next_lesson(lesson)
+            previous_lesson = self.get_previous_lesson(lesson)
+            curator_comments = Comment.objects.filter(lesson=lesson, is_student_comment=False, user=student)
             return render(request, self.admin_template,
-                          {'lesson': lesson, 'lessons': lessons, 'comment_form': comment_form})
+                          {'lesson': lesson,
+                           'lessons': lessons,
+                           'next_lesson': next_lesson,
+                           'previous_lesson': previous_lesson,
+                           'courses': courses,
+                           'course_type': course_type,
+                           'student': student,
+                           'curator_comments': curator_comments,
+                           'lesson_id': lesson_id,
+                           })
         else:
             return redirect(reverse('users:login'))
 

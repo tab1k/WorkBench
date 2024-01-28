@@ -1,67 +1,74 @@
 {% extends 'admin/starter-kit/base.html' %}
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добавить курс</title>
-</head>
-<body>
-    {% block content %}
-    <div class="page-body">
-        <div class="container-fluid">
-            <div class="page-title">
-                <h1 class="mt-2">Добавить курс</h1>
+  <head>
+  </head>
+  <body onload="startTime()">
+    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+      <div class="page-body-wrapper">
+        {% block content %}
+            <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+                <div class="ps-md-3 ps-lg-0 mt-md-2 py-md-4">
+                    <div class="page-title">
+                        <h1 class="mt-2">Добавить курс</h1>
+                    </div>
+                    <div class="row">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.non_field_errors }}
+        
+                            <div class="form-group">
+                                {{ form.title.label_tag }}
+                                {{ form.title }}
+                                {{ form.title.errors }}
+                            </div>
+        
+                            <div class="form-group">
+                                {{ form.description.label_tag }}
+                                {{ form.description }}
+                                {{ form.description.errors }}
+                            </div>
+        
+                            <div class="form-group">
+                                {{ form.duration.label_tag }}
+                                {{ form.duration }}
+                                {{ form.duration.errors }}
+                            </div>
+        
+                            <div class="form-group">
+                                {{ form.course_type.label_tag }}
+                                {{ form.course_type }}
+                                {{ form.course_type.errors }}
+                            </div>
+        
+                            <div class="form-group">
+                                {{ form.curators.label_tag }}
+                                {{ form.curators }}
+                                {{ form.curators.errors }}
+                            </div>
+        
+        
+                            <div class="form-group">
+                                {{ form.image.label_tag }}
+                                {{ form.image }}
+                                {{ form.image.errors }}
+                            </div>
+        
+                            <div class="text-center mt-4 mb-4">
+                                <button type="submit" class="btn btn-outline-primary px-3 px-lg-4 me-3">
+                                    <i class="bx bx-edit fs-xl me-xl-2"></i>
+                                    <span class="d-none d-xl-inline">Добавить курс</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.non_field_errors }}
-
-                    <div class="form-group">
-                        {{ form.title.label_tag }}
-                        {{ form.title }}
-                        {{ form.title.errors }}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form.description.label_tag }}
-                        {{ form.description }}
-                        {{ form.description.errors }}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form.duration.label_tag }}
-                        {{ form.duration }}
-                        {{ form.duration.errors }}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form.course_type.label_tag }}
-                        {{ form.course_type }}
-                        {{ form.course_type.errors }}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form.curators.label_tag }}
-                        {{ form.curators }}
-                        {{ form.curators.errors }}
-                    </div>
-
-
-                    <div class="form-group">
-                        {{ form.image.label_tag }}
-                        {{ form.image }}
-                        {{ form.image.errors }}
-                    </div>
-
-                    <div class="mt-4 mb-4">
-                        <button class="btn btn-primary btn-sm" type="submit">Добавить</button>
-                    </div>
-                </form>
-        </div>
+        {% endblock %}
+      </div>
     </div>
-    {% endblock %}
-</body>
+  </body>
 </html>

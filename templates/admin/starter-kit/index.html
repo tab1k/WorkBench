@@ -1,251 +1,55 @@
 {% extends 'admin/starter-kit/base.html' %}
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{% static 'admin/assets/images/favicon.png' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'admin/assets/images/favicon.png' %}" type="image/x-icon">
-    {% block css %}<title>Главная</title>{% endblock %}
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/font-awesome.css' %}">
-    <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/icofont.css' %}">
-    <!-- Themify icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/themify.css' %}">
-    <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/flag-icon.css' %}">
-    <!-- Feather icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/feather-icon.css' %}">
-    <!-- Plugins css start-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/scrollbar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/animate.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/chartist.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/date-picker.css' %}">
-    <!-- Plugins css Ends-->
-    <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/vendors/bootstrap.css' %}">
-    <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/style.css' %}">
-    <link id="color" rel="stylesheet" href="{% static 'admin/assets/css/color-1.css' %}" media="screen">
-    <!-- Responsive css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/assets/css/responsive.css' %}">
-  </head>
-  <body onload="startTime()">
-    <!-- tap on top starts-->
-    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
-    <!-- tap on tap ends-->
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper compact-wrapper" id="pageWrapper">
-
-      <div class="page-body-wrapper">
+{% load static %}
+<html lang="en" data-bs-theme="light">
+<head>
 
 
-        <!-- PAGE BODY-->
+  <body>
 
-        {% block content %}
-          <div class="page-body">
-          <div class="container-fluid">
-            <div class="page-title">
-              <div class="row">
-                <div class="col-6">
-                  <h3>Главная</h3>
+
+    <main class="page-wrapper">
+      <section class="container pt-5">
+        <div class="row">
+          {% block content %}
+              <div class="col-md-8 offset-lg-1 pb-5 mb-lg-2 pt-md-5 mt-n3 mt-md-0">
+            <div class="ps-md-3 ps-lg-0 mt-md-2 pt-md-4 pb-md-2">
+              <div class="d-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
+                <h1 class="h2 mb-0">Популярные посты</h1>
+              </div>
+              <div class="row row-cols-1 row-cols-sm-2 gx-3 gx-lg-4">
+  
+                {% for post in posts %}
+                <div class="col pb-lg-2 mb-4">
+                  <article class="card h-100 border-0 shadow-sm">
+                    <div class="position-relative">
+                      <a href="{% url 'users:blog:blog_detail' pk=post.pk %}" class="d-block position-absolute w-100 h-100 top-0 start-0" aria-label="Cover image"></a>
+                      <img src="{{ post.image.url }}" class="card-img-top" alt="Image">
+                    </div>
+                    <div class="card-body pb-3">
+                      <h3 class="h5 mb-2">
+                        <a href="{% url 'users:blog:blog_detail' pk=post.pk %}">{{ post.title }}</a>
+                      </h3>
+                      <p class="fs-sm mb-2">{{ post.author }}</p>
+                    </div>
+                    <div class="card-footer d-flex align-items-center fs-sm text-muted py-4">
+                      <div class="d-flex align-items-center me-4">
+                        <i class="bx bx-time fs-xl me-1"></i>
+                        {{ post.date}}
+                      </div>
+                    </div>
+                  </article>
                 </div>
-                <div class="col-6">
-                  <ol class="breadcrumb">
-                    <i data-feather="home"></i>
-<!--                    <li class="breadcrumb-item"><a href="index.html">                                       <i data-feather="home"></i></a></li>-->
-<!--                    <li class="breadcrumb-item"></li>-->
-<!--                    <li class="breadcrumb-item active">Default      </li>-->
-                  </ol>
-                </div>
+                {% endfor %}  
+  
               </div>
             </div>
           </div>
-          <!-- Container-fluid starts-->
-          <div class="container-fluid">
-            <div class="d-sm-flex justify-content-between align-items-center mb-4">
-              <div class="col-6">
-                <h3>Типы курсов</h3>
-              </div>
-            </div>
-            <div class="row">
-              {% for ct in courses_type|slice:3 %}
-              <div class="col-md-4 course-card">
-                <a href="{% url 'users:admin:courses:courses_by_type' ct.pk %}">
-                  <div class="card shadow border-start-primary mb-4">
-                    <img src="{{ ct.photo.url }}" alt="" style="max-width: 100%; max-height: 300px; border-radius: 20px 20px 0px 0px;">
-                    <div class="card-body">
-                      <div class="text-primary fw-bold h5 mb-0" style="text-align: center;">{{ ct.title|truncatechars:40 }}</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              {% endfor %}
-            </div>
-            <div class="d-sm-flex justify-content-between align-items-center mb-4">
-              <div class="col-6">
-                <h3>Курсы</h3>
-              </div>
-            </div>
-            <div class="row">
-              {% for c in courses|slice:3 %}
-              <div class="col-md-4 course-card">
-                <a href="{% url 'users:admin:courses:modules' c.pk %}">
-                  <div class="card shadow border-start-primary mb-4">
-                    {% if c.image %}
-                        <img src="{{ c.image.url }}" alt="" style="max-width: 100%; max-height: 300px; border-radius: 20px 20px 0px 0px;">
-                    {% else %}
-                        <img src="{% static 'media/course_images/programming.jpg' %}" alt="" style="max-width: 100%; max-height: 300px; border-radius: 20px 20px 0px 0px;">
-                    {% endif %}
-
-                    <div class="card-body">
-                      <div class="text-uppercase text-primary fw-bold text-xs mb-1 ">{{ c.title|truncatechars:40 }}</div>
-                      <p>{{ c.duration }} часов</p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              {% endfor %}
-            </div>
-            <div class="row second-chart-list third-news-update">
-              <!-- НОВЫЕ УВЕДОМЛЕНИЯ -->
-              <div class="col-xl-3 xl-50 chart_data_right box-col-12">
-                {% for notification in notifications|slice:3 %}
-                <a href="{% url 'users:admin:view_notifications' %}">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="media align-items-center">
-                        <div class="media-body right-chart-content">
-                          <h4>{{ notification.course }}<span class="new-box">{{ notification.timestamp }}</span></h4><span>{{ notification.message|truncatechars:40 }}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                {% endfor %}
-              </div>
-              <div class="col-xl-4 xl-50 news box-col-6">
-
-                <!--  УВЕДОМЛЕНИЯ -->
-                  <div class="card">
-                      <div class="card-header">
-                          <div class="header-top">
-                              <h5 class="m-0">Уведомления</h5>
-                          </div>
-                      </div>
-                      <div class="card-body p-0" style="height: 300px; overflow-y: auto;">
-                          {% if notifications %}
-                              {% for notification in notifications %}
-                              <div class="news-update">
-                                  <h6>{{ notification.message|truncatechars:40 }}</h6><span>{{ notification.course }}</span>
-                                  <p>{{ notification.timestamp }}</p>
-                              </div>
-                              {% endfor %}
-                          {% else %}
-                              <div class="no-notifications text-center py-5">
-                                  <h3 class="mb-3">Нет уведомлений</h3>
-                                      <img src="{% static 'website/img/tl.webp' %}" style="height: 150px;" alt="Нет заявок">
-                              </div>
-                          {% endif %}
-                      </div>
-                      <div class="card-footer">
-                          <div class="bottom-btn"><a href="{% url 'users:admin:view_notifications' %}">Все уведомления</a></div>
-                      </div>
-                  </div>
-              </div>
-
-              <!--  ЗАЯВКИ -->
-              <div class="col-xl-4 xl-50 appointment-sec box-col-6">
-                  <div class="row">
-                      <div class="card">
-                          <div class="card-header">
-                              <div class="header-top">
-                                  <h5 class="m-0">Заявки</h5>
-                              </div>
-                          </div>
-                          <div class="card-body p-0" style="height: 300px; overflow-y: auto;">
-                              {% if contacts %}
-                                  {% for contact in contacts %}
-                                  <div class="news-update">
-                                      <h6>{{ contact.name }}</h6><span>{{ contact.message }}</span>
-                                      <p>{{ contact.timestamp|timesince }}</p>
-                                  </div>
-                                  {% endfor %}
-                              {% else %}
-                                  <div class="no-contacts text-center py-5">
-                                      <h3 class="mb-3">Нет заявок</h3>
-                                      <img src="{% static 'website/img/tl.webp' %}" style="height: 150px;" alt="Нет заявок">
-                                  </div>
-                              {% endif %}
-                          </div>
-                          <div class="card-footer">
-                              <div class="bottom-btn"><a href="{% url 'users:admin:admin_applications' %}">Все заявки</a></div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-
-              <div class="col-xl-4 col-lg-12 xl-50 calendar-sec box-col-6">
-                <div class="card gradient-primary o-hidden">
-                  <div class="card-body">
-                    <div class="default-datepicker">
-                      <div class="datepicker-here" data-language="en"></div>
-                    </div><span class="default-dots-stay overview-dots full-width-dots"><span class="dots-group"><span class="dots dots1"></span><span class="dots dots2 dot-small"></span><span class="dots dots3 dot-small"></span><span class="dots dots4 dot-medium"></span><span class="dots dots5 dot-small"></span><span class="dots dots6 dot-small"></span><span class="dots dots7 dot-small-semi"></span><span class="dots dots8 dot-small-semi"></span><span class="dots dots9 dot-small">                </span></span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {% endblock %}
         </div>
-        {% endblock %}
-      </div>
-    </div>
-    <!-- latest jquery-->
-    <script src="{% static 'admin/assets/js/jquery-3.5.1.min.js' %}"></script>
-    <!-- Bootstrap js-->
-    <script src="{% static 'admin/assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
-    <!-- feather icon js-->
-    <script src="{% static 'admin/assets/js/icons/feather-icon/feather.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/icons/feather-icon/feather-icon.js' %}"></script>
-    <!-- scrollbar js-->
-    <script src="{% static 'admin/assets/js/scrollbar/simplebar.js' %}"></script>
-    <script src="{% static 'admin/assets/js/scrollbar/custom.js' %}"></script>
-    <!-- Sidebar jquery-->
-    <script src="{% static 'admin/assets/js/config.js' %}"></script>
-    <!-- Plugins JS start-->
-    <script src="{% static 'admin/assets/js/sidebar-menu.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/chartist/chartist.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/chartist/chartist-plugin-tooltip.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/knob/knob.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/knob/knob-chart.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/apex-chart/apex-chart.js' %}"></script>
-    <script src="{% static 'admin/assets/js/chart/apex-chart/stock-prices.js' %}"></script>
-    <script src="{% static 'admin/assets/js/notify/bootstrap-notify.min.js' %}"></script>
-    <script src="{% static 'admin/assets/js/dashboard/default.js' %}"></script>
-    <script src="{% static 'admin/assets/js/notify/index.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.en.js' %}"></script>
-    <script src="{% static 'admin/assets/js/datepicker/date-picker/datepicker.custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/handlebars.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/typeahead.bundle.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead/typeahead.custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead-search/handlebars.js' %}"></script>
-    <script src="{% static 'admin/assets/js/typeahead-search/typeahead-custom.js' %}"></script>
-    <script src="{% static 'admin/assets/js/tooltip-init.js' %}"></script>
-    <!-- Plugins JS Ends-->
-    <!-- Theme js-->
-    <script src="{% static 'admin/assets/js/script.js' %}"></script>
-    <script src="{% static 'admin/assets/js/theme-customizer/customizer.js' %}"></script>
-    <!-- login js-->
-    <!-- Plugin used-->
-  </body>
-</html>
+      </section>
+    </main>
+
+
+  
+</body></html>

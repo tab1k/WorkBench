@@ -15,7 +15,7 @@ class UserLoginView(LoginView):
             if user.role == 'curator':
                 return redirect('users:curator:dashboard')
             elif user.role == 'admin':
-                return redirect('users:admin:administrator')
+                return redirect('users:admin:dashboard')
         else:
             return redirect(self.success_url)
 

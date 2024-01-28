@@ -25,11 +25,6 @@ class StudentDashboardView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         student = self.request.user
         context['posts'] = Post.objects.filter().order_by('-date')[:3]
-        # context['course_type'] = CourseType.objects.filter(courses__students=student).distinct()
-        # context['course'] = Course.objects.filter(students=student)
-        # context['notifications'] = Notification.objects.filter(course__in=context['course']).order_by('-timestamp')
-        # context['curator_comments'] = Comment.objects.filter(lesson__module__course__in=context['course'],
-        #                                                      is_student_comment=False, user=student)
         return context
 
 

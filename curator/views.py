@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, CreateView, TemplateView, UpdateView, DetailView
+from django.views.generic import ListView, CreateView, TemplateView, UpdateView, DetailView, RedirectView
 from administrator.forms import NotificationForm
 from blog.models import Post
 from courses.models import Course, CourseType, Notification
@@ -21,15 +22,9 @@ class CuratorDashboardView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        student = self.request.user
         context['posts'] = Post.objects.filter().order_by('-date')[:3]
         context['notifications'] = Notification.objects.all().order_by('-timestamp')
         context['contacts'] = Contact.objects.all().order_by('-timestamp')
-        #courses = Course.objects.filter(curators=curator)
-        # courses_type = CourseType.objects.all()
-        # context['notifications'] = Notification.objects.filter(course__in=context['course']).order_by('-timestamp')
-        # context['curator_comments'] = Comment.objects.filter(lesson__module__course__in=context['course'],
-        #                                                      is_student_comment=False, user=student)
         return context
 
 
@@ -59,6 +54,7 @@ class CuratorProfileView(LoginRequiredMixin, UpdateView):
 
 class StudentsCheckAdmin(View):
     template_name = 'curator/starter-kit/students.html'
+    items_per_page = 10  # Количество студентов на странице
 
     def get(self, request):
         stream_id = request.GET.get('stream')
@@ -70,8 +66,15 @@ class StudentsCheckAdmin(View):
             selected_stream = get_object_or_404(Stream, id=stream_id)
             students = students.filter(stream=selected_stream)
 
+        # Создаем объект пагинатора и получаем текущую страницу из параметра запроса
+        paginator = Paginator(students, self.items_per_page)
+        page_number = request.GET.get('page')
+
+        # Получаем студентов для текущей страницы
+        students_page = paginator.get_page(page_number)
+
         return render(request, self.template_name, {
-            'students': students,
+            'students': students_page,
             'streams': streams,
             'selected_stream': selected_stream
         })
@@ -211,6 +214,45 @@ class NotificationCreateView(CreateView):
     def form_valid(self, form):
         messages.success(self.request, 'Уведомление успешно создано.')
         return super().form_valid(form)
+
+class PreviousLessonRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        current_lesson = get_object_or_404(Lesson, pk=self.kwargs['pk'])
+        all_lessons = Lesson.objects.filter(module=current_lesson.module).order_by('order')
+
+        current_lesson_index = None
+        for index, lesson in enumerate(all_lessons):
+            if lesson.id == current_lesson.id:
+                current_lesson_index = index
+                break
+
+        if current_lesson_index is not None and current_lesson_index > 0:
+            previous_lesson = all_lessons[current_lesson_index - 1]
+            return previous_lesson.get_absolute_url()  # Замените на ваш метод получения URL урока
+        else:
+            return current_lesson.get_absolute_url()
+
+
+class NextLessonRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        current_lesson = get_object_or_404(Lesson, pk=self.kwargs['pk'])
+        all_lessons = Lesson.objects.filter(module=current_lesson.module).order_by('order')
+
+        current_lesson_index = None
+        for index, lesson in enumerate(all_lessons):
+            if lesson.id == current_lesson.id:
+                current_lesson_index = index
+                break
+
+        if current_lesson_index is not None and current_lesson_index < len(all_lessons) - 1:
+            next_lesson = all_lessons[current_lesson_index + 1]
+            return next_lesson.get_absolute_url()  # Замените на ваш метод получения URL урока
+        else:
+            return current_lesson.get_absolute_url()
 
 
 class LogoutView(View):

@@ -19,6 +19,9 @@ urlpatterns = [
     path('create-notification/', NotificationCreateView.as_view(), name='create_notification'),
     path('search/', SearchView.as_view(), name='search'),
 
+    path('lesson/<int:pk>/previous/', PreviousLessonRedirectView.as_view(), name='previous_lesson_redirect'),
+    path('lesson/<int:pk>/next/', NextLessonRedirectView.as_view(), name='next_lesson_redirect'),
+
     path('previous/<int:lesson_id>/', show_previous_lesson, name='previous_lesson'),
     path('next/<int:lesson_id>/', show_next_lesson, name='next_lesson'),
 ]

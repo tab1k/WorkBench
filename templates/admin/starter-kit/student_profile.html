@@ -1,0 +1,80 @@
+{% extends 'admin/starter-kit/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+
+{% block content %}
+    <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+            <div class="ps-md-3 ps-lg-0 mt-md-2 py-md-4">
+              <h1 class="h2 pt-xl-1 pb-3">Детали аккаунта</h1>
+
+              <!-- Basic info -->
+              <h2 class="h5 text-primary mb-4">Базовая информация</h2>
+              <form class="needs-validation border-bottom pb-2 pb-lg-4" method="post" enctype="multipart/form-data" novalidate="">
+                  {% csrf_token %}
+                {{ form.non_field_errors }}
+                  <div class="col-sm-6 mb-4">
+                        <label for="{{ form.image.id_for_label }}" class="form-label fs-base">Фото </label>
+                        {{ form.image }}
+                        <div class="invalid-feedback">Пожалуйста, выберите изображение для загрузки!</div>
+                    </div>
+                <div class="row pb-2">
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.first_name.id_for_label }}" class="form-label fs-base">Имя</label>
+                        {{ form.first_name }}
+                        <div class="invalid-feedback">Пожалуйста введите свое имя!</div>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.last_name.id_for_label }}" class="form-label fs-base">Фамилия</label>
+                        {{ form.last_name }}
+                        <div class="invalid-feedback">Пожалуйста введите свою фамилию!</div>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.email.id_for_label }}" class="form-label fs-base">Почта</label>
+                        {{ form.email }}
+                        <div class="invalid-feedback">Пожалуйста, представьте действующий адрес электронной почты!</div>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.phone.id_for_label }}" class="form-label fs-base">Телефон <small class="text-muted"></small></label>
+                        {{ form.phone }}
+                    </div>
+                    <div class="col-12 mb-4">
+                        <label for="{{ form.bio.id_for_label }}" class="form-label fs-base">Биография <small class="text-muted"></small></label>
+                        {{ form.bio }}
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.country.id_for_label }}" class="form-label fs-base">Страна</label>
+                        {{ form.country }}
+                        <div class="invalid-feedback">Пожалуйста выберите свою страну!</div>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <label for="{{ form.city.id_for_label }}" class="form-label fs-base">Город</label>
+                        {{ form.city }}
+                        <div class="invalid-feedback">Пожалуйста выберите свой город!</div>
+                    </div>
+                    <div class="col-12 mb-4">
+                        <label for="{{ form.address.id_for_label }}" class="form-label fs-base">Адрес</label>
+                        {{ form.address }}
+                        <div class="invalid-feedback">Пожалуйста введите свой адрес!</div>
+                    </div>
+                </div>
+                <div class="d-flex mb-3">
+                    <button type="reset" class="btn btn-secondary me-3">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+              </form>
+
+            
+              <form method="post" action="{% url 'users:admin:delete_student' student.id %}">
+                  {% csrf_token %}
+                  <h2 class="h5 text-primary pt-1 pt-lg-3 mt-4">Удалить аккаунт</h2>
+                  <p>Если вы удалите учетную запись студента, то вы больше не сможете ее восстановить.</p>
+                  <div class="form-check mb-4">
+                    <input type="checkbox" id="delete-account" class="form-check-input">
+                    <label for="delete-account" class="form-check-label fs-base">Да, я хочу удалить учетную запись студента.</label>
+                  </div>
+                  <button type="submit" class="btn btn-danger">Удалить</button>
+              </form>    
+            </div>
+          </div>
+        </div>
+{% endblock %}

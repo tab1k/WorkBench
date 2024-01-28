@@ -1,53 +1,101 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.contrib.auth import logout, get_user_model
-from django.db.models import Q
-from django.views.generic import ListView
-from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpResponseBadRequest
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import logout
+from django.views.generic import ListView, TemplateView, DetailView, RedirectView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.urls import reverse_lazy
-from .forms import NotificationForm
-from administrator.forms import StudentForm, CuratorForm
-from courses.models import Course, CourseType
+from blog.models import Post
+from .forms import NotificationForm, AdminCustomProfileForm, StudentCustomProfileForm
 from website.models import Contact
 from users.models import User, Stream
 from django.contrib.auth.models import Group
-from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
 from django.views import View
-from django.shortcuts import render
-from courses.models import Course, Notification
+from courses.models import Notification
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.shortcuts import render, redirect
+from django.views import View
+from courses.models import *
+from .forms import *
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 
+class AdminDashboardView(LoginRequiredMixin, TemplateView):
+    template_name = 'admin/starter-kit/index.html'
 
-@login_required(login_url='users:login')
-def admin_view(request):
-    admin = request.user
-    if request.user.role == 'admin':
-        courses = Course.objects.all()
-        courses_type = CourseType.objects.all()
-
-        # Получите список заявок
-        contacts = Contact.objects.all().order_by('-timestamp')  # Замените на необходимый способ получения заявок
-
-        # Отметьте все заявки как прочитанные
-        Contact.objects.all().update(read=True)
-
-        # Получите количество заявок
-        contact_count = Contact.objects.count()
-
-        # Получите список уведомлений
-        notifications = Notification.objects.all().order_by('-timestamp')  # Замените на необходимый способ получения уведомлений
-
-        return render(request, 'admin/starter-kit/index.html',
-                      {'courses': courses, 'courses_type': courses_type, 'admin': admin, 'contacts': contacts,
-                       'contact_count': contact_count, 'notifications': notifications})
-    else:
-        return redirect('users:login')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.filter().order_by('-date')[:3]
+        context['notifications'] = Notification.objects.all().order_by('-timestamp')
+        context['contacts'] = Contact.objects.all().order_by('-timestamp')
+        return context
 
 
+class StudentProfileDetailView(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = 'admin/starter-kit/student_profile.html'
+    context_object_name = 'student'
+    success_url = reverse_lazy('users:admin:dashboard')
+    form_class = StudentCustomProfileForm
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        # Сохранение изображения профиля
+        if 'image' in form.cleaned_data:
+            self.object.image = form.cleaned_data['image']
+            self.object.save()
+        return response
+
+    def form_invalid(self, form):
+        print("Form is invalid!")
+        print(form.errors)
+        return super().form_invalid(form)
+
+
+class StudentProfileDeleteView(UserPassesTestMixin, DeleteView):
+    model = User
+    template_name = 'admin/starter-kit/student_confirm_delete.html'
+
+    def test_func(self):
+        return self.request.user.role == 'admin'
+
+    def get_success_url(self):
+        return reverse_lazy('users:admin:dashboard')
+
+    def delete(self, request, *args, **kwargs):
+        student = get_object_or_404(User, id=self.kwargs['pk'], role='student')
+
+        if self.request.user.role == 'admin':
+            student.delete()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return HttpResponseForbidden("У вас нет разрешения на удаление студента.")
+
+
+class AdminProfileView(LoginRequiredMixin, UpdateView):
+    model = User
+    template_name = 'admin/starter-kit/user_profile.html'
+    context_object_name = 'user'
+    success_url = reverse_lazy('users:admin:dashboard')
+    form_class = AdminCustomProfileForm
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        # Сохранение изображения профиля
+        if 'image' in form.cleaned_data:
+            self.object.image = form.cleaned_data['image']
+            self.object.save()
+        return response
+
+    def form_invalid(self, form):
+        print("Form is invalid!")
+        print(form.errors)
+        return super().form_invalid(form)
 
 
 class StudentsCheckAdmin(View):
@@ -76,7 +124,6 @@ class StudentsCheckAdmin(View):
             'streams': streams,
             'selected_stream': selected_stream
         })
-
 
 
 class CuratorCheckAdmin(View):
@@ -186,7 +233,6 @@ class SearchStudentsView(View):
         return render(request, self.get_template_names(), context)
 
 
-
 class SearchCuratorsView(View):
     template_name = 'admin/starter-kit/curators.html'
 
@@ -203,7 +249,11 @@ class SearchCuratorsView(View):
             )
 
         if stream:
-            curators = curators.filter(stream__number=int(stream))
+            try:
+                stream_number = int(stream)
+                curators = curators.filter(stream__number=stream_number)
+            except ValueError:
+                return HttpResponseBadRequest("Неверный формат значения 'поток'.")
 
         context = {'results': curators}
         return render(request, self.template_name, context)
@@ -231,9 +281,6 @@ class ContactListView(ListView):
         context['contact_count'] = Contact.objects.count()
         return context
 
-
-from datetime import datetime, timedelta
-from django.utils import timezone
 
 class NotificationListView(ListView):
     model = Notification
@@ -312,16 +359,6 @@ class SearchView(View):
                       {'courses': courses, 'students': students, 'notifications': notifications})
 
 
-
-
-
-# ДОБАВЛЕНИЕ КУРСА
-
-from django.shortcuts import render, redirect
-from django.views import View
-from courses.models import *
-from .forms import *
-
 class AddCourseView(View):
     def get(self, request):
         # Retrieve all available course types
@@ -347,10 +384,6 @@ class AddCourseView(View):
         return render(request, 'admin/starter-kit/add_course.html', {'form': form})
 
 
-
-from django.views import View
-from .forms import ModuleForm
-
 class AddModuleView(View):
     def get(self, request):
         # Retrieve all available course types
@@ -370,7 +403,7 @@ class AddModuleView(View):
             module = form.save()
 
             # Redirect to a success page or any other desired URL
-            return render(request, 'admin/starter-kit/add_module.html', {'form': form, 'success_message': 'Module added successfully'})
+            return render(request, 'admin/starter-kit/add_module.html', {'form': form, 'success_message': 'Модуль был успешно добавлен!'})
 
         # If the form is not valid, re-render the form with errors
         return render(request, 'admin/starter-kit/add_module.html', {'form': form})
@@ -379,6 +412,45 @@ class AddModuleView(View):
 
 
 
+
+class PreviousLessonRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        current_lesson = get_object_or_404(Lesson, pk=self.kwargs['pk'])
+        all_lessons = Lesson.objects.filter(module=current_lesson.module).order_by('order')
+
+        current_lesson_index = None
+        for index, lesson in enumerate(all_lessons):
+            if lesson.id == current_lesson.id:
+                current_lesson_index = index
+                break
+
+        if current_lesson_index is not None and current_lesson_index > 0:
+            previous_lesson = all_lessons[current_lesson_index - 1]
+            return previous_lesson.get_absolute_url()  # Замените на ваш метод получения URL урока
+        else:
+            return current_lesson.get_absolute_url()
+
+
+class NextLessonRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        current_lesson = get_object_or_404(Lesson, pk=self.kwargs['pk'])
+        all_lessons = Lesson.objects.filter(module=current_lesson.module).order_by('order')
+
+        current_lesson_index = None
+        for index, lesson in enumerate(all_lessons):
+            if lesson.id == current_lesson.id:
+                current_lesson_index = index
+                break
+
+        if current_lesson_index is not None and current_lesson_index < len(all_lessons) - 1:
+            next_lesson = all_lessons[current_lesson_index + 1]
+            return next_lesson.get_absolute_url()  # Замените на ваш метод получения URL урока
+        else:
+            return current_lesson.get_absolute_url()
 
 
 
