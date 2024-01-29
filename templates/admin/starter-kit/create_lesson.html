@@ -1,0 +1,24 @@
+{% extends 'admin/starter-kit/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block content %}
+        <div class="col-md-8 offset-lg-1 pb-5 mb-lg-2 pt-md-5 mt-n3 mt-md-0">
+            <h2>Create Lesson</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-outline-primary px-3 px-lg-4 me-3">
+                    <i class="bx bx-plus fs-xl me-xl-2"></i>
+                    <span class="d-none d-xl-inline">Создать урок</span>
+                </button>
+            </form>
+        </div>
+    {% endblock %}
+</body>
+</html>

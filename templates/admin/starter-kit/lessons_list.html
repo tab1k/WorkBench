@@ -57,10 +57,12 @@
               {% endfor %}  
 
               <div class="py-2">
-                <button type="button" class="btn btn-primary ps-4">
-                  <i class="bx bx-plus fs-xl me-2"></i>
-                  Добавить урок
-                </button>
+                  <a href="{% url 'users:admin:courses:create_lesson' %}">
+                      <button type="button" class="btn btn-primary ps-4">
+                        <i class="bx bx-plus fs-xl me-2"></i>
+                        Добавить урок
+                      </button>
+                  </a>
               </div>
             </div>
           </div>

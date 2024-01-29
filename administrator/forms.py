@@ -23,10 +23,6 @@ class StudentForm(forms.ModelForm):
         self.fields['stream'].widget.attrs['class'] = 'form-select'
 
 
-
-
-
-
 class CuratorForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input'}))
     courses = forms.ModelMultipleChoiceField(queryset=Course.objects.all())
@@ -43,7 +39,6 @@ class CuratorForm(forms.ModelForm):
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['password'].widget.attrs['class'] = 'form-control'
         self.fields['courses'].widget.attrs['class'] = 'form-control'
-
 
 
 class NotificationForm(forms.ModelForm):
@@ -215,3 +210,41 @@ class StudentCustomProfileForm(forms.ModelForm):
             attrs={'class': 'form-control form-control-lg', 'placeholder': 'Enter your address', 'required': True}),
         error_messages={'required': 'Please enter your address!'}
     )
+
+
+class CourseChangeForm(forms.ModelForm):
+    title = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'Название курса'}),
+        required=True
+    )
+
+    duration = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'Длительность курса'}),
+        required=True
+    )
+
+    description = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'form-control form-control-lg', 'rows': 4}),
+        required=False
+    )
+
+    image = forms.ImageField(
+        widget=forms.ClearableFileInput(attrs={'class': 'form-control form-control-lg'}),
+        required=False
+    )
+
+    start_date = forms.DateField(
+        widget=forms.DateInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'Дата начала'}),
+        required=True
+    )
+
+    course_type = forms.ModelChoiceField(
+        queryset=CourseType.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control form-control-lg'}),
+        required=True,
+        empty_label=None,
+    )
+
+    class Meta:
+        model = Course
+        fields = ['title', 'duration', 'description', 'image', 'start_date', 'course_type']

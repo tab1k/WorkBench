@@ -1,0 +1,28 @@
+{% extends 'admin/starter-kit/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block content %}
+        <div class="col-md-8 offset-lg-1 pb-5 mb-lg-2 pt-md-5 mt-n3 mt-md-0">
+            <div class="card border-0 shadow-sm overflow-hidden mb-4">
+              <form method="post" class="p-5">
+                {% csrf_token %}
+                <h2 class="h5 text-primary pt-1">Удалить курс - {{ course.title }}?</h2>  
+                <p>Если вы удалите учетную запись студента, то вы больше не сможете ее восстановить.</p>  
+                <div class="form-check mb-4">
+                    <input type="checkbox" id="delete-account" class="form-check-input">
+                    <label for="delete-account" class="form-check-label fs-base">Да, я хочу удалить этот курс.</label>
+                  </div>  
+                <button type="submit" class="btn btn-danger">Удалить</button>
+                <a href="{% url 'users:admin:courses:courses' %}" class="btn btn-secondary">Отмена</a>
+              </form>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

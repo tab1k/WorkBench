@@ -210,8 +210,23 @@
                 </li>
                     {% endif %}
                 {% endif %}
+                {% if user.is_authenticated %}
+                    {% if user.role == "admin" %}
+                    <li class="nav-item">
+                      <a href="{% url 'users:admin:view_notifications' %}" class="nav-link">Почта</a>
+                    </li>
+                    {% elif user.role == "curator" %}
+                    <li class="nav-item">
+                      <a href="{% url 'users:curator:view_notifications' %}" class="nav-link">Почта</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                      <a href="{% url 'users:student:student_notifications' %}" class="nav-link">Почта</a>
+                    </li>    
+                    {% endif %}    
+                {% endif %}
                 <li class="nav-item">
-                  <a href="docs/getting-started.html" class="nav-link">Документы</a>
+                  <a href="#" class="nav-link">Документы</a>
                 </li>
               </ul>
             </div>

@@ -69,11 +69,15 @@
             <form class="row gy-2" method="get" action="{% url 'users:blog:blog' %}">
                 <div class="col-lg-5 col-sm-6">
                     <div class="d-flex align-items-center">
-                        <div class="nav flex-nowrap me-sm-4 me-3">
-                            <a href="blog-grid-no-sidebar.html" class="nav-link p-0 active" aria-label="Grid view">
-                                <i class="bx bx-grid-alt fs-4"></i>
-                            </a>
-                        </div>
+                        {% if user.is_authenticated %}
+                            {% if user.role == "admin" %}
+                            <div class="nav flex-nowrap me-sm-4 me-3">
+                                <a href="#" class="nav-link p-0 active" aria-label="Grid view">
+                                    <i class="bx bx-plus fs-4"></i>
+                                </a>
+                            </div>
+                            {% endif %}
+                        {% endif %}
                         <select class="form-select" name="hashtag" id="hashtag" onchange="this.form.submit()">
                             <option value="" {% if not request.GET.hashtag %}selected{% endif %}>Все хэштеги</option>
                             <option value="startups" {% if request.GET.hashtag == 'startups' %}selected{% endif %}>Стартапы</option>

@@ -1,0 +1,58 @@
+{% extends 'admin/starter-kit/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block content %}
+        <div class="col-md-8 offset-lg-1 pb-5 mb-lg-2 pt-md-5 mt-n3 mt-md-0">
+            <div class="card border-0 shadow-sm overflow-hidden mb-4">
+                <div class="row g-0">
+                    
+                    <a href="#" class="col-sm-4 bg-repeat-0 bg-position-center bg-size-cover" style="background-image: url(/media/course_images/collection01.jpg); min-height: 13rem;" aria-label="Cover image"></a>
+                        
+                    <div class="col-sm-8">
+                        <div class="card-body">
+                          <div class="fs-sm text-muted mb-1">{{ course.start_date }}</div>
+                          <h2 class="h4 pb-1 mb-2">
+                            <a href="/users/administrator/courses/course_num12/">{{ course.title }}</a>
+                          </h2>
+                          <p class="mb-4 mb-lg-5">{{ course.course_type }}</p>
+                          
+                        </div>
+                      </div>
+                    </div>
+            </div>
+            <h3 class="h4 pb-1 mb-3">Список студентов:</h3>
+            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3 gx-3 gx-lg-3">
+                
+                {% for student in students %}
+                    <div class="col pb-2 mb-4">
+                        <article class="card h-100 border-0 shadow-sm">
+                            <div class="position-relative">
+                                <a href="{% url 'users:admin:student-profile' pk=student.pk %}" class="d-block position-absolute w-100 h-100 top-0 start-0" aria-label="Cover image"></a>
+                                <img src="{% if student.image and student.image.url %}{{ student.image.url }}{% else %}{% static 'student/images/18.jpg' %}{% endif %}" class="card-img-top" alt="Image">
+                            </div>
+                            <div class="card-body pb-3">
+                                <h3 class="h5 mb-2">
+                                    <a href="{% url 'users:admin:student-profile' pk=student.pk %}">{{ student.first_name }} {{ student.last_name }}</a>
+                                </h3>
+                                <p class="fs-sm mb-2">Поток: {{ student.stream }}</p>
+                            </div>
+                            <div class="card-footer d-flex align-items-center justify-content-center fs-sm text-muted py-4">
+                                <a href="{% url 'users:admin:courses:student_progress' student_id=student.id %}" class="btn btn-outline-secondary px-3 px-lg-4 me-3">
+                                    <i class="bx bxl-graphql fs-xl me-xl-2"></i>
+                                    <span class="d-none d-xl-inline">Успеваемость</span>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                {% endfor %}
+              </div>
+        </div>
+    {% endblock %}
+</body>
+</html>

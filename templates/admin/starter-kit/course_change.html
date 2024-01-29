@@ -1,0 +1,61 @@
+{% extends 'admin/starter-kit/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block content %}
+    <div class="col-md-8 offset-lg-1 pb-5 mb-lg-2 pt-md-5 mt-n3 mt-md-0">
+        <div class="card border-0 shadow-sm overflow-hidden mb-4">
+            <div class="row g-0">
+                        
+                <a href="/users/administrator/courses/course_num12/" class="col-sm-4 bg-repeat-0 bg-position-center bg-size-cover" style="background-image: url({{course.image.url}}); min-height: 13rem;" aria-label="Cover image"></a>
+                
+                <div class="col-sm-8">
+                    <div class="card-body">
+                        <div class="fs-sm text-muted mb-1">{{ course.start_date }}</div>
+                        <h2 class="h4 pb-1 mb-2">
+                            <a href="/users/administrator/courses/course_num12/">{{ course.title }}</a>
+                        </h2>
+                        <p class="mb-4 mb-lg-5">{{ course.course_type }}</p>
+                        <div class="d-flex">
+{#                            <a href="/users/administrator/change_course/12/">#}
+{#                                <button type="button" class="btn btn-outline-primary px-3 px-lg-4 me-3">#}
+{#                                  <i class="bx bx-edit fs-xl me-xl-2"></i>#}
+{#                                  <span class="d-none d-xl-inline">Изменить</span>#}
+{#                                </button>#}
+{#                            </a>#}
+{#                            <button type="button" class="btn btn-outline-secondary px-3 px-lg-4 me-3">#}
+{#                              <i class="bx bx-info-circle fs-xl me-xl-2"></i>#}
+{#                              <span class="d-none d-xl-inline">О курсе</span>#}
+{#                            </button>#}
+{#                            <button type="button" class="btn btn-outline-danger px-3 px-lg-4">#}
+{#                              <i class="bx bx-trash-alt fs-xl me-xl-2"></i>#}
+{#                              <span class="d-none d-xl-inline">Удалить</span>#}
+{#                            </button>#}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            <div class="container">
+                <h2>Изменить курс</h2>
+                <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <table>
+                    {{ form.as_p }}  {# Render the form as a table #}
+                  </table>
+                    <button type="submit" class="btn btn-outline-primary px-3 px-lg-4 me-3">
+                        <i class="bx bx-edit fs-xl me-xl-2"></i>
+                        <span class="d-none d-xl-inline">Изменить</span>
+                    </button>
+                    <a href="{% url 'users:admin:courses:courses' %}" class="btn btn-secondary">Отмена</a>
+                </form>
+              </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

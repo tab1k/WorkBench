@@ -4,8 +4,11 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.timezone import localtime, now
 from django.http import JsonResponse
+from django.views.generic import CreateView
+
 from comments.forms import CommentForm
 from comments.models import Comment
+from .forms import LessonCreationForm
 from .models import Course, Module, CourseType
 from courses.models import Lesson
 from tests.models import TestResult
@@ -74,6 +77,17 @@ class Courses(View):
         })
 
 
+class DeleteCourseView(LoginRequiredMixin,View):
+    def get(self, request, pk):
+        course = get_object_or_404(Course, pk=pk)
+        return render(request, 'admin/starter-kit/delete_course_confirm.html', {'course': course})
+
+    def post(self, request, pk):
+        course = get_object_or_404(Course, pk=pk)
+        course.delete()
+        return redirect('users:admin:courses:courses')
+
+
 # Представление для отображения Модулей
 class Modules(View):
     template_admin = 'admin/starter-kit/modules.html'
@@ -96,15 +110,16 @@ class Modules(View):
             return render(request, self.template_student, {'modules': module, 'course': course})
 
 
-# Представление для отображения
-class CourseDetailView(View):
+class CourseStudentsView(View):
+    template_name = 'admin/starter-kit/course_students.html'
 
     def get(self, request, course_id):
         course = get_object_or_404(Course, id=course_id)
-        return render(request, 'users/admin/detail.html', {'course': course})
+        students = course.students.all()
+
+        return render(request, self.template_name, {'course': course, 'students': students})
 
 
-# Представление для отображения уроков в модуле
 class LessonsByModule(View):
     template_student = 'student/starter-kit/lessons_list.html'
     template_curator = 'curator/starter-kit/lessons_list.html'
@@ -244,6 +259,21 @@ class LessonView(View):
         else:
             # Перенаправление на страницу входа
             return redirect(reverse('users:login'))
+
+
+class LessonCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'admin/starter-kit/create_lesson.html'
+    form_class = LessonCreationForm
+    model = Lesson
+
+    def form_valid(self, form):
+        lesson = form.save(commit=False)
+        # Дополнительная логика, если необходимо
+        lesson.save()
+        return redirect('users:student:courses:lesson_view', lesson_id=lesson.id)
+
+    def form_invalid(self, form):
+        return render(self.request, self.template_name, {'form': form})
 
 
 class AnswersView(View):

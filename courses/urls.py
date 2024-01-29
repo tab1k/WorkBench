@@ -6,9 +6,12 @@ app_name = 'courses'
 urlpatterns = [
     path('by_type/<int:type_id>/', CoursesByType.as_view(), name='courses_by_type'),
     path('', Courses.as_view(), name='courses'),
-    path('course_detail/<int:course_id>/', CourseDetailView.as_view(), name='course_detail'),
+    path('delete_course/<int:pk>/', DeleteCourseView.as_view(), name='delete_course'),
+
+    path('course_students/<int:course_id>/', CourseStudentsView.as_view(), name='course_students'),
     path('course_num<int:pk>/', Modules.as_view(), name='modules'),
     path('module/<int:module_id>/lessons/', LessonsByModule.as_view(), name='lessons_by_module'),
+    path('create_lesson/', LessonCreateView.as_view(), name='create_lesson'),
     path('lesson/view/<int:lesson_id>/', LessonView.as_view(), name='lesson_view'),
 
     path('lesson/answers/', AnswersView.as_view(), name='answers_view'),

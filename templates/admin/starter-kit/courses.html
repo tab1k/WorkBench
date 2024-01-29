@@ -53,18 +53,24 @@
                           </h2>
                           <p class="mb-4 mb-lg-5">{{ c.course_type }}</p>
                           <div class="d-flex">
-                            <button type="button" class="btn btn-outline-primary px-3 px-lg-4 me-3">
-                              <i class="bx bx-edit fs-xl me-xl-2"></i>
-                              <span class="d-none d-xl-inline">Изменить</span>
-                            </button>
-                            <button type="button" class="btn btn-outline-secondary px-3 px-lg-4 me-3">
-                              <i class="bx bx-info-circle fs-xl me-xl-2"></i>
-                              <span class="d-none d-xl-inline">О курсе</span>
-                            </button>
+                            <a href="{% url 'users:admin:change_course' pk=c.pk %}">
+                                <button type="button" class="btn btn-outline-primary px-3 px-lg-4 me-3">
+                                  <i class="bx bx-edit fs-xl me-xl-2"></i>
+                                  <span class="d-none d-xl-inline">Изменить</span>
+                                </button>
+                            </a>
+                            <a href="{% url 'users:admin:courses:course_students' c.id %}">
+                                <button type="button" class="btn btn-outline-secondary px-3 px-lg-4 me-3">
+                                  <i class="bx bx-user fs-xl me-xl-2"></i>
+                                  <span class="d-none d-xl-inline">Студенты</span>
+                                </button>
+                            </a>
+                            <a href="{% url 'users:admin:courses:delete_course' pk=c.pk %}">
                             <button type="button" class="btn btn-outline-danger px-3 px-lg-4">
                               <i class="bx bx-trash-alt fs-xl me-xl-2"></i>
                               <span class="d-none d-xl-inline">Удалить</span>
                             </button>
+                            </a>      
                           </div>
                         </div>
                       </div>

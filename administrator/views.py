@@ -332,33 +332,6 @@ class NotificationCreateView(CreateView):
 
 
 
-
-class StreamListView(ListView):
-    model = Stream
-    template_name = 'users/admin/streams.html'
-    context_object_name = 'streams'
-
-
-
-
-
-from django.db.models import Q
-
-class SearchView(View):
-    template_name = 'users/admin/search_results.html'
-
-    def get(self, request):
-        query = request.GET.get('q')
-        courses = Course.objects.filter(title__icontains=query) if query else []
-        students = User.objects.filter(Q(role='student'),
-                                       Q(username__icontains=query) | Q(first_name__icontains=query) | Q(
-                                           last_name__icontains=query)) if query else []
-        notifications = Notification.objects.filter(message__icontains=query) if query else []
-
-        return render(request, self.template_name,
-                      {'courses': courses, 'students': students, 'notifications': notifications})
-
-
 class AddCourseView(View):
     def get(self, request):
         # Retrieve all available course types
@@ -409,6 +382,12 @@ class AddModuleView(View):
         return render(request, 'admin/starter-kit/add_module.html', {'form': form})
 
 
+class AdminChangeCourse(LoginRequiredMixin, UpdateView):
+    model = Course
+    template_name = 'admin/starter-kit/course_change.html'
+    form_class = CourseChangeForm
+    success_url = reverse_lazy('users:admin:courses:courses')
+    context_object_name = 'course'
 
 
 
@@ -451,7 +430,6 @@ class NextLessonRedirectView(RedirectView):
             return next_lesson.get_absolute_url()  # Замените на ваш метод получения URL урока
         else:
             return current_lesson.get_absolute_url()
-
 
 
 class LogoutView(View):
