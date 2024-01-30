@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-^g3y09%yta_zrwfe1#kpl7hjw88$t0zyvh%xxdca6^s8h$wy5v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['185.100.67.30', 'workbench.kz', '0.0.0.0', 'localhost', '127.0.0.1', '192.168.238.80']
+ALLOWED_HOSTS = ['185.100.67.30', 'workbench.kz', '0.0.0.0', 'localhost', '127.0.0.1', '*']
 
 
 
@@ -91,25 +91,25 @@ WSGI_APPLICATION = "workbench.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-#
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": 'workbench_db',
-#         "USER": 'admin',
-#         "PASSWORD": 'admin',
-#         "HOST": 'db',
-#         "PORT": '5432',
-#     }
-# }
-
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": 'workbenchkz',
+        "USER": 'admin',
+        "PASSWORD": 'TOBI8585',
+        "HOST": 'localhost',
+        "PORT": '5433',
     }
 }
+
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 
 # Password validation

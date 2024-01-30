@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from datetime import datetime, timedelta
+from django.utils import timezone
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, TemplateView, UpdateView, DetailView, RedirectView
@@ -15,6 +16,7 @@ from users.models import User, Stream
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from courses.models import Lesson
+from django.utils import timezone
 
 
 class CuratorDashboardView(LoginRequiredMixin, TemplateView):
@@ -153,42 +155,22 @@ class ContactListView(ListView):
         return context
 
 
-from datetime import datetime, timedelta
-from django.utils import timezone
-
 class NotificationListView(ListView):
     model = Notification
     template_name = 'curator/starter-kit/notifications.html'
     context_object_name = 'notifications'
-    ordering = ['-timestamp']
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['courses'] = Course.objects.all()  # Замените на ваш запрос для получения списка курсов
-        return context
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        # Define date range for filtering (e.g., notifications from the last 7 days)
+        start_date = timezone.now() - timedelta(days=7)
+        end_date = timezone.now()
 
-        course_id = self.request.GET.get('course_id')
-        start_date = self.request.GET.get('start_date')
-        end_date = self.request.GET.get('end_date')
-
-        if course_id:
-            queryset = queryset.filter(course_id=course_id)
-
-        if start_date:
-            start_date = datetime.strptime(start_date, '%Y-%m-%d').replace(tzinfo=timezone.utc)
-            queryset = queryset.filter(timestamp__gte=start_date)
-
-        if end_date:
-            end_date = datetime.strptime(end_date, '%Y-%m-%d').replace(tzinfo=timezone.utc) + timedelta(days=1)
-            queryset = queryset.filter(timestamp__lt=end_date)
+        # Filter notifications based on the timestamp field
+        queryset = Notification.objects.filter(timestamp__range=(start_date, end_date))
 
         return queryset
 
 
-from django.db.models import Q
 
 class SearchView(View):
     template_name = 'users/curator/search_results.html'

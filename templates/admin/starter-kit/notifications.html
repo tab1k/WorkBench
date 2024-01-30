@@ -1,99 +1,46 @@
-{% extends 'admin/starter-kit/base.html' %}
-{% load static %}
+{% extends 'curator/starter-kit/base.html' %}
 {% block content %}
     <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
-        <div class="row">
-              <div class="card shadow">
-                  <div class="container mt-3">
-                        <form class="mb-4" method="get" action="{% url 'users:admin:view_notifications' %}">
-                            <div class="form-group">
-                                <label for="course_id">Курс:</label>
-                                <select class="form-control" id="course_id" name="course_id">
-                                    <option value="">Все курсы</option>
-                                    {% for course in courses %}
-                                    <option value="{{ course.id }}">{{ course.title }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="start_date">Дата начала:</label>
-                                <input type="date" class="form-control" id="start_date" name="start_date">
-                            </div>
-                            <div class="form-group">
-                                <label for="end_date">Дата окончания:</label>
-                                <input type="date" class="form-control" id="end_date" name="end_date">
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary" style="margin-top: 15px;">Применить фильтры</button>
-                            <a href="{% url 'users:admin:create_notification' %}">
-                                <button style="margin-top: 15px;" type="button" class="btn btn-outline-primary px-3 px-lg-4 me-3">
-                                    <i class="bx bx-plus fs-xl me-xl-2"></i>
-                                    <span class="d-none d-xl-inline">Создать уведомление</span>
-                                </button>
-                            </a>
-                        </form>
-                        <div class="container-fluid">
-            <div class="container mt-5">
-                {% if notifications %}
-                <div class="row">
-                    {% for notification in notifications %}
-                    <div class="col-md-4 mb-4">
-                        <div class="card card-hover" style="transition: transform 0.2s; cursor: pointer;" data-toggle="modal" data-target="#myModal{{ notification.id }}">
-                            <div class="card-header bg-primary text-white">
-                                <h5 class="card-title">{{ notification.course }}</h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">{{ notification.message|truncatechars:25 }}</p>
-                                <p class="card-text"><small class="text-muted">Дата создания: {{ notification.timestamp }}</small></p>
-                            </div>
-                        </div>
-                    </div>
+        <h2 class="mb-4">Уведомления</h2>
 
+        <form method="get" action="{% url 'users:curator:view_notifications' %}">
+            <div class="mb-3">
+                <label for="courseSelect" class="form-label">Выберите курс:</label>
+                <select id="courseSelect" name="course_id" class="form-select">
+                    <option value="">Все курсы</option>
+                    {% for course in courses %}
+                        <option value="{{ course.id }}">{{ course.title }}</option>
                     {% endfor %}
-                </div>
-                {% else %}
-                <div class="no-notifications text-center py-5">
-                    <h3 class="mb-3">Нет уведомлений</h3>
-                    <img src="{% static 'website/img/tl.webp' %}" style="height: 150px;" alt="Нет заявок">
-                </div>
-                {% endif %}
+                </select>
+            </div>
 
+            <div class="mb-3">
+                <label for="startDate" class="form-label">Дата начала:</label>
+                <input type="date" id="startDate" name="start_date" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="endDate" class="form-label">Дата окончания:</label>
+                <input type="date" id="endDate" name="end_date" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Применить фильтры</button>
+        </form>
+
+        <div class="mt-4">
+            {% if notifications %}
+                <ul>
                     {% for notification in notifications %}
-                    <div class="modal fade" id="myModal{{ notification.id }}" style="z-index: 1050;">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header bg-primary text-white">
-                                    <h4 class="modal-title">{{ notification.course }}</h4>
-                                    <button type="button" class="close custom-close-button btn " style="border-radius: 15px; border: 1px solid white; color: white;" data-dismiss="modal" aria-label="Закрыть">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body" style="overflow-y: scroll; max-height: 700px;">
-                                    <p>{{ notification.message }}</p>
-                                    <p><small class="text-muted">Дата создания: {{ notification.timestamp }}</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <li>
+                            <strong>{{ notification.course.title }}</strong>
+                            <p>{{ notification.message }}</p>
+                            <small>{{ notification.timestamp|date:"D d M Y H:i:s" }}</small>
+                        </li>
                     {% endfor %}
-                    <!-- JavaScript для открытия модального окна -->
-                    <script>
-                        // Эта функция будет вызываться при клике на карточку уведомления
-                        function openModal{{ notification.id }}() {
-                            $('#myModal{{ notification.id }}').modal('show'); // Показать модальное окно
-                        }
-                    </script>
-
-                </div>
-
-
-            </div>
-              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-                    </div>
-              </div>
-            </div>
+                </ul>
+            {% else %}
+                <p>Нет уведомлений.</p>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
-
-

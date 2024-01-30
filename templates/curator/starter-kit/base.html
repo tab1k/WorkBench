@@ -190,7 +190,9 @@
             </div>       
           </div>
           <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
-            
+            <input type="checkbox" class="form-check-input" id="theme-mode">
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Светлый</label>
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Темный</label>
           </div>
 
 
@@ -243,7 +245,7 @@
                     <i class="bx bx-user fs-xl opacity-60 me-2"></i>
                     Студенты
                   </a>  
-                  <a href="{% url 'users:curator:courses:answers_view' %}" class="list-group-item list-group-item-action d-flex align-items-center {% if current_url_name == 'student-schedule' %}active{% endif %}">
+                  <a href="{% url 'users:curator:courses:answers_view' %}" class="list-group-item list-group-item-action d-flex align-items-center {% if current_url_name == 'answers' %}active{% endif %}">
                     <i class="bx bx-message fs-xl opacity-60 me-2"></i>
                     Лента ответов
                   </a>

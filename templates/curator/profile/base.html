@@ -15,6 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
     <script async="" src="{% static 'student/js/gtm.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'student/js/theme-switcher.js' %}"></script>
 
     
 
@@ -174,7 +175,9 @@
             </div>      
           </div>
           <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
-            
+            <input type="checkbox" class="form-check-input" id="theme-mode">
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Светлый</label>
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Темный</label>
           </div>
 
 

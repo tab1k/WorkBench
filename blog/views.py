@@ -1,9 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
+from blog.forms import PostCreationForm
 from blog.models import Post
 
 
@@ -47,6 +49,12 @@ class BlogListView(ListView):
             context['posts'] = paginator.page(paginator.num_pages)
 
         return context
+
+
+class CreatePostView(LoginRequiredMixin, CreateView):
+    model = Post
+    form_class = PostCreationForm
+    template_name = 'student/blog/create_post.html'
 
 
 class BlogDetailView(DetailView):

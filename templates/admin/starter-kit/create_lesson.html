@@ -9,7 +9,7 @@
 <body>
     {% block content %}
         <div class="col-md-8 offset-lg-1 pb-5 mb-lg-2 pt-md-5 mt-n3 mt-md-0">
-            <h2>Create Lesson</h2>
+            <h2>Добавить урок</h2>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}

@@ -74,36 +74,14 @@ class StudentOrderHistoryView(LoginRequiredMixin, ListView):
 
 class StudentNotificationListView(ListView):
     model = Notification
-    template_name = 'users/student/student_notifications.html'
+    template_name = 'student/starter-kit/notifications.html'
     context_object_name = 'notifications'
     ordering = ['-timestamp']
 
     def get_queryset(self):
         student = self.request.user
-        return Notification.objects.filter(course__students__in=[student])
+        return Notification.objects.filter(course__students__in=[student], read=False)
 
-
-class StudentMessagesListView(ListView):
-    template_name = 'users/student/student_messages.html'
-
-    def get(self, request):
-
-        student = request.user
-        course_type = CourseType.objects.filter(courses__students=student).distinct()
-        courses = Course.objects.filter(students=student)
-
-
-        # Получите сообщения куратора только для текущего студента
-        curator_comments = Comment.objects.filter(lesson__module__course__in=courses, is_student_comment=False,
-                                                  user=student)
-
-        context = {
-            'courses': courses,
-            'course_type': course_type,
-            'student': student,
-            'curator_comments': curator_comments
-        }
-        return render(request, self.template_name, context=context)
 
 
 class SendResponseView(View):
@@ -114,31 +92,6 @@ class SendResponseView(View):
             comment.student_response = student_response
             comment.save()
         return redirect('users:student:student_messages')  # Перенаправьте, куда вам нужно
-
-
-class StudentNotificationListView(ListView):
-
-    def get(self, request):
-        student = request.user
-        course_type = CourseType.objects.filter(courses__students=student).distinct()
-        courses = Course.objects.filter(students=student)
-
-        # Получите уведомления, связанные с курсами пользователя
-        notifications = Notification.objects.filter(course__in=courses).order_by('-timestamp')
-
-        # Получите сообщения куратора только для текущего студента
-        curator_comments = Comment.objects.filter(lesson__module__course__in=courses, is_student_comment=False,
-                                                  user=student)
-        if request.user.role == 'student':
-            return render(request, 'student/starter-kit/student_notifications.html', {
-                'courses': courses,
-                'course_type': course_type,
-                'student': student,
-                'notifications': notifications,
-                'curator_comments': curator_comments  # Передача сообщений куратора в контекст
-            })
-        else:
-            return redirect('users:login')
 
 
 class PreviousLessonRedirectView(RedirectView):

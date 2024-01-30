@@ -49,9 +49,11 @@
         {% block content %}
       <nav class="container mt-lg-4 pt-5" aria-label="breadcrumb">
         <ol class="breadcrumb mb-0 pt-5">
+           {% if user.is_authenticated %}
           <li class="breadcrumb-item">
             <a href="{% url 'users:student:dashboard' %}"><i class="bx bx-home-alt fs-lg me-1"></i>Главная</a>
           </li>
+           {% endif %} 
           <li class="breadcrumb-item active" aria-current="page">Блог</li>
         </ol>
       </nav>
@@ -72,7 +74,7 @@
                         {% if user.is_authenticated %}
                             {% if user.role == "admin" %}
                             <div class="nav flex-nowrap me-sm-4 me-3">
-                                <a href="#" class="nav-link p-0 active" aria-label="Grid view">
+                                <a href="{% url 'users:blog:create_post' %}" class="nav-link p-0 " >
                                     <i class="bx bx-plus fs-4"></i>
                                 </a>
                             </div>

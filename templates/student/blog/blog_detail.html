@@ -27,13 +27,15 @@
         {% block content %}
       <nav class="container pt-4 mt-lg-3" aria-label="breadcrumb">
         <ol class="breadcrumb mb-0">
+          {% if user.is_authenticated %}  
           <li class="breadcrumb-item">
             <a href="{% url 'users:student:dashboard' %}"><i class="bx bx-home-alt fs-lg me-1"></i>Главная</a>
           </li>
+          {% endif %}  
           <li class="breadcrumb-item">
             <a href="{% url 'users:blog:blog' %}">Блог</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">{{ detail.title|truncatechars:20 }}</li>
+          <li class="breadcrumb-item active" aria-current="page">{{ detail.title|truncatechars:25 }}</li>
         </ol> 
       </nav>
 

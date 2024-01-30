@@ -9,11 +9,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=workbench_db
+      - POSTGRES_USER=tab1k
+      - POSTGRES_PASSWORD=TOBI8585
+      - POSTGRES_DB=bonapart_db
     ports:
-      - "5433:5432"
+      - "5434:5433"
 
   web:
     build: .
@@ -22,10 +22,24 @@ services:
       bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     restart: always
     volumes:
-      - .:/code/WorkBench
+      - .:/code/bonapart
       - .:/static
       - .:/media
     ports:
       - "8000:8000"
     depends_on:
       - db
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/lib/letsencrypt:/var/lib/letsencrypt
+      - .:/code/bonapart
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
