@@ -98,8 +98,8 @@ DATABASES = {
         "NAME": 'workbenchkz',
         "USER": 'admin',
         "PASSWORD": 'TOBI8585',
-        "HOST": 'localhost',
-        "PORT": '5433',
+        "HOST": 'db',
+        "PORT": '5432',
     }
 }
 

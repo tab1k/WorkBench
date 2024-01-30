@@ -13,7 +13,7 @@ services:
       - POSTGRES_PASSWORD=TOBI8585
       - POSTGRES_DB=workbenchkz
     ports:
-      - "5434:5433"
+      - "5432:5432"
 
   web:
     build: .
