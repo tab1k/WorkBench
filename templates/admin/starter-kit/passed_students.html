@@ -59,7 +59,7 @@
                                                     {% endfor %}
                                                 </td>
                                                 <td><a href="{% url 'users:admin:courses:student_progress' student_id=student.id %}" class="btn btn-primary btn-sm">Успеваемость</a></td>
-                                                <td><a href="{% url 'users:admin:courses:generate_certificate' student_id=student.id %}" target="_blank" class="btn btn-success btn-sm">Выдать сертификат</a></td>
+                                                <td><a href="{% url 'users:admin:courses:generate_certificate' student_id=student.id %}"  class="btn btn-success btn-sm">Выдать сертификат</a></td>
                                             </tr>
                                             {% endfor %}
                                         </tbody>

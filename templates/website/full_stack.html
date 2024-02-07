@@ -201,21 +201,21 @@
             {% if user.is_authenticated %}
               {% if user.role == "student" %}
                 <div class="offcanvas-header border-top">
-                  <a href="{% url 'users:student:dashboard' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                  <a href="{% url 'users:student:dashboard' %}" class="btn btn-primary w-100" rel="noopener">
                     <i class="bx bx-log-in fs-5"></i>
                     &nbsp;Кабинет студента
                   </a>
                 </div>
               {% elif user.role == "curator" %}
                 <div class="offcanvas-header border-top">
-                  <a href="{% url 'users:curator:curator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                  <a href="{% url 'users:curator:dashboard' %}" class="btn btn-primary w-100" rel="noopener">
                     <i class="bx bx-log-in fs-5"></i>
                     &nbsp;Кабинет ментора
                   </a>
                 </div>
               {% elif user.role == "admin" %}
                 <div class="offcanvas-header border-top">
-                  <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                  <a href="{% url 'users:admin:dashboard' %}" class="btn btn-primary w-100" rel="noopener">
                     <i class="bx bx-log-in fs-5"></i>
                     &nbsp;Кабинет администратора
                   </a>
@@ -223,7 +223,7 @@
               {% endif %}
             {% else %}
               <div class="offcanvas-header border-top">
-                <a href="{% url 'users:login' %}" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                <a href="{% url 'users:login' %}" class="btn btn-primary w-100" rel="noopener">
                   <i class="bx bx-log-in fs-5"></i>
                   &nbsp;Войти
                 </a>
@@ -240,23 +240,23 @@
           </button>
           {% if user.is_authenticated %}
             {% if user.role == "student" %}
-              <a href="{% url 'users:student:dashboard' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+              <a href="{% url 'users:student:dashboard' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" rel="noopener">
                 <i class="bx bx-log-in fs-5"></i>
                 &nbsp;Кабинет студента
               </a>
             {% elif user.role == "curator" %}
-              <a href="{% url 'users:curator:curator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+              <a href="{% url 'users:curator:dashboard' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex"  rel="noopener">
                 <i class="bx bx-log-in fs-5"></i>
                 &nbsp;Кабинет ментора
               </a>
             {% elif user.role == "admin" %}
-              <a href="{% url 'users:admin:administrator' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+              <a href="{% url 'users:admin:dashboard' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" rel="noopener">
                 <i class="bx bx-log-in fs-5"></i>
                 &nbsp;Кабинет администратора
               </a>
             {% endif %}
           {% else %}
-            <a href="{% url 'users:login' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+            <a href="{% url 'users:login' %}" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" rel="noopener">
               <i class="bx bx-log-in fs-5"></i>
               &nbsp;Войти
             </a>
@@ -853,7 +853,7 @@
         </div>
         <p class="nav d-block fs-xs text-center text-md-start pb-2 pb-lg-0 mb-0">
           &copy; Все права защищены.
-          <a class="nav-link d-inline-block p-0" href="{% url 'website:home' %}" target="_blank" rel="noopener">WorkBench</a>
+          <a class="nav-link d-inline-block p-0" href="{% url 'website:home' %}"  rel="noopener">WorkBench</a>
         </p>
       </div>
     </footer>

@@ -1,15 +1,17 @@
-FROM python:3
+FROM python:3.10
+
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends gdal-bin
+RUN apt-get install -y mime-support
+
+WORKDIR /code/workbench
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update
-
-WORKDIR /code/workbench
-
-COPY requirements.txt /code/requirements.txt
+COPY requirements.txt /code/workbench/requirements.txt
 RUN pip3 install --upgrade pip
-RUN pip install -r /code/requirements.txt
+RUN pip3 install -r /code/workbench/requirements.txt
 RUN pip3 install Pillow psycopg2
 
 COPY . /code/workbench

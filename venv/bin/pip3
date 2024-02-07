@@ -1,4 +1,4 @@
-#!/Users/tabigat/PycharmProjects/workbench/venv/bin/python3.12
+#!/Users/tabigat/PycharmProjects/workbench/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

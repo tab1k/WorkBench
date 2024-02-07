@@ -9,17 +9,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=admin
+      - POSTGRES_USER=workbench
       - POSTGRES_PASSWORD=TOBI8585
-      - POSTGRES_DB=workbenchkz
+      - POSTGRES_DB=workbench_db
     ports:
-      - "5432:5432"
+      - "5433:5432"
+
 
   web:
     build: .
     tty: true
     command: >
-      bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+      bash -c "python manage.py migrate &&  python manage.py runserver 0.0.0.0:8000"
     restart: always
     volumes:
       - .:/code/workbench

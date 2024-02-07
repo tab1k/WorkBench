@@ -93,16 +93,15 @@ WSGI_APPLICATION = "workbench.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": 'workbenchkz',
-        "USER": 'admin',
-        "PASSWORD": 'TOBI8585',
-        "HOST": 'db',
-        "PORT": '5432',
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'workbench',
+        'USER': 'admin',
+        'PASSWORD': 'TOBI8585',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
-
 
 # DATABASES = {
 #     "default": {
@@ -163,6 +162,8 @@ AUTH_USER_MODEL = 'users.User'
 
 LOGOUT_REDIRECT_URL = 'users:login'
 SITE_URL = 'http://127.0.0.1:8000/'
+
+CSRF_TRUSTED_ORIGINS = ['https://workbench.kz']
 
 
 # Default primary key field type

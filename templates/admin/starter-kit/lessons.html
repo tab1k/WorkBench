@@ -85,7 +85,7 @@
                         <div class="fs-sm">Об уроке: {{ lesson.description }} </div>
                     {% endif %}
                     {% if lesson.learn_documentation %}  
-                        <div class="fs-sm">Документация: <a href="{{ lesson.learn_documentation.url }}" target="_blank">{{ lesson.learn_documentation.url|truncatechars:10 }} 📎</div>
+                        <div class="fs-sm">Документация: <a href="{{ lesson.learn_documentation.url }}" >{{ lesson.learn_documentation.url|truncatechars:10 }} 📎</div>
                     {% endif %}  
                   </div>
                     

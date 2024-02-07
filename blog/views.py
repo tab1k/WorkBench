@@ -18,12 +18,10 @@ class BlogListView(ListView):
     def get_queryset(self):
         queryset = Post.objects.all().order_by('-date')
 
-        # Filter by hashtag
         hashtag_filter = self.request.GET.get('hashtag', '')
         if hashtag_filter:
             queryset = queryset.filter(hashtag=hashtag_filter)
 
-        # Search
         search_query = self.request.GET.get('search', '')
         if search_query:
             search_condition = Q()
