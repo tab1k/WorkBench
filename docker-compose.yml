@@ -9,9 +9,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=admin
+      - POSTGRES_USER=tab1k
       - POSTGRES_PASSWORD=TOBI8585
-      - POSTGRES_DB=workbench
+      - POSTGRES_DB=work
     ports:
       - "5433:5432"
 

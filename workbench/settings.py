@@ -95,8 +95,8 @@ WSGI_APPLICATION = "workbench.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'workbench',
-        'USER': 'admin',
+        'NAME': 'work',
+        'USER': 'tab1k',
         'PASSWORD': 'TOBI8585',
         'HOST': 'db',
         'PORT': '5432',
