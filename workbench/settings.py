@@ -95,20 +95,14 @@ WSGI_APPLICATION = "workbench.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'work',
-        'USER': 'tab1k',
-        'PASSWORD': 'TOBI8585',
-        'HOST': 'db',
-        'PORT': '5432',
+        'NAME': 'work',         # Название базы данных
+        'USER': 'tab1k',        # Имя пользователя
+        'PASSWORD': 'TOBI8585', # Пароль
+        'HOST': 'db',           # Адрес сервера базы данных (имя контейнера в сети Docker Compose)
+        'PORT': '5432',         # Порт
     }
 }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
 
 
 # Password validation

@@ -7,12 +7,13 @@ services:
       POSTGRES_DB: work
       POSTGRES_USER: tab1k
       POSTGRES_PASSWORD: TOBI8585
+    ports:
+      - "5433:5432"
 
   web:
     build: .
     command: >
       bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    restart: always
     volumes:
       - .:/app
     ports:
@@ -27,7 +28,7 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/lib/letsencrypt:/var/lib/letsencrypt
-      - .:/code
+      - .:/app
     ports:
       - "80:80"
       - "443:443"

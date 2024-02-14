@@ -16,8 +16,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копируем все файлы из текущей директории хоста в рабочую директорию контейнера
 COPY . /app/
 
-# Запускаем миграции Django
-RUN python manage.py migrate
+# Устанавливаем права на выполнение для скрипта docker-entrypoint.sh
+RUN chmod +x docker-entrypoint.sh
 
-# Команда для запуска сервера Django
+# Задаем точку входа для контейнера
+CMD ["./docker-entrypoint.sh"]
+# Команда для запуска сервера Django (выполняется из скрипта entrypoint)
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
