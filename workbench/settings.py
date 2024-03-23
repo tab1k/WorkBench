@@ -93,14 +93,20 @@ WSGI_APPLICATION = "workbench.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'work',         # Название базы данных
-        'USER': 'tab1k',        # Имя пользователя
-        'PASSWORD': 'TOBI8585', # Пароль
-        'HOST': 'db',           # Адрес сервера базы данных (имя контейнера в сети Docker Compose)
-        'PORT': '5432',         # Порт
+
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
+    #
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'work',
+    #     'USER': 'tab1k',
+    #     'PASSWORD': 'TOBI8585',
+    #     'HOST': 'db',
+    #     'PORT': '5432',
+    # }
 }
 
 
@@ -166,7 +172,6 @@ CSRF_TRUSTED_ORIGINS = ['https://workbench.kz']
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-
 # JAZZMIN SETTINGS
 
 JAZZMIN_SETTINGS = {
@@ -219,7 +224,7 @@ JAZZMIN_SETTINGS = {
         {"name": "Главная",  "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "Вернуться на сайт", "url": "/", "new_window": True},
+        {"name": "Вернуться на сайт", "url": "/", "new_window": False},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},

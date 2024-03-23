@@ -1,11 +1,10 @@
 {% extends 'admin/starter-kit/base.html' %}
 <!DOCTYPE html>
 {% load static %}
-{% load embed_video_tags %}
 <html lang="en" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
-    <title>Silicon | Account - Messages</title>
+    <title></title>
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="Silicon - Multipurpose Technology Bootstrap Template">
@@ -73,25 +72,57 @@
               </div>  
                 
               <div class="buttons d-flex justify-content-around mb-5 mt-5">
-                  {% video lesson.video width="800" height="450" %}
+                  <video style="border-radius: 10px; max-width: 100%;" id="lesson-video" controls width="800" height="450">
+                      <source src="{{ lesson.stream_url }}" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
               </div>
+              <script>
+                  document.addEventListener('contextmenu', function(event) {
+                      if (event.target.id === 'lesson-video') { // Проверяем, был ли клик на видео
+                          event.preventDefault(); // Отменяем контекстное меню только для видео
+                      }
+                  });
+                
+                  document.addEventListener('mousedown', function(event) {
+                      if (event.button === 2 && event.target.id === 'lesson-video') { // Проверяем, была ли нажата правая кнопка мыши на видео
+                          event.preventDefault(); // Отменяем действие по умолчанию только для правой кнопки мыши на видео
+                      }
+                  });
+              </script>  
             
               <div class="card d-sm-flex flex-sm-row align-items-sm-center justify-content-between border-0 shadow-sm p-3 p-md-4 mb-4">
                 <div class="d-flex align-items-center pe-sm-3">
                   <img src="{% static 'student/images/lesson.webp' %}" width="84" alt="Visa">
                   <div class="ps-3 ps-sm-4">
-                    <h6 class="mb-2">{{ lesson.title }}</h6>
+                    <h6 class="mb-2">{{ lesson.title }}
+                    {% if lesson.test_set.exists %}
+                        {% if lesson.is_completed %}
+                            <span class="badge bg-success ms-1">Пройден</span>
+                          {% else %}
+                              <span class="badge bg-danger ms-1">Не пройден</span>
+                          {% endif %}
+                    {% else %}
+                        {% if lesson.is_watched %}
+                            <span class="badge bg-success ms-1">Просмотрено</span>
+                        {% else %}
+                            <span class="badge bg-danger ms-1">Не просмотрено</span>
+                        {% endif %}
+                    {% endif %}
+                    </h6>
                     {% if lesson.description %}
                         <div class="fs-sm">Об уроке: {{ lesson.description }} </div>
                     {% endif %}
                     {% if lesson.learn_documentation %}  
                         <div class="fs-sm">Документация: <a href="{{ lesson.learn_documentation.url }}" >{{ lesson.learn_documentation.url|truncatechars:10 }} 📎</div>
                     {% endif %}  
+                  
                   </div>
                     
                 </div>
                 
                 <div class="d-flex justify-content-end pt-3 pt-sm-0">
+                
                     {% if lesson.test_set.exists %}
                   <a href="{% url 'users:admin:courses:tests:take_test' lesson_id=lesson.id %}" type="button" class="btn btn-outline-secondary px-3 px-xl-4 me-3">
                     <i class="bx bx-edit fs-xl me-lg-1 me-xl-2"></i>
@@ -104,7 +135,10 @@
                 
             </div>
               
+            
             <div class="mt-md-2 pt-md-4 pb-md-2">
+                
+            <!-- CHAT CURATOR -->
               <div class="row g-0 border rounded-3 shadow-sm position-relative overflow-hidden">
                   
                 <div class="col-lg-12" style="max-height: 712px;">
@@ -124,23 +158,24 @@
                     </div>
                   
                     <div class="card-body swiper scrollbar-hover overflow-hidden w-100 pb-0" style="overflow-y: scroll; min-height: 100px; max-height: 300px;">
-                      <div class="swiper-wrapper" style="overflow-y: scroll;">
-                        <div class="swiper-slide h-auto">
-                        
-                           
+                        <div class="swiper-wrapper" style="overflow-y: scroll;">
+                            <div class="swiper-slide h-auto">
+                                <div class="comments">
+                                    
+                                </div>
                                 {% for comment in student_comments %}
                                     <div class="d-flex align-items-start justify-content-end mb-3">
-                                        <div class="pe-2 me-1" style="max-width: 348px;">
-                                            <div class="bg-primary text-light p-3 mb-1" style="border-top-left-radius: .5rem; border-bottom-right-radius: .5rem; border-bottom-left-radius: .5rem;">{{ comment.text }}</div>
+                                        <img src="{{ user.image.url }}" class="rounded-circle me-2" width="40" alt="Albert Flores">
+                                        <div class="pe-2">
+                                            <div class="bg-primary text-light p-3 mb-1" style="border-top-right-radius: .5rem; border-bottom-right-radius: .5rem; border-bottom-left-radius: .5rem;">{{ comment.text }}</div>
                                             <div class="d-flex justify-content-end align-items-center fs-sm text-muted">
                                                 {{ comment.timestamp }}
                                                 <i class="bx bx-check-double fs-xl text-primary ms-2"></i>
                                             </div>
                                         </div>
-                                        <img src="{{ user.image.url }}" class="rounded-circle" width="40" alt="Albert Flores">
                                     </div>
-                                {% endfor %}    
-                        
+                                {% endfor %}
+
                                 {% for comment in curator_comments %}
                                 <div class="d-flex align-items-start mb-3">
                                     <img src="{% static 'student/images/account.webp' %}" class="rounded-circle" width="40" alt="Куратор">
@@ -149,80 +184,145 @@
                                         <div class="fs-sm text-muted">{{ comment.timestamp }}</div>
                                     </div>
                                 </div>
-                                {% endfor %}    
-                       
+                                {% endfor %}
+                            </div>
                         </div>
-
-                      </div>
-                    
                     </div>
+
 
                     <!-- Footer (Send message form) -->
                     <form id="commentForm" class="d-flex">
                         {% csrf_token %}
                         <div class="card-footer d-sm-flex w-100 border-0 pt-3 pb-3 px-4">
-                          <div class="position-relative w-100 me-2 mb-3 mb-sm-0">
-                            <input name="text" type="text" class="form-control form-control-lg" style="padding-right: 85px;">
-                            <div class="position-absolute top-50 end-0 translate-middle-y d-flex zindex-3 me-2">
-                              <button type="button" class="btn btn-icon btn-sm btn-link nav-link bg-faded-primary-hover me-1" aria-label="Attachment">
-                                <i class="bx bx-paperclip fs-4"></i>
-                              </button>
-                              <button type="button" class="btn btn-icon btn-sm btn-link nav-link bg-faded-primary-hover" aria-label="Emoji">
-                                <i class="bx bx-smile fs-4"></i>
-                              </button>
+                            <div class="position-relative w-100 me-2 mb-3 mb-sm-0">
+                                <input name="text" type="text" class="form-control form-control-lg" style="padding-right: 85px;">
+                                <div class="position-absolute top-50 end-0 translate-middle-y d-flex zindex-3 me-2">
+                                    <button type="button" class="btn btn-icon btn-sm btn-link nav-link bg-faded-primary-hover me-1" aria-label="Attachment">
+                                        <i class="bx bx-paperclip fs-4"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-icon btn-sm btn-link nav-link bg-faded-primary-hover" aria-label="Emoji">
+                                        <i class="bx bx-smile fs-4"></i>
+                                    </button>
+                                </div>
                             </div>
-                          </div>
-                          <button type="submit" class="btn btn-primary btn-icon btn-lg d-none d-sm-inline-flex ms-1" aria-label="Send">
-                            <i class="bx bx-send"></i>
-                          </button>
-                          <button type="submit" class="btn btn-primary btn-lg w-100 d-sm-none">
-                            <i class="bx bx-send fs-xl me-2"></i>
-                            Отправить
-                          </button>
+                            <button type="submit" class="btn btn-primary btn-icon btn-lg d-none d-sm-inline-flex ms-1" aria-label="Send">
+                                <i class="bx bx-send"></i>
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-lg w-100 d-sm-none">
+                                <i class="bx bx-send fs-xl me-2"></i>
+                                Отправить
+                            </button>
                         </div>
                     </form>
+
                     <script>
                         document.getElementById('commentForm').addEventListener('submit', function(event) {
-                            event.preventDefault(); // Отменяем отправку формы по умолчанию
+                            event.preventDefault();
                             const form = event.target;
                             const formData = new FormData(form);
-                            fetch(window.location.href, { // Используйте текущий URL страницы или другой URL, если нужно
+                            fetch(window.location.href, {
                                 method: 'POST',
                                 body: formData,
                                 headers: {
-                                    'X-CSRFToken': formData.get('csrfmiddlewaretoken') // Передаем CSRF-токен в заголовках
+                                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
                                 }
                             })
-                                .then(response => response.json()) // Ожидаем JSON-ответ
-                                .then(data => {
-                                    if (data.success) {
-                                        form.reset(); // Очищаем форму после успешной отправки
-                                        // Обновляем список комментариев на странице без перезагрузки
-                                        const commentsDiv = document.querySelector('.comments');
-                                        commentsDiv.innerHTML = ''; // Очищаем список комментариев
-                                        for (const comment of data.comments) {
-                                            const commentDiv = document.createElement('div');
-                                            commentDiv.className = 'comment';
-                                            commentDiv.innerHTML = `
-                                                   <div class="ava">
-                                                       <h5>Ваше сообщение находится на рассмотрении инструкторов ❗ </h5>
-                                                       <h6>После проверки вашего сообщения инструктором, в этом чате появятся ответ на ваш вопрос 😁</h6>
-                                                   </div>
-                                                   <div class="comment-text">
-                                                       <h5><strong>${comment.user}</strong>: ${comment.text}</h5>
-                                                   </div>`;
-                                            commentsDiv.appendChild(commentDiv);
-                                        }
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    form.reset();
+                                    const commentsDiv = document.querySelector('.comments');
+                                    commentsDiv.innerHTML = '';
+                                    for (const comment of data.comments) {
+                                        const commentDiv = document.createElement('div');
+                                        commentDiv.className = 'comment';
+                                        commentDiv.innerHTML = `
+                                            <div class="d-flex align-items-start justify-content-end mb-3">
+                                                <img src="{{ user.image.url }}" class="rounded-circle me-2" width="40" alt="Albert Flores">
+                                                <div class="pe-2">
+                                                    <div class="bg-primary text-light p-3 mb-1" style="border-top-right-radius: .5rem; border-bottom-right-radius: .5rem; border-bottom-left-radius: .5rem;">${comment.text}</div>
+                                                </div>
+                                            </div>`;
+                                        commentsDiv.appendChild(commentDiv);
                                     }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
                         });
+                    </script>
+
+                  </div>
+                </div>
+
+              </div>
+            
+                
+              <!-- CHAT GPT -->  
+              <div class="row g-0 border rounded-3 shadow-sm position-relative overflow-hidden mt-4">
+                  
+                <div class="col-lg-12" style="max-height: 712px;">
+                  <div class="card h-100 border-0 bg-transparent pb-3">
+                    <!-- Header -->
+                    <div class="navbar card-header d-flex align-items-center justify-content-between w-100 p-sm-4 p-3">
+                      <div class="d-flex align-items-center pe-3">
+                        <button type="button" class="navbar-toggler d-lg-none me-3" data-bs-toggle="offcanvas" data-bs-target="#contactsList" aria-controls="contactsList" aria-label="Toggle contacts list">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <img src="{% static 'student/images/chat.jpg' %}" class="rounded-circle" width="40" alt="Albert Flores">
+                        <h6 class="mb-0 px-1 mx-2">CHAT GPT</h6>
+                        <div class="bg-success rounded-circle" style="width: 8px; height: 8px;"></div>
+                      </div>
+                    </div>
+                    
+                    <div class="container mt-4">
+                      <div id="chat-history"></div>
+                      
+                      <form id="chat-form" class="mt-4">
+                        <div class="input-group">
+                          <input type="text" id="chat-message" class="form-control" placeholder="Введите сообщение...">
+                          <button type="submit" class="btn btn-primary">Отправить</button>
+                        </div>
+                      </form>
+                    </div>
+                    
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                      $(document).ready(function() {
+                        $('#chat-form').submit(function(event) {
+                          event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+                    
+                          var message = $('#chat-message').val(); // Получаем сообщение из поля ввода
+                          var csrf_token = $('input[name="csrfmiddlewaretoken"]').val(); // Получаем CSRF-токен из метатега
+                    
+                          $.ajax({
+                            url: '{% url 'users:admin:courses:lesson_view' lesson_id %}',
+                            method: 'POST',
+                            headers: {
+                              'X-CSRFToken': csrf_token // Передаем CSRF-токен в заголовке запроса
+                            },
+                            data: {
+                              'message': message
+                            },
+                            success: function(response) {
+                              // Показываем ответ чата в div с id="chat-history"
+                              $('#chat-history').prepend('<p><strong>Вы:</strong> ' + message + '</p>');
+                              $('#chat-history').prepend('<p><strong>ChatGPT:</strong> ' + response.response + '</p>');
+                              $('#chat-message').val(''); // Очищаем поле ввода
+                            },
+                            error: function(xhr, errmsg, err) {
+                              console.log(xhr.status + ': ' + xhr.responseText); // В случае ошибки выводим информацию в консоль
+                            }
+                          });
+                        });
+                      });
                     </script>
                   </div>
                 </div>
+
               </div>
+            
             </div>
           </div>
                 

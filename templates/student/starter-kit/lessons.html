@@ -1,7 +1,6 @@
 {% extends 'student/starter-kit/base.html' %}
 <!DOCTYPE html>
 {% load static %}
-{% load embed_video_tags %}
 <html lang="en" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
@@ -72,15 +71,47 @@
                   {% endif %}
               </div>  
                 
+              
+            
               <div class="buttons d-flex justify-content-around mb-5 mt-5">
-                  {% video lesson.video width="800" height="450" %}
+                  <video style="border-radius: 10px; max-width: 100%;" id="lesson-video" controls width="800" height="450">
+                      <source src="{{ lesson.stream_url }}" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
               </div>
+              <script>
+                  document.addEventListener('contextmenu', function(event) {
+                      if (event.target.id === 'lesson-video') { // Проверяем, был ли клик на видео
+                          event.preventDefault(); // Отменяем контекстное меню только для видео
+                      }
+                  });
+                
+                  document.addEventListener('mousedown', function(event) {
+                      if (event.button === 2 && event.target.id === 'lesson-video') { // Проверяем, была ли нажата правая кнопка мыши на видео
+                          event.preventDefault(); // Отменяем действие по умолчанию только для правой кнопки мыши на видео
+                      }
+                  });
+              </script>  
             
               <div class="card d-sm-flex flex-sm-row align-items-sm-center justify-content-between border-0 shadow-sm p-3 p-md-4 mb-4">
                 <div class="d-flex align-items-center pe-sm-3">
                   <img src="{% static 'student/images/lesson.webp' %}" width="84" alt="Visa">
                   <div class="ps-3 ps-sm-4">
-                    <h6 class="mb-2">{{ lesson.title }}</h6>
+                    <h6 class="mb-2">{{ lesson.title }}
+                    {% if lesson.test_set.exists %}
+                        {% if lesson.is_completed %}
+                            <span class="badge bg-success ms-1">Пройден</span>
+                          {% else %}
+                              <span class="badge bg-danger ms-1">Не пройден</span>
+                          {% endif %}
+                    {% else %}
+                        {% if lesson.is_watched %}
+                            <span class="badge bg-success ms-1">Просмотрено</span>
+                        {% else %}
+                            <span class="badge bg-danger ms-1">Не просмотрено</span>
+                        {% endif %}
+                    {% endif %}
+                    </h6>
                     {% if lesson.description %}
                         <div class="fs-sm">Об уроке: {{ lesson.description }} </div>
                     {% endif %}
@@ -223,6 +254,69 @@
                   </div>
                 </div>
               </div>
+            
+              <div class="row g-0 border rounded-3 shadow-sm position-relative overflow-hidden mt-4">
+                  
+                <div class="col-lg-12" style="max-height: 712px;">
+                  <div class="card h-100 border-0 bg-transparent pb-3">
+                    <!-- Header -->
+                    <div class="navbar card-header d-flex align-items-center justify-content-between w-100 p-sm-4 p-3">
+                      <div class="d-flex align-items-center pe-3">
+                        <button type="button" class="navbar-toggler d-lg-none me-3" data-bs-toggle="offcanvas" data-bs-target="#contactsList" aria-controls="contactsList" aria-label="Toggle contacts list">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <img src="{% static 'student/images/chat.jpg' %}" class="rounded-circle" width="40" alt="Albert Flores">
+                        <h6 class="mb-0 px-1 mx-2">CHAT GPT</h6>
+                        <div class="bg-success rounded-circle" style="width: 8px; height: 8px;"></div>
+                      </div>
+                    </div>
+                    
+                    <div class="container mt-4">
+                      <div id="chat-history"></div>
+                      
+                      <form id="chat-form" class="mt-4">
+                        <div class="input-group">
+                          <input type="text" id="chat-message" class="form-control" placeholder="Введите сообщение...">
+                          <button type="submit" class="btn btn-primary">Отправить</button>
+                        </div>
+                      </form>
+                    </div>
+                    
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                      $(document).ready(function() {
+                        $('#chat-form').submit(function(event) {
+                          event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+                    
+                          var message = $('#chat-message').val(); // Получаем сообщение из поля ввода
+                          var csrf_token = $('input[name="csrfmiddlewaretoken"]').val(); // Получаем CSRF-токен из метатега
+                    
+                          $.ajax({
+                            url: '{% url 'users:admin:courses:lesson_view' lesson_id %}',
+                            method: 'POST',
+                            headers: {
+                              'X-CSRFToken': csrf_token // Передаем CSRF-токен в заголовке запроса
+                            },
+                            data: {
+                              'message': message
+                            },
+                            success: function(response) {
+                              // Показываем ответ чата в div с id="chat-history"
+                              $('#chat-history').prepend('<p><strong>Вы:</strong> ' + message + '</p>');
+                              $('#chat-history').prepend('<p><strong>ChatGPT:</strong> ' + response.response + '</p>');
+                              $('#chat-message').val(''); // Очищаем поле ввода
+                            },
+                            error: function(xhr, errmsg, err) {
+                              console.log(xhr.status + ': ' + xhr.responseText); // В случае ошибки выводим информацию в консоль
+                            }
+                          });
+                        });
+                      });
+                    </script>
+                  </div>
+                </div>
+
+              </div>  
             </div>
           </div>
                 

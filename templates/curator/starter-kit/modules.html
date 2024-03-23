@@ -4,7 +4,7 @@
 <html lang="en" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
-    <title>Silicon | Account - Payment Details</title>
+    <title></title>
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="Silicon - Multipurpose Technology Bootstrap Template">
@@ -178,7 +178,7 @@
                 <div class="d-flex align-items-center pe-sm-3">
                   <a href="{% url 'users:curator:courses:lessons_by_module' module.id %}"><img src="{% static 'student/images/module.webp' %}" width="84" alt="Mastercard"></a>
                   <div class="ps-3 ps-sm-4">
-                      <h6 class="mb-2"><a href="{% url 'users:curator:courses:lessons_by_module' module.id %}">{{ module.title}}</a><span class="badge bg-success ms-1">Пройден</span></h6>
+                      <h6 class="mb-2"><a href="{% url 'users:curator:courses:lessons_by_module' module.id %}">{{ module.title}}</a></h6>
                     <div class="fs-sm">Кол-во уроков: {{ module.lesson_set.count }}</div>
                   </div>
                 </div>

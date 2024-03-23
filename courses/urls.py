@@ -11,7 +11,10 @@ urlpatterns = [
     path('course_students/<int:course_id>/', CourseStudentsView.as_view(), name='course_students'),
     path('course_num<int:pk>/', Modules.as_view(), name='modules'),
     path('module/<int:module_id>/lessons/', LessonsByModule.as_view(), name='lessons_by_module'),
-    path('create_lesson/', LessonCreateView.as_view(), name='create_lesson'),
+
+    path('module/<int:module_id>/create_lesson/', LessonCreateView.as_view(), name='create_lesson'),
+    path('lesson/<int:pk>/delete/', LessonDeleteView.as_view(), name='lesson_delete'),
+
     path('lesson/view/<int:lesson_id>/', LessonView.as_view(), name='lesson_view'),
 
     path('lesson/answers/', AnswersView.as_view(), name='answers_view'),

@@ -85,7 +85,7 @@ class CourseForm(forms.ModelForm):
 class ModuleForm(forms.ModelForm):
     class Meta:
         model = Module
-        fields = ['title', 'description', 'order', 'course']
+        fields = ['title', 'description', 'order']
 
     def __init__(self, *args, **kwargs):
         super(ModuleForm, self).__init__(*args, **kwargs)
@@ -93,10 +93,10 @@ class ModuleForm(forms.ModelForm):
         self.fields['title'].label = 'Название'
         self.fields['description'].label = 'Описание'
         self.fields['order'].label = 'Длительность'
-        self.fields['course'].label = 'Курс'
 
         for field_name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
+
 
 
 
@@ -248,3 +248,9 @@ class CourseChangeForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ['title', 'duration', 'description', 'image', 'start_date', 'course_type']
+
+
+class ModuleChangeForm(forms.ModelForm):
+    class Meta:
+        model = Module
+        fields = ['title', 'description', 'order', 'course']

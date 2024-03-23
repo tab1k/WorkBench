@@ -48,6 +48,10 @@ class TakeTestView(View):
         test_result.score = total_score
         test_result.save()
 
+        if total_score > 50:
+            lesson.is_completed = True
+            lesson.save()
+
         return redirect('users:student:courses:tests:test_result.html', lesson_id=lesson_id)
 
 

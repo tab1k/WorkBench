@@ -170,7 +170,26 @@
                 <div class="d-flex align-items-center pe-sm-3">
                   <a href="{% url 'users:curator:courses:lesson_view' lesson_id=lesson.id %}"><img src="{% static 'student/images/lesson.webp' %}" width="84" alt="lesson"></a>
                   <div class="ps-3 ps-sm-4">
-                    <h6 class="mb-2"><a href="{% url 'users:curator:courses:lesson_view' lesson_id=lesson.id %}">{{ lesson.title }}</a> <span class="badge bg-success ms-1">Пройден</span></h6>
+                    <h6 class="mb-2"><a href="{% url 'users:curator:courses:lesson_view' lesson_id=lesson.id %}">{{ lesson.title }}</a> 
+                        {% if lesson.test_set.exists %}
+                            {% if lesson.is_watched %}
+                                <span class="badge bg-success ms-1">Просмотрено</span>
+                            {% else %}
+                                <span class="badge bg-danger ms-1">Не просмотрено</span>
+                            {% endif %}
+                            {% if lesson.is_completed %}
+                                <span class="badge bg-success ms-1">Пройден</span>
+                              {% else %}
+                                  <span class="badge bg-danger ms-1">Не пройден</span>
+                              {% endif %}
+                        {% else %}
+                            {% if lesson.is_watched %}
+                                <span class="badge bg-success ms-1">Просмотрено</span>
+                            {% else %}
+                                <span class="badge bg-danger ms-1">Не просмотрено</span>
+                            {% endif %}
+                        {% endif %}  
+                    </h6>
                     <div class="fs-sm">Дата и время начала: {{ lesson.start_datetime|date:"D d M H:i" }}</div>
                     {% if lesson.zoom_link %}  
                     <div class="fs-sm"><a href="{{ lesson.zoom_link }}">{{ lesson.zoom_link }}</a></div>

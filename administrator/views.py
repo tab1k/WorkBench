@@ -175,6 +175,7 @@ class AddStudent(View):
         return render(request, self.template_name, {'form': form})
 
 
+
 class AddCurator(View):
     template_name = 'admin/starter-kit/addcoach.html'
 
@@ -314,9 +315,6 @@ class NotificationCreateView(CreateView):
         return super().form_valid(form)
 
 
-
-
-
 class AddCourseView(View):
     def get(self, request):
         # Retrieve all available course types
@@ -336,35 +334,40 @@ class AddCourseView(View):
             course = form.save()
 
             # Redirect to the course detail page or any other desired URL
-            return render(request, 'admin/starter-kit/index.html', {'form': form, 'success_message': 'Course added successfully'})
+            return redirect('users:administrator:courses:modules', pk=course.pk)
 
         # If the form is not valid, re-render the form with errors
         return render(request, 'admin/starter-kit/add_course.html', {'form': form})
 
 
 class AddModuleView(View):
-    def get(self, request):
-        # Retrieve all available course types
-        course_types = CourseType.objects.all()
+    def get(self, request, course_id):
+        # Получить курс по его идентификатору или вернуть 404, если курс не найден
+        course = get_object_or_404(Course, pk=course_id)
 
-        # Create an empty form instance
-        form = ModuleForm()
+        # Создать пустой экземпляр формы модуля с указанным курсом
+        form = ModuleForm(initial={'course': course})
 
-        return render(request, 'admin/starter-kit/add_module.html', {'course_types': course_types, 'form': form})
+        return render(request, 'admin/starter-kit/add_module.html', {'course': course,  'form': form})
 
-    def post(self, request):
-        # Create a form instance with POST data
+    def post(self, request, course_id):
+        # Получить курс по его идентификатору или вернуть 404, если курс не найден
+        course = get_object_or_404(Course, pk=course_id)
+
+        # Создать экземпляр формы модуля с POST данными и указанным курсом
         form = ModuleForm(request.POST)
 
         if form.is_valid():
-            # Save the module object to the database
-            module = form.save()
+            # Сохранить объект модуля в базу данных с привязкой к курсу
+            module = form.save(commit=False)
+            module.course = course
+            module.save()
 
-            # Redirect to a success page or any other desired URL
-            return render(request, 'admin/starter-kit/add_module.html', {'form': form, 'success_message': 'Модуль был успешно добавлен!'})
+            # Перенаправить пользователя на страницу курса
+            return redirect('users:administrator:courses:modules', pk=course_id)
 
-        # If the form is not valid, re-render the form with errors
-        return render(request, 'admin/starter-kit/add_module.html', {'form': form})
+        # Если форма невалидна, вернуть ее с ошибками
+        return render(request, 'admin/starter-kit/add_module.html', {'course': course, 'form': form})
 
 
 class AdminChangeCourse(LoginRequiredMixin, UpdateView):
@@ -373,7 +376,6 @@ class AdminChangeCourse(LoginRequiredMixin, UpdateView):
     form_class = CourseChangeForm
     success_url = reverse_lazy('users:admin:courses:courses')
     context_object_name = 'course'
-
 
 
 

@@ -95,6 +95,7 @@
                         </div>
                     </div>
                 </div>
+                <a href="{% url 'users:admin:courses:generate_certificate' student_id=student.id %}"  class="btn btn-success btn-sm">Выдать сертификат</a>
             </div>
             </div>
         {% endblock %}

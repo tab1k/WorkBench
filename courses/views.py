@@ -1,15 +1,30 @@
+import shutil
+
+from PyPDF2 import PdfMerger
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.timezone import localtime, now
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseNotFound, FileResponse
+from django.views.generic import CreateView, DeleteView
+import subprocess  # Для выполнения команд в системной оболочке
+from django.core.files.base import ContentFile
+from django.shortcuts import redirect, render
 from django.views.generic import CreateView
-
+import tempfile
+from openai import OpenAI
+from reportlab.lib.pagesizes import A4,landscape
+from reportlab.pdfgen import canvas
+from PIL import Image
+from datetime import date
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from django.conf import settings
 from comments.forms import CommentForm
 from comments.models import Comment
 from .forms import LessonCreationForm
-from .models import Course, Module, CourseType
+from .models import Course, Module, CourseType, TemporaryToken
 from courses.models import Lesson
 from tests.models import TestResult
 from django.db.models import Count
@@ -130,14 +145,7 @@ class LessonsByModule(View):
         lessons = module.lesson_set.all()  # Получаем все уроки модуля
         student = request.user
 
-        test_results = {}
-        if student.is_authenticated and student.role == 'student':
-            # Если пользователь — студент, получаем результаты тестов для каждого урока
-            for lesson in lessons:
-                test_result = TestResult.objects.filter(student=student, lesson=lesson).first()
-                test_results[lesson.id] = test_result
-
-        context = {'module': module, 'lessons': lessons, 'test_results': test_results}
+        context = {'module': module, 'lessons': lessons}
 
         if student.is_authenticated:
             if student.role == 'student':
@@ -171,6 +179,22 @@ class LessonView(View):
         comment_list = [{"user": comment.user, "text": comment.text} for comment in comments]
         return JsonResponse({"comments": comment_list})
 
+    def get_chat_response(self, message):
+        client = OpenAI(api_key='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')
+
+        # Создание сессии чата для взаимодействия с моделью
+        completion = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system",
+                 "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."},
+                {"role": "user", "content": message}
+            ]
+        )
+
+        # Возвращаем результат работы модели (текст ответа)
+        return completion.choices[0].message.content
+
     def get(self, request, lesson_id):
         lesson = get_object_or_404(Lesson, id=lesson_id)
         module = lesson.module
@@ -182,10 +206,14 @@ class LessonView(View):
         courses = Course.objects.filter(students=student)
 
 
+
+
         if request.user.role == 'student':
             next_lesson = self.get_next_lesson(lesson)
             previous_lesson = self.get_previous_lesson(lesson)
             curator_comments = Comment.objects.filter(lesson=lesson, is_student_comment=False, user=student)
+            lesson.is_watched = True
+            lesson.save()
             return render(request, self.student_template,
                           {'lesson': lesson, 'lessons': lessons, 'comment_form': comment_form,
                            'student_comments': student_comments, 'next_lesson': next_lesson,
@@ -195,12 +223,15 @@ class LessonView(View):
                            'student': student,
                            'curator_comments': curator_comments,
                            'lesson_id': lesson_id,
+
                            })
 
         elif request.user.role == 'curator':
             next_lesson = self.get_next_lesson(lesson)
             previous_lesson = self.get_previous_lesson(lesson)
             curator_comments = Comment.objects.filter(lesson=lesson, is_student_comment=False, user=student)
+            lesson.is_watched = True
+            lesson.save()
             return render(request, self.curator_template,
                           {'lesson': lesson,
                            'lessons': lessons,
@@ -218,6 +249,8 @@ class LessonView(View):
             next_lesson = self.get_next_lesson(lesson)
             previous_lesson = self.get_previous_lesson(lesson)
             curator_comments = Comment.objects.filter(lesson=lesson, is_student_comment=False, user=student)
+            lesson.is_watched = True
+            lesson.save()
             return render(request, self.admin_template,
                           {'lesson': lesson,
                            'lessons': lessons,
@@ -250,6 +283,13 @@ class LessonView(View):
             comments_data = [{'user': comment.user.username, 'text': comment.text} for comment in comments]
             return JsonResponse({'success': True, 'comments': comments_data})
 
+        elif 'message' in request.POST:
+            message = request.POST['message']
+            chat_response = self.get_chat_response(message)
+
+            # Возвращаем ответ чата в JSON-ответе
+            return JsonResponse({'success': True, 'response': chat_response})
+
         if request.user.role == 'student':
             return render(request, self.student_template, {'lesson': lesson, 'lessons': lessons, 'comment_form': comment_form})
         elif request.user.role == 'curator':
@@ -266,14 +306,44 @@ class LessonCreateView(LoginRequiredMixin, CreateView):
     form_class = LessonCreationForm
     model = Lesson
 
+    def get_initial(self):
+        initial = super().get_initial()
+        module_id = self.kwargs.get('module_id')  # Получаем идентификатор модуля из URL
+        if module_id:
+            module = get_object_or_404(Module, pk=module_id)
+            initial['module'] = module
+        return initial
+
     def form_valid(self, form):
         lesson = form.save(commit=False)
-        # Дополнительная логика, если необходимо
+        lesson.module = self.get_initial()['module']  # Устанавливаем модуль урока
+
+        # Обработка загруженного видео и создание потокового URL
+        video_file = form.cleaned_data['video']  # Получаем загруженный видеофайл из формы
+        if video_file:
+            # Сохраняем файл в медиа
+            lesson.video = video_file
+            lesson.save()  # Сохраняем урок для получения id
+
+            # Создаем потоковый URL для видео
+            lesson.stream_url = lesson.video.url
+
         lesson.save()
         return redirect('users:student:courses:lesson_view', lesson_id=lesson.id)
 
     def form_invalid(self, form):
         return render(self.request, self.template_name, {'form': form})
+
+
+
+
+
+
+
+class LessonDeleteView(DeleteView):
+    model = Lesson
+    template_name = 'admin/starter-kit/lesson_confirm_delete.html'  # шаблон для подтверждения удаления
+    success_url = reverse_lazy('users:admin:courses:courses')
 
 
 class AnswersView(View):
@@ -507,13 +577,6 @@ class PassedStudentsView(View):
             return render(request, self.template_name, context)
 
 
-import tempfile
-from reportlab.lib.pagesizes import A4,landscape
-from reportlab.pdfgen import canvas
-from PIL import Image
-from datetime import date
-
-
 
 class CertificateView(View):
     def get(self, request, student_id):
@@ -522,77 +585,77 @@ class CertificateView(View):
         except User.DoesNotExist:
             return HttpResponse("Студент с указанным ID не найден.", status=404)
 
+        # Создаем сертификаты для каждого курса студента
+        certificates = []
+        for index, course in enumerate(student.courses.all(), start=1):
+            today = date.today()
+            month_name = today.strftime("%B")
+            today_str = f"{today.day} {month_name.capitalize()} {today.year} года"
 
-        today = date.today()
+            certificate_path = 'static/student/certificate/cert.png'  # Обновите путь к вашему сертификату
+            certificate_image = Image.open(certificate_path)
 
-        # Установка русской локали
-        # locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
+            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+                temp_filepath = temp_file.name
+                certificate_image.save(temp_filepath, format='PNG')
 
-        # Получение названия месяца
-        month_name = today.strftime("%B")
+            buffer = BytesIO()
+            p = canvas.Canvas(buffer, pagesize=landscape(A4))
 
-        today_str = f"{today.day} {month_name.capitalize()} {today.year} года"
+            p.drawImage(temp_filepath, 0, 0, width=850, height=600)
 
-        # Открытие сертификата в виде изображения с помощью PIL
-        certificate_path = 'users/static/admin/img/certificate.png'  # Обновите путь к вашему сертификату
-        certificate_image = Image.open(certificate_path)
+            font_path = 'static/student/certificate/fonts/Tinos-Italic.ttf'
+            pdfmetrics.registerFont(TTFont('Tinos', font_path))
 
-        # Создание временного файла для сохранения сертификата
-        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-            temp_filepath = temp_file.name
-            certificate_image.save(temp_filepath, format='PNG')
+            p.setFillColor('white')
 
-        # Создание PDF-сертификата с помощью reportlab
-        buffer = BytesIO()
-        p = canvas.Canvas(buffer, pagesize=landscape(A4))
+            text_x = 200
+            text_y = 300
+            line_height = 20
 
-        # Вставка сертификата как изображения на PDF-страницу
-        p.drawImage(temp_filepath, 0, 0, width=850, height=600)
+            full_name = f"{student.first_name} {student.last_name}"
+            text_width = p.stringWidth(full_name, "Tinos", 60)
 
-        # Вставка данных на сертификат
+            # Вычисляем горизонтальную позицию для центрирования текста имени студента
+            text_x = (850 - text_width) / 2
 
-        # Установка шрифта
-        font_path = 'users/static/fonts/Tinos-Italic.ttf'
-        pdfmetrics.registerFont(TTFont('Tinos', font_path))
+            p.setFont("Tinos", 60)
+            p.drawString(text_x, text_y, student.first_name)
+            p.drawString(text_x + p.stringWidth(student.first_name) + 10, text_y, student.last_name)
 
-        # Расположение текста на сертификате
-        text_x = 360  # Горизонтальная позиция текста
-        text_y = 340  # Вертикальная позиция текста
-        line_height = 20  # Высота строки
+            text_y -= line_height * 1
 
-        # Вставка имени студента
-        p.setFont("Tinos", 20)
-        p.drawString(text_x, text_y, student.first_name)
-        p.drawString(text_x + p.stringWidth(student.first_name) + 5, text_y, student.last_name)
+            date_text_x = 30
+            date_text_y = 565
+            p.setFont("Tinos", 15)
+            p.drawString(date_text_x, date_text_y, today_str)
 
-        # Обновление вертикальной позиции для следующего текстового блока
-        text_y -= line_height * 1
+            text_y -= line_height * 2
 
-        # Вставка даты завершения курса
-        date_text_x = 310  # Горизонтальная позиция текста даты
-        date_text_y = 265  # Вертикальная позиция текста даты
-        p.setFont("Tinos", 15)
-        p.drawString(date_text_x, date_text_y, today_str)
+            text_course_x = 512
+            text_course_y = 205
+            course_text = course.title
+            p.setFont("Tinos", 17)
+            p.drawString(text_course_x, text_course_y, course_text)
 
-        # Обновление вертикальной позиции для следующего текстового блока
-        text_y -= line_height * 2
+            p.save()
 
+            buffer.seek(0)
+            certificates.append(buffer)
 
-        text_course_x = 275
-        text_course_y = 241
+        # Объединяем все сертификаты в один PDF-файл
+        merged_buffer = BytesIO()
+        merger = PdfMerger()
 
-        # Вставка информации о курсе
-        student = get_object_or_404(User, pk=student_id)
-        course_names = student.courses.all().values_list('title', flat=True)
-        course_text = f"{', '.join(course_names)}"  # Замените на фактическое название курса
-        p.setFont("Tinos", 17)
-        p.drawString(text_course_x, text_course_y, course_text)
+        for certificate_buffer in certificates:
+            merger.append(BytesIO(certificate_buffer.read()))
 
+        merger.write(merged_buffer)
+        merger.close()
 
-        p.save()
+        merged_buffer.seek(0)
 
-        buffer.seek(0)
-        return HttpResponse(buffer, content_type='application/pdf')
+        return HttpResponse(merged_buffer, content_type='application/pdf')
 
 
 

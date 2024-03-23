@@ -4,7 +4,7 @@
 <html lang="en" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
-    <title>Silicon | Account - Payment Details</title>
+    <title></title>
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="Silicon - Multipurpose Technology Bootstrap Template">
@@ -172,11 +172,24 @@
                   <div class="ps-3 ps-sm-4">
                     <h6 class="mb-2">
                         <a href="{% url 'users:student:courses:lesson_view' lesson_id=lesson.id %}">{{ lesson.title }}</a>
-                        {% if test_results  %}
-                            <span class="badge bg-success ms-1">Пройден</span>
+                        {% if lesson.test_set.exists %}
+                            {% if lesson.is_watched %}
+                                <span class="badge bg-success ms-1">Просмотрено</span>
+                            {% else %}
+                                <span class="badge bg-danger ms-1">Не просмотрено</span>
+                            {% endif %}
+                            {% if lesson.is_completed %}
+                                <span class="badge bg-success ms-1">Пройден</span>
+                              {% else %}
+                                  <span class="badge bg-danger ms-1">Не пройден</span>
+                              {% endif %}
                         {% else %}
-                            <span class="badge bg-warning ms-1">Не пройден</span>
-                        {% endif %}
+                            {% if lesson.is_watched %}
+                                <span class="badge bg-success ms-1">Просмотрено</span>
+                            {% else %}
+                                <span class="badge bg-danger ms-1">Не просмотрено</span>
+                            {% endif %}
+                        {% endif %}  
                     </h6>
                     <div class="fs-sm">Дата и время начала: {{ lesson.start_datetime|date:"D d M H:i" }}</div>
                     {% if lesson.zoom_link %}  
@@ -193,10 +206,14 @@
                       </button>
                   </a>
                     {% endif %}
-                  <button type="button" class="btn btn-outline-danger px-3 px-xl-4">
-                    <i class="bx bx-trash-alt fs-xl me-lg-1 me-xl-2"></i>
-                    <span class="d-none d-lg-inline">Delete</span>
-                  </button>
+                
+                  <a href="{% url 'users:student:courses:lesson_view' lesson_id=lesson.id %}">
+                      <button type="button" class="btn btn-outline-secondary px-3 px-xl-4 me-3">
+                        <i class="bx bx-play-circle fs-xl me-lg-1 me-xl-2"></i>
+                        <span class="d-none d-lg-inline">Посмотреть</span>
+                      </button>
+                  </a>                  
+                  
                 </div>
               </div>
               {% endfor %}  

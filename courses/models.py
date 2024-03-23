@@ -1,9 +1,16 @@
+from datetime import datetime
+
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models import URLField, FileField
 from django.urls import reverse
-
+import os
+from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import post_delete
+from django.conf import settings
 from users.models import User
-from embed_video.fields import EmbedVideoField
+
 
 
 class CourseType(models.Model):
@@ -72,12 +79,16 @@ class Lesson(models.Model):
     description = models.TextField()  # Описание урока
     zoom_link = models.URLField(blank=True, null=True)
     start_datetime = models.DateTimeField(blank=True, null=True)
-    video = EmbedVideoField(blank=True, null=True) # Видео
+    video = FileField(upload_to='videos/')  # Видео
+    stream_url = models.URLField(blank=True, null=True)
     learn_documentation = models.FileField(blank=True, null=True)
+    home_work = models.FileField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
     module = models.ForeignKey(Module, on_delete=models.CASCADE)
 
+    is_watched = models.BooleanField(default=False)  # Просмотрено
+    is_completed = models.BooleanField(default=False)  # Пройдено
 
     def __str__(self):
         return self.title
@@ -88,6 +99,24 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = 'Урок'
         verbose_name_plural = 'Уроки'
+
+
+class TemporaryToken(models.Model):
+    token = models.CharField(max_length=255)
+    expiration_time = models.DateTimeField()
+
+    @staticmethod
+    def save_token(token, expiration_time):
+        TemporaryToken.objects.create(token=token, expiration_time=expiration_time)
+
+    @staticmethod
+    def is_valid_token(token):
+        now = datetime.datetime.now()
+        try:
+            token_obj = TemporaryToken.objects.get(token=token, expiration_time__gt=now)
+            return True
+        except TemporaryToken.DoesNotExist:
+            return False
 
 
 

@@ -36,28 +36,54 @@
                 <div class="d-flex align-items-center pe-sm-3">
                   <a href="{% url 'users:admin:courses:lesson_view' lesson_id=lesson.id %}"><img src="{% static 'student/images/lesson.webp' %}" width="84" alt="lesson"></a>
                   <div class="ps-3 ps-sm-4">
-                    <h6 class="mb-2"><a href="{% url 'users:admin:courses:lesson_view' lesson_id=lesson.id %}">{{ lesson.title }}</a> <span class="badge bg-success ms-1">Пройден</span></h6>
-                    <div class="fs-sm">Дата и время начала: {{ lesson.start_datetime|date:"D d M H:i" }}</div>
-                    {% if lesson.zoom_link %}  
-                    <div class="fs-sm"><a href="{{ lesson.zoom_link }}">{{ lesson.zoom_link }}</a></div>
-                    {% endif %}  
-                  </div>
+                      <h6 class="mb-2"><a href="{% url 'users:admin:courses:lesson_view' lesson_id=lesson.id %}">{{ lesson.title }}</a></h6>
+                      {% if lesson.test_set.exists %}
+                            {% if lesson.is_watched %}
+                                <span class="badge bg-success ms-1">Просмотрено</span>
+                            {% else %}
+                                <span class="badge bg-danger ms-1">Не просмотрено</span>
+                            {% endif %}
+                            {% if lesson.is_completed %}
+                                <span class="badge bg-success ms-1">Пройден</span>
+                              {% else %}
+                                  <span class="badge bg-danger ms-1">Не пройден</span>
+                              {% endif %}
+                        {% else %}
+                            {% if lesson.is_watched %}
+                                <span class="badge bg-success ms-1">Просмотрено</span>
+                            {% else %}
+                                <span class="badge bg-danger ms-1">Не просмотрено</span>
+                            {% endif %}
+                        {% endif %}
+                      
+                        <div class="fs-sm mt-2">Дата и время начала: {{ lesson.start_datetime|date:"D d M H:i" }}</div>
+                        {% if lesson.zoom_link %}  
+                            <div class="fs-sm"><a href="{{ lesson.zoom_link }}">{{ lesson.zoom_link }}</a></div>
+                        {% endif %}  
+                    </div>
                 </div>
                 <div class="d-flex justify-content-end pt-3 pt-sm-0">
-                  <button type="button" class="btn btn-outline-secondary px-3 px-xl-4 me-3">
+                    
+                  {% if lesson.test_set.exists %}
+                  <a href="{% url 'users:admin:courses:tests:take_test' lesson_id=lesson.id %}" type="button" class="btn btn-outline-secondary px-3 px-xl-4 me-3">
                     <i class="bx bx-edit fs-xl me-lg-1 me-xl-2"></i>
                     <span class="d-none d-lg-inline">Тест</span>
-                  </button>
-                  <button type="button" class="btn btn-outline-danger px-3 px-xl-4">
+                  </a>
+                    {% endif %}
+                
+                
+                  <a href="{% url 'users:admin:courses:lesson_delete' pk=lesson.pk %}" type="button" class="btn btn-outline-danger px-3 px-xl-4 me-3">
                     <i class="bx bx-trash-alt fs-xl me-lg-1 me-xl-2"></i>
                     <span class="d-none d-lg-inline">Удалить</span>
-                  </button>
+                  </a>                  
+                  
+                
                 </div>
               </div>
               {% endfor %}  
 
               <div class="py-2">
-                  <a href="{% url 'users:admin:courses:create_lesson' %}">
+                  <a href="{% url 'users:admin:courses:create_lesson' module_id=module.id %}">
                       <button type="button" class="btn btn-primary ps-4">
                         <i class="bx bx-plus fs-xl me-2"></i>
                         Добавить урок
