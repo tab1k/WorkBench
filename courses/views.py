@@ -23,6 +23,7 @@ from django.core.files.base import ContentFile
 from django.conf import settings
 from comments.forms import CommentForm
 from comments.models import Comment
+from workbench.settings import OPENAI_API_KEY
 from .forms import LessonCreationForm
 from .models import Course, Module, CourseType, TemporaryToken
 from courses.models import Lesson
@@ -180,7 +181,7 @@ class LessonView(View):
         return JsonResponse({"comments": comment_list})
 
     def get_chat_response(self, message):
-        client = OpenAI(api_key='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')
+        client = OpenAI(api_key=OPENAI_API_KEY)
 
         # Создание сессии чата для взаимодействия с моделью
         completion = client.chat.completions.create(
