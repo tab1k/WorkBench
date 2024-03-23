@@ -166,7 +166,7 @@ SITE_URL = 'http://127.0.0.1:8000/'
 CSRF_TRUSTED_ORIGINS = ['https://workbench.kz']
 
 
-OPENAI_API_KEY = ''
+OPENAI_API_KEY = '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'
 
 
 # Default primary key field type
