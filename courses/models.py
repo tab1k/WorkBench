@@ -75,12 +75,12 @@ class Module(models.Model):
 
 
 class Lesson(models.Model):
-    title = models.CharField(max_length=255)  # Название урока
+    title = models.CharField(max_length=400)  # Название урока
     description = models.TextField()  # Описание урока
     zoom_link = models.URLField(blank=True, null=True)
     start_datetime = models.DateTimeField(blank=True, null=True)
     video = FileField(upload_to='videos/')  # Видео
-    stream_url = models.URLField(blank=True, null=True)
+    stream_url = models.URLField(max_length=1000, blank=True, null=True)
     learn_documentation = models.FileField(blank=True, null=True)
     home_work = models.FileField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
