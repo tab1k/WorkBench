@@ -77,36 +77,38 @@
                       Your browser does not support the video tag.
                   </video>
               </div>
-              <script>
-                document.addEventListener('contextmenu', function(event) {
-                    if (event.target.id === 'lesson-video') {
-                        event.preventDefault();
-                    }
-                });
+                
+                <script>
+                    // Получаем ссылку на элемент видео
+                    var videoElement = document.getElementById('lesson-video');
+                
+                    // Добавляем обработчик события для предотвращения контекстного меню на видео
+                    videoElement.addEventListener('contextmenu', function(event) {
+                        event.preventDefault(); // Отменяем действие по умолчанию (отображение контекстного меню)
+                    });
+                
+                    // Добавляем обработчик события для предотвращения правого клика на видео
+                    videoElement.addEventListener('mousedown', function(event) {
+                        if (event.button === 2) { // Проверяем, что это правый клик
+                            event.preventDefault(); // Отменяем действие по умолчанию (отображение контекстного меню)
+                        }
+                    });
+                
+                    // Получаем ссылку на элемент с кнопкой "Скачать"
+                    var downloadButton = document.querySelector('.download-button');
+                
+                    // Добавляем обработчик события для предотвращения контекстного меню на элементе с кнопкой "Скачать"
+                    downloadButton.addEventListener('contextmenu', function(event) {
+                        event.preventDefault(); // Отменяем действие по умолчанию (отображение контекстного меню)
+                    });
+                
+                    // Добавляем обработчик события для предотвращения клика на элементе с кнопкой "Скачать"
+                    downloadButton.addEventListener('click', function(event) {
+                        event.preventDefault(); // Отменяем действие по умолчанию (например, переход по ссылке)
+                        // Здесь можно добавить свой код, чтобы оповестить пользователя о том, что скачивание недоступно
+                    });
+                </script>
 
-                document.addEventListener('mousedown', function(event) {
-                    if (event.button === 2 && event.target.id === 'lesson-video') {
-                        event.preventDefault();
-                    }
-                });
-
-                // Добавляем обработчик события на попытку перетащить видео
-                document.getElementById('lesson-video').addEventListener('dragstart', function(event) {
-                    event.preventDefault(); // Отменяем действие по умолчанию при перетаскивании
-                });
-
-                // Добавляем обработчик события на попытку сохранить видео (для мобильных устройств)
-                document.getElementById('lesson-video').addEventListener('touchstart', function(event) {
-                    event.preventDefault(); // Отменяем действие по умолчанию при касании
-                });
-            </script>
-            
-            <script>
-                // Обработчик события для предотвращения контекстного меню по всей странице
-                document.addEventListener('contextmenu', function(event) {
-                    event.preventDefault(); // Отменяем действие по умолчанию
-                });
-            </script>
 
             
               <div class="card d-sm-flex flex-sm-row align-items-sm-center justify-content-between border-0 shadow-sm p-3 p-md-4 mb-4">
