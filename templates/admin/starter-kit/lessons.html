@@ -78,18 +78,36 @@
                   </video>
               </div>
               <script>
-                  document.addEventListener('contextmenu', function(event) {
-                      if (event.target.id === 'lesson-video') { // Проверяем, был ли клик на видео
-                          event.preventDefault(); // Отменяем контекстное меню только для видео
-                      }
-                  });
-                
-                  document.addEventListener('mousedown', function(event) {
-                      if (event.button === 2 && event.target.id === 'lesson-video') { // Проверяем, была ли нажата правая кнопка мыши на видео
-                          event.preventDefault(); // Отменяем действие по умолчанию только для правой кнопки мыши на видео
-                      }
-                  });
-              </script>  
+                document.addEventListener('contextmenu', function(event) {
+                    if (event.target.id === 'lesson-video') {
+                        event.preventDefault();
+                    }
+                });
+
+                document.addEventListener('mousedown', function(event) {
+                    if (event.button === 2 && event.target.id === 'lesson-video') {
+                        event.preventDefault();
+                    }
+                });
+
+                // Добавляем обработчик события на попытку перетащить видео
+                document.getElementById('lesson-video').addEventListener('dragstart', function(event) {
+                    event.preventDefault(); // Отменяем действие по умолчанию при перетаскивании
+                });
+
+                // Добавляем обработчик события на попытку сохранить видео (для мобильных устройств)
+                document.getElementById('lesson-video').addEventListener('touchstart', function(event) {
+                    event.preventDefault(); // Отменяем действие по умолчанию при касании
+                });
+            </script>
+            
+            <script>
+                // Обработчик события для предотвращения контекстного меню по всей странице
+                document.addEventListener('contextmenu', function(event) {
+                    event.preventDefault(); // Отменяем действие по умолчанию
+                });
+            </script>
+
             
               <div class="card d-sm-flex flex-sm-row align-items-sm-center justify-content-between border-0 shadow-sm p-3 p-md-4 mb-4">
                 <div class="d-flex align-items-center pe-sm-3">
